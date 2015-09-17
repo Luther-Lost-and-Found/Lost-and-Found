@@ -11,4 +11,9 @@ Database:
    Administrator:
       attributes: norsekey(primary key), password, location, first name, last name, email
    Location:
-      attributes: locationID (primary key), email, phone number
+      attributes: locationID (primary key), email, phone number,buildingName, room Name
+   Item:
+      attributes: itemID, date, title, tags, (photo), location held , notes, claimed by, found by,claimed
+ 
+RELATIONS:
+   Location to admin: one to many, admin to item: one to many, location to item: one to many.
