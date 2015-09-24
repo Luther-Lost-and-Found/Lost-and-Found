@@ -1,0 +1,30 @@
+{
+  "name": "Lost-and-Found",
+  "version": "0.0.1",
+  "description": "A project intended to make inter-building lost-and-found more efficient",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "mysql": "^2.5.4"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "superagent": "^1.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Luther-Lost-and-Found/Lost-and-Found.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Luther-Lost-and-Found/Lost-and-Found/issues"
+  },
+  "homepage": "https://github.com/Luther-Lost-and-Found/Lost-and-Found"
+}
