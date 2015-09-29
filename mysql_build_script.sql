@@ -28,11 +28,13 @@ engine=InnoDB;
 CREATE TABLE ItemLF (itemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
 time_stamp DATE NOT NULL,
 title VARCHAR(50) NOT NULL,
+imageID INT,
 tags VARCHAR(30), 
 locationID INT NOT NULL, 
 accepted_by VARCHAR(30) NOT NULL, 
 claimed_by VARCHAR(30),
 claimed VARCHAR(5) NOT NULL,
+FOREIGN KEY (imageID) REFERENCES ImageLF(imageID)),
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
 engine=InnoDB;
