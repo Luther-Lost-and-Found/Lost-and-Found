@@ -1,5 +1,6 @@
 CREATE USER senior;
 GRANT ALL PRIVILEGES ON *.* TO senior;
+SET PASSWORD FOR senior = PASSWORD("qwerty");
 CREATE DATABASE lost;
 USE lost;
 CREATE TABLE LocationLF (locationID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
@@ -31,7 +32,7 @@ locationID INT NOT NULL,
 accepted_by VARCHAR(30) NOT NULL, 
 claimed_by VARCHAR(30),
 claimed VARCHAR(5) NOT NULL,
-FOREIGN KEY (imageID) REFERENCES ImageLF(imageID)),
+FOREIGN KEY (imageID) REFERENCES ImageLF(imageID),
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
 engine=InnoDB;
