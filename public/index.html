@@ -27,14 +27,14 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><input class="form/control" ng-model="item.title"</td>
-				<td><input class="form/control" ng-model="item.locationID"</td>
-				<td><input class="form/control" ng-model="item.accepted_by"</td>
-				<td><input class="form/control" ng-model="item.claimed_by"</td>
-				<td><input class="form/control" ng-model="item.claimed"</td>
-				<td><input class="form/control" ng-model="item.tags"</td>
-				<td><button class="btn-primary" ng-click="addItem()">Add item</button></td>			
-				<td><button class="btn-info" ng-click="updateItem(item)">Update</button></td> 
+				<td><input class="form-control" ng-model="item.title"</td>
+				<td><input class="form-control" ng-model="item.locationID"</td>
+				<td><input class="form-control" ng-model="item.accepted_by"</td>
+				<td><input class="form-control" ng-model="item.claimed_by"</td>
+				<td><input class="form-control" ng-model="item.claimed"</td>
+				<td><input class="form-control" ng-model="item.tags"</td>
+				<td><button class="btn btn-primary" ng-click="addItem()">Add item</button></td>			
+				<td><button class="btn btn-info" ng-click="updateItem(item)">Update</button></td> 
 			</tr>
 			<tr ng-repeat="item in itemlist"> <!-- ng-repeat allows to load data into separate rows -->
 				<td>{{item.title}}</td>
@@ -43,8 +43,8 @@
 				<td>{{item.claimed_by}}</td>
 				<td>{{item.claimed}}</td>
 				<td>{{item.tags}}</td>
-				<td><button class="btn-danger" ng-click="removeItem(item)">Remove</button></td>
-				<td><button class="btn-warning" ng-click="editItem(item)">Edit</button></td> 
+				<td><button class="btn btn-danger" ng-click="removeItem(item)">Remove</button></td>
+				<td><button class="btn btn-warning" ng-click="editItem(item)">Edit</button></td> 
 			</tr>
 		</tbody>
 
