@@ -6,7 +6,8 @@
   "dependencies": {
     "body-parser": "^1.10.2",
     "express": "^4.11.1",
-    "mysql": "^2.5.4"
+    "mysql": "^2.5.4",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "chai": "^3.3.0",
@@ -14,7 +15,7 @@
     "superagent": "^1.4.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --recursive -R nyan",
     "start": "node server.js"
   },
   "repository": {
