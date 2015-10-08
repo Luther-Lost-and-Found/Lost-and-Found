@@ -7,32 +7,26 @@ var express = require('express'),
     mysql = require('mysql'),
     bodyParser = require("body-parser"),
     path = require('path'),
+    passport = require('passport'),
     server;
 
-var db = mysql.createConnection({
-  host     : 'localhost',
-  port		: '3306',
-  user     : 'senior',
-  password : 'qwerty',
-  database : 'lost'
-});
+require('./config/passport')(passport); // pass passport for configuration
+
 
 //============================================================================
 //==========Check the If the Connection with the MySQL database is established
 //============================================================================
 
-db.connect(function(err){
-if(!err) {
-	console.log("Database is connected ... \n\n");  
-} else {
-	console.log("Error connecting database ... \n\n");  
-}
-});
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 app.locals.rootDir = __dirname;
-require(path.join(__dirname + '/api/routes'))(app, db)
+
+require(path.join(__dirname + '/api/routes'))(app, passport)
+
 
 var start = exports.start = function start(port, callback) {
     server = app.listen(port, callback);
