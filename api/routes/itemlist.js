@@ -6,8 +6,8 @@ var express = require('express'),
     
 db.query('USE ' + dbconfig.database);
 
-module.exports = function(app, passport) {
-    app.get("/itemlist",function(req,res){
+module.exports = function(app, passport, isLoggedIn) {
+    app.get("/itemlist", isLoggedIn, function(req,res){
             console.log('i received the request');
 
             db.query('SELECT * from ItemLF', function(err, rows, fields) {

@@ -25,7 +25,7 @@ app.use(passport.session()); // persistent login sessions
 
 app.locals.rootDir = __dirname;
 
-require(path.join(__dirname + '/api/routes'))(app, passport)
+require(path.join(__dirname + '/api/routes.js'))(app, passport)
 
 
 var start = exports.start = function start(port, callback) {
