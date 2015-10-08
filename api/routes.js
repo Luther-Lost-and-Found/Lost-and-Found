@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
 
     app.get('*', isLoggedIn, function(req, res) {
         return res.status(404)
-    }
+    })
 };
 
 
