@@ -1,41 +1,58 @@
-//======================================================
-//=======use "service mysql start" to start the database
-//======================================================
+var myApp = angular.module('LostApp', []);
+myApp.controller('ItemCtrl', ['$timeout', '$scope', '$http', function($timeout, $scope, $http) {
+  console.log("Hello World from controller");
 
-var express = require('express'),
-    app = express(),
-    mysql = require('mysql'),
-    bodyParser = require("body-parser"),
-    path = require('path'),
-    passport = require('passport'),
-    server;
+  var refresh = function(){
+    $http.get("/itemlist").success(function(response){
+      console.log('i got the data requested');
+      $scope.$applyAsync(function(){
+        $scope.itemlist = response;
+        $scope.item = "";
+      });
+    });
+  };
 
-require('./config/passport')(passport); // pass passport for configuration
+  refresh();
 
+  $scope.addItem = function(){
+    console.log($scope.item);
+    $http.post("/itemlist",$scope.item).success(function(response){
+      refresh();
+    });
 
-//============================================================================
-//==========Check the If the Connection with the MySQL database is established
-//============================================================================
+  }
 
+  $scope.removeItem = function($scope,$element){
+    var current_id = ($scope.itemID); 
+    console.log(current_id);
+    $http.delete("/itemlist/?" + current_id).success(function(response){
+      refresh();
+    });
 
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json());
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+  }
 
-app.locals.rootDir = __dirname;
+  $scope.editItem = function($element){
+    var current_id = ($element.itemID); 
+    console.log(current_id);
+    $http.get("/itemlist/" + current_id).success(function(response){
+      console.log("got the data to edit");
+      $scope.$applyAsync(function(){
+        $scope.item = response[0];
+      });
+      
+    });
+    
+  }
 
-require(path.join(__dirname + '/api/routes'))(app, passport)
+  $scope.updateItem = function($element){
+    console.log($scope.item);
+    var current_id = ($element.itemID);
+    $http.put("/itemlist/" + current_id, $scope.item).success(function(response){
+      console.log("UPDATE");
+      refresh();
+    });
+    
+  }
 
+}]);
 
-var start = exports.start = function start(port, callback) {
-    server = app.listen(port, callback);
-};
-
-var stop = exports.stop = function stop(callback) {
-    server.close(callback);
-};
-
-start(3000);
-
-console.log('Server running');
