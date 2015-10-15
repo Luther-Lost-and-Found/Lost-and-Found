@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="LoginApp">
   <head>
     <meta charset="UTF-8">
     <title>Luther College:Lost and Found</title>
@@ -22,6 +22,7 @@
         			<input type="text" placeholder="Username" ng-model="login.username">
         			<input type="password" placeholder="Password" ng-model="login.password">
         			<button type="submit" id="login-button" ng-click="loginSubmit(login)" >Login</button>
+              <div> {{login.username}} </div>
       		  </form>
 
       	 </div>
@@ -29,6 +30,8 @@
       </div>  
 
     </div>
-
+  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+  <script src = "../controllers/logincontroller.js"></script>
   </body>
+
 </html>
