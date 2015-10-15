@@ -3,6 +3,7 @@ var express = require('express'),
 
 module.exports = function(app, passport) {
     require('./routes/index.js')(app, passport, isLoggedIn)
+    require('./routes/login.js')(app, passport, isLoggedIn)
     require('./routes/itemlist.js')(app, passport, isLoggedIn)
 
     app.get('*', isLoggedIn, function(req, res) {
