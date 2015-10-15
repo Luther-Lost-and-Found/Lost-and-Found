@@ -3,6 +3,6 @@ var express = require('express'),
 
 module.exports = function(app, db, isLoggedIn) {
     app.get('/', function(req, res) {
-        res.sendFile(path.join(app.locals.rootDir + '/public/itemList.html'));
+        res.sendFile(path.join(app.locals.rootDir + '/public/login/login.html'));
     });
 };
