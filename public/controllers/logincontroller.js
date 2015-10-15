@@ -3,10 +3,10 @@ loginApp.controller('loginController', ['$timeout', '$scope', '$http', function(
 	console.log("Hello World from controller");
 
 
-	$scope.loginSubmit = function(){
-		console.log($scope.username);
-		$scope.username = "hello";
-		$http.post("/login",$scope.username).success(function(response){
+	$scope.loginSubmit = function($scope){
+		var login_username = $scope.username;
+		
+		$http.post("/login",{login_username}).success(function(response){
 			console.log("success");
 		});
 	}

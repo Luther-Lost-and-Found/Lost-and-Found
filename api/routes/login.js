@@ -32,19 +32,16 @@ module.exports = function(app, passport) {
 
   console.log("hi");
 
-  app.get('/', function(req, res) {
+  app.get('/login', function(req, res) {
+    console.log("get");
     res.sendFile(path.join(app.locals.rootDir + '/public/login/login.html')); // load the index.ejs file
   });
 
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect : '/itemList.html', // redirect to the secure profile section
-    failureRedirect : '/', // redirect back to the signup page if there is an error
-    failureFlash : true // allow flash messages
-    }),
-        
-    function(req, res) {
-    console.log("hello");
+  app.post('/login', function(req, res) {
+    
+    console.log(req.body);
+    res.redirect('/itemList.html');
 
-  res.redirect('/');
+  
   });
 }
