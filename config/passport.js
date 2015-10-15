@@ -8,6 +8,8 @@ var mysql = require('mysql');
 var dbconfig = require('./database');
 var connection = mysql.createConnection(dbconfig.connection);
 
+
+console.log("passport");
 connection.query('USE ' + dbconfig.database);
 // expose this function to our app using module.exports
 module.exports = function(passport) {
