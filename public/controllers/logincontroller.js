@@ -1,5 +1,5 @@
 var loginApp = angular.module('LoginApp', []);
-loginApp.controller('loginController', ['$timeout', '$scope', '$http', function($timeout, $scope, $http) {
+loginApp.controller('loginController', ['$timeout', '$scope', '$http', '$window', function($timeout, $scope, $http, $window) {
 	console.log("Hello World from controller");
 
 
@@ -8,6 +8,7 @@ loginApp.controller('loginController', ['$timeout', '$scope', '$http', function(
 		
 		$http.post("/login",{login_username}).success(function(response){
 			console.log("success");
+			$window.location.href = "../itemList.html";
 		});
 	}
 }]);

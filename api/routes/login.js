@@ -40,7 +40,7 @@ module.exports = function(app, passport) {
   app.post('/login', function(req, res) {
     
     console.log(req.body);
-    res.redirect('/itemList.html');
+    res.sendFile(path.join(app.locals.rootDir + '/public/itemList.html'));
 
   
   });
