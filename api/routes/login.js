@@ -1,8 +1,13 @@
 var express = require('express'),
-    passport = require('passport');
-    path = require('path');
+	passport = require('passport'),
+	mysql = require('mysql'),
+	dbconfig = require('../../config/database'),
+	path = require('path'),
+	db = mysql.createConnection(dbconfig.connection);
+	
+db.query('USE ' + dbconfig.database);
 
-// module.exports = function(router,db){
+// // module.exports = function(router,db){
 
 //     router.post('/login', function(req, res, next) {
 //       passport.authenticate('local', function(err, user, info) {
@@ -30,18 +35,28 @@ var express = require('express'),
 
 module.exports = function(app, passport) {
 
-  console.log("hi");
+	console.log("hi1");
 
-  app.get('/login', function(req, res) {
-    console.log("get");
-    res.sendFile(path.join(app.locals.rootDir + '/public/login/login.html')); // load the index.ejs file
-  });
+	app.get('/login', function(req, res) {
+		console.log("get");
+		res.sendFile(path.join(app.locals.rootDir + '/public/login/login.html')); // load the index.ejs file
+	});
 
-  app.post('/login', function(req, res) {
-    
-    console.log(req.body);
-    res.sendFile(path.join(app.locals.rootDir + '/public/itemList.html'));
+	app.get('/loggedin', function(req, res) {
+		res.send(req.isAuthenticated() ? req.user : '0');
+	});
 
-  
-  });
+	// route to log in
+	app.post('/login', passport.authenticate('local'), function(req, res) {
+		console.log("inside pass login");
+		res.send(req.user);
+	});
+
+	var auth = function(req, res, next){
+		if (!req.isAuthenticated()){
+			res.send(401);
+		} 
+		else next(); 
+	};
 }
+
