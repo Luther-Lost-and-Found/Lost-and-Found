@@ -9,7 +9,6 @@ var LocalStrategy = require('passport-local').Strategy,
     
 
 
-console.log("passport");
 connection.query('USE ' + dbconfig.database);
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -90,27 +89,17 @@ module.exports = function(passport) {
         },
         function(req, usernameField, passwordField, done) { // callback with email and password from our form
             connection.query("SELECT * FROM AdminLF WHERE norsekeyID = ?",[usernameField], function(err, rows){
-                console.log(usernameField);
-                console.log(rows[0].password);
+
                 if (err){
-                    console.log("hello1");
                     return done(err);
                 }
-                console.log("hey sexy");
                 if (!rows.length) {
-                    console.log("hello2");
                     return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
                 }
-                console.log("hey sexy");
                 // if the user is found but the password is wrong
                 if (!bcrypt.compareSync(password, rows[0].password)){
-                    console.log("hello3");
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
                 }
-
-                // all is well, return successful user
-
-                console.log("hey sexy");
                 return done(null, rows[0]);
             });
         })
