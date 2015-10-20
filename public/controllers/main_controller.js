@@ -106,7 +106,7 @@ myApp.controller('loginController', ['$timeout', '$scope', '$http', '$location',
 	    })
 	    .error(function(){
 	    	$rootScope.message = 'Authentication failed.';
-	    	$window.location.href = "../login/login.html";
+	    	$window.location.href = "../login/login";
 	    });
   	};
 }]);
