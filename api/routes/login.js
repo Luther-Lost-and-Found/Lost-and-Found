@@ -35,10 +35,9 @@ db.query('USE ' + dbconfig.database);
 
 module.exports = function(app, passport) {
 
-	console.log("hi1");
+	app.use(express.static(path.join(__dirname, '/views')));
 
 	app.get('/login', function(req, res) {
-		console.log("get");
 		res.sendFile(path.join(app.locals.rootDir + '/public/login/login.html')); // load the index.ejs file
 	});
 
