@@ -12,8 +12,6 @@ require('./config/passport')(passport); // pass passport for configuration
 //============================================================================
 //==========Check the If the Connection with the MySQL database is established
 //============================================================================
-
-
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(passport.initialize());
