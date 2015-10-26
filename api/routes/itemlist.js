@@ -13,8 +13,8 @@ module.exports = function(app, passport, isLoggedIn) {
             db.query('SELECT * from ItemLF', function(err, rows, fields) {
                     
                     console.log(rows);
+                    //console.log(auth.user.username);
                     res.json(rows);
-
             });
 
     });

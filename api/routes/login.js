@@ -55,7 +55,7 @@ module.exports = function(app, passport) {
 		if (!req.isAuthenticated()){
 			res.send(401);
 		} 
-		else next(); 
+		else next();
 	};
 }
 
