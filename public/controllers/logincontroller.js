@@ -18,7 +18,7 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	    })
 	    .success(function(user){
 	    	console.log("cool");
-	     	$window.location.href = "/#itemList";
+	     	$window.location.href = "/#itemlist";
 	    })
 	    .error(function(){
 	    	$rootScope.message = 'Authentication failed.';

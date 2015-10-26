@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Luther College:Lost and Found</title>
         
-        <link rel="stylesheet" href="/login/login.css">
+        <link rel="stylesheet" href="/partials/login/login.css">
   </head>
 
   <body>
     <div class="webpage" ng-controller="loginController">
-      <img src="/login/Norsehead.jpg" />
+      <img src="/partials/login/Norsehead.jpg" />
     
       <div class="wrapper">
 
@@ -22,7 +22,6 @@
         			<input type="text" placeholder="Username" ng-model="login.username">
         			<input type="password" placeholder="Password" ng-model="login.password">
         			<button type="submit" id="login-button" ng-click="loginSubmit(login)" >Login</button>
-              <div> {{login.username}} </div>
       		  </form>
 
       	 </div>
