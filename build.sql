@@ -1,3 +1,16 @@
+#======================================================
+#=================	  INSTRUCTIONS	 ==================
+#======================================================
+#=== from within your project directory containing ====
+#===== build.sql enter the mysql database as root =====
+#============ and run the following script ============
+#======================================================
+
+
+DROP DATABASE lost;
+
+DROP USER senior;
+
 CREATE USER senior IDENTIFIED BY 'qwerty';
 GRANT ALL PRIVILEGES ON *.* TO senior;
 FLUSH PRIVILEGES;
