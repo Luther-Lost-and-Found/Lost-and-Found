@@ -3,8 +3,9 @@
 angular.module('LoginApp',[]);
 angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
+angular.module('addItemApp',[]);
 
-var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp']);
+var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp','addItemApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {
@@ -31,6 +32,19 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'itemlist': {
                         templateUrl : '../partials/itemList/itemList.html',
                         action : 'ItemApp.ItemCtrl'
+                    }
+                }
+            })
+            .state('additem', {
+                url:'/additem',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/navBar/navBar.html',
+                        action : 'navBarApp.NavBarCtrl'
+                    },
+                    'addItem': {
+                        templateUrl : '../partials/addItem/addItem.html',
+                        action : 'addItemApp.AddItemCtrl'
                     }
                 }
             })

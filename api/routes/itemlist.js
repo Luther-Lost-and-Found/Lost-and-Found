@@ -19,16 +19,6 @@ module.exports = function(app, passport, isLoggedIn) {
 
     });
 
-    app.post("/itemlist", function(req,res){
-            console.log(req.body);
-
-            db.query('INSERT INTO ItemLF SET ?', req.body, function(err,result){
-
-                    res.json(result);
-
-            });
-    });
-
     app.delete('/itemlist/', function(req, res) {
             var to_delete = Object.keys(req.query)[0];
             console.log(typeof(to_delete));

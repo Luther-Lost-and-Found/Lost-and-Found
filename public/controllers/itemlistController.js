@@ -15,14 +15,6 @@ angular.module('ItemApp').controller('ItemCtrl', ['$timeout', '$scope', '$http',
 
 	refresh();
 
-	$scope.addItem = function(){
-		console.log($scope.item);
-		$http.post("/itemlist",$scope.item).success(function(response){
-			refresh();
-		});
-
-	}
-
 	$scope.removeItem = function($scope,$element){
 		var current_id = ($scope.itemID); 
 		console.log(current_id);

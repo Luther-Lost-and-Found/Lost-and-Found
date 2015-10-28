@@ -6,8 +6,10 @@ module.exports = function(app, passport) {
     require('./routes/login.js')(app, passport)
     require('./routes/itemlist.js')(app, passport, isLoggedIn)
     require('./routes/logout.js')(app, passport)
+    require('./routes/additem.js')(app, passport)
 
     app.get('*', isLoggedIn, function(req, res) {
+        console.log("redirect");
         res.redirect('/');
     });
 
