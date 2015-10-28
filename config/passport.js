@@ -23,12 +23,13 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        done(null, user);
+        console.log(user.norsekeyID);
+        done(null, user.norsekeyID);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(user, done) {
-        connection.query("SELECT * FROM AdminLF WHERE norsekeyID = ? ",[id], function(err, rows){
+        connection.query("SELECT * FROM AdminLF WHERE norsekeyID = ?",[user], function(err, rows){
             done(err, rows[0]);
         });
     });
@@ -99,7 +100,7 @@ module.exports = function(passport) {
                 if (!rows.length) {
                     return done(null, false);
                 }
-                if (passwordField != rows[0].password){
+                if (!bcrypt.compareSync(passwordField, rows[0].password)){                
                     return done(null, false);
                 }
                 return done(null, rows[0]);
