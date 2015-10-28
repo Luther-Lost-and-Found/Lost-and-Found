@@ -38,7 +38,7 @@ module.exports = function(app, passport) {
 	app.use(express.static(path.join(__dirname, '/views')));
 
 	app.get('/login', function(req, res) {
-		res.sendFile(path.join(app.locals.rootDir + '/public/login/login.html')); // load the index.ejs file
+		res.sendFile(path.join(app.locals.rootDir + '/public/partials/login/login.html')); // load the index.ejs file
 	});
 
 	app.get('/loggedin', function(req, res) {

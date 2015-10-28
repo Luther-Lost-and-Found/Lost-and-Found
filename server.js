@@ -4,6 +4,8 @@ var express = require('express'),
     bodyParser = require("body-parser"),
     path = require('path'),
     passport = require('passport'),
+	session = require('express-session'),
+	cookieParser = require('cookie-parser'),
     server;
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -14,6 +16,8 @@ require('./config/passport')(passport); // pass passport for configuration
 //============================================================================
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

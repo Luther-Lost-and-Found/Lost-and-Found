@@ -4,9 +4,11 @@ var express = require('express'),
 
 
 module.exports = function(app, db, isLoggedIn) {
-	app.use(express.static(path.join(__dirname, '/public/login')));
+	console.log("index.js");
+	app.use(express.static(path.join(__dirname, '/public/partials/login')));
 	app.engine('.html', require('ejs').__express);
     app.get('/', function(req, res) {
         res.render(path.join(app.locals.rootDir + '/public/index.html'));
+        console.log("adsffffffff");
     });
 };

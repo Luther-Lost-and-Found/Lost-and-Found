@@ -1,4 +1,5 @@
-angular.module('ItemApp').controller('ItemCtrl', ['$timeout', '$scope', '$http', function($timeout, $scope, $http) {
+angular.module('ItemApp').controller('ItemCtrl', ['$timeout', '$scope', '$http',
+	function($timeout, $scope, $http) {
 
 	console.log("Hello World from controller");
 

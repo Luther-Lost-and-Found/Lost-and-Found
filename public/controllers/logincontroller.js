@@ -1,4 +1,5 @@
-angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '$http', '$location', '$rootScope','$window', function($timeout, $scope, $http, $location, $rootScope, $window) {
+angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '$http', '$location',
+ '$rootScope','$window', function($timeout, $scope, $http, $location, $rootScope, $window) {
 
 // $scope.loginSubmit = function($scope){
 // 		var login_username = $scope.username;
@@ -17,12 +18,11 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	      	password: $scope.password,
 	    })
 	    .success(function(user){
-	    	console.log("cool");
 	     	$window.location.href = "/#itemlist";
 	    })
 	    .error(function(){
 	    	$rootScope.message = 'Authentication failed.';
-	    	$window.location.href = "../login/login";
+	    	$window.location.href = "/";
 	    });
   	};
 }]);

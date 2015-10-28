@@ -2,42 +2,67 @@
 
 angular.module('LoginApp',[]);
 angular.module('ItemApp',[]);
+angular.module('navBarApp',[]);
+
+var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp']);
+
+myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+    function($stateProvider,$urlRouterProvider, $httpProvider) {
+
+        $urlRouterProvider.otherwise('/');
+
+        $stateProvider
+        	.state('login',{
+                url: '/',
+                views: {
+                    'login': {
+                        templateUrl : 'partials/login/login.html',
+                        action : 'LoginApp.loginController'
+                    }
+                }
+        	})
+            .state('itemlist', {
+                url:'/itemlist',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/navBar/navBar.html',
+                        action : 'navBarApp.NavBarCtrl'
+                    },
+                    'itemlist': {
+                        templateUrl : '../partials/itemList/itemList.html',
+                        action : 'ItemApp.ItemCtrl'
+                    }
+                }
+            })
+
+        var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
+
+            function success(response) {
+
+                return response;
+            }
+
+            function error(response) {
 
 
-
-//Define an angular module for our app
-var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp']);
- 
-//Define Routing for app
-//Uri /AddNewOrder -> template add_order.html and Controller AddOrderController
-//Uri /ShowOrders -> template show_orders.html and Controller AddOrderController
-myApp.config(['$stateProvider', '$urlRouterProvider',
-  function($stateProvider,$urlRouterProvider) {
-
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-    	.state('test',{
-            url: '/',
-            views: {
-                'login': {
-                    templateUrl : 'partials/login/login.html',
-                    action : 'LoginApp.loginController'
+                if(response.status === 401) {
+                    $injector.get('$state').transitionTo('login');
+                    return $q.reject(response);
+                }
+                else {
+                    return $q.reject(response);
                 }
             }
-    	})
-        .state('itemlist', {
-            url:'/itemlist',
-            views: {
-                'navBar': {
-                    templateUrl : '../partials/navBar.html',
-                },
-                'itemlist': {
-                    templateUrl : '../partials/itemList.html',
-                    action : 'ItemApp.ItemCtrl'
-                }
+
+            return function(promise) {
+                return promise.then(success, error);
+
             }
-        })
-}]);
+
+        }];
+
+        $httpProvider.interceptors.push(interceptor);
+    }
+]);
 
 
