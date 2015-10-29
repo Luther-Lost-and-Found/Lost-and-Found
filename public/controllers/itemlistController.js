@@ -1,5 +1,6 @@
-angular.module('ItemApp').controller('ItemCtrl', ['$timeout', '$scope', '$http',
-	function($timeout, $scope, $http) {
+angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '$scope', '$http',
+	'$animate','$uibModal','$rootScope',
+	function($timeout, $scope, $http, $animate,$uibModal,$rootScope) {
 
 	console.log("Hello World from controller");
 
@@ -22,20 +23,7 @@ angular.module('ItemApp').controller('ItemCtrl', ['$timeout', '$scope', '$http',
 			refresh();
 		});
 
-	}
-
-	$scope.editItem = function($element){
-		var current_id = ($element.itemID); 
-		console.log(current_id);
-		$http.get("/itemlist/" + current_id).success(function(response){
-			console.log("got the data to edit");
-			$scope.$applyAsync(function(){
-				$scope.item = response[0];
-			});
-			
-		});
-		
-	}
+	};
 
 	$scope.updateItem = function($element){
 		console.log($scope.item);
@@ -44,6 +32,64 @@ angular.module('ItemApp').controller('ItemCtrl', ['$timeout', '$scope', '$http',
 			console.log("UPDATE");
 			refresh();
 		});
-		
-	}
+	};
+
+	$scope.showDetails = function ($element) {
+	    if ($scope.active != $element.title) {
+	    	$scope.active = $element.title;
+	    }
+	    else {
+	    	$scope.active = null;
+	    }
+	};
+
+	$scope.isCollapsed = true;
+
+	$scope.editItem = function ($element) {
+		var current_id = ($element.itemID); 
+		console.log(current_id);
+		$http.get("/itemlist/" + current_id).success(function(response){
+			console.log("got the data to edit");
+			$rootScope.$applyAsync(function(){
+				$rootScope.item = response[0];
+			});
+		});
+
+	    var modalInstance = $uibModal.open({
+	      animation: $scope.animationsEnabled,
+	      templateUrl: 'myModalContent.html',
+	      controller: 'ModalInstanceCtrl',
+	      size: 'lg',
+	      resolve: {
+	        items: function () {
+	          	return $scope.item;
+	        }
+	      }
+	    });
+
+	    modalInstance.result.then(function ($rootScope) {
+	      $rootScope.selected = selectedItem;
+	    });
+	};	
 }]);
+
+angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items) {
+	console.log(items);
+	$rootScope.item = items;
+	$scope.selected = {
+	    item: $rootScope.item[0]
+	};
+
+  	$scope.updateItem = function($element){
+		var current_id = $rootScope.item.itemID;
+		console.log(current_id);
+		$http.put("/itemlist/" + current_id, $scope.item).success(function(response){
+			console.log("UPDATE");
+			$uibModalInstance.dismiss('cancel');
+		});
+	};
+
+ 	$scope.cancel = function () {
+    	$uibModalInstance.dismiss('cancel');
+  	};
+});
