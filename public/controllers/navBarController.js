@@ -13,7 +13,8 @@ angular.module('navBarApp').controller('NavBarCtrl', ['$rootScope','$timeout', '
 		console.log("search is activated");
 		sharedProperties.setProperty($scope);
 		console.log(sharedProperties.getProperty());
-		$http.put("/searchItem",$scope).success(function(data){
+		var current_search = $scope.title;
+		$http.get("/searchItem/?"+current_search).success(function(data){
 			console.log(data);
 			console.log("exiting the navbarcontroller")
 			$window.location.href = "/#searchItem";

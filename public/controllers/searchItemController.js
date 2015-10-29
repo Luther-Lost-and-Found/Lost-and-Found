@@ -5,15 +5,13 @@ angular.module('searchItemApp',['ui.bootstrap']).controller('searchItemControlle
 	console.log("Hello World from SEARCH controller");
 
 	var refresh = function(){
-		console.log(sharedProperties.getProperty());
-		$scope = sharedProperties.getProperty();
+		var current_search = sharedProperties.getProperty().title;
 
-		$http.put("/searchItem",$scope).success(function(data){
+		$http.get("/searchItem/?"+current_search).success(function(response){
 			console.log("should be good");
-			console.log(data);
+			console.log(response);
 			$scope.$applyAsync(function(){
-				$scope.itemlist = data;
-				$scope.item = "";
+				$scope.searchitemlist = response;
 			});
 		});
 	};

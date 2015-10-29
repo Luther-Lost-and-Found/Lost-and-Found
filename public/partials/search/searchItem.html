@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html ng-app="searchItemApp">
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-	<title>Search Results</title>
+		<title>Search Results</title>
 
-</head>
+	</head>
 
-<body>
-	<div class="container" ng-controller="searchItemController">
-		<h1> Item List </h1>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Location</th>				
-				<th>Accepted By</th>
-				<th>Claimed By</th>
-				<th>Claimed</th>
-				<th>Tags</th>
-				<th>&nbsp;</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr ng-repeat="item in itemlist"> <!-- ng-repeat allows to load data into separate rows -->
-				<td>{{item.title}}</td>
-				<td>{{item.locationID}}</td>
-				<td>{{item.accepted_by}}</td>
-				<td>{{item.claimed_by}}</td>
-				<td>{{item.claimed}}</td>
-				<td>{{item.tags}}</td>
-			</tr>
-		</tbody>
+	<body>
+		<div class="container" ng-controller="searchItemController">
+			<h1> Item List </h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Location</th>				
+						<th>Accepted By</th>
+						<th>Claimed By</th>
+						<th>Claimed</th>
+						<th>Tags</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="searchitem in searchitemlist"> <!-- ng-repeat allows to load data into separate rows -->
+						<td>{{searchitem.title}}</td>
+						<td>{{searchitem.locationID}}</td>
+						<td>{{searchitem.accepted_by}}</td>
+						<td>{{searchitem.claimed_by}}</td>
+						<td>{{searchitem.claimed}}</td>
+						<td>{{searchitem.tags}}</td>
+					</tr>
+				</tbody>
 
-	</table>
-	</div>
-</body>
+			</table>
+		</div>
+	</body>
 </html>

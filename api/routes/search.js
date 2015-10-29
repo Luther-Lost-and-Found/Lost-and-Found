@@ -7,12 +7,10 @@ var express = require('express'),
 db.query('USE ' + dbconfig.database);
 
 module.exports = function(app, passport) {
-    app.put("/searchItem", function(req,res){
+    app.get("/searchItem", function(req,res){
         console.log('hello from search route');
-        console.log(req.body.title);
-
-        db.query("SELECT * from ItemLF WHERE Concat(title,'',tags) like '%" + req.body.title + "%'", function(err, result) {
-                console.log(result);  
+        var to_search = Object.keys(req.query)[0];
+        db.query("SELECT * from ItemLF WHERE Concat(title,'',tags) like '%" + to_search + "%'", function(err, result) {
                 res.json(result);
         });
 
