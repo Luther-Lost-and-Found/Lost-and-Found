@@ -3,6 +3,43 @@
   <link rel="stylesheet" href="/partials/navBar/navBar.css">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid" ng-controller="NavBarCtrl">
+    <script type='text/ng-template' class='myModalContent.html'>
+      <div class="modal-header">
+                <h3 class="modal-title">Add Item</h3>
+            </div>
+            <div class="modal-body">
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Location</th>       
+                <th>Accepted By</th>
+                <th>Claimed By</th>
+                <th>Claimed</th>
+                <th>Tags</th>
+                <th>&nbsp;</th>
+              </tr>
+            </thead>
+            <tbody>
+          <tr>
+            <td><input class="form-control" ng-model="item.title"</td>
+            <td><input class="form-control" ng-model="item.locationID"</td>
+            <td><input class="form-control" ng-model="item.accepted_by"</td>
+            <td><input class="form-control" ng-model="item.claimed_by"</td>
+            <td><input class="form-control" ng-model="item.claimed"</td>
+            <td><input class="form-control" ng-model="item.tags"</td>
+            <td><button class="btn btn-primary" ng-click="addItem()">Add Item</button></td>
+          </tr>
+      </tbody>
+
+    </table>
+  </div>
+  <div class="modal-footer">
+     <button class="btn btn-primary" type="button" ng-click="addItem()">Add</button>
+     <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  </div>
+  </script>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -16,7 +53,8 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <a class="navbar-brand" ui-sref="additem">Add Item</a>
+          <button type="button" class="btn btn-default navbar-btn" ng-click="addItem()">Add Item</button>
+   
         </ul>
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">

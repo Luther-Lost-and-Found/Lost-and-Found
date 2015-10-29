@@ -69,16 +69,24 @@ body nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100px;
+  height: 20%;
   margin-bottom:1px;
 }
 #logo {
-  top:0px;
-  right: 0px;
-  padding: 15px;
+  position:fixed;
+  width: 100%;
+  height:20%;
+
+
+
+}
+img {
+  top:5px;
+  right: 5px;
+
   float:right;
   position: relative;
-  height:140px;
+  height:85%;
   width: auto;
 } 
 
