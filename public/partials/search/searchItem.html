@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html ng-app="LostApp">
+<html ng-app="searchItemApp">
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-	<title>Lost And Found</title>
+	<title>Search Results</title>
 
 </head>
 
 <body>
-	<div class="container" ng-controller="ItemCtrl">
-		<h1> item List </h1>
+	<div class="container" ng-controller="searchItemController">
+		<h1> Item List </h1>
 	<table class="table">
 		<thead>
 			<tr>
@@ -30,8 +30,6 @@
 				<td>{{item.claimed_by}}</td>
 				<td>{{item.claimed}}</td>
 				<td>{{item.tags}}</td>
-				<td><button class="btn btn-danger" ng-click="removeItem(item)">Remove</button></td>
-				<td><button class="btn btn-warning" ng-click="editItem(item)">Edit</button></td> 
 			</tr>
 		</tbody>
 

@@ -1,5 +1,5 @@
-angular.module('navBarApp').controller('NavBarCtrl', ['$timeout', '$scope', '$http', '$window',
-	function($timeout, $scope, $http, $window) {
+angular.module('navBarApp').controller('NavBarCtrl', ['$rootScope','$timeout', '$scope', '$http', '$window','sharedProperties',
+	function($rootScope,$timeout, $scope, $http, $window,sharedProperties) {
 
 	console.log("Hello World from the Navigation Bar");
 
@@ -9,9 +9,15 @@ angular.module('navBarApp').controller('NavBarCtrl', ['$timeout', '$scope', '$ht
 		});
 	}
 
-	$scope.search = function(){
+	$scope.searchItem = function($scope){
 		console.log("search is activated");
-		$window.location.href = "/#searchItem"
+		sharedProperties.setProperty($scope);
+		console.log(sharedProperties.getProperty());
+		$http.put("/searchItem",$scope).success(function(data){
+			console.log(data);
+			console.log("exiting the navbarcontroller")
+			$window.location.href = "/#searchItem";
+		});
 	}
 
-}]);
+}]).$inject = ['$scope', 'sharedProperties'];
