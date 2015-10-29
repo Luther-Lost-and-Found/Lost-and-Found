@@ -7,7 +7,11 @@ angular.module('navBarApp').controller('NavBarCtrl', ['$timeout', '$scope', '$ht
 		$http.get("/signout").success(function(req,res){
 			$window.location.href = "/";
 		});
+	}
 
+	$scope.search = function(){
+		console.log("search is activated");
+		$window.location.href = "/#searchItem"
 	}
 
 }]);

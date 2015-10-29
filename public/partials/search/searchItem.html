@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="LostApp">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<title>Lost And Found</title>
+
+</head>
+
+<body>
+	<div class="container" ng-controller="ItemCtrl">
+		<h1> item List </h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Location</th>				
+				<th>Accepted By</th>
+				<th>Claimed By</th>
+				<th>Claimed</th>
+				<th>Tags</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in itemlist"> <!-- ng-repeat allows to load data into separate rows -->
+				<td>{{item.title}}</td>
+				<td>{{item.locationID}}</td>
+				<td>{{item.accepted_by}}</td>
+				<td>{{item.claimed_by}}</td>
+				<td>{{item.claimed}}</td>
+				<td>{{item.tags}}</td>
+				<td><button class="btn btn-danger" ng-click="removeItem(item)">Remove</button></td>
+				<td><button class="btn btn-warning" ng-click="editItem(item)">Edit</button></td> 
+			</tr>
+		</tbody>
+
+	</table>
+	</div>
+</body>
+</html>

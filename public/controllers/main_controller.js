@@ -48,6 +48,18 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
+            .state('searchitem', {
+                url:'/searchItem',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/navBar/navBar.html',
+                        action : 'navBarApp.NavBarCtrl'
+                    },
+                    'searchitem': {
+                        templateUrl : '../partials/search/searchItem.html'
+                    }
+                }
+            })
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
 
