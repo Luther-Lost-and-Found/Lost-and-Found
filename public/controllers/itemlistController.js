@@ -70,8 +70,12 @@ angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '
 	    modalInstance.result.then(function ($rootScope) {
 	      $rootScope.selected = selectedItem;
 	    });
+
+	    $scope.$on('handleBroadcast', function() {
+        	refresh();
+    	});
 	};	
-}]);
+}]).$inject = ['$scope', 'sharedService'];
 
 angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items) {
 	console.log(items);
@@ -85,6 +89,7 @@ angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootS
 		console.log(current_id);
 		$http.put("/itemlist/" + current_id, $scope.item).success(function(response){
 			console.log("UPDATE");
+			$rootScope.$broadcast('handleBroadcast');
 			$uibModalInstance.dismiss('cancel');
 		});
 	};
@@ -92,4 +97,5 @@ angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootS
  	$scope.cancel = function () {
     	$uibModalInstance.dismiss('cancel');
   	};
-});
+}).$inject = ['$scope', 'sharedService'];
+       

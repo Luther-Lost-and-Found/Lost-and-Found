@@ -78,5 +78,3 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
         $httpProvider.interceptors.push(interceptor);
     }
 ]);
-
-
