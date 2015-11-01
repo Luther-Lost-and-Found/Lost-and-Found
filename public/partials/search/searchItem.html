@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="searchItemApp">
+	<head>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    	<link rel="stylesheet" type="text/css" href="/css/custom.css">
+   		<link rel="stylesheet" type="text/css" href="/partials/search/searchItem.css">
+
+		<title>Search Results</title>
+
+	</head>
+
+	<body>
+		<div class="container" ng-controller="searchItemController">
+			<h1> Item List </h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Location</th>				
+						<th>Accepted By</th>
+						<th>Claimed By</th>
+						<th>Claimed</th>
+						<th>Tags</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="searchitem in searchitemlist"> <!-- ng-repeat allows to load data into separate rows -->
+						<td>{{searchitem.title}}</td>
+						<td>{{searchitem.locationID}}</td>
+						<td>{{searchitem.accepted_by}}</td>
+						<td>{{searchitem.claimed_by}}</td>
+						<td>{{searchitem.claimed}}</td>
+						<td>{{searchitem.tags}}</td>
+					</tr>
+				</tbody>
+
+			</table>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html ng-app="LostApp">
+	<head>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    	<link rel="stylesheet" type="text/css" href="/css/custom.css">
+    	<link rel="stylesheet" type="text/css" href="/partials/itemList/itemList.css">
+    	<title>Lost And Found</title>
+	</head>
+	<body>
+		<div class="container" ng-controller="ItemCtrl">
+			<h1> item List </h1>
+
+			<script type="text/ng-template" id="myModalContent.html">
+		        <div class="modal-header">
+		            <h3 class="modal-title">Edit Item</h3>
+		        </div>
+		        <div class="modal-body">
+		            <table class="table">
+						<thead>
+							<tr>
+								<th>Title</th>
+								<th>Location</th>				
+								<th>Accepted By</th>
+								<th>Claimed By</th>
+								<th>Claimed</th>
+								<th>Tags</th>
+								<th>&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input class="form-control" ng-model="item.title"></td>
+								<td><input class="form-control" ng-model="item.locationID"></td>
+								<td><input class="form-control" ng-model="item.accepted_by"></td>
+								<td><input class="form-control" ng-model="item.claimed_by"></td>
+								<td><input class="form-control" ng-model="item.claimed"></td>
+								<td><input class="form-control" ng-model="item.tags"></td>
+							</tr>
+						</tbody>
+
+					</table>
+		        </div>
+		        <div class="modal-footer">
+		            <button class="btn btn-primary" type="button" ng-click="updateItem()">Update</button>
+		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+		        </div>
+	    	</script>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Location</th>				
+						<th>Accepted By</th>
+						<th>Claimed By</th>
+						<th>Claimed</th>
+						<th>Tags</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="item in itemlist"> <!-- ng-repeat allows to load data into separate rows -->
+						<td>{{item.title}}</td>
+						<td>{{item.locationID}}</td>
+						<td>{{item.accepted_by}}</td>
+						<td>{{item.claimed_by}}</td>
+						<td>{{item.claimed}}</td>
+						<td>{{item.tags}}</td>
+						<td><button class="btn btn-danger" ng-click="removeItem(item)">Remove</button></td>
+						<td><button class="btn btn-warning" ng-click="editItem(item)">Edit</button></td> 
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+</html>
