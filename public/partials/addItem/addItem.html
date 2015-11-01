@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="addItemApp">
+<head>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/partials/addItem/addItem.css">
+
+	<title>Lost And Found</title>
+
+</head>
+
+<body>
+	<div class="container" ng-controller="addItemCtrl">
+		<h1> item List </h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Tags</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input class="form-control" ng-model="item.title"</td>
+				<td><input class="form-control" ng-model="item.tags"</td>
+				<td><button class="btn btn-primary" ng-click="addItem()">Add item</button></td>
+			</tr>
+		</tbody>
+
+	</table>
+	</div>
+</body>
+</html>

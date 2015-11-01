@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="addItemApp">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/custom.css">
+  <link rel="stylesheet" type="text/css" href="/partials/addItem/upload.css">
+
+	<title>Lost And Found</title>
+
+</head>
+<body>
+    <div class="modal-header">
+        <h3 class="modal-title">Upload Picture</h3>
+    </div>
+    <div class="modal-body">
+        <div>
+          <form name="myForm">
+            <fieldset>
+              <div class="col-lg-6 col-sm-6 col-12">
+                <div class="input-group">
+                  <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                      Browse&hellip; <input type="file" ngf-select="" ng-model="picFile" name="file" ngf-fix-orientation="false" accept="image/*">
+                    </span>
+                  </span>
+                  <input ng-model="picFile.name" type="text" class="form-control" readonly>
+                </div>
+              </div>
+              <button class="btn btn-primary" type="button" ng-click="uploadImage(picFile)">Submit</button>
+            </fieldset>
+            <img ngf-src="picFile" class="thumb" width="200">
+          </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</body>
+</html>
