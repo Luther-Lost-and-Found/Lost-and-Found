@@ -5,8 +5,10 @@ angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
 angular.module('addItemApp',[]);
 angular.module('searchItemApp',[]);
+angular.module('guestApp',[]);
 
-var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp','addItemApp','searchItemApp']);
+var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp','addItemApp',
+    'searchItemApp','guestApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {
@@ -59,6 +61,15 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'searchitem': {
                         templateUrl : '../partials/search/searchItem.html',
                         action : 'searchItemApp.searchItemController'
+                    }
+                }
+            })
+            .state('guestPage', {
+                url:'/guestPage',
+                views: {
+                    'guestPage': {
+                        templateUrl : '../partials/guest/guest.html',
+                        action : 'guestApp.guestController'
                     }
                 }
             })
