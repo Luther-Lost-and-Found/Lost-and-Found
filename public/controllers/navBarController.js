@@ -1,5 +1,6 @@
-angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$timeout', '$scope', '$http', '$window','$animate','$uibModal','$rootScope','sharedService',
-	function($timeout, $scope, $window, $http, $animate,$uibModal,$rootScope ) {
+
+angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootScope','$timeout', '$scope', '$http', '$window','sharedProperties','sharedService','$animate','$uibModal',
+	function($rootScope,$timeout, $scope, $http, $window,sharedProperties,sharedService,$animate,$uibModal) {
 
 	console.log("Hello World from the Navigation Bar");
 	var refresh = function(){
@@ -18,9 +19,16 @@ angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$timeout
 		});
 	}
 
-	$scope.search = function(){
+	$scope.searchItem = function($scope){
 		console.log("search is activated");
-		$window.location.href = "/#searchItem"
+		sharedProperties.setProperty($scope);
+		console.log(sharedProperties.getProperty());
+		var current_search = $scope.title;
+		$http.get("/searchItem/?"+current_search).success(function(data){
+			console.log(data);
+			console.log("exiting the navbarcontroller")
+			$window.location.href = "/#searchItem";
+		});
 	}
 
 	$scope.addItem = function(){
@@ -62,5 +70,4 @@ angular.module('navBarApp').controller('itemModalInstanceCtrl', function ($http,
  	$scope.cancel = function () {
     	$uibModalInstance.dismiss('cancel');
   	};
-}).$inject = ['$scope', 'sharedService'];
-       
+});

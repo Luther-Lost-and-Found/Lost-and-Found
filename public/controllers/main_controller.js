@@ -4,8 +4,9 @@ angular.module('LoginApp',[]);
 angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
 angular.module('addItemApp',[]);
+angular.module('searchItemApp',[]);
 
-var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp','addItemApp']);
+var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp','addItemApp','searchItemApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {
@@ -43,7 +44,8 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                         action : 'navBarApp.NavBarCtrl'
                     },
                     'searchitem': {
-                        templateUrl : '../partials/search/searchItem.html'
+                        templateUrl : '../partials/search/searchItem.html',
+                        action : 'searchItemApp.searchItemController'
                     }
                 }
             })
@@ -78,6 +80,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     }
 ]);
 
+
 myApp.service('sharedService',function($rootScope) {
     console.log('working');
     return{
@@ -86,3 +89,17 @@ myApp.service('sharedService',function($rootScope) {
         }
     };
 });
+
+myApp.service('sharedProperties',function(){
+    var property = {nice:'First'};
+
+    return {
+        getProperty: function () {
+            return property;
+        },
+        setProperty: function(value) {
+            property = value;
+        }
+    };
+});
+

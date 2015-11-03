@@ -7,6 +7,7 @@ angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '
 	var refresh = function(){
 		$http.get("/itemlist").success(function(response){
 			console.log('i got the data requested');
+			console.log(response);
 			$scope.$applyAsync(function(){
 				$scope.itemlist = response;
 				$scope.item = "";
@@ -79,7 +80,7 @@ angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '
         	refresh();
     	});
 	};	
-}]).$inject = ['$scope', 'sharedService'];
+}]).$inject = ['$scope', 'sharedServiceUpdateModal'];
 
 angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items) {
 	console.log(items);
@@ -101,5 +102,5 @@ angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootS
  	$scope.cancel = function () {
     	$uibModalInstance.dismiss('cancel');
   	};
-}).$inject = ['$scope', 'sharedService'];
+}).$inject = ['$scope', 'sharedServiceUpdateModal'];
        
