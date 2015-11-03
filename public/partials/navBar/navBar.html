@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="/partials/navBar/navBar.css">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid" ng-controller="NavBarCtrl">
-    <script type='text/ng-template' class='myModalContent.html'>
+    <script type='text/ng-template' id='addItemContent.html'>
       <div class="modal-header">
                 <h3 class="modal-title">Add Item</h3>
             </div>
@@ -29,7 +29,7 @@
             <td><input class="form-control" ng-model="item.claimed_by"</td>
             <td><input class="form-control" ng-model="item.claimed"</td>
             <td><input class="form-control" ng-model="item.tags"</td>
-            <td><button class="btn btn-primary" ng-click="addItem()">Add Item</button></td>
+
           </tr>
       </tbody>
 

@@ -35,19 +35,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
-            .state('additem', {
-                url:'/additem',
-                views: {
-                    'navBar': {
-                        templateUrl : '../partials/navBar/navBar.html',
-                        action : 'navBarApp.NavBarCtrl'
-                    },
-                    'addItem': {
-                        templateUrl : '../partials/addItem/addItem.html',
-                        action : 'addItemApp.AddItemCtrl'
-                    }
-                }
-            })
             .state('searchitem', {
                 url:'/searchItem',
                 views: {
@@ -90,3 +77,12 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
         $httpProvider.interceptors.push(interceptor);
     }
 ]);
+
+myApp.service('sharedService',function($rootScope) {
+    console.log('working');
+    return{
+        refreshMain: function(){
+            $rootScope.$broadcast('handleBroadcast');
+        }
+    };
+});

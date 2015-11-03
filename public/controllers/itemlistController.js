@@ -1,6 +1,6 @@
 angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '$scope', '$http',
-	'$animate','$uibModal','$rootScope',
-	function($timeout, $scope, $http, $animate,$uibModal,$rootScope) {
+	'$animate','$uibModal','$rootScope','sharedService',
+	function($timeout, $scope, $http, $animate,$uibModal,sharedService,$rootScope) {
 
 	console.log("Hello World from controller");
 
@@ -42,6 +42,10 @@ angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '
 	    	$scope.active = null;
 	    }
 	};
+
+	$scope.$on('handleBroadcast', function() {
+        	refresh();
+    });
 
 	$scope.isCollapsed = true;
 
