@@ -6,6 +6,7 @@ var express = require('express'),
     passport = require('passport'),
     session = require('express-session'),
     cookieParser = require('cookie-parser'),
+    multiparty = require('multiparty'),
     server;
 
 require('./config/passport')(passport); // pass passport for configuration
