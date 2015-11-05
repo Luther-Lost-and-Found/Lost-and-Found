@@ -4,8 +4,9 @@ var express = require('express'),
     bodyParser = require("body-parser"),
     path = require('path'),
     passport = require('passport'),
-	session = require('express-session'),
-	cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    cookieParser = require('cookie-parser'),
+    multiparty = require('multiparty'),
     server;
 
 require('./config/passport')(passport); // pass passport for configuration
@@ -26,14 +27,8 @@ app.locals.rootDir = __dirname;
 require(path.join(__dirname + '/api/routes.js'))(app, passport)
 
 
-var start = exports.start = function start(port, callback) {
-    server = app.listen(port, callback);
-};
+server = app.listen(3000);
 
-var stop = exports.stop = function stop(callback) {
-    server.close(callback);
-};
-
-start(3000);
+module.exports = server;
 
 console.log('Server running');

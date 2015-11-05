@@ -4,16 +4,17 @@
   "description": "A project intended to make inter-building lost-and-found more efficient",
   "main": "server.js",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.10.2",
+    "chai-http": "^1.0.0",
+    "cookie-parser": "~1.0.0",
+    "ejs": "^2.3.2",
     "express": "^4.11.1",
+    "express-session": "~1.0.0",
     "mysql": "^2.5.4",
-    "path": "^0.12.7",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
-    "bcrypt-nodejs": "0.0.3",
-    "ejs": "^2.3.2",
-    "cookie-parser": "~1.0.0",
-    "express-session": "~1.0.0"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "chai": "^3.3.0",
