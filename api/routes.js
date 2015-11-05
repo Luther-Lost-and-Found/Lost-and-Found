@@ -27,7 +27,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else{
-        console.log("ASDFFFFFFFFFFFFFFFFFFFFFFF");
+        res.redirect('/#/')
         res.status(401);
     }
 
