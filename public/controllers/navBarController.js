@@ -35,16 +35,17 @@ angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootSco
 	}
 
 	$scope.addItem = function(){
-		  var modalInstance = $uibModal.open({
-	      animation: $scope.animationsEnabled,
-	      templateUrl: 'addItemContent.html',
-	      controller: 'itemModalInstanceCtrl',
-	      size: 'lg',
-	      resolve: {
-	        items: function () {
-	          	return $scope.item;
-	        }
-	      }
+		$rootScope.item = {};
+		var modalInstance = $uibModal.open({
+	    	animation: $scope.animationsEnabled,
+	    	templateUrl: 'addItemContent.html',
+	    	controller: 'itemModalInstanceCtrl',
+	    	size: 'lg',
+	    	resolve: {
+	        	items: function () {
+	          		return $scope.item;
+	        	}
+	    	}
 	    });
 	};	
 }]);

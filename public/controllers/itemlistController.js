@@ -1,6 +1,6 @@
 angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '$scope', '$http',
 	'$animate','$uibModal','$rootScope','sharedService',
-	function($timeout, $scope, $http, $animate,$uibModal,sharedService,$rootScope) {
+	function($timeout, $scope, $http, $animate,$uibModal,$rootScope,sharedService) {
 
 	console.log("Hello World from controller");
 
@@ -52,7 +52,7 @@ angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '
 
 	$scope.editItem = function ($element) {
 		var current_id = ($element.itemID); 
-		console.log(current_id);
+		console.log($element);
 		$http.get("/itemlist/" + current_id).success(function(response){
 			console.log("got the data to edit");
 			$rootScope.$applyAsync(function(){
