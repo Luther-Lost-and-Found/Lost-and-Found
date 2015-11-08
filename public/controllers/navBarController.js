@@ -1,6 +1,9 @@
 
-angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootScope','$timeout', '$scope', '$http', '$window','sharedProperties','sharedService','$animate','$uibModal',
-	function($rootScope,$timeout, $scope, $http, $window,sharedProperties,sharedService,$animate,$uibModal) {
+angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootScope',
+	'$timeout', '$scope', '$http', '$window','sharedProperties','sharedService',
+	'$animate','$uibModal',
+	function($rootScope,$timeout, $scope, $http, $window,sharedProperties,
+		sharedService,$animate,$uibModal) {
 
 	console.log("Hello World from the Navigation Bar");
 	var refresh = function(){

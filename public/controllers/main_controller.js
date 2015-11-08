@@ -3,12 +3,10 @@
 angular.module('LoginApp',[]);
 angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
-angular.module('addItemApp',[]);
 angular.module('searchItemApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router',
-    'LoginApp','ItemApp','navBarApp','addItemApp',
-    'searchItemApp']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {

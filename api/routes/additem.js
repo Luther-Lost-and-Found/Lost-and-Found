@@ -9,11 +9,18 @@ db.query('USE ' + dbconfig.database);
 module.exports = function(app, passport) {
 
     app.post("/additem", function(req,res){
-        console.log(req.body);
 
-        db.query('INSERT INTO ItemLF SET ?', req.body, function(err,result){
+        db.query("SELECT locationID FROM AdminLF WHERE norsekeyID = '" + req.user.norsekeyID + "';",
+            function(error,currentLocation){
+                console.log(req.user.norsekeyID);
+                console.log(currentLocation[0].locationID);
 
-                res.json(result);
+                db.query("INSERT INTO ItemLF (title,tags,locationID,accepted_by,claimed) VALUES ('"+
+                req.body.title + "','" + req.body.tags + "'," + currentLocation[0].locationID + ",'" + req.user.norsekeyID +
+                "','False');",function(err,result){
+                
+                    res.json(result);
+            });
         });
     });
 
