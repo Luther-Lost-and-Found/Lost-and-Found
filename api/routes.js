@@ -7,16 +7,14 @@ module.exports = function(app, passport) {
     require('./routes/itemlist.js')(app, passport, isLoggedIn)
     require('./routes/logout.js')(app, passport)
     require('./routes/additem.js')(app, passport)
-    require('./routes/search.js')(app, passport)
+    require('./routes/search.js')(app, passport, isLoggedIn)
 
-    app.get('*', isLoggedIn, function(req, res) {
-        console.log("redirect");
+    app.get('/#/*', isLoggedIn, function(req, res) {
         res.redirect('/');
     });
 
-    app.get('/', function(req, res) {
-        console.log("hwerwer");
-        res.render('index.html'); // load the index.ejs file
+    app.get('/loggedin', function(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
     });
 };
 
@@ -27,6 +25,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else{
+        console.log("need to authenticate");
         res.redirect('/#/')
         res.status(401);
     }

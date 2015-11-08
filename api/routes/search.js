@@ -6,8 +6,8 @@ var express = require('express'),
     
 db.query('USE ' + dbconfig.database);
 
-module.exports = function(app, passport) {
-    app.get("/searchItem", function(req,res){
+module.exports = function(app, passport, isLoggedIn) {
+    app.get("/searchItem", isLoggedIn, function(req,res){
         console.log('hello from search route');
         var to_search = Object.keys(req.query)[0];
         db.query("SELECT * from ItemLF WHERE Concat(title,'',tags) like '%" + to_search + "%'", function(err, result) {

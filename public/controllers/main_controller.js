@@ -6,7 +6,9 @@ angular.module('navBarApp',[]);
 angular.module('addItemApp',[]);
 angular.module('searchItemApp',[]);
 
-var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp','addItemApp','searchItemApp']);
+var myApp = angular.module('LostApp', ['ui.router',
+    'LoginApp','ItemApp','navBarApp','addItemApp',
+    'searchItemApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {
@@ -51,29 +53,17 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             })
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-
-            function success(response) {
-
-                return response;
-            }
-
-            function error(response) {
-
-
-                if(response.status === 401) {
-                    $injector.get('$state').transitionTo('login');
-                    return $q.reject(response);
-                }
-                else {
-                    return $q.reject(response);
-                }
-            }
-
-            return function(promise) {
-                return promise.then(success, error);
-
-            }
-
+            console.log("inside the interceptor"); 
+            return {
+                response: function(response) {
+                    return response; 
+                },
+                responseError: function(response) { 
+                    if (response.status === 401) 
+                        $location.url('/login'); 
+                    return $q.reject(response); 
+                } 
+            };
         }];
 
         $httpProvider.interceptors.push(interceptor);
