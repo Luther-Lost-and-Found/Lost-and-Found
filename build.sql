@@ -32,14 +32,6 @@ email VARCHAR(50) NOT NULL,
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID))
 engine=InnoDB;
 
-CREATE TABLE ImageLF (imageID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-image_type VARCHAR(25) NOT NULL DEFAULT '',
-image BLOB NOT NULL,
-image_size VARCHAR(25) NOT NULL DEFAULT '', 
-image_ctgy VARCHAR(25) NOT NULL DEFAULT '',
-image_name VARCHAR(50) NOT NULL DEFAULT '')
-engine=InnoDB;
-
 CREATE TABLE ItemLF (itemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
 time_stamp DATE NOT NULL,
 title VARCHAR(50) NOT NULL,
@@ -49,10 +41,13 @@ locationID INT NOT NULL,
 accepted_by VARCHAR(30) NOT NULL, 
 claimed_by VARCHAR(30),
 claimed VARCHAR(5) NOT NULL,
-FOREIGN KEY (imageID) REFERENCES ImageLF(imageID),
+imagePrimColor VARCHAR(20),
+imageSecColor VARCHAR(20),
+imageThirdColor VARCHAR(20),
+FULLTEXT (title,tags),
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
-engine=InnoDB;
+ENGINE=MyISAM;
 
 USE lost
 

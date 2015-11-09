@@ -2,7 +2,6 @@ var express = require('express'),
     path = require('path');
 
 module.exports = function(app, passport) {
-    require('./routes/index.js')(app, passport, isLoggedIn)
     require('./routes/login.js')(app, passport)
     require('./routes/itemlist.js')(app, passport, isLoggedIn)
     require('./routes/logout.js')(app, passport)
