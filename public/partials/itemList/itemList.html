@@ -7,8 +7,20 @@
 	<body>
 		<div class="container" ng-controller="ItemCtrl">
 			<h1> Item List </h1>
+			  <div class="dropdown">
+    			<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Sort By
+    				<span class="caret"></span></button>
+    					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+      						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Location</a></li>
+      						<li role="presentation" class="divider"></li>
+      						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Date Found</a></li>
+      						<li role="presentation" class="divider"></li>
+      						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Alphebetically</a></li>
+      						<li role="presentation" class="divider"></li>
 
-			<script type="text/ng-template" id="myModalContent.html">
+    					</ul>
+  			</div>
+	<script type="text/ng-template" id="myModalContent.html">
 		        <div class="modal-header">
 		            <h3 class="modal-title">Edit Item</h3>
 		        </div>
