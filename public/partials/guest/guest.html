@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="guestApp">
+	<head>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    	<link rel="stylesheet" type="text/css" href="/css/custom.css">
+    	<link rel="stylesheet" type="text/css" href="/partials/guest/guest.css">
+    	<title>Lost And Found</title>
+	</head>
+	<body>
+		<div class="container" ng-controller="guestController">
+			<div class="container">
+				<div class="col-sm-10 col-sm-offset-2" id="header">
+			  		<h2>Fill out the form to get the possible locations of your item</h2>
+			  	</div>
+			  <form class="form-horizontal" role="form">
+			    <div class="form-group">
+			      <label class="control-label col-sm-1" for="itemTitle">Item:</label>
+			      <div class="col-sm-11">
+			        <input type="itemTitle" class="form-control" id="itemTitle" ng-model="searchGuest.itemTitle" placeholder="What did you lose?">
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      <label class="control-label col-sm-1" for="location">Location:</label>
+			      <div class="col-sm-11">
+			        <input type="location" class="form-control" id="location" ng-model="searchGuest.location" placeholder="Where did you lose it?">
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      <label class="control-label col-sm-1" for="location">Color:</label>
+			      <div class="col-sm-11">
+			        <input type="color" class="form-control" id="itemColor" ng-model="searchGuest.itemColor">
+			      </div>
+			    </div>
+			    <div class="form-group">
+			    	<label class="control-label col-sm-1" for="description">Description:</label>
+			      	<div class="col-sm-11">
+						<textarea class="form-control" rows="10" id="description" ng-model="searchGuest.description"></textarea>
+				 	</div>
+			    </div>
+			    <div class="form-group">        
+			      <div class="col-sm-offset-1 col-sm-11">
+			        <button class="btn btn-primary" type="button" ng-click="submitGuestSearch(searchGuest)">Submit</button>
+			      </div>
+			    </div>
+			  </form>
+			</div>
+		</div>
+	</body>
+</html>
