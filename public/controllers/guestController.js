@@ -16,7 +16,9 @@ angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$tim
 	};
 
 	$scope.submitGuestSearch = function($scope){
+
 		$rootScope.item = {};
+		console.log()
 		var modalInstance = $uibModal.open({
 	    	animation: $scope.animationsEnabled,
 	    	templateUrl: 'guestSearchResult.html',
@@ -31,22 +33,25 @@ angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$tim
 	};
 }]);
 
-angular.module('guestApp').controller('guestModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items,sharedService) {
+angular.module('guestApp').controller('guestModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items,sharedService, sharedProperties) {
 
 	$scope.submitGuestSearch = function(){
 
 		var current_search = sharedProperties.getProperty().title;
 
-		$http.get("/guestPage/?"+current_search).success(function(response){
+		$http.get("/guest/?"+current_search).success(function(response){
 			console.log("should be good");
 			console.log(response);
 			$scope.$applyAsync(function(){
 				$scope.locationlist = response;
 			});
+
+			sharedService.refreshMain();
+			$uibModalInstance.dismiss('cancel');
 		});
 
 		console.log($scope.locationlist);
-		$http.post("/guestPage",$scope.locationlist).success(function(response){
+		/*$http.post("/guest",$scope.locationlist).success(function(response){
 			console.log("yes");
 
 			
@@ -54,7 +59,7 @@ angular.module('guestApp').controller('guestModalInstanceCtrl', function ($http,
 
 			$uibModalInstance.dismiss('cancel');
 
-		});
+		});*/
 
 	}
 

@@ -7,7 +7,7 @@ var express = require('express'),
 db.query('USE ' + dbconfig.database);
 
 module.exports = function(app) {
-    app.get("/guestPage", function(req,res){
+    app.get("/guest", function(req,res){
             console.log('i received the request');
             //var to_search = Object.keys(req.query)[0];
             //db.query("SELECT ItemLF.title, LocationLF.building_name from ItemLF, LocationLF WHERE Concat(ItemLF.title,'',ItemLF.tags) like '%" + to_search + "%'", function(err, rows, fields) {
