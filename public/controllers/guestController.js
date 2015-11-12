@@ -17,7 +17,17 @@ angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$tim
 
 	$scope.submitGuestSearch = function($scope){
 
-		$rootScope.item = {};
+		var current_search = ($scope.itemTitle); 
+		console.log(current_search);
+		$http.get("/guest/?"+current_search).success(function(response){
+			console.log("should be good");
+			console.log(response);
+			$rootScope.$applyAsync(function(){
+				$rootScope.locationlist = response;
+			});
+		});
+
+		//$rootScope.item = {};
 		console.log()
 		var modalInstance = $uibModal.open({
 	    	animation: $scope.animationsEnabled,
@@ -33,33 +43,21 @@ angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$tim
 	};
 }]);
 
-angular.module('guestApp').controller('guestModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items,sharedService, sharedProperties) {
+angular.module('guestApp').controller('guestModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items, sharedProperties) {
 
 	$scope.submitGuestSearch = function(){
 
 		var current_search = sharedProperties.getProperty().title;
 
-		$http.get("/guest/?"+current_search).success(function(response){
-			console.log("should be good");
-			console.log(response);
-			$scope.$applyAsync(function(){
-				$scope.locationlist = response;
-			});
-
-			sharedService.refreshMain();
-			$uibModalInstance.dismiss('cancel');
-		});
-
-		console.log($scope.locationlist);
-		/*$http.post("/guest",$scope.locationlist).success(function(response){
+		$http.post("/guest",$scope.locationlist).success(function(response){
 			console.log("yes");
 
 			
-			sharedService.refreshMain();
+			//sharedService.refreshMain();
 
 			$uibModalInstance.dismiss('cancel');
 
-		});*/
+		});
 
 	}
 

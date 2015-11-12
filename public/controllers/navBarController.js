@@ -61,11 +61,10 @@ angular.module('navBarApp').controller('itemModalInstanceCtrl', function ($http,
 		console.log($scope.item);
 		$http.post("/additem",$scope.item).success(function(response){
 			console.log("yes");
+			
 			sharedService.refreshMain();
 
 			$uibModalInstance.dismiss('cancel');
-
-		
 
 		});
 
