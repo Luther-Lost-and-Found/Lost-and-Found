@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html ng-app="LostApp">
 	<head>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">		
+		<link rel="stylesheet" href="/partials/itemList/itemList.css">
+
+
 		<title>Lost And Found</title>
 	</head>
 	<body>
 		<div class="container" ng-controller="ItemCtrl">
 			<h1> Item List </h1>
 			  <div class="dropdown">
-    			<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Sort By
+    			<button class="dropdown" type="button" id="menu1" data-toggle="dropdown">Sort By
     				<span class="caret"></span></button>
     					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
       						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Location</a></li>
@@ -66,6 +70,7 @@
 				                  md-colspan-sm="1"
 				                  ng-class="tile.background" >
 				      <md-icon md-svg-icon="{{item.icon}}"></md-icon>
+				      <img ng-src="{{image.src}}" height="220" width="220"></img>
 				      <md-grid-tile-footer><h3>{{item.title}}</h3></md-grid-tile-footer>
 				    </md-grid-tile>
 				  </md-grid-list>

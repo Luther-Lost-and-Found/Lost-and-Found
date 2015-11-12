@@ -1,4 +1,4 @@
-angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '$scope', '$http',
+angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', ['$timeout', '$scope', '$http',
 	'$animate','$uibModal','$rootScope','sharedService',
 	function($timeout, $scope, $http, $animate,$uibModal,$rootScope,sharedService) {
 
@@ -10,6 +10,7 @@ angular.module('ItemApp',['ui.bootstrap']).controller('ItemCtrl', ['$timeout', '
 			console.log(response);
 			$scope.$applyAsync(function(){
 				$scope.itemlist = response;
+				$scope.image = {src : "../itemImages/meow.jpg" }; 
 				$scope.item = "";
 			});
 		});
@@ -103,4 +104,5 @@ angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootS
     	$uibModalInstance.dismiss('cancel');
   	};
 }).$inject = ['$scope', 'sharedServiceUpdateModal'];
-       
+ 
+
