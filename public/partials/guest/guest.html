@@ -18,13 +18,18 @@
 	        <table class="table">
 	            <thead>
 	              <tr>
-	                <th>Location</th>
+	                <th>Building</th>
+	                <th>Room</th>
+	                <th>Contact</th>
 	                <th>&nbsp;</th>
 	              </tr>
 	            </thead>
 	            <tbody>
 		          	<tr ng-repeat="location in locationlist"> <!-- ng-repeat allows to load data into separate rows -->
 						<td>{{location.building_name}}</td>
+						<td>{{location.room_name}}</td>
+						<td>{{location.email}}</td>
+						<td>{{location.phonenumber}}</td>
 					</tr>
 	      		</tbody>
     		</table>
