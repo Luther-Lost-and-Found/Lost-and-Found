@@ -8,6 +8,31 @@
 	</head>
 	<body>
 		<div class="container" ng-controller="guestController">
+		<script type='text/ng-template' id='guestSearchResult.html'>
+      		<div class="modal-header">
+                <h3 class="modal-title">Search Results</h3>
+            </div>
+            <div class="modal-body">
+            <p>Your item is most likely to be found in the following locations:</p>
+
+	        <table class="table">
+	            <thead>
+	              <tr>
+	                <th>Location</th>
+	                <th>&nbsp;</th>
+	              </tr>
+	            </thead>
+	            <tbody>
+		          	<tr ng-repeat="location in locationlist"> <!-- ng-repeat allows to load data into separate rows -->
+						<td>{{location}}</td>
+					</tr>
+	      		</tbody>
+    		</table>
+  			</div>
+			<div class="modal-footer">
+			    <button class="btn btn-primary" type="button" ng-click="cancel()">Okay</button>
+			</div>
+		</script>
 			<div class="container">
 				<div class="col-sm-10 col-sm-offset-2" id="header">
 			  		<h2>Fill out the form to get the possible locations of your item</h2>
