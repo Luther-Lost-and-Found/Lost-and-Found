@@ -13,5 +13,6 @@ module.exports = function(app, passport) {
 		console.log("hello from the navBar router");
 		req.logout();
 		res.redirect('/');
+                res.status(401);
 	});
 }
