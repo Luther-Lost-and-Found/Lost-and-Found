@@ -17,9 +17,10 @@ angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$tim
 
 	$scope.submitGuestSearch = function($scope){
 
-		var current_search = ($scope.itemTitle); 
+		//var current_search = ($scope.itemTitle); 
+		var current_search = {title:$scope.itemTitle, location:$scope.location, description:$scope.description}
 		console.log(current_search);
-		$http.get("/guest/?"+current_search).success(function(response){
+		$http.get("/guest", current_search).success(function(response){
 			console.log("should be good");
 			console.log(response);
 			$rootScope.$applyAsync(function(){
