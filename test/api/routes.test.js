@@ -4,7 +4,7 @@ var chai = require('chai'),
 
 chai.use(chaiHttp);
 
-describe('unauthenticated requests', function () {
+describe('requests on undefined routes', function () {
 
     var server;
 
@@ -19,7 +19,7 @@ describe('unauthenticated requests', function () {
 
     it('should have status 401', function(done) {
         chai.request(server)
-            .get('/itemlist/')
+            .get('/asdfjkasjdkfajslfdjalks/')
             .end(function(err, res){
                 expect(err).to.not.be.ok;
                 expect(res).to.have.status(401);
@@ -28,10 +28,10 @@ describe('unauthenticated requests', function () {
     });
     it('should redirect to /', function(done) {
         chai.request(server)
-            .get('/itemlist/')
+            .get('/asdfjkasjdkfajslfdjalks/')
             .end(function(err, res){
                 expect(err).to.not.be.ok;
-                expect(res.text).to.contain('Redirecting to /#/');
+                expect(res.text).to.contain('Redirecting to /');
                 done();
             });
     });
