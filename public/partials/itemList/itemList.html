@@ -24,38 +24,22 @@
 
     					</ul>
   			</div>
+
 	<script type="text/ng-template" id="myModalContent.html">
 		        <div class="modal-header">
-		            <h3 class="modal-title">Edit Item</h3>
+		            <h3 class="modal-title">Item Description</h3>
 		        </div>
 		        <div class="modal-body">
-		            <table class="table">
-						<thead>
-							<tr>
-								<th>Title</th>
-								<th>Location</th>				
-								<th>Accepted By</th>
-								<th>Claimed By</th>
-								<th>Claimed</th>
-								<th>Tags</th>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input class="form-control" ng-model="item.title"></td>
-								<td><input class="form-control" ng-model="item.locationID"></td>
-								<td><input class="form-control" ng-model="item.accepted_by"></td>
-								<td><input class="form-control" ng-model="item.claimed_by"></td>
-								<td><input class="form-control" ng-model="item.claimed"></td>
-								<td><input class="form-control" ng-model="item.tags"></td>
-							</tr>
-						</tbody>
+		            <label for="itemName">Item Name:</label> <input id="itemName" class="form-control" ng-model="item.title">
+		            <label for "located" > Current Location </label><input id="located" class="form-control" ng-model="item.locationID">
+		            <label for="accepted">Accepted By: </label>  <input id="accepted" class="form-control" ng-model="item.accepted_by">
+		            <label for="claimed" > Claimed By: </label>  <input id="claimed" class="form-control" ng-model="item.claimed_by">
+		            <label for="desc" > Description </label> <input id="desc" class="form-control" ng-model="item.tags"></td>
 
-					</table>
 		        </div>
 		        <div class="modal-footer">
 		            <button class="btn btn-primary" type="button" ng-click="updateItem()">Update</button>
+		            <button class="btn btn-danger" ng-click="removeItem(item)">Remove</button>
 		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 		        </div>
 	    	</script>
@@ -68,7 +52,7 @@
 				                  md-rowspan="{{item.span.row}}"
 				                  md-colspan="{{item.span.col}}"
 				                  md-colspan-sm="1"
-				                  ng-class="tile.background" >
+				                  ng-class="tile.background" ng-click="clicked(item)" >
 				     
 				      <img class="images" ng-src="{{image.src}}"></img>
 				      <md-grid-tile-footer ><h3>{{item.title}}</h3></md-grid-tile-footer>

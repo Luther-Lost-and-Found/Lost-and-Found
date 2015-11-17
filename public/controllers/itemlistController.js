@@ -4,13 +4,14 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 
 	console.log("Hello World from controller");
 
+
 	var refresh = function(){
 		$http.get("/itemlist").success(function(response){
 			console.log('i got the data requested');
 			console.log(response);
 			$scope.$applyAsync(function(){
 				$scope.itemlist = response;
-				$scope.image = {src : "../itemImages/baby.jpg" }; 
+				$scope.image = {src : "../itemImages/meow.jpg" }; 
 				$scope.item = "";
 			});
 		});
@@ -35,7 +36,29 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 			refresh();
 		});
 	};
+	$scope.clicked = function($element){
+		var current_id = ($element.itemID); 
+		console.log($element);
+		$http.get("/itemlist/" + current_id).success(function(response){
+			console.log("got the data to edit");
+			$rootScope.$applyAsync(function(){
+				$rootScope.item = response[0];
+			});
+		});
 
+	    var modalInstance = $uibModal.open({
+	      animation: $scope.animationsEnabled,
+	      templateUrl: 'myModalContent.html',
+	      controller: 'ModalInstanceCtrl',
+	      size: 'lg',
+	      resolve: {
+	        items: function () {
+	          	return $scope.item;
+	        }
+	      }
+	    });
+
+      };
 	$scope.showDetails = function ($element) {
 	    if ($scope.active != $element.title) {
 	    	$scope.active = $element.title;
