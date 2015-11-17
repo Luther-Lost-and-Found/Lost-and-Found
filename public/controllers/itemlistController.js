@@ -10,7 +10,7 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 			console.log(response);
 			$scope.$applyAsync(function(){
 				$scope.itemlist = response;
-				$scope.image = {src : "../itemImages/paris.jpg" }; 
+				$scope.image = {src : "../itemImages/baby.jpg" }; 
 				$scope.item = "";
 			});
 		});
