@@ -11,7 +11,6 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 			console.log(response);
 			$scope.$applyAsync(function(){
 				$scope.itemlist = response;
-				$scope.image = {src : "../itemImages/meow.jpg" }; 
 				$scope.item = "";
 			});
 		});
