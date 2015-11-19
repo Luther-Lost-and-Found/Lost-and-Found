@@ -27,12 +27,37 @@
 
 
 	<script type="text/ng-template" id="myModalContent.html">
+				<div class="modal-header">
+		            <h3 class="modal-title">Item Description</h3>
+		        </div>
 		        <div class="modal-body">
-		            
-
+		        <pre><img class="images" ng-src="{{'../itemImages/' +item.itemID + '.jpg'}}"></img> </pre>
+		          <label for="itemName">Item Name:</label> <p id="itemName"> {{item.title}} </p>
+		          <label for "located" > Current Location </label> <p id="located"> {{item.locationID}} </p>
+		          <label for="accepted">Accepted By: </label>  <p id="accepted" >{{item.accepted_by}} </p>
+		          <label for="claimed" > Claimed By: </label>  <p id="claimed"> {{item.claimed_by}} </p>
+		          <label for="desc" > Description </label> <p id="desc"> {{item.tags}} </p>
 		        </div>
 		        <div class="modal-footer">
-		            <button class="btn btn-primary" type="button" ng-click="updateItem()">Update</button>
+		            <button class="btn btn-warning" ng-click="editItem(item)">Edit</button>
+		            <button class="btn btn-danger" ng-click="removeItem(item)">Remove</button>
+		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+		        </div>
+	    	</script>
+	    		<script type="text/ng-template" id="myModalContentEdit.html">
+				<div class="modal-header">
+		            <h3 class="modal-title">Item Description</h3>
+		        </div>
+		        <div class="modal-body">
+		        <pre><img class="images" ng-src="{{'../itemImages/' +item.itemID + '.jpg'}}"></img> </pre>
+		         <label for="itemName">Item Name:</label> <input id="itemName" class="form-control" ng-model="item.title">
+		            <label for "located" > Current Location </label><input id="located" class="form-control" ng-model="item.locationID">
+		            <label for="accepted">Accepted By: </label>  <input id="accepted" class="form-control" ng-model="item.accepted_by">
+		            <label for="claimed" > Claimed By: </label>  <input id="claimed" class="form-control" ng-model="item.claimed_by">
+		            <label for="desc" > Description </label> <input id="desc" class="form-control" ng-model="item.tags">
+
+		        <div class="modal-footer">
+		            <button class="btn btn-warning" ng-click="updateItem(item)">Update</button>
 		            <button class="btn btn-danger" ng-click="removeItem(item)">Remove</button>
 		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 		        </div>

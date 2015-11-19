@@ -49,7 +49,7 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 	      animation: $scope.animationsEnabled,
 	      templateUrl: 'myModalContent.html',
 	      controller: 'ModalInstanceCtrl',
-	      size: 'lg',
+	      size: 'md',
 	      resolve: {
 	        items: function () {
 	          	return $scope.item;
@@ -73,7 +73,16 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 
 	$scope.isCollapsed = true;
 
-	$scope.editItem = function ($element) {
+
+}]).$inject = ['$scope', 'sharedServiceUpdateModal'];
+
+angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items) {
+	console.log(items);
+	$rootScope.item = items;
+	$scope.selected = {
+	    item: $rootScope.item[0]
+	};
+		$scope.editItem = function ($element) {
 		var current_id = ($element.itemID); 
 		console.log($element);
 		$http.get("/itemlist/" + current_id).success(function(response){
@@ -83,18 +92,6 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 			});
 		});
 
-	    var modalInstance = $uibModal.open({
-	      animation: $scope.animationsEnabled,
-	      templateUrl: 'myModalContent.html',
-	      controller: 'ModalInstanceCtrl',
-	      size: 'lg',
-	      resolve: {
-	        items: function () {
-	          	return $scope.item;
-	        }
-	      }
-	    });
-
 	    modalInstance.result.then(function ($rootScope) {
 	      $rootScope.selected = selectedItem;
 	    });
@@ -103,15 +100,6 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
         	refresh();
     	});
 	};	
-}]).$inject = ['$scope', 'sharedServiceUpdateModal'];
-
-angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items) {
-	console.log(items);
-	$rootScope.item = items;
-	$scope.selected = {
-	    item: $rootScope.item[0]
-	};
-
   	$scope.updateItem = function($element){
 		var current_id = $rootScope.item.itemID;
 		console.log(current_id);
