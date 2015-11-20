@@ -13,10 +13,11 @@ module.exports = function(app) {
 
             
             db.query("select distinct LocationLF.*, \
+                    match (ItemLF.title) against ('"+ req.body.title + "') as title_relevance,\
                     match (ItemLF.title, ItemLF.tags) against ('"+req.body.title+" " + req.body.description +"') as relevance \
                     from LocationLF, ItemLF where ItemLF.locationID = LocationLF.locationID and \
                     match (ItemLF.title, ItemLF.tags) against ('" + req.body.title + " " + req.body.description + "')\
-                    order by relevance desc;", function(err, rows, fields){        
+                    order by title_relevance desc, relevance desc;", function(err, rows, fields){        
                     console.log(rows);
                     //console.log(auth.user.username);
                     res.json(rows);
