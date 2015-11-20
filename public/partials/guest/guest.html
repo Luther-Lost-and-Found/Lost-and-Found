@@ -7,13 +7,14 @@
     	<title>Lost And Found</title>
 	</head>
 	<body>
+	<nav>
 		<div class="container" ng-controller="guestController">
 		<script type='text/ng-template' id='guestSearchResult.html'>
       		<div class="modal-header">
                 <h3 class="modal-title">Search Results</h3>
             </div>
             <div class="modal-body">
-            <p>Your item is most likely to be found in one of the following locations:</p>
+            <p>Your item is most likely to be found in one of the following locations, ordered from most to least likely:</p>
 
 	        <table class="table">
 	            <thead>
@@ -40,7 +41,7 @@
 		</script>
 			<div class="container">
 				<div class="col-sm-10 col-sm-offset-2" id="header">
-			  		<h2>Fill out the form to get the possible locations of your item</h2>
+			  		<h2>Find Your Lost Item</h2>
 			  	</div>
 			  <form class="form-horizontal" role="form">
 			    <div class="form-group">
