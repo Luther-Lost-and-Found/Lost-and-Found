@@ -16,6 +16,12 @@ angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootSco
 		});
 	};
 
+	$scope.login = function(){
+		$http.get("/login").success(function(req,res){
+			$window.location.href = "/";
+		});
+	}
+
 	$scope.logout = function(){
 		$http.get("/signout").success(function(req,res){
 			$window.location.href = "/";

@@ -14,7 +14,7 @@ angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$tim
 			});
 		});
 	};
-
+	
 	$scope.submitGuestSearch = function($scope){
 
 		//var current_search = ($scope.itemTitle); 
