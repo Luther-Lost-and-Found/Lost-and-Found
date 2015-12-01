@@ -56,19 +56,25 @@ INSERT INTO LocationLF (locationID,phonenumber,email,building_name,room_name)
 VALUES (1,"111-1111","awesome@location.edu","Miller","418");
 
 INSERT INTO LocationLF (locationID,phonenumber,email,building_name,room_name)
-VALUES (2,"111-1111","awesome2@location.edu","Olin,"200");
+VALUES (2,"111-1111","awesome2@location.edu","Olin","200");
 
 INSERT INTO LocationLF (locationID,phonenumber,email,building_name,room_name)
-VALUES (3,"111-1111","awesome3@location.edu","Valders,"10");
+VALUES (3,"111-1111","awesome3@location.edu","Valders","10");
 
 INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
-VALUES ("111111", "$2a$10$p1LerZ.GmYkKRHNQS5UPyeZAjhEJ9uFgn2kEmns0mmTsqr/b/5bRi", 1, "Super", "Senior", "super@senior.edu");
+VALUES ("111111", "$2a$10$z4tbDtxmQaK2004UcE/Fqu9DsqVkQBs1ol7nnP.VdogYJ0B9aKBqG", 2, "Ales", "Sparrow", "super@senior.edu");
 
 INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
-VALUES ("111112", "$2a$10$p1LerZ.GmYkKRHNQS5UPyeZAjhEJ9uFgn2kEmns0mmTsqr/b/5bRi", 2, "Fresh", "Prince", "fresh@prince.edu");
+VALUES ("111112", "$2a$10$20cgX0UkoBJr3cac1eJi4ey9SU/LXaa5qjawZFYNa9PFI0w8C4bp2", 1, "Miriam", "Harries", "hello@adele.edu");
 
 INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
-VALUES ("111113", "$2a$10$p1LerZ.GmYkKRHNQS5UPyeZAjhEJ9uFgn2kEmns0mmTsqr/b/5bRi", 3, "Hello", "Adele", "hello@adele.edu");
+VALUES ("111113", "$2a$10$V2pfZRnZmI1DK5.IX4mIAOI7k572seZLOrm68TLIEW1xBrn.mo//e", 3, "Jessica", "Tan", "yoda@sucks.edu");
+
+INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
+VALUES ("111114", "$2a$10$zK7VmQehbFZ7AQa9I/5KEuhjUSFQluu3YElPuJmhCF5m4mm52i0Km", 1, "Kirby", "Olson", "fresh@prince.edu");
+
+INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
+VALUES ("111115", "$2a$10$bc7qhIYLq7pZNAW/XWwwGeuecEW3KfYTY7UjZTF1hsNQnM8QPQpnW", 2, "Sergei", "Hanka", "jarjar@binks.edu");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
 VALUES (1,CURDATE(),"Bag","Blue",1,"111111","False");
