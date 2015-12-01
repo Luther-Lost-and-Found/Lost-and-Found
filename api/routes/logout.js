@@ -7,11 +7,12 @@ var express = require('express'),
 	
 db.query('USE ' + dbconfig.database);
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, isLoggedIn) {
 
-	app.get('/signout', function(req, res) {
+	app.get('/signout', isLoggedIn, function(req, res) {
 		console.log("hello from the navBar router");
 		req.logout();
 		res.redirect('/');
+                res.status(401);
 	});
 }

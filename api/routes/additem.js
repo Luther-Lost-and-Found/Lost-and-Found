@@ -6,9 +6,10 @@ var express = require('express'),
     
 db.query('USE ' + dbconfig.database);
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, isLoggedIn) {
 
-    app.post("/additem", function(req,res){
+    app.post("/additem", isLoggedIn, function(req,res){
+        console.log(res);
 
         db.query("SELECT locationID FROM AdminLF WHERE norsekeyID = '" + req.user.norsekeyID + "';",
             function(error,currentLocation){
