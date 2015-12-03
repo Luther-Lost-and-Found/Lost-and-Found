@@ -12,16 +12,23 @@ module.exports = function(app, passport, isLoggedIn) {
 
             db.query('SELECT * from ItemLF', function(err, rows, fields) {
                     
-                    console.log(rows);
-                    //console.log(auth.user.username);
-                    res.json(rows);
+                for (i = 0; i < rows.length; i++) { 
+                    if(rows[i].imagePrimColor == null){
+                        rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';
+                    }
+                    else{
+                        rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
+                    }
+                }
+
+                //console.log(auth.user.username);
+                res.json(rows);
             });
 
     });
 
     app.delete('/itemlist/', function(req, res) {
             var to_delete = Object.keys(req.query)[0];
-            console.log(typeof(to_delete));
             db.query("DELETE FROM ItemLF WHERE itemID = '" + to_delete + "'", function(err,result){
                     res.json(result);
             });
@@ -29,10 +36,19 @@ module.exports = function(app, passport, isLoggedIn) {
 
     app.get('/itemlist/:id', function(req, res) {
             var to_edit = req.params["id"];
-            db.query("SELECT * FROM ItemLF WHERE itemID = '" + to_edit + "'", function(err,result){
-                    res.json(result);
+            db.query("SELECT * FROM ItemTags,ItemLF WHERE ItemLF.itemID = ItemTags.itemID and ItemTags.itemID = '" + to_edit + "'", function(err,result){
+                
+                for (i = 0; i < result.length; i++) { 
+                    if(result[i].imagePrimColor == null){
+                        result[i].currentImage = '../itemImages/'+ result[i].itemColor + '.jpg';
+                    }
+                    else{
+                        result[i].currentImage = '../itemImages/' + result[i].itemID + '.jpg';
+                    }
+                }
+
+                res.json(result);
             });
-            console.log(to_edit);
     });
 
     app.put('/itemlist/:id',function(req,res){

@@ -3,18 +3,14 @@
 angular.module('LoginApp',[]);
 angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
-angular.module('addItemApp',[]);
 angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router',
-    'LoginApp','ItemApp','navBarApp','addItemApp',
-    'searchItemApp','guestApp']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp']);
 
-myApp.config(['$stateProvider', '$urlRouterProvider',
- '$httpProvider',
-    function($stateProvider,$urlRouterProvider,
-     $httpProvider) {
+myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+    function($stateProvider,$urlRouterProvider, $httpProvider) {
 
         $urlRouterProvider.otherwise('/');
 
@@ -70,7 +66,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider',
             })
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-            console.log("inside the interceptor"); 
             return {
                 response: function(response) {
                     return response; 
@@ -89,7 +84,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider',
 
 
 myApp.service('sharedService',function($rootScope) {
-    console.log('working');
     return{
         refreshMain: function(){
             $rootScope.$broadcast('handleBroadcast');
@@ -112,6 +106,19 @@ myApp.service('sharedProperties',function(){
 
 myApp.service('sharedServiceUploadModal',function(){
     var property = {nice:'First'};
+
+    return {
+        getProperty: function () {
+            return property;
+        },
+        setProperty: function(value) {
+            property = value;
+        }
+    };
+});
+
+myApp.service('sharedPropertiesTags',function(){
+    var property = [{name:'First'}];
 
     return {
         getProperty: function () {

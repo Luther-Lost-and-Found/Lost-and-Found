@@ -1,8 +1,8 @@
 
-angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootScope',
+angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarCtrl', ['$rootScope',
 	'$timeout', '$scope', '$http', '$window','sharedProperties','sharedService',
 	'$animate','$uibModal',
-	function($rootScope,$timeout, $scope, $http, $window,sharedProperties,
+	function($rootScope,$timeout, $scope, $http, $window,sharedProperties, 
 		sharedService,$animate,$uibModal) {
 
 	console.log("Hello World from the Navigation Bar");
@@ -15,12 +15,6 @@ angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootSco
 			});
 		});
 	};
-
-	$scope.login = function(){
-		$http.get("/login").success(function(req,res){
-			$window.location.href = "/";
-		});
-	}
 
 	$scope.logout = function(){
 		$http.get("/signout").success(function(req,res){
@@ -53,30 +47,109 @@ angular.module('navBarApp',['ui.bootstrap']).controller('NavBarCtrl', ['$rootSco
 	        	}
 	    	}
 	    });
-	};	
+	};
+
 }]);
+
 
 //create a service between navbar controller and itemlistcontroller trigger an event,
 //$scope.editItem = function ($element) {
 		
 
-angular.module('navBarApp').controller('itemModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items,sharedService) {
+angular.module('navBarApp').controller('itemModalInstanceCtrl', 
+	function ($http,$rootScope,$scope, $uibModalInstance, items,sharedService,sharedPropertiesTags) {
 
-	$scope.addItem = function(){
+	var myList = [];
 
-		console.log($scope.item);
-		$http.post("/additem",$scope.item).success(function(response){
-			console.log("yes");
-			
-			sharedService.refreshMain();
+    function getTagsFromDatabase() {
+      $http.get("/tags").success(function(response){
+        console.log("tags request received.");
+        for (object in response){
+          myList.push({'name': response[object].tag});
+        }
+        sharedPropertiesTags.setProperty(myList);
+        $scope.allTags = loadTags(myList);
+
+      });
+    };
+
+    getTagsFromDatabase();
+
+    $scope.readonly = false;
+    $scope.selectedItem = null;
+    $scope.searchText = null;
+    $scope.querySearch = querySearch;
+    $scope.selectedTags = [];
+    $scope.numberBuffer = '';
+    $scope.autocompleteDemoRequireMatch = true;
+    $scope.transformChip = transformChip;
+    $scope.myTags = [];
+
+    /* Return the proper object when the append is called. */
+    function transformChip(chip) {
+      // If it is an object, it's already a known chip
+      if (angular.isObject(chip)) {
+
+        return chip;
+      }
+      // Otherwise, create a new one
+      return {tagname: chip};
+      // return {name: chip,type='color'};
+    }
+    /* Search for tags. */
+    function querySearch(query) {
+      var results = query ? $scope.allTags.filter(createFilterFor(query)) : [];
+      return results;
+    }
+    /* Create filter function for a query string */
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(tag) {
+        return (tag.lowername.indexOf(lowercaseQuery) === 0)
+      };
+    }
+    function loadTags(tagsList) {
+      var tags = tagsList;
+      return tags.map(function (tag) {
+        tag.lowername = tag.name.toLowerCase();
+        return tag;
+      });
+    }
+
+	$scope.uploadImage = function (file) {
+ 		if (file == null) {
+	    	$scope.upload()
+	    }
+    	$uibModalInstance.dismiss('cancel');
+  	};
+
+  	$scope.upload = function() {
+
+  		console.log($scope.selectedTags);
+
+	    $scope.errorMsg = null;
+
+	    var fullTagsRaw = $scope.selectedTags;
+
+	    console.log(fullTagsRaw);
+
+	    $scope.item.newTags = fullTagsRaw;
+
+	    $http.post("/additem",$scope.item).success(function(response){
+
+		    sharedService.refreshMain();
 
 			$uibModalInstance.dismiss('cancel');
-
 		});
+	};
 
-	}
+	$scope.getReqParams = function () {
+	    return $scope.generateErrorOnServer ? '?errorCode=' + $scope.serverErrorCode +
+	    '&errorMessage=' + $scope.serverErrorMsg : '';
+	};
 
  	$scope.cancel = function () {
     	$uibModalInstance.dismiss('cancel');
   	};
+
 });

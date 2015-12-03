@@ -25,7 +25,6 @@ module.exports = function(app) {
     });
 };
 
-
 /*"select LocationLF.*, match (ItemLF.title) against ('"+req.body.title+"') as title_relevance, \
                     match (ItemLF.tags) against ('"+req.body.description+"') as desc_relevance \
                     from LocationLF, ItemLF where ItemLF.locationID = LocationLF.locationID and \
