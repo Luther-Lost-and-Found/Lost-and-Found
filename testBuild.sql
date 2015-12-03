@@ -181,6 +181,7 @@ INSERT INTO Tags (tag) VALUES ("Gray");
 CREATE TABLE ItemTags (
 	itemID INT NOT NULL,
 	tag VARCHAR(15) NOT NULL,
+	FULLTEXT(tag),
 	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
 	FOREIGN KEY (tag) REFERENCES Tags (tag),
 	PRIMARY KEY (itemID, tag)
