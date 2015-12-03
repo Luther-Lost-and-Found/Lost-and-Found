@@ -9,9 +9,9 @@ module.exports = function(app, passport) {
     require('./routes/search.js')(app, passport, isLoggedIn)
 
     app.all('*', isLoggedIn, function(req, res) {
-        console.log("This shouldn't be called");
-        res.redirect('/');
-        res.status(401);
+        // Requests that make it here are authenticated, but to
+        // non-existant routes, so 404
+        res.status(404).end();
     });
 
     app.all('/loggedin', function(req, res) {
@@ -26,7 +26,7 @@ function isLoggedIn(req, res, next) {
         return next();
 
     else{
-        console.log("need to authenticate " + req.route.path);
+        //console.log("need to authenticate " + req.route.path);
         res.redirect('/')
         res.status(401);
     }
