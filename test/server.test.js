@@ -10,7 +10,7 @@ describe('server should respond to request on /', function () {
 
     beforeEach(function() {
         delete require.cache[require.resolve('../server')];
-        server = require('../server.js');
+        server = require('../server.js').server;
     });
 
     afterEach(function(done) {
