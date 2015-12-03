@@ -28,6 +28,7 @@ require(path.join(__dirname + '/api/routes.js'))(app, passport)
 
 server = app.listen(3000);
 
-module.exports = server;
+exports.server = server;
+exports.app = app;
 
-console.log('Server running');
+//console.log('Server running');
