@@ -1,108 +1,141 @@
 <!DOCTYPE html>
 <html ng-app="LostApp">
 	<head>
-		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">		
 		<link rel="stylesheet" href="/partials/itemList/itemList.css">
+
+		<style>
+			md-content.autocomplete {
+		  	min-height: 200px;
+		  	z-index:3060; }
+		</style>
 
 
 		<title>Lost And Found</title>
 	</head>
 	<body>
-		<div class="container" ng-controller="ItemCtrl">
-			<h1> Item List </h1>
-			  <div class="dropdown">
-    			<button class="dropdown" type="button" id="menu1" data-toggle="dropdown">Sort By
-    				<span class="caret"></span></button>
-    					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-      						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Location</a></li>
-      						<li role="presentation" class="divider"></li>
-      						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Date Found</a></li>
-      						<li role="presentation" class="divider"></li>
-      						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Alphebetically</a></li>
-      						<li role="presentation" class="divider"></li>
+		<div class="container" ng-controller="ItemCtrl" ng-cloak>
+			<div class="dropdown">
+			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    Dropdown
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			    <li><a href="" ng-click="sort('location')">Location</a></li>
+			    <li role="separator" class="divider"></li>
+			    <li><a href="" ng-click="sort('date')">Date Found</a></li>
+			    <li role="separator" class="divider"></li>
+			    <li><a href="" ng-click="sort('alpha')">Alphabetically</a></li>
+			    <li role="separator" class="divider"></li>
+			  </ul>
+			</div>
 
-    					</ul>
-  			</div>
-	<script type="text/ng-template" id="myModalContent.html">
-		        <div class="modal-header">
-		            <h3 class="modal-title">Edit Item</h3>
+
+			<script type="text/ng-template" id="myModalContent.html">
+				<div class="modal-header">
+		            <h3 class="modal-title">Item Description</h3>
 		        </div>
-		        <div class="modal-body">
-		            <table class="table">
-						<thead>
-							<tr>
-								<th>Title</th>
-								<th>Location</th>				
-								<th>Accepted By</th>
-								<th>Claimed By</th>
-								<th>Claimed</th>
-								<th>Tags</th>
-								<th>&nbsp;</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td><input class="form-control" ng-model="item.title"></td>
-								<td><input class="form-control" ng-model="item.locationID"></td>
-								<td><input class="form-control" ng-model="item.accepted_by"></td>
-								<td><input class="form-control" ng-model="item.claimed_by"></td>
-								<td><input class="form-control" ng-model="item.claimed"></td>
-								<td><input class="form-control" ng-model="item.tags"></td>
-							</tr>
-						</tbody>
+		        <div class="modal-body" style="z-index:20;">
 
-					</table>
+			        <pre><img class="images" ng-src="{{item.currentImage}}"></img> </pre>
+			        <label for="itemName">Item Name:</label> <p id="itemName"> {{item.title}} </p>
+			        <label for "located" > Current Location </label> <p id="located"> {{item.locationID}} </p>
+			        <label for="accepted">Accepted By: </label>  <p id="accepted" >{{item.accepted_by}} </p>
+			        <label for="claimed" > Claimed By: </label>  <p id="claimed"> {{item.claimed_by}} </p>
+			        <div layout="column" ng-cloak>
+					  <md-content class="md-padding" layout="column">
+					    <h2 class="md-title">Tags</h2>
+
+					    <md-chips ng-repeat="tag in itemTags" layout="column">
+					      <md-chip>{{tag}}</md-chip>
+					    </md-chips>
+					    
+					  </md-content>
+					</div>
 		        </div>
 		        <div class="modal-footer">
-		            <button class="btn btn-primary" type="button" ng-click="updateItem()">Update</button>
+		            <button class="btn btn-warning" ng-click="editItem(item)">Edit</button>
+		            <button class="btn btn-danger" ng-click="removeItem(item)">Remove</button>
 		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 		        </div>
 	    	</script>
+	    	<script type="text/ng-template" id="myModalContentEdit.html">
+				<div class="modal-header">
+		            <h3 class="modal-title">Item Description</h3>
+		        </div>
+		        <div class="modal-body" style="z-index:20;">
+		        <pre><img class="images" ng-src="{{item.currentImage}}"></img> </pre>
+		        <table class="table">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Location</th>				
+							<th>Accepted By</th>
+							<th>Claimed By</th>
+							<th>Claimed</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="form-control" ng-model="item.title"></td>
+							<td><input class="form-control" ng-model="item.locationID"></td>
+							<td><input class="form-control" ng-model="item.accepted_by"></td>
+							<td><input class="form-control" ng-model="item.claimed_by"></td>
+							<td><input class="form-control" ng-model="item.claimed"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<md-content class="md-padding" layout="column">
+				        <md-chips 
+				            ng-model="selectedTags" md-autocomplete-snap
+				            md-transform-chip="transformChip($chip)"
+				            md-require-match="autocompleteDemoRequireMatch">
 
-				  <md-grid-list
-				        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
-				        md-row-height-gt-md="1:1" md-row-height="4:3"
-				        md-gutter="8px" md-gutter-gt-sm="4px" >
-				    <md-grid-tile ng-repeat="item in itemlist"
-				                  md-rowspan="{{item.span.row}}"
-				                  md-colspan="{{item.span.col}}"
-				                  md-colspan-sm="1"
-				                  ng-class="tile.background" >
-				     
-				      <img class="images" ng-src="{{image.src}}"></img>
-				      <md-grid-tile-footer ><h3>{{item.title}}</h3></md-grid-tile-footer>
-				    </md-grid-tile>
-				  </md-grid-list>
-		
+				          <md-autocomplete
+				          		class="chipsdemoCustomInputs" 
+				              md-selected-item="selectedItem"
+				              md-search-text="searchText"
+				              md-items="item in querySearch(searchText)"
+				              md-item-text="item.name"
+				              placeholder="Start Typing...">
+				            <span md-highlight-text="searchText">{{item.name}}</span>
 
+				          </md-autocomplete>
 
+				          <md-chip-template>
+				            <span>
+				              <strong>{{$chip.name}}</strong>
+				            </span>
+				          </md-chip-template>
+				        </md-chips>
+				      </md-content>
+				</div>
 
-	<!-- 		<table class="table">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Location</th>				
-						<th>Accepted By</th>
-						<th>Claimed By</th>
-						<th>Claimed</th>
-						<th>Tags</th>
-						<th>&nbsp;</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="item in itemlist"> <!-- ng-repeat allows to load data into separate rows -->
-	<!-- 					<td>{{item.title}}</td>
-						<td>{{item.locationID}}</td>
-						<td>{{item.accepted_by}}</td>
-						<td>{{item.claimed_by}}</td>
-						<td>{{item.claimed}}</td>
-						<td>{{item.tags}}</td>
-						<td><button class="btn btn-danger" ng-click="removeItem(item)">Remove</button></td>
-						<td><button class="btn btn-warning" ng-click="editItem(item)">Edit</button></td> 
-					</tr>
-				</tbody>
-			</table> --> <!-- --> 
+		        <div class="modal-footer">
+		            <button class="btn btn-warning" ng-click="updateItem(item)">Update</button>
+		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+		        </div>
+	    	</script>
+			<md-grid-list
+			        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="5"
+			        md-row-height-gt-md="1:1.2" md-row-height="4:3"
+			        md-gutter="8px" md-gutter-gt-sm="4px" >
+			    <md-grid-tile ng-repeat="item in itemlist"
+			                  md-rowspan="{{item.span.row}}"
+			                  md-colspan="{{item.span.col}}"
+			                  md-colspan-sm="1">
+			    	<md-card>
+				   		<img class="images" ng-src="{{item.currentImage}}" ng-class="tile.background" ng-click="clicked(item)"></img>
+				        <md-card-actions layout-align="end center">
+				        <md-checkbox ng-model="data.cb" ng-click="checkbox()" aria-label="Checkbox">{{item.title}}</md-checkbox>
+			    	</md-card>
+			    </md-grid-tile>
+			</md-grid-list>
 		</div>
+		<footer> 
+		 	
+		</footer>
 	</body>
 </html>

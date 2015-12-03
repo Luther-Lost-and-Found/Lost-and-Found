@@ -4,9 +4,10 @@ angular.module('LoginApp',[]);
 angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
 angular.module('searchItemApp',[]);
+angular.module('guestApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {
@@ -49,9 +50,22 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
+            .state('guestPage', {
+                url:'/guestPage',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/guest/guestNav.html',
+                        action : 'navBarApp.NavBarCtrl'
+                    },
+                    'guestPage': {
+                        templateUrl : '../partials/guest/guest.html',
+                        action : 'guestApp.guestController'
+                    }
+                    
+                }
+            })
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-            console.log("inside the interceptor"); 
             return {
                 response: function(response) {
                     return response; 
@@ -70,7 +84,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
 
 
 myApp.service('sharedService',function($rootScope) {
-    console.log('working');
     return{
         refreshMain: function(){
             $rootScope.$broadcast('handleBroadcast');
@@ -91,3 +104,28 @@ myApp.service('sharedProperties',function(){
     };
 });
 
+myApp.service('sharedServiceUploadModal',function(){
+    var property = {nice:'First'};
+
+    return {
+        getProperty: function () {
+            return property;
+        },
+        setProperty: function(value) {
+            property = value;
+        }
+    };
+});
+
+myApp.service('sharedPropertiesTags',function(){
+    var property = [{name:'First'}];
+
+    return {
+        getProperty: function () {
+            return property;
+        },
+        setProperty: function(value) {
+            property = value;
+        }
+    };
+});

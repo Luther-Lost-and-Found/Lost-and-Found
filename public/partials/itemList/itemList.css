@@ -1,8 +1,6 @@
 body {
   background-color: #eee;
   color:#444;
-  padding-top: 50px;
-
 }
 
 .fa {
@@ -13,9 +11,7 @@ hr {
   border-color: transparent;
 }
 
-.dropdown {
-  padding-bottom:10px;
-}
+
 #userList {
   display:none;
 }
@@ -35,6 +31,25 @@ hr {
 .alt {
 	background-color:#ccc;
 }
+
+body {
+  background-color: #eee;
+  color:#444;
+  padding-top: 50px;
+
+}
+
+.fa {
+  color:#666;
+}
+
+hr {
+  border-color: transparent;
+}
+
+.dropdown {
+  padding-bottom:10px;
+}
 .images {
     border: 1px solid black;
     width: 190px;
@@ -42,4 +57,12 @@ hr {
     float: left;
     margin: 2px;
     padding: 2px;
+}
+footer h5{
+  padding-top: 50px;
+  margin-right: 105px;
+  text-align: right;
+  text-decoration: bold;
+  color:blue;
+
 }

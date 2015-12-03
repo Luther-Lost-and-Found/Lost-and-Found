@@ -36,18 +36,21 @@ CREATE TABLE ItemLF (itemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 time_stamp DATE NOT NULL,
 title VARCHAR(50) NOT NULL,
 imageID INT,
+tags VARCHAR(30), 
 locationID INT NOT NULL, 
 accepted_by VARCHAR(30) NOT NULL, 
 claimed_by VARCHAR(30),
-claimed BOOL NOT NULL DEFAULT false,
+claimed VARCHAR(5) NOT NULL,
 imagePrimColor VARCHAR(20),
 imageSecColor VARCHAR(20),
 imageThirdColor VARCHAR(20),
 itemColor VARCHAR(10),
-FULLTEXT (title),
+FULLTEXT (title,tags),
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
 ENGINE=MyISAM;
+
+USE lost
 
 INSERT INTO LocationLF (locationID,phonenumber,email,building_name,room_name)
 VALUES (1,"111-1111","awesome@location.edu","Miller","418");
@@ -73,84 +76,84 @@ VALUES ("111114", "$2a$10$zK7VmQehbFZ7AQa9I/5KEuhjUSFQluu3YElPuJmhCF5m4mm52i0Km"
 INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
 VALUES ("111115", "$2a$10$bc7qhIYLq7pZNAW/XWwwGeuecEW3KfYTY7UjZTF1hsNQnM8QPQpnW", 2, "Sergei", "Hanka", "jarjar@binks.edu");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (1,CURDATE(),"Bag","Blue",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (1,CURDATE(),"Bag","Blue",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (2,CURDATE(),"Bottle",1,"111111","black");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed,itemColor)
+VALUES (2,CURDATE(),"Bottle","Third in a row",1,"111111","False","black");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (3,CURDATE(),"Wallet",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (3,CURDATE(),"Wallet","Empty",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (4,CURDATE(),"Pajama",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (4,CURDATE(),"Pajama","Cozy",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (5,CURDATE(),"Palmer",1,"111111","white");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed,itemColor)
+VALUES (5,CURDATE(),"Palmer","Happy",1,"111111","False","white");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (6,CURDATE(),"Kylie",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (6,CURDATE(),"Kylie","Black",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (7,CURDATE(),"Wires",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (7,CURDATE(),"Wires","Red",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (8,CURDATE(),"Doggie",1,"111111","green");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed,itemColor)
+VALUES (8,CURDATE(),"Doggie","Rainbow Colors",1,"111111","False","green");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (9,CURDATE(),"Consciousness",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (9,CURDATE(),"Consciousness","Undefined",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (10,CURDATE(),"Textbook",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (10,CURDATE(),"Textbook","With a lot of pictures",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (11,CURDATE(),"Launch",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (11,CURDATE(),"Launch","Rotten",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (12,CURDATE(),"Coat",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (12,CURDATE(),"Coat","Black",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (13,CURDATE(),"Marker",1,"111111","blue");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed,itemColor)
+VALUES (13,CURDATE(),"Marker","Family Relic",1,"111111","False","blue");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (14,CURDATE(),"Charger",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (14,CURDATE(),"Charger","MacBook Pro",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (15,CURDATE(),"Phone",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (15,CURDATE(),"Phone","Keep it",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (16,CURDATE(),"Game",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (16,CURDATE(),"Game","Very sad",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (17,CURDATE(),"test",2,"111112","purple");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed,itemColor)
+VALUES (17,CURDATE(),"test","failed",2,"111112","False","purple");
 
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (18,CURDATE(),"cat",2,"111113");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (18,CURDATE(),"cat","stripped",2,"111113","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (19,CURDATE(),"Bottle",2,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (19,CURDATE(),"Bottle","iron",2,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (20,CURDATE(),"jeans",2,"111112","brown");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed,itemColor)
+VALUES (20,CURDATE(),"jeans","blue",2,"111112","False","brown");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (21,CURDATE(),"Pajama",1,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (21,CURDATE(),"Pajama","scratchy",1,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (22,CURDATE(),"computer",3,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (22,CURDATE(),"computer","apple",3,"111111","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (23,CURDATE(),"sweater",3,"111112");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (23,CURDATE(),"sweater","ugly",3,"111112","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (24,CURDATE(),"hammer",3,"111112","orange");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed,itemColor)
+VALUES (24,CURDATE(),"hammer","big",3,"111112","False","orange");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (25,CURDATE(),"hat",3,"111113");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (25,CURDATE(),"hat","cool",3,"111113","False");
 
-INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (26,CURDATE(),"beard",3,"111111");
+INSERT INTO ItemLF (itemID,time_stamp,title,tags,locationID,accepted_by,claimed)
+VALUES (26,CURDATE(),"beard","glitter",3,"111111","False");
 
 
 CREATE TABLE Tags (tag VARCHAR(15) NOT NULL PRIMARY KEY) 

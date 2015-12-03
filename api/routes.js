@@ -7,6 +7,8 @@ module.exports = function(app, passport) {
     require('./routes/logout.js')(app, passport, isLoggedIn)
     require('./routes/additem.js')(app, passport, isLoggedIn)
     require('./routes/search.js')(app, passport, isLoggedIn)
+    require('./routes/tagsRoute.js')(app, passport, isLoggedIn)
+    require('./routes/guest.js')(app)
 
     app.all('*', isLoggedIn, function(req, res) {
         console.log("This shouldn't be called");
