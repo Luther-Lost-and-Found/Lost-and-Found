@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html ng-app="LoginApp">
   <head>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/partials/login/login.css">
+
     <meta charset="UTF-8">
     <title>Luther College:Lost and Found</title>
-        
-        <link rel="stylesheet" href="/partials/login/login.css">
   </head>
 
   <body>
     <div class="webpage" ng-controller="loginController">
-      <nav>
-        <img id="logo" src="/partials/login/Norsehead.jpg" />
-      </nav> 
+      <img id="logo" src="/partials/login/Norsehead.jpg" />
+    
       <div class="wrapper">
 
       	 <div class="container">
@@ -23,7 +24,7 @@
         			<input type="text" placeholder="Username" ng-model="login.username">
         			<input type="password" placeholder="Password" ng-model="login.password">
         			<button type="submit" id="login-button" ng-click="loginSubmit(login)" >Login</button>
-              <button type="submit" id="login-button" ng-click="guestLoginSubmit()" >Search As Guest</button>
+              <button type="submit" id="login-button" ng-click="guestLoginSubmit()" >Guest Login</button>
       		  </form>
 
       	 </div>

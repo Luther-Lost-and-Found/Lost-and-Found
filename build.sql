@@ -44,10 +44,9 @@ claimed VARCHAR(5) NOT NULL,
 imagePrimColor VARCHAR(20),
 imageSecColor VARCHAR(20),
 imageThirdColor VARCHAR(20),
-FULLTEXT (title,tags),
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
-ENGINE=MyISAM;
+engine=InnoDB;
 
 USE lost
 

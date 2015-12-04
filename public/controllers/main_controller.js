@@ -3,11 +3,12 @@
 angular.module('LoginApp',[]);
 angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
+angular.module('addItemApp',[]);
 angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
 
-var myApp = angular.module('LostApp', ['ui.router',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp']);
+var myApp = angular.module('LostApp', ['ui.router','LoginApp','ItemApp','navBarApp','addItemApp',
+    'searchItemApp','guestApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {
@@ -37,6 +38,19 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                 }
             })
+            .state('additem', {
+                url:'/additem',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/navBar/navBar.html',
+                        action : 'navBarApp.NavBarCtrl'
+                    },
+                    'addItem': {
+                        templateUrl : '../partials/addItem/addItem.html',
+                        action : 'addItemApp.addItemCtrl'
+                    }
+                }
+            })
             .state('searchitem', {
                 url:'/searchItem',
                 views: {
@@ -53,21 +67,18 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             .state('guestPage', {
                 url:'/guestPage',
                 views: {
-                    'navBar': {
-                        templateUrl : '../partials/guest/guestNav.html',
-                        action : 'navBarApp.NavBarCtrl'
-                    },
                     'guestPage': {
                         templateUrl : '../partials/guest/guest.html',
                         action : 'guestApp.guestController'
                     }
-                    
                 }
             })
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
+            console.log("inside the interceptor"); 
             return {
                 response: function(response) {
+                    // do something on success 
                     return response; 
                 },
                 responseError: function(response) { 
@@ -77,19 +88,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 } 
             };
         }];
-
+        
         $httpProvider.interceptors.push(interceptor);
     }
 ]);
-
-
-myApp.service('sharedService',function($rootScope) {
-    return{
-        refreshMain: function(){
-            $rootScope.$broadcast('handleBroadcast');
-        }
-    };
-});
 
 myApp.service('sharedProperties',function(){
     var property = {nice:'First'};
@@ -106,19 +108,6 @@ myApp.service('sharedProperties',function(){
 
 myApp.service('sharedServiceUploadModal',function(){
     var property = {nice:'First'};
-
-    return {
-        getProperty: function () {
-            return property;
-        },
-        setProperty: function(value) {
-            property = value;
-        }
-    };
-});
-
-myApp.service('sharedPropertiesTags',function(){
-    var property = [{name:'First'}];
 
     return {
         getProperty: function () {
