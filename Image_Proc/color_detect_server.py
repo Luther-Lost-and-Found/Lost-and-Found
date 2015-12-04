@@ -42,7 +42,7 @@ class Color(object):
         return percentage,clt.cluster_centers_
 
     def final_result(self,image_name):
-        directory = "../itemImages/"        
+        directory = "../public/itemImages/"        
 
         image = cv2.imread(directory+image_name,1)
 

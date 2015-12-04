@@ -5554,7 +5554,7 @@ md-backdrop {
       opacity: 0; }
 
 md-bottom-sheet {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
@@ -5798,13 +5798,13 @@ button.md-button::-moz-focus-inner {
       right: 20px;
       bottom: 20px;
       left: auto;
-      position: absolute; }
+      position: fixed; }
     .md-button.md-fab.md-fab-bottom-left {
       top: auto;
       right: auto;
       bottom: 20px;
       left: 20px;
-      position: absolute; }
+      position: fixed; }
     .md-button.md-fab.md-fab-top-right {
       top: 20px;
       right: 20px;
@@ -5812,11 +5812,11 @@ button.md-button::-moz-focus-inner {
       left: auto;
       position: absolute; }
     .md-button.md-fab.md-fab-top-left {
-      top: 20px;
+      top: 150px;
       right: auto;
       bottom: auto;
       left: 20px;
-      position: absolute; }
+      position: fixed; }
     .md-button.md-fab .md-ripple-container {
       border-radius: 50%;
       background-clip: padding-box;
@@ -6595,8 +6595,8 @@ md-fab-speed-dial {
     top: auto;
     right: auto;
     bottom: 20px;
-    left: 20px;
-    position: absolute; }
+    left: 90px;
+    position: fixed; }
   md-fab-speed-dial.md-fab-top-right {
     top: 20px;
     right: 20px;
@@ -9131,7 +9131,7 @@ md-toolbar {
   position: relative;
   z-index: 2;
   font-size: 20px;
-  min-height: 64px;
+  min-height: 34px;
   width: 100%; }
   md-toolbar.md-whiteframe-z1-add, md-toolbar.md-whiteframe-z1-remove {
     transition: box-shadow 0.5s linear; }

@@ -16,7 +16,6 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
   	};
 
   	$scope.guestLoginSubmit = function(){
-  		console.log("going to guest");
   		$window.location.href = "/#guestPage";
   	}
 }]);
