@@ -1,8 +1,8 @@
 
 angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarCtrl', ['$rootScope',
-	'$timeout', '$scope', '$http', '$window','sharedProperties','sharedService',
+	'$timeout', '$scope', '$http', '$location', 'sharedProperties','sharedService',
 	'$animate','$uibModal', 'sharedServiceUploadModal','sharedPropertiesTags',
-	function($rootScope,$timeout, $scope, $http, $window,sharedProperties, 
+	function($rootScope,$timeout, $scope, $http, $location, sharedProperties, 
 		sharedService,$animate,$uibModal,sharedServiceUploadModal,sharedPropertiesTags) {
 
 	getTagsFromDatabase();
@@ -28,39 +28,34 @@ angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarCt
 
   $scope.login = function(){
     $http.get("/login").success(function(req,res){
-      $window.location.href = "/";
+      $location.url("/");
     });
   }
 
 	$scope.logout = function(){
 		$http.get("/signout").success(function(req,res){
-			$window.location.href = "/";
+			$location.url("/");
 		});
 	}
 
 	$scope.searchItem = function($scope){
 		sharedProperties.setProperty($scope);
-		var current_search = $scope.selectedTags;
+    var current_search = $scope;
+		// var current_search = $scope.selectedTags;
 		$http.get("/searchItem/?"+current_search).success(function(data){
-			$window.location.href = "/#searchItem";
+
+      var current_search = sharedProperties.getProperty().title;
+
+      $http.get("/searchItem/?"+current_search).success(function(response){
+        console.log("should be good");
+        console.log(response);
+        $rootScope.searchitemlist = response;
+      });
+
+
+			$location.url("/searchItem");
 		});
 	}
-
-	$scope.addItem = function(){
-		sharedServiceUploadModal.setProperty($scope.item);
-		$rootScope.item = {};
-		var modalInstance = $uibModal.open({
-	    	animation: $scope.animationsEnabled,
-	    	templateUrl: 'addItemContent.html',
-	    	controller: 'itemModalInstanceCtrl',
-	    	size: 'lg',
-	    	resolve: {
-	        	items: function () {
-	          		return $scope.item;
-	        	}
-	    	}
-	    });
-	};
 
 	var myList = [];
 

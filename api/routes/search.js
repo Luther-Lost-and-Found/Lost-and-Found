@@ -9,9 +9,18 @@ db.query('USE ' + dbconfig.database);
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/searchItem", isLoggedIn, function(req,res){
         var to_search = Object.keys(req.query)[0];
-        db.query("SELECT * from ItemLF WHERE Concat(title) like '%" + to_search + "%'", function(err, result) {
-                res.json(result);
-        });
+
+        db.query("select distinct LocationLF.*, \
+                match (ItemLF.title) against ('"+to_search + "') as title_relevance, \
+                match (ItemTags.tag) against ('"+to_search +"') as desc_relevance \
+                from LocationLF, ItemLF, ItemTags where ItemLF.locationID = LocationLF.LocationID \
+                and ItemLF.ItemID = ItemTags.ItemID and \
+                (match (ItemLF.title) against ('"+to_search+"') or match (ItemTags.tag) against ( '"+to_search+"')) \
+                order by title_relevance desc, desc_relevance desc;", function(err, rows, fields){        
+                    console.log(rows);
+                    //console.log(auth.user.username);
+                    res.json(rows);
+            });
 
     });
 };

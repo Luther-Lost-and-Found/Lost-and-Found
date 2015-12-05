@@ -36,6 +36,7 @@ CREATE TABLE ItemLF (itemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 time_stamp DATE NOT NULL,
 title VARCHAR(50) NOT NULL,
 imageID INT,
+tags VARCHAR(20),
 locationID INT NOT NULL, 
 accepted_by VARCHAR(30) NOT NULL, 
 claimed_by VARCHAR(30),
@@ -49,6 +50,19 @@ FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
 ENGINE=MyISAM;
 
+CREATE TABLE Tags (tag VARCHAR(15) NOT NULL PRIMARY KEY) 
+engine=MyISAM;
+
+CREATE TABLE ItemTags (
+	itemID INT NOT NULL,
+	tag VARCHAR(15) NOT NULL,	
+	FULLTEXT(tag),
+	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
+	FOREIGN KEY (tag) REFERENCES Tags (tag),
+	PRIMARY KEY (itemID, tag)
+	)
+engine=MyISAM;
+
 INSERT INTO LocationLF (locationID,phonenumber,email,building_name,room_name)
 VALUES (1,"111-1111","awesome@location.edu","Miller","418");
 
@@ -57,6 +71,7 @@ VALUES (2,"111-1111","awesome2@location.edu","Olin","200");
 
 INSERT INTO LocationLF (locationID,phonenumber,email,building_name,room_name)
 VALUES (3,"111-1111","awesome3@location.edu","Valders","10");
+
 
 INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
 VALUES ("111111", "$2a$10$z4tbDtxmQaK2004UcE/Fqu9DsqVkQBs1ol7nnP.VdogYJ0B9aKBqG", 2, "Ales", "Sparrow", "super@senior.edu");
@@ -72,6 +87,7 @@ VALUES ("111114", "$2a$10$zK7VmQehbFZ7AQa9I/5KEuhjUSFQluu3YElPuJmhCF5m4mm52i0Km"
 
 INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
 VALUES ("111115", "$2a$10$bc7qhIYLq7pZNAW/XWwwGeuecEW3KfYTY7UjZTF1hsNQnM8QPQpnW", 2, "Sergei", "Hanka", "jarjar@binks.edu");
+
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (1,CURDATE(),"Bag","Blue",1,"111111");
@@ -124,7 +140,6 @@ VALUES (16,CURDATE(),"Game",1,"111111");
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
 VALUES (17,CURDATE(),"test",2,"111112","purple");
 
-
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (18,CURDATE(),"cat",2,"111113");
 
@@ -153,9 +168,6 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (26,CURDATE(),"beard",3,"111111");
 
 
-CREATE TABLE Tags (tag VARCHAR(15) NOT NULL PRIMARY KEY) 
-engine=MyISAM;
-
 INSERT INTO Tags (tag) VALUES ("Red");
 
 INSERT INTO Tags (tag) VALUES ("Black");
@@ -178,14 +190,6 @@ INSERT INTO Tags (tag) VALUES ("Brown");
 
 INSERT INTO Tags (tag) VALUES ("Gray");
 
-CREATE TABLE ItemTags (
-	itemID INT NOT NULL,
-	tag VARCHAR(15) NOT NULL,
-	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
-	FOREIGN KEY (tag) REFERENCES Tags (tag),
-	PRIMARY KEY (itemID, tag)
-	)
-engine=MyISAM;
 
 INSERT INTO ItemTags (itemID, tag) VALUES (1, "Black");
 
