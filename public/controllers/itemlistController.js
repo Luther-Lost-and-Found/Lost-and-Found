@@ -6,6 +6,7 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 	var refresh = function(){
 		$http.get("/itemlist").success(function(response){
 			$scope.$applyAsync(function(){
+				console.log(response);
 				$scope.itemlist = response;
 				$scope.item = "";
 			});

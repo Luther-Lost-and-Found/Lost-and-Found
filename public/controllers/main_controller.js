@@ -52,10 +52,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'searchitem': {
                         templateUrl : '../partials/search/searchItem.html',
                         action : 'searchItemApp.searchItemController'
-                    },
-                    'footerAdmin': {
-                        templateUrl : '../partials/general/footer.html',
-                        action : 'footerApp.footerController'
                     }
                 }
             })
