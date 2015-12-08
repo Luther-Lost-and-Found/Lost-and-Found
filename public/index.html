@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/partials/itemList/angular-material.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
   </head>
   <body ng-app="LostApp">
     <div ui-view="navBar"></div>
@@ -16,6 +17,7 @@
       <div ui-view="addItem"></div>
       <div ui-view="searchitem"></div>
       <div ui-view="guestPage"></div>
+      <div ui-view="404"></div>
     </div>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
@@ -33,6 +35,7 @@
     <script src="controllers/searchItemController.js"></script>
     <script src="controllers/guestController.js"></script>
     <script src="controllers/footerController.js"></script>
+    <script src="controllers/404Controller.js"></script>
 
     <footer>
       <div ui-view="footerAdmin"></div>

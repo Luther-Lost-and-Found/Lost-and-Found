@@ -52,6 +52,7 @@ module.exports = function(app, passport) {
 
 	var auth = function(req, res, next){
 		if (!req.isAuthenticated()){
+			console.log("401 from authentication");
 			res.send(401);
 		} 
 		else next();
