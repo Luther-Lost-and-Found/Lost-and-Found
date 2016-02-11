@@ -14,8 +14,7 @@
     "ejs": "^2.3.2",
     "cookie-parser": "~1.0.0",
     "express-session": "~1.0.0",
-    "node-multiparty": "https://github.com/andrewrk/node-multiparty.git",
-    "ng-file-upload" : "https://github.com/danialfarid/ng-file-upload.git"
+    "node-multiparty": "https://github.com/andrewrk/node-multiparty.git"
   },
   "devDependencies": {
     "chai": "^3.3.0",
