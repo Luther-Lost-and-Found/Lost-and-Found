@@ -41,4 +41,12 @@ Senior project
 
 >> refining user interface (html, css, etc…) 
 
+>> User preferences:
+
+>>> password
+
+>>> default views
+
+>>> etc...
+
 >> #HAVE FUN!
