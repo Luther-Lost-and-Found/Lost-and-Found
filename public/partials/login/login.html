@@ -22,16 +22,16 @@
             <div flex>
             <form id="login">
               <div class="group">
-                <input type="text"><span class="highlight"></span><span class="bar"></span>
+                <input type="text" ng-model="login.username" ><span class="highlight"></span><span class="bar"></span>
                 <label>Username</label>
               </div>
                 <div class="group">
-                  <input type="password"><span class="highlight"></span><span class="bar"></span>
+                  <input type="password" ng-model="login.password"><span class="highlight"></span><span class="bar"></span>
                   <label>Password</label>
                 </div>
                 <div>
-                <button type="button" class="button buttonBlue">Login</button> 
-                <button type="button" class="button buttonGreen">Guest User</button>
+                <button type="button" class="button buttonBlue" ng-click="loginSubmit(login)">Login</button> 
+                <button type="button" class="button buttonGreen" ng-click="guestLoginSubmit()">Guest User</button>
                 </div>
             </form>
             </div>
