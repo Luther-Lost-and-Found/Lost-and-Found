@@ -2,21 +2,24 @@
 <html ng-app="LoginApp">
   <head>
     <meta charset="UTF-8">
+
     <title>Luther College Lost and Found</title>
 
     <link rel="stylesheet" href="/partials/login/login.css">
   </head>
   <body layout="column" ng-controller="loginController">
-    <md-toolbar flex="33">
-      <h1>Luther College</h1>
-      <h2>Lost and Found</h2>
+    <md-toolbar flex="66">
+    <div id=titles>
+      <h1 id=title1 >Luther College</h1>
+      <h3 id=title2 >Lost and Found</h3>
+    </div>
     </md-toolbar>
     <div layout-align="center start" layout="row">
       <md-content class="md-whiteframe-z2 move-up" flex="66">
       <md-card>
       <md-card-header>
         <md-card-avatar>
-          <img src="/partials/login/Luther_Norse.jpg" class="md-user-avatar">
+          <img src="/partials/login/Luther_Norse.jpg" class="md-user-avatar" layout-align="center" id="norse">
         </md-card-avatar>
         <md-card-header-text>
           <span class="md-title">Welcome</span>

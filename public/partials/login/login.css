@@ -1,9 +1,29 @@
-.move-up {
-  position: relative;
-  top: -60px;
-  z-index: 99;
-}
 
-.md-user-avatar{
-  width: 100px;
+.move-up {
+	position: relative;
+	top: -60px;
+	z-index: 99;
+
+}
+#title1 {
+	text-align: center;
+	color: #fff;
+	text-shadow: 0 1px 0 #ccc;
+	margin-bottom:1px;
+}
+#title2 {
+	text-align: center;
+	margin-top: 0;
+	margin-bottom: 1px;
+	padding-bottom: 1px;
+}
+#titles {
+	text-align: center;
+	margin-bottom: 80px;
+}
+#norse{
+  max-width:20%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
