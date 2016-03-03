@@ -32,11 +32,8 @@ hr {
 	background-color:#ccc;
 }
 
-body {
-  background-color: #eee;
-  color:#444;
-  padding-top: 50px;
-
+md-grid-list {
+  padding-top: 20px;
 }
 
 .fa {

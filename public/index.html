@@ -2,15 +2,13 @@
 <html>
 
   <head>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/partials/navBar/navBar.css">
     <link rel="stylesheet" type="text/css" href="/partials/itemList/angular-material.css">
   </head>
   <body ng-app="LostApp">
-    <div ui-view="navBar"></div>
-    <div id="main">
+      <div ui-view="navBar"></div>
       <div ui-view="login"></div>
       <div ui-view="itemlist"></div>
       <div ui-view="addItem"></div>
@@ -29,6 +27,7 @@
     <script src="controllers/logincontroller.js"></script>
     <script src="controllers/itemlistController.js"></script>
     <script src="controllers/navBarController.js"></script>
+    <script src="controllers/navBarSearch.js"></script>
     <script src="controllers/ui-bootstrap-tpls-0.14.3.js"></script>
     <script src="controllers/searchItemController.js"></script>
     <script src="controllers/guestController.js"></script>

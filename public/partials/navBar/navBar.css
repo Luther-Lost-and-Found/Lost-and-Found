@@ -1,3 +1,11 @@
-body { 
-	padding-top: 70px; 
+md-content.stuff {
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+}
+div.navBarSearch {
+	color: black;
+	width: 100%;
+	padding-right: 150px;
+	padding-left: 150px;
 }

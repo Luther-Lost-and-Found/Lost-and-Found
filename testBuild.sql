@@ -23,14 +23,7 @@ building_name VARCHAR(20) NOT NULL,
 room_name VARCHAR(30) NOT NULL)
 engine=InnoDB;
 
-CREATE TABLE AdminLF (norsekeyID varchar(30) NOT NULL PRIMARY KEY, 
-password VARCHAR(128) NOT NULL,
-locationID INT NOT NULL,
-first_name VARCHAR(20) NOT NULL, 
-last_name VARCHAR(30) NOT NULL,
-email VARCHAR(50) NOT NULL,
-FOREIGN KEY (locationID) REFERENCES LocationLF(locationID))
-engine=InnoDB;
+
 
 CREATE TABLE ItemLF (itemID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
 time_stamp DATE NOT NULL,
