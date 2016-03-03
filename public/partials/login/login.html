@@ -27,12 +27,19 @@
         </md-card-header-text>
       </md-card-header>
       <md-card-title>
-    <md-card-title-text>
+    <md-card-title-text >
       <span class="md-headline">Card headline</span>
       <span class="md-subhead">Card subheader</span>
     </md-card-title-text>
   </md-card-title>
   <md-card-actions layout="row" layout-align="start center">
+     <form class="form">
+      <input type="text" placeholder="Username" ng-model="login.username">
+      <input type="password" placeholder="Password" ng-model="login.password">
+      <button type="submit" id="login-button" ng-click="loginSubmit(login)" >Login</button>
+      <button type="submit" id="login-button" ng-click="guestLoginSubmit()" >Search As Guest</button>
+    </form>
+
     <md-button>Action 1</md-button>
     <md-button>Action 2</md-button>
     <md-card-icon-actions>
