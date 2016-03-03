@@ -132,3 +132,9 @@ input:focus ~ .highlight {
   margin-right: auto;
   margin-left: auto;
 }
+
+#header_bar{
+	background-color: #093A7D;
+	min-height: 320px;
+}
+
