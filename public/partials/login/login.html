@@ -19,22 +19,25 @@
       <md-card>
       <md-card-header>
         <md-card-avatar>
-          <img src="/partials/login/Luther_Norse.jpg" class="md-user-avatar" layout-align="center" id="norse">
+          <img src="/partials/login/Luther_Norse.jpg" class="md-user-avatar" id="norse">
         </md-card-avatar>
-        <md-card-header-text>
-          <span class="md-title">Welcome</span>
-          <span class="md-subhead">Login Here</span>
-        </md-card-header-text>
-      </md-card-header>
-      <md-card-title>
-    <md-card-title-text>
-      <span class="md-headline">Card headline</span>
-      <span class="md-subhead">Card subheader</span>
-    </md-card-title-text>
-  </md-card-title>
   <md-card-actions layout="row" layout-align="start center">
-    <md-button>Action 1</md-button>
-    <md-button>Action 2</md-button>
+    <form>
+      <div class="group">
+        <input type="text"><span class="highlight"></span><span class="bar"></span>
+        <label>Username</label>
+      </div>
+      <div class="group">
+        <input type="text"><span class="highlight"></span><span class="bar"></span>
+        <label>Password</label>
+      </div>
+      <button type="button" class="button buttonBlue">Login
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+      </button>
+      <button type="button" class="button buttonBlue">Login as Guest
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+      </button>
+    </form>
     <md-card-icon-actions>
       <md-button class="md-icon-button" aria-label="icon">
         <md-icon md-svg-icon="icon"></md-icon>
