@@ -1,9 +1,8 @@
 
 .move-up {
 	position: relative;
-	top: -60px;
+	top: -184px;
 	z-index: 99;
-
 }
 #title1 {
 	text-align: center;
@@ -26,4 +25,8 @@
   display: block;
   margin-right: auto;
   margin-left: auto;
+}
+#header_bar{
+	background-color: #003C72;
+	min-height: 320px;
 }
