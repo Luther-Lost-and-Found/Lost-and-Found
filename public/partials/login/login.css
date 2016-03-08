@@ -1,7 +1,11 @@
 form {
 	width: 380px;
-	margin: 4em auto;
-	padding: 3em 2em 2em 3em;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top:20px;
+	padding-bottom:20px;
+	margin: auto;
+	margin-top: 2em;
 	background: #fafafa;
 	border: 1px solid #ebebeb;
 	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
@@ -9,11 +13,15 @@ form {
 
 .group { 
 	position: relative; 
-	margin-bottom: 45px; 
+	color:#003C72;
+	padding-bottom: 20px;
+
 }
+
 input {
+	min-height: 100%;
 	font-size: 18px;
-	padding: 10px 10px 10px 5px;
+	padding-top:10px;
 	-webkit-appearance: none;
 	display: block;
 	background: #fafafa;
@@ -22,6 +30,7 @@ input {
 	border: none;
 	border-radius: 0;
 	border-bottom: 1px solid #757575;
+	align-content: center;
 }
 
 input:focus { outline: none; }
@@ -57,10 +66,11 @@ input:focus ~ label, input.used ~ label {
 	position: relative;
 	display: block;
 	width: 100%;
+	padding:1px;
 
 }
 
-.bar:before, .bar:after {
+.bar:before,.bar:after {
 	content: '';
 	height: 2px; 
 	width: 0;
@@ -68,6 +78,7 @@ input:focus ~ label, input.used ~ label {
 	position: absolute;
 	background:  #003C72; 
 	transition: all 0.2s ease;
+
 }
 
 .bar:before { left: 50%; }
@@ -90,6 +101,7 @@ input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
 	left: 0;
 	pointer-events: none;
 	opacity: 0.5;
+	padding:1px;
 }
 
 
@@ -98,7 +110,16 @@ input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
 input:focus ~ .highlight {
 	animation: inputHighlighter 0.3s ease;
 }
+.buttonBlue {
+	background-color:#003C72;
+	margin-bottom: 10px;
+	margin-top:10px;
+	border: 1px solid black;
 
+}
+.buttonHolder {
+	text-align: center;
+}
 .move-up {
 	position: relative;
 	top: -60px;
