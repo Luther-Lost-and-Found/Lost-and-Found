@@ -1,3 +1,5 @@
+
+
 form {
 	width: 380px;
 	padding-left: 10px;
@@ -25,7 +27,7 @@ input {
 	-webkit-appearance: none;
 	display: block;
 	background: #fafafa;
-	color:  #003C72;
+	color:  #4F97E9;
 	width: 100%;
 	border: none;
 	border-radius: 0;
@@ -52,13 +54,24 @@ label {
 
 /* active */
 
-input:focus ~ label, input.used ~ label {
-	top: -20px;
+/*input:focus ~ label {
+  top: -20px;
   transform: scale(.75); left: -2px;
 	/* font-size: 14px; */
-	color: #4a89dc;
-}
+/*	color: #4a89dc;
+}*/
 
+input:focus ~ label {
+	top: -20px;
+	transform: scale(.75); left: -2px;
+	color:#003C72 ;
+}
+input:valid ~ label {
+	top: -20px;
+	transform: scale(.75); left: -2px;
+	color:#003C72 ;
+
+}
 
 /* Underline */
 
@@ -110,12 +123,9 @@ input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
 input:focus ~ .highlight {
 	animation: inputHighlighter 0.3s ease;
 }
-.buttonBlue {
-	background-color:#003C72;
-	margin-bottom: 10px;
-	margin-top:10px;
-	border: 1px solid black;
-
+@keyframes inputHighlighter {
+	from { background: #fafafa; }
+	to 	{ width: 0; background: transparent; }
 }
 .buttonHolder {
 	text-align: center;
@@ -158,4 +168,22 @@ input:focus ~ .highlight {
 	background-color: #093A7D;
 	min-height: 320px;
 }
-
+.md-button {
+  padding: 0 6px 0 6px;
+  margin: 6px 8px 6px 8px;
+  min-width: 88px;
+  border-radius: 3px;
+  font-size: 14px;
+  text-align: center;
+  color:white;
+  text-transform: uppercase;
+  text-decoration:none;
+  border: black;
+  outline: none;
+}
+.btn1 {
+ 	background-color: #003C72;
+}
+.btn2 {
+	background-color: #4F97E9;
+}
