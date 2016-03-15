@@ -8,9 +8,7 @@ form {
 	padding-bottom:20px;
 	margin: auto;
 	margin-top: 2em;
-	background: #fafafa;
-	border: 1px solid #ebebeb;
-	box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;
+	background: #ffffff;
 }
 
 .group { 
@@ -26,7 +24,7 @@ input {
 	padding-top:10px;
 	-webkit-appearance: none;
 	display: block;
-	background: #fafafa;
+	background: #ffffff;
 	color:  #4F97E9;
 	width: 100%;
 	border: none;
