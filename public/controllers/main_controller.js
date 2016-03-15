@@ -5,16 +5,16 @@ angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
 angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
+angular.module('404App',[]);
 
-var myApp = angular.module('LostApp', ['ui.router',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp']);
+var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider, $httpProvider) {
 
-        $urlRouterProvider.otherwise('/');
-
         $stateProvider
+
         	.state('login',{
                 url: '/',
                 views: {
@@ -65,14 +65,39 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 }
             })
 
+            .state('404',{
+                url:'/404',
+                views:{
+                    'navBar': {
+                        templateUrl : '../partials/navBar/navBar.html',
+                        action : 'navBarApp.NavBarCtrl'
+                    },
+                    '404':{
+                        templateUrl : '../partials/404/404.html',
+                        action : '404App.404Controller'
+                    }
+                }
+            })
+
+            $urlRouterProvider.when('','/');
+
+            $urlRouterProvider.otherwise('/404');
+
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
+
+            console.log("inside the interceptor");
+
             return {
                 response: function(response) {
                     return response; 
                 },
                 responseError: function(response) { 
-                    if (response.status === 401) 
-                        $location.url('/login'); 
+                    if (response.status === 401){
+                        $location.url('/login');
+                    }
+                    if (response.status === 404){
+                        $location.url('/404');
+                    } 
                     return $q.reject(response); 
                 } 
             };
