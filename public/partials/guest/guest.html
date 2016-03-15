@@ -6,62 +6,50 @@
 	</head>
 	<body>
 		<div class="container" ng-controller="guestController">
-		<script type='text/ng-template' id='guestSearchResult.html'>
-      		<div class="modal-header">
-                <h3 class="modal-title">Search Results</h3>
-            </div>
-            <div class="modal-body">
-            <p>Your item is most likely to be found in one of the following locations, ordered from most to least likely:</p>
+		<script type="text/ng-template" id="guestSearchResult.html">
+			<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="50">
+				<md-dialog-content>
+				    <div class="md-dialog-content">
+				        
+				        <table class="table">
+				            <thead>
+				              <tr>
+				                <th>Building</th>
+				                <th>Room</th>
+				                <th>Contact</th>
+				                <th>&nbsp;</th>
+				              </tr>
+				            </thead>
+				            <tbody>
+					          	<tr ng-repeat="location in locationlist"> 
+									<td>{{location.building_name}}</td>
+									<td>{{location.room_name}}</td>
+									<td>{{location.email}}</td>
+									<td>{{location.phonenumber}}</td>
+								</tr>
+				      		</tbody>
+			    		</table>
+				        
+					</div>
+					<md-button aria-label="Remove" ng-click="cancel()" md-autofocus>Cancel</md-button>
 
-	        <table class="table">
-	            <thead>
-	              <tr>
-	                <th>Building</th>
-	                <th>Room</th>
-	                <th>Contact</th>
-	                <th>&nbsp;</th>
-	              </tr>
-	            </thead>
-	            <tbody>
-		          	<tr ng-repeat="location in locationlist"> <!-- ng-repeat allows to load data into separate rows -->
-						<td>{{location.building_name}}</td>
-						<td>{{location.room_name}}</td>
-						<td>{{location.email}}</td>
-						<td>{{location.phonenumber}}</td>
-					</tr>
-	      		</tbody>
-    		</table>
-  			</div>
-			<div class="modal-footer">
-			    <button class="btn btn-primary" type="button" ng-click="cancel()">Okay</button>
-			</div>
-		</script>
+				</md-dialog-content>
+			</md-dialog>
+    	</script>
+		
 			<div class="container">
 				<div class="col-sm-10 col-sm-offset-4" id="header">
 			  		<h2>Find Your Lost Item</h2>
 			  	</div>
-			  <form class="form-horizontal" role="form">
 			    <div class="form-group">
-			      <label class="control-label col-sm-1" for="itemTitle">Item:</label>
-			      <div class="col-sm-11">
-			        <input type="itemTitle" class="form-control" id="itemTitle" ng-model="searchGuest.itemTitle" placeholder="What did you lose?">
-			      </div>
-			    </div>
-			    <!-- <div class="form-group">
-			      <label class="control-label col-sm-1" for="location">Color:</label>
-			      <div class="col-sm-11">
-			        <input type="color" class="form-control" id="itemColor" ng-model="searchGuest.itemColor">
-			      </div>
-			    </div> -->
-			    <div class="form-group">
-			    	<label class="control-label col-sm-1" for="description">Description:</label>
-			      	<div class="col-sm-11">
-						<textarea class="form-control" rows="10" id="description" ng-model="searchGuest.description"></textarea>
-				 	</div>
+				 	<md-input-container class="md-block">
+			          <label>Description</label>
+			          <textarea ng-model="searchGuest.description" md-maxlength="150" rows="8" md-select-on-focus></textarea>
+			        </md-input-container>
 			    </div>
 			    <div class="form-group">        
 			      <div class="col-sm-offset-1 col-sm-11">
-			        <button class="btn btn-primary" type="button" ng-click="submitGuestSearch(searchGuest)">Submit</button>
+			        <md-button aria-label="Submit" ng-click="submitGuestSearch($event,searchGuest)" md-autofocus>Submit</md-button>
 			      </div>
 			    </div>
 			  </form>
