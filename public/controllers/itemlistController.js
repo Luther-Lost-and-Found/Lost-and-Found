@@ -17,6 +17,15 @@ angular.module('ItemApp',['ui.bootstrap','ngMaterial']).controller('ItemCtrl', [
 
 	refresh();
 
+	// $scope.topDirections = ['left', 'up'];
+	// $scope.bottomDirections = ['down', 'right'];
+	$scope.isOpen = false;
+	//$scope.availableModes = ['md-fling', 'md-scale'];
+	$scope.selectedMode = 'md-scale';
+	//$scope.availableDirections = ['up', 'down', 'left', 'right'];
+	$scope.selectedDirection = 'down';
+
+
 	$scope.sort = function(sortMethod){
 	};
 

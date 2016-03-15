@@ -15,7 +15,7 @@
 	</head>
 	<body>
 		<div class="container" ng-controller="ItemCtrl" ng-cloak>
-			<!-- <div class="dropdown">
+<!-- 			<div class="dropdown">
 			  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 			    Dropdown
 			    <span class="caret"></span>
@@ -31,6 +31,31 @@
 			</div> -->
 
 
+			<div layout="column" ng-cloak="" class="itemListOptions">
+			<md-content class="md-padding" layout="column">
+				<div class="lock-size" layout="row" layout-align="start start">
+					<md-fab-speed-dial md-open="isOpen" md-direction="{{selectedDirection}}" ng-class="selectedMode">
+						<md-fab-trigger>
+							<md-button aria-label="menu" class="md-fab md-warn">
+								<md-icon md-svg-src="img/icons/menuBlack.svg"></md-icon>
+							</md-button>
+						</md-fab-trigger>
+
+						<md-fab-actions>
+							<md-button aria-label="test1" class="md-fab md-raised md-mini">
+								<md-icon md-svg-src="img/icons/locationBlack.svg" aria-label="test1"></md-icon>
+							</md-button>
+							<md-button aria-label="test2" class="md-fab md-raised md-mini">
+								<md-icon md-svg-src="img/icons/plusBlack.svg" aria-label="test2"></md-icon>
+							</md-button>
+							<md-button aria-label="test3" class="md-fab md-raised md-mini">
+								<md-icon md-svg-src="img/icons/calendarBlack.svg" aria-label="test3"></md-icon>
+							</md-button>
+						</md-fab-actions>
+					</md-fab-speed-dial>
+				</div>
+
+			<!-- END TESTING -->
 			<script type="text/ng-template" id="myModalContent.html">
 				<div class="modal-header">
 		            <h3 class="modal-title">Item Description</h3>

@@ -1,31 +1,43 @@
-angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarSearchCtrl', ['$rootScope',
+angular.module('navBarApp',['ngMaterial','ngFileUpload']).controller('NavBarSearchCtrl', ['$rootScope',
   '$timeout', '$scope', '$http', '$location', 'sharedProperties','sharedService',
   '$animate','$uibModal', 'sharedServiceUploadModal','sharedPropertiesTags',
-  function($rootScope,$timeout, $scope, $q, $log, $http, $location, sharedProperties, 
-    sharedService,$animate,$uibModal,sharedServiceUploadModal,sharedPropertiesTags) {
+  function($rootScope,$timeout, $scope, $q, $http, $location, sharedProperties, 
+    sharedService,$animate,$uibModal,sharedServiceUploadModal,sharedPropertiesTags, log, $log) {
 
     var self = this;
     self.simulateQuery = false;
     self.isDisabled    = false;
     
-    // list of `state` value/display objects
-    self.states        = loadAll();
+    // list of `tag` value/display objects
+    self.tags        = loadAll();
     self.querySearch   = querySearch;
     self.selectedItemChange = selectedItemChange;
     self.searchTextChange   = searchTextChange;
-    self.newState = newState;
 
-    function newState(state) {
-      alert("Alert!");
-    }
+    // self.newTag = newTag;
+
+    // function newTag(tag) {
+    //   alert("Alert!");
+    // }
 
     /**
-     * Search for states... use $timeout to simulate remote dataservice call.
+     * Search for tags... use $timeout to simulate remote dataservice call.
      */
+  
+    $scope.openMenu = function($mdOpenMenu, ev) {
+      $mdOpenMenu(ev);
+    };
+
+    function test() {
+      console.log("MADE IT TO TESTING.....");
+    }
+
 
     function querySearch (query) {
-      var results = query ? self.states.filter( createFilterFor(query) ) : self.states,
+      console.log("querySearch", query);
+      var results = query ? self.tags.filter( createFilterFor(query) ) : self.tags,
           deferred;
+
       if (self.simulateQuery) {
         deferred = $q.defer();
         $timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
@@ -35,11 +47,11 @@ angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarSe
       }
     }
     function searchTextChange(text) {
-      console.log("text: ");
-      console.log(text);
+      console.log("text: ", text);
       // $log.info('Text changed to ' + text);
     }
     function selectedItemChange(item) {
+      console.log("selectedItemChange");
       // $log.info('Item changed to ' + JSON.stringify(item));
     }
 
@@ -48,17 +60,12 @@ angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarSe
      */
 
     function loadAll() {
-      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
-      return allStates.split(/, +/g).map( function (state) {
+      console.log("loadAll");
+      var allTags = 'One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten';
+      return allTags.split(/, +/g).map( function (tag) {
         return {
-          value: state.toLowerCase(),
-          display: state
+          value: tag.toLowerCase(),
+          display: tag
         };
       });
     }
@@ -68,9 +75,10 @@ angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarSe
      */
 
     function createFilterFor(query) {
+      console.log("createFilterFor", query);
       var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(state) {
-        return (state.value.indexOf(lowercaseQuery) === 0);
+      return function filterFn(tag) {
+        return (tag.value.indexOf(lowercaseQuery) === 0);
       };
     }
 }]);

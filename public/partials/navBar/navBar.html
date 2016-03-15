@@ -4,9 +4,9 @@
 <head>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-  <md-content class="stuff" ng-controller= "NavBarSearchCtrl as ctrl" ng-cloak>
-    <md-toolbar md-scroll-shrink ng-if="true" layout="row" layout-align="space-between center">
-      <div tag="navBarStyle" class="md-toolbar-tools md-toolbar-top">
+  <md-content class="navInPageForStyling" ng-controller= "NavBarSearchCtrl as ctrl" ng-cloak>
+    <md-toolbar class="navBarClass" md-scroll-shrink ng-if="true" layout="row" layout-align="space-between center">
+      <div class="md-toolbar-tools md-toolbar-top">
         
         <md-button class="md-icon-button" aria-label="More" ui-sref="itemlist">
            <md-icon class="testbuttonstyle" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
@@ -22,8 +22,8 @@
             md-selected-item-change="ctrl.selectedItemChange(item)"
             md-items="item in ctrl.querySearch(ctrl.searchText)"
             md-item-text="item.name"
-            md-min-length="2"
-            placeholder="Search">
+            md-min-length="0"
+            placeholder="Search ...">
 
             <md-item-template>
               <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
@@ -34,10 +34,21 @@
         
         <span flex></span>
         
-        <!-- SORTWHITE Will replace the itemList dropdown -->
-        <md-button class="md-icon-button" aria-label="More" ng-click="">
-          <md-icon md-svg-icon="img/icons/sortWhite.svg"></md-icon>
-        </md-button>
+        <div class="md-menu-demo" ng-cloak="">
+          <md-menu>
+            <md-button class="md-icon-button" aria-label="menu icon" ng-click="openMenu($mdOpenMenu, $event)">
+                <md-icon md-menu-origin md-svg-icon="img/icons/sortWhite.svg"></md-icon>
+            </md-button>
+
+            <md-menu-content width="2">
+              <md-menu-item>
+                <md-button ng-click="" aria-label="item1">
+                  <md-icon md-svg-icon="img/icons/exitWhite.svg" md-menu-align-target></md-icon> Item1
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
 
         <md-button class="md-icon-button" aria-label="More" ng-click="logout()">
           <md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>

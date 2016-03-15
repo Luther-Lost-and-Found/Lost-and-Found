@@ -45,7 +45,7 @@ hr {
 }
 
 .dropdown {
-  padding-bottom:10px;
+  padding-top:150px;
 }
 .images {
     border: 1px solid black;
@@ -63,3 +63,22 @@ footer h5{
   color:blue;
 
 }
+.itemListOptions {
+  padding-top: 150px;
+}
+.itemListOptions .text-capitalize {
+  text-transform: capitalize; }
+
+.itemListOptions .md-fab:hover, .itemListOptions .md-fab.md-focused {
+  background-color: #000 !important; }
+
+.itemListOptions p.note {
+  font-size: 1.2rem; }
+
+.itemListOptions .lock-size {
+  min-width: 300px;
+  min-height: 300px;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto; }

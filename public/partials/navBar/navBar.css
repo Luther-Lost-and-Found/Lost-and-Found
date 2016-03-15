@@ -1,11 +1,15 @@
-md-content.stuff {
+md-content.navInPageForStyling {
 	position: fixed;
 	width: 100%;
-	z-index: 1000;
+	z-index: 100;
 }
 div.navBarSearch {
 	color: black;
 	width: 100%;
 	padding-right: 150px;
 	padding-left: 150px;
+}
+
+md-toolbar.navBarClass {
+	background-color: #093A7D;	
 }
