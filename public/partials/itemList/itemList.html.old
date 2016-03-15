@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html ng-app="LostApp">
+	<head>
+		<link rel="stylesheet" href="/partials/itemList/itemList.css">
+		<title>Lost And Found</title>
+	</head>
+	<body>
+		<div class="container" ng-controller="ItemCtrl" ng-cloak>
+			
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<md-button class="md-fab md-fab-top-left" aria-label="Add Item" ng-click="addItem()">
+					            <md-icon md-svg-src="img/icons/plus.svg"></md-icon>
+					      	</md-button>
+
+							<md-fab-speed-dial md-open="demo.isOpen" md-direction="right" class="md-fab md-fab-bottom-left" ng-class="demo.selectedMode">
+						        <md-fab-trigger>
+						          <md-button aria-label="menu" class="md-fab md-primary md-fab-bottom-left">
+						            <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
+						          </md-button>
+						        </md-fab-trigger>
+						        <md-fab-actions>
+						          <md-button aria-label="Alphabetically" class="md-fab md-raised" ng-click="sortAlpha()">
+						            <md-icon md-svg-src="img/icons/alpha.svg" aria-label="Alpha" title="Sort Alphabetically"></md-icon>
+						          </md-button>
+						          <md-button aria-label="Location" class="md-fab md-raised" ng-click="sortLoc()">
+						            <md-icon md-svg-src="img/icons/location.svg" aria-label="Location" title="Sort by Location"></md-icon>
+						          </md-button>
+						          <md-button aria-label="Date" class="md-fab md-raised" ng-click="sortDate()">
+						            <md-icon md-svg-src="img/icons/calendar.svg" aria-label="Date" title="Sort By Date"></md-icon>
+						          </md-button>
+						        </md-fab-actions>
+						      </md-fab-speed-dial>
+					    </td>
+						<td>
+							<md-button class="md-fab md-warn md-fab-bottom-right" aria-label="Delete All" ng-click="deleteAll()">
+					            <md-icon md-svg-src="img/icons/bin.svg"></md-icon>
+					        </md-button>
+					    </td>
+				    </tr>
+			    </tbody>
+		    </table>
+
+
+			<script type="text/ng-template" id="myModalContent.html">
+				<div class="modal-header">
+		            <h3 class="modal-title">Item Description</h3>
+		        </div>
+		        <div class="modal-body" style="z-index:20;">
+
+			        <pre><img class="images" ng-src="{{item.currentImage}}"></img> </pre>
+			        <label for="itemName">Item Name:</label> <p id="itemName"> {{item.title}} </p>
+			        <label for "located" > Current Location </label> <p id="located"> {{item.locationID}} </p>
+			        <label for="accepted">Accepted By: </label>  <p id="accepted" >{{item.accepted_by}} </p>
+			        <td><md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox></td>
+			        <div layout="column" ng-cloak>
+					  <md-content class="md-padding" layout="column">
+					    <h2 class="md-title">Tags</h2>
+					    <md-chips ng-repeat="tag in itemTags">
+					      <md-chip>{{tag}}</md-chip>
+					    </md-chips>
+					    
+					  </md-content>
+					</div>
+		        </div>
+		        <div class="modal-footer">
+		            <button class="btn btn-warning" ng-click="editItem(item)">Edit</button>
+		            <button class="btn btn-danger" ng-click="removeItem(item)">Remove</button>
+		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+		        </div>
+	    	</script>
+	    	<script type="text/ng-template" id="myModalContentEdit.html">
+				<div class="modal-header">
+		            <h3 class="modal-title">Item Description</h3>
+		        </div>
+		        <div class="modal-body" style="z-index:20;">
+		        <pre><img class="images" ng-src="{{item.currentImage}}"></img> </pre>
+		        <table class="table">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Location</th>				
+							<th>Accepted By</th>
+							<th>Claimed By</th>
+							<th>Claimed</th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input class="form-control" ng-model="item.title"></td>
+							<td><input class="form-control" ng-model="item.locationID"></td>
+							<td><input class="form-control" ng-model="item.accepted_by"></td>
+							<td><input class="form-control" ng-model="item.claimed_by"></td>
+							<td><md-checkbox ng-model="item.claimed" ng-init="item.claimed" aria-label="Checkbox"></md-checkbox></td>
+							
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<md-content class="md-padding" layout="column">
+				        <md-chips 
+				            ng-model="selectedTags" md-autocomplete-snap
+				            md-transform-chip="transformChip($chip)"
+				            md-require-match="autocompleteDemoRequireMatch">
+
+				          <md-autocomplete
+				          		class="chipsdemoCustomInputs" 
+				              md-selected-item="selectedItem"
+				              md-search-text="searchText"
+				              md-items="item in querySearch(searchText)"
+				              md-item-text="item.name"
+				              placeholder="Start Typing...">
+				            <span md-highlight-text="searchText">{{item.name}}</span>
+
+				          </md-autocomplete>
+
+				          <md-chip-template>
+				            <span>
+				              <strong>{{$chip.name}}</strong>
+				            </span>
+				          </md-chip-template>
+				        </md-chips>
+				      </md-content>
+				</div>
+
+		        <div class="modal-footer">
+		            <button class="btn btn-warning" ng-click="updateItem(item)">Update</button>
+		            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+		        </div>
+	    	</script>
+			<md-grid-list
+			        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="5"
+			        md-row-height-gt-md="1:1.2" md-row-height="4:3"
+			        md-gutter="8px" md-gutter-gt-sm="4px" >
+			    <md-grid-tile ng-repeat="item in itemlist"
+			                  md-rowspan="{{item.span.row}}"
+			                  md-colspan="{{item.span.col}}"
+			                  md-colspan-sm="1">
+			    	<md-card>
+				   		<img class="images" ng-src="{{item.currentImage}}" ng-class="tile.background" ng-click="clicked($event,item)"></img>
+				        <md-card-actions layout-align="end center">
+				        <md-checkbox ng-model="item.toDelete" aria-label="Checkbox">{{item.title}}</md-checkbox>
+			    	</md-card>
+			    </md-grid-tile>
+			</md-grid-list>
+		</div>
+	</body>
+</html>
