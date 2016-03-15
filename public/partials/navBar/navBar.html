@@ -1,82 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="navBarApp">
-  <link rel="stylesheet" href="/partials/navBar/navBar.css">
-  <link rel="stylesheet" type="text/css" href="/partials/navBar/upload.css">
-
+  <head>
+    <link rel="stylesheet" type="text/css" href="/partials/navBar/navBar.css">
+    <link rel="stylesheet" type="text/css" href="/partials/navBar/upload.css">
+  </head>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid" ng-controller="NavBarCtrl">
-    <script type='text/ng-template' id='addItemContent.html'>
-      <div class="modal-header">
-        <h3 class="modal-title">Add Item</h3>
-      </div>
-      <div class="modal-body">
-        <div>
-          <md-content class="md-padding" layout="column">
-                <md-chips 
-                    ng-model="selectedTags" md-autocomplete-snap
-                    md-transform-chip="transformChip($chip)"
-                    md-require-match="autocompleteDemoRequireMatch">
-
-                  <md-autocomplete
-                      class="chipsdemoCustomInputs" 
-                      md-selected-item="selectedItem"
-                      md-search-text="searchText"
-                      md-items="item in querySearch(searchText)"
-                      md-item-text="item.name"
-                      placeholder="Start Typing...">
-                    <span md-highlight-text="searchText">{{item.name}}</span>
-
-                  </md-autocomplete>
-
-                  <md-chip-template>
-                    <span>
-                      <strong>{{$chip.name}}</strong>
-                    </span>
-                  </md-chip-template>
-                </md-chips>
-              </md-content>
-        </div>
-        <table class="table">
-          <thead>
-              <tr>
-                <th>Title</th>
-                <th>Color</th>
-                <th>&nbsp;</th>
-              </tr>
-            </thead>
-          <tbody>
-            <tr>
-              <td><input class="form-control" ng-model="item.title"</td>
-              <td><input class="form-control" ng-model="item.itemColor"</td>
-            </tr>
-          </tbody>
-        </table>
-    <div class="modal-header">
-        <h3 class="modal-title">Upload Picture</h3>
-    </div>
-    <div class="modal-body">
-      <div>
-        <form name="myForm">
-          <fieldset>
-            <div class="col-lg-6 col-sm-6 col-12">
-              <div class="input-group">
-                <span class="input-group-btn">
-                  <span class="btn btn-primary btn-file">
-                    Browse&hellip; <input type="file" ngf-select="" ng-model="picFile" name="file" ngf-fix-orientation="false" accept="image/*">
-                  </span>
-                </span>
-                <input ng-model="picFile.name" type="text" class="form-control" readonly>
-              </div>
-            </div>
-              <button class="btn btn-primary" type="button" ng-click="uploadImage(picFile)">Add</button>
-              <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-          </fieldset>
-          <img ngf-src="picFile" class="thumb" width="200">
-        </form>
-      </div>
-    </div>
-  </div>
-  </script>
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
@@ -84,15 +13,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" ui-sref="itemlist">Home</a>
+        <md-button class="md-icon-button" aria-label="More" ui-sref="itemlist">
+          <md-icon md-svg-icon="img/icons/home3.svg"></md-icon>
+        </md-button>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <button type="button" class="btn btn-default navbar-btn" ng-click="addItem()">Add Item</button>
-   
-        </ul>
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <input type="text" class="form-control" placeholder="Search" ng-model="search.title">
@@ -100,7 +27,10 @@
           <button type="submit" class="btn btn-default" ng-click="searchItem(search)">Search</button>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <button type="button" class="btn btn-default navbar-btn" ng-click="logout()">Logout</button>
+          
+          <md-button class="md-icon-button" aria-label="More" ng-click="logout()">
+            <md-icon md-svg-icon="img/icons/exit.svg"></md-icon>
+          </md-button>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
