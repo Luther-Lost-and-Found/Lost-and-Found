@@ -122,7 +122,7 @@ input:focus ~ .highlight {
 }
 .move-up {
 	position: relative;
-	top: -60px;
+	top: -146px;
 	z-index: 99;
 
 }
@@ -130,21 +130,22 @@ input:focus ~ .highlight {
 	text-align: center;
 	color: #fff;
 	text-shadow: 0 1px 0 #ccc;
-	margin-bottom:1px;
+	margin-bottom:18px;
+	font-size: 58px;
 }
 #title2 {
 	text-align: center;
 	margin-top: 0;
 	margin-bottom: 1px;
 	padding-bottom: 1px;
+	font-size: 28px;
 }
 #titles {
 	text-align: center;
-	margin-bottom: 80px;
+	margin-bottom: 32px;
 }
 .md-title {
 	padding-top: 5px;
-
 }
 
 #norse{
@@ -157,5 +158,10 @@ input:focus ~ .highlight {
 #header_bar{
 	background-color: #093A7D;
 	min-height: 320px;
+}
+
+#form{
+	border: none;
+	box-shadow: none;
 }
 
