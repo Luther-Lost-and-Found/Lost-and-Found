@@ -10,6 +10,15 @@ app.controller('guestController', function($timeout, $scope, $http, $animate,$ro
 			});
 		});
 	};
+
+	$scope.signIn = function(){
+		$http.get("/").success(function(response){
+			$scope.$applyAsync(function(){
+				$scope.itemlist = response;
+				$scope.item = "";
+			});
+		});
+	};
 	
 	$scope.submitGuestSearch = function(ev, $scope){
 

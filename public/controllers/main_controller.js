@@ -53,10 +53,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             .state('guestPage', {
                 url:'/guestPage',
                 views: {
-                    'navBar': {
-                        templateUrl : '../partials/guest/guestNav.html',
-                        action : 'navBarApp.NavBarCtrl'
-                    },
                     'guestPage': {
                         templateUrl : '../partials/guest/guest.html',
                         action : 'guestApp.guestController'
