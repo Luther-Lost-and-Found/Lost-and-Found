@@ -1,4 +1,3 @@
-
 angular.module('navBarApp',['ui.bootstrap','ngFileUpload']).controller('NavBarCtrl', ['$rootScope',
   '$timeout', '$scope', '$http', '$location', 'sharedProperties','sharedService',
   '$animate','$uibModal', 'sharedServiceUploadModal','sharedPropertiesTags',

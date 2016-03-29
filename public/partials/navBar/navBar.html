@@ -1,38 +1,61 @@
 <!DOCTYPE html>
 <html ng-app="navBarApp">
-  <head>
-    <link rel="stylesheet" type="text/css" href="/partials/navBar/navBar.css">
-    <link rel="stylesheet" type="text/css" href="/partials/navBar/upload.css">
-  </head>
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid" ng-controller="NavBarCtrl">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <md-button class="md-icon-button" aria-label="More" ui-sref="itemlist">
-          <md-icon md-svg-icon="img/icons/home3.svg"></md-icon>
-        </md-button>
-      </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" ng-model="search.title">
-          </div>
-          <button type="submit" class="btn btn-default" ng-click="searchItem(search)">Search</button>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-          
-          <md-button class="md-icon-button" aria-label="More" ng-click="logout()">
-            <md-icon md-svg-icon="img/icons/exit.svg"></md-icon>
-          </md-button>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+  <md-content class="navInPageForStyling" ng-controller= "NavBarSearchCtrl as ctrl" ng-cloak>
+    <md-toolbar class="navBarClass" md-scroll-shrink ng-if="true" layout="row" layout-align="space-between center">
+      <div class="md-toolbar-tools md-toolbar-top">
+        
+        <md-button class="md-icon-button" aria-label="More" ui-sref="itemlist">
+           <md-icon class="testbuttonstyle" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
+        </md-button>
+
+        <div class="navBarSearch">
+          <md-autocomplete
+            ng-disabled="ctrl.isDisabled"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+            md-search-text="ctrl.searchText"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.name"
+            md-min-length="0"
+            placeholder="Search ...">
+
+            <md-item-template>
+              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+            
+          </md-autocomplete>
+        </div>
+        
+        <span flex></span>
+        
+        <div class="md-menu-demo" ng-cloak="">
+          <md-menu>
+            <md-button class="md-icon-button" aria-label="menu icon" ng-click="openMenu($mdOpenMenu, $event)">
+                <md-icon md-menu-origin md-svg-icon="img/icons/sortWhite.svg"></md-icon>
+            </md-button>
+
+            <md-menu-content width="2">
+              <md-menu-item>
+                <md-button ng-click="" aria-label="item1">
+                  <md-icon md-svg-icon="img/icons/exitWhite.svg" md-menu-align-target></md-icon> Item1
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+
+        <md-button class="md-icon-button" aria-label="More" ng-click="logout()">
+          <md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>
+        </md-button>
+      
+      </div>
+    </md-toolbar>
+  </md-content>
+</div>
 </html>
