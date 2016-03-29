@@ -12,12 +12,8 @@ app.controller('guestController', function($timeout, $scope, $http, $animate,$ro
 	};
 
 	$scope.signIn = function(){
-		$http.get("/").success(function(response){
-			$scope.$applyAsync(function(){
-				$scope.itemlist = response;
-				$scope.item = "";
-			});
-		});
+		$console.log("going to login page");
+  		$window.location.href = "/#";
 	};
 	
 	$scope.submitGuestSearch = function(ev, $scope){
