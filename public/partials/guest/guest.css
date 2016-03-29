@@ -194,3 +194,7 @@ input:focus ~ .highlight {
  	background-color: #093A7D;
  	align-items: right;
 }
+
+.forms{
+	padding: 12px;
+}
