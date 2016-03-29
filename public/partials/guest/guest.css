@@ -130,7 +130,7 @@ input:focus ~ .highlight {
 	to 	{ width: 0; background: transparent; }
 }
 .buttonHolder {
-	text-align: center;
+	text-align: right;
 }
 .move-up {
 	position: relative;
@@ -192,7 +192,5 @@ input:focus ~ .highlight {
 }
 .btn1 {
  	background-color: #093A7D;
-}
-.btn2 {
-	background-color: #4F97E9;
+ 	align-items: right;
 }

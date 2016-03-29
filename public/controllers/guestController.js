@@ -10,11 +10,6 @@ app.controller('guestController', function($timeout, $scope, $http, $animate,$ro
 			});
 		});
 	};
-
-	$scope.signIn = function(){
-		$console.log("going to login page");
-  		$window.location.href = "/#";
-	};
 	
 	$scope.submitGuestSearch = function(ev, $scope){
 
