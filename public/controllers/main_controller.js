@@ -56,8 +56,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'guestPage': {
                         templateUrl : '../partials/guest/guest.html',
                         action : 'guestApp.guestController'
-                    }
-                    
+                    } 
                 }
             })
 
