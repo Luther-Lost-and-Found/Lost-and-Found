@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app="navBarApp">
+
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+  <md-content class="fixed" ng-controller= "NavBarCtrl as ctrl" ng-cloak>
+    <md-toolbar class="navBarClass" md-scroll-shrink ng-if="true" layout="row" layout-align="space-between center">
+      <div class="md-toolbar-tools md-toolbar-top">
+        
+        <md-button class="md-icon-button" aria-label="More" ui-sref="itemlist">
+           <md-icon class="testbuttonstyle" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
+        </md-button>
+
+        <div class="navBarSearch">
+          <md-autocomplete
+            ng-disabled="ctrl.isDisabled"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+            md-search-text="ctrl.searchText"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.name"
+            md-min-length="0"
+            placeholder="Search ...">
+
+            <md-item-template>
+              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+            
+          </md-autocomplete>
+        </div>
+        
+        <span flex></span>
+        
+        <div class="md-menu-demo" ng-cloak="">
+          <md-menu>
+            <md-button class="md-icon-button testclass" aria-label="menu icon" ng-click="toggleRight()" ng-hide="isOpenRight()">
+                <md-icon md-menu-origin md-svg-icon="img/icons/sortWhite.svg"></md-icon>
+            </md-button>
+
+            <md-menu-content class="testContent" width="2">
+              <md-menu-item>
+                <md-button ng-click="" aria-label="item1">
+                  <md-icon md-svg-icon="img/icons/exitWhite.svg" md-menu-align-target></md-icon> Item1
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <div layout="vertical">
+          <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="position:fixed;" is-locked-open="$mdMedia('sm')" md-component-id="right" flex>
+            <md-toolbar class="md-theme-light">
+              <div>
+                <div layout-gt-xs="row" style="width: 100%;display: table;">
+                  <div style="display: table-cell;">
+                    <h1 class="md-toolbar-tools">{{username}}</h1>
+                  </div>
+                  <div >
+                    <md-button class="logout" aria-label="More" ng-click="logout()" >
+                      <md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>
+                    </md-button>
+                  </div>
+                </div>
+              </div>
+              
+            </md-toolbar>
+            <md-content ng-controller="SideNavCtrl" layout-padding>
+              <form>
+                <md-switch aria-label="SwitchAll">
+                  See All Items
+                </md-switch>
+                <md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+                  <h2 class="md-toolbar-tools">
+                    <span>Sort By</span>
+                  </h2>
+                </md-toolbar>
+                 <md-radio-group ng-model="data">
+                  <md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.type)">{{it.name}}</md-radio-button>
+                </md-radio-group>
+                <!-- <md-radio-group ng-model="cc.selectedId" >
+                  <div ng-repeat='it in sections.pages' class="row">
+                    <div flex layout='row' layout-padding layout-align="start center" >
+                      
+                      <md-radio-button flex
+                          ng-value="it.name"
+                          class="md-primary"
+                          ng-click="sort(it.type)" >
+                      </md-radio-button>
+                      <div flex style="max-width:200px;">
+                        {{it.name}}
+                      </div>
+                    </div>
+                  </div>
+                </md-radio-group> -->
+                <md-slider-container>
+                  <md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+                    <h2 class="md-toolbar-tools">
+                      <span>Size</span>
+                    </h2>
+                  </md-toolbar>
+                  <md-slider flex min="0" max="100" ng-model="color.red" aria-label="red" id="red-slider">
+                  </md-slider>
+                  <md-input-container>
+                    <input flex type="number" ng-model="color.red" aria-label="red" aria-controls="red-slider">
+                  </md-input-container>
+                </md-slider-container>
+              </form>
+              
+              <md-button ng-click="close()" class="md-primary" style="position:fixed; bottom:0;">
+                Close Sidenav Right
+              </md-button>
+            </md-content>
+          </md-sidenav>
+        </div>
+      
+      </div>
+    </md-toolbar>
+  </md-content>
+</div>
+</html>

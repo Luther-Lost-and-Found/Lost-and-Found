@@ -1,0 +1,63 @@
+.fa {
+  color:#666;
+}
+
+hr {
+  border-color: transparent;
+}
+
+
+#userList {
+  display:none;
+}
+
+#loader {
+  position:absolute;
+  z-index:2;
+  width:100%;
+  text-align:center;
+  top:40%;
+}
+
+.cap:first-letter {
+    text-transform: uppercase;
+}
+
+.alt {
+	background-color:#ccc;
+}
+
+body {
+  background-color: #eee;
+  color:#444;
+  padding-top: 80px;
+
+}
+
+.fa {
+  color:#666;
+}
+
+hr {
+  border-color: transparent;
+}
+
+.dropdown {
+  padding-bottom:10px;
+}
+.images {
+    border: 1px solid black;
+    width: 190px;
+    height: 190px;
+    float: left;
+    margin: 2px;
+    padding: 2px;
+}
+footer h5{
+  padding-top: 50px;
+  margin-right: 105px;
+  text-align: right;
+  text-decoration: bold;
+  color:blue;
+
+}

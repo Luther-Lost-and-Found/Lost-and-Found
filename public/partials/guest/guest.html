@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="guestApp">
+	<head>
+    	<link rel="stylesheet" type="text/css" href="/partials/guest/guest.css">
+    	<title>Lost And Found</title>
+	</head>
+	<body>
+		<div class="container" ng-controller="guestController">
+		<script type="text/ng-template" id="guestSearchResult.html">
+			<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="50">
+				<md-dialog-content>
+				    <div class="md-dialog-content">
+				        
+				        <table class="table">
+				            <thead>
+				              <tr>
+				                <th>Building</th>
+				                <th>Room</th>
+				                <th>Contact</th>
+				                <th>&nbsp;</th>
+				              </tr>
+				            </thead>
+				            <tbody>
+					          	<tr ng-repeat="location in locationlist"> 
+									<td>{{location.building_name}}</td>
+									<td>{{location.room_name}}</td>
+									<td>{{location.email}}</td>
+									<td>{{location.phonenumber}}</td>
+								</tr>
+				      		</tbody>
+			    		</table>
+				        
+					</div>
+					<md-button aria-label="Remove" ng-click="cancel()" md-autofocus>Cancel</md-button>
+
+				</md-dialog-content>
+			</md-dialog>
+    	</script>
+		
+			<div class="container">
+				<div class="col-sm-10 col-sm-offset-4" id="header">
+			  		<h2>Find Your Lost Item</h2>
+			  	</div>
+			    <div class="form-group">
+				 	<md-input-container class="md-block">
+			          <label>Description</label>
+			          <textarea ng-model="searchGuest.description" md-maxlength="150" rows="8" md-select-on-focus></textarea>
+			        </md-input-container>
+			    </div>
+			    <div class="form-group">        
+			      <div class="col-sm-offset-1 col-sm-11">
+			        <md-button aria-label="Submit" ng-click="submitGuestSearch($event,searchGuest)" md-autofocus>Submit</md-button>
+			      </div>
+			    </div>
+			  </form>
+			</div>
+		</div>
+	</body>
+</html>

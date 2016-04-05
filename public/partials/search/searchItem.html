@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="searchItemApp">
+	<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<title>Search Results</title>
+
+	</head>
+
+	<body>
+	<script type="text/ng-template" id="myModalContent.html">
+				<div class="modal-header">
+		            <h3 class="modal-title">Item Description</h3>
+		        </div>
+		        <div class="modal-body" style="z-index:20;">
+
+			        <pre><img class="images" ng-src="{{item.currentImage}}"></img> </pre>
+			        <label for="itemName">Item Name:</label> <p id="itemName"> {{item.title}} </p>
+			        <label for "located" > Current Location </label> <p id="located"> {{item.locationID}} </p>
+			        <label for="accepted">Accepted By: </label>  <p id="accepted" >{{item.accepted_by}} </p>
+			        <td><md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox></td>
+			        <div layout="column" ng-cloak>
+					  <md-content class="md-padding" layout="column">
+					    <h2 class="md-title">Tags</h2>
+					    <md-chips ng-repeat="tag in itemTags">
+					      <md-chip>{{tag}}</md-chip>
+					    </md-chips>
+					    
+					  </md-content>
+					</div>
+		        </div>
+	    	</script>
+		<div class="container" ng-controller="searchItemController">
+			<h1> Item List </h1>
+			<md-grid-list
+			        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="5"
+			        md-row-height-gt-md="1:1.2" md-row-height="4:3"
+			        md-gutter="8px" md-gutter-gt-sm="4px" >
+			    <md-grid-tile ng-repeat="item in searchitemlist"
+			                  md-rowspan="{{item.span.row}}"
+			                  md-colspan="{{item.span.col}}"
+			                  md-colspan-sm="1">
+			    	<md-card>
+				   		<img class="images" ng-src="{{item.currentImage}}" ng-class="tile.background" ng-click="clicked(item)"></img>
+				        <md-card-actions layout-align="end center">
+				        <md-checkbox ng-model="item.toDelete" aria-label="Checkbox">{{item.title}}{{item.locationID}}</md-checkbox>
+			    	</md-card>
+			    </md-grid-tile>
+			</md-grid-list>
+		</div>
+	</body>
+</html>
