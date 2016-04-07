@@ -1,0 +1,38 @@
+{
+  "name": "Lost-and-Found",
+  "version": "0.0.1",
+  "description": "A project intended to make inter-building lost-and-found more efficient",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "mysql": "^2.5.4",
+    "path": "^0.12.7",
+    "passport": "^0.2.1",
+    "passport-local": "^1.0.0",
+    "bcrypt-nodejs": "0.0.3",
+    "ejs": "^2.3.2",
+    "cookie-parser": "~1.0.0",
+    "express-session": "~1.0.0",
+    "node-multiparty": "https://github.com/andrewrk/node-multiparty.git"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "superagent": "^1.4.0"
+  },
+  "scripts": {
+    "test": "mocha --recursive -R nyan",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Luther-Lost-and-Found/Lost-and-Found.git"
+  },
+  "author": "",
+  "license": "GNU",
+  "bugs": {
+    "url": "https://github.com/Luther-Lost-and-Found/Lost-and-Found/issues"
+  },
+  "homepage": "https://github.com/Luther-Lost-and-Found/Lost-and-Found"
+}

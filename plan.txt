@@ -1,0 +1,36 @@
+1. Get search engine to work (either using Sphinx, or by googling for how to build a mysql search engine)
+2. Use search engine to effectively querry results for guest page (Should be done earlier, since it is an easier place)
+3. Integrate search engine into authenticated section
+4. Integrate search engine into showing live suggestions within search bar. There are two possibilities:
+	+ Querry the database for the results.
+	+ Alternatively, the itemlist page will already have a full list of items and their attributes. As such, wedo not need to querry the database every single time, and can perform a search directly within the client application. I, personally believe such will be a much better option. Need to look at the algorithms that could be used to search a JSON object effectively.
+		-> We should think about whether we want all the items on campus to be querried or just the ones from the current location.
+		-> if we get that part working perhaps the following replacement idea might work better, and should not take long:
+			=> Instead of showing suggestions as a dropdown from searchbar, start automatically filtering out the items that do not fit from within the main grid. Literally, tiles that do not match disappear. Such will be better since we will not have to provide a separate page for querried results if the user wants to see them all.
+5. Develop a feature to allow administrators select items and transfer ownership to a different location
+6. Develop a feature that allows administrators to switch between to additional modes:
+	-> Owner Location Items - shows only the items that are present in the registered location of the user
+	-> All Items - See all items and their locations
+7. Add a switch (Angular switch demo is available) for admins to switch between viewing all items and just their location items:
+	+ Possible considerations:
+		-> If all items are currently displayed, disable transfer and edit functionality
+		-> re-enable functionalities when back in own location.
+8. Integrate descriptive API into the project. This will be an extremely cool feature to have.
+9. Provide a color picker.
+10. Develop a settings panel. Include all the navbar button functionality (except for home in there). In the beginning include the switch for all/local items and logout button. We can add additional stuff later. Maybe add a grid/list of radio buttons (angular material demo) to switch between different ways of sorting items. Definitely have separators between different types of functionality in there.
+	+ Here is a different dea for settings. erhaps instead f using a dropdown we should have a sidenav, that appears when a button is pressed in the navbar. The side panel wll have information about a user, and means of changing the settings.
+11. Include a table for personalized settings into MYSQL. The table will contain information about all the settings a specific user changes, and will automatically load the same every time the user logs in. Provide support for that table.
+12. Provide additional functionality that will allow users to change their passwords.
+13. Think about how new users will be added to it in future.
+
+
+
+Need to provide a full database (that will have items for multiple administrators, locations and so on)
+Get a smaller dictionary to use as tags.
+In the database we need to create a new table/new fields for user settings.
+
+
+----------------------------------------
+
+1. md-swipe-left
+2. pull tags from database in initial database query to populate itemlist

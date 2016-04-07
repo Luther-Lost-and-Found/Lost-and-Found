@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html ng-app="LoginApp">
+  <head>
+    <meta charset="UTF-8">
+    <title>Luther College:Lost and Found</title>
+        
+    <link rel="stylesheet" href="/partials/login/login.css">
+  </head>
+
+  <body>
+    <div class="webpage" ng-controller="loginController">
+      <nav>
+        <img id="logo" src="/partials/login/Norsehead.jpg" />
+      </nav> 
+      <div class="wrapper">
+
+         <div layout="column" class="container">
+
+            <h1>Welcome to Lost and Found!</h1>
+            <h2> Please sign in: </h2>
+
+            <div flex>
+            <form id="login">
+              <div class="group">
+                <input type="text"><span class="highlight"></span><span class="bar"></span>
+                <label>Username</label>
+              </div>
+                <div class="group">
+                  <input type="password"><span class="highlight"></span><span class="bar"></span>
+                  <label>Password</label>
+                </div>
+                <div>
+                <button type="button" class="button buttonBlue">Login</button> 
+                <button type="button" class="button buttonGreen">Guest User</button>
+                </div>
+            </form>
+            </div>
+         </div>
+
+      </div>  
+
+    </div>
+  </body>
+
+</html>
+
+---------
+<!DOCTYPE html>
+<html ng-app="LoginApp">
+  <head>
+    <meta charset="UTF-8">
+    <title>Luther College Lost and Found</title>
+
+    <link rel="stylesheet" href="/partials/login/login.css">
+  </head>
+  <body layout="column" ng-controller="loginController">
+    <md-toolbar flex="33">
+      <h1>Luther College</h1>
+      <h2>Lost and Found</h2>
+    </md-toolbar>
+    <div layout-align="center start" layout="row">
+      <md-content class="md-whiteframe-z2 move-up" flex="66">
+      <md-card>
+      <md-card-header>
+        <md-card-avatar>
+          <img src="/partials/login/Norsehead.jpg" class="md-user-avatar">
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">Welcome</span>
+          <span class="md-subhead">Login Here</span>
+        </md-card-header-text>
+      </md-card-header>
+      <md-card-title>
+    <md-card-title-text>
+      <span class="md-headline">Card headline</span>
+      <span class="md-subhead">Card subheader</span>
+    </md-card-title-text>
+  </md-card-title>
+  <md-card-actions layout="row" layout-align="start center">
+    <md-button>Action 1</md-button>
+    <md-button>Action 2</md-button>
+    <md-card-icon-actions>
+      <md-button class="md-icon-button" aria-label="icon">
+        <md-icon md-svg-icon="icon"></md-icon>
+      </md-button>
+    </md-card-icon-actions>
+  </md-card-actions>
+  <md-card-content>
+    <p>
+     Card content
+    </p>
+  </md-card-content>
+</md-card>
+      </md-content>
+    </div>
+
+  </body>
+</html>

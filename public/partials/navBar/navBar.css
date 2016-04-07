@@ -1,0 +1,46 @@
+md-content.fixed {
+	/*position: fixed;*/
+	width: 100%;
+	/*z-index: 1000;*/
+}
+
+div.navBarSearch {
+	color: white;
+	width: 100%;
+	padding: 0px;
+	padding-right: 4%;
+	padding-left: 4%;
+}
+
+md-input-container.navBarSearchContainer {
+	padding: 0px;
+}
+
+input.navBarSearchTextInput {
+	background-color: white;
+	border-radius: 1.1px;
+	font-size: 16px;
+}
+
+md-toolbar.navBarClass {
+	background-color: #093A7D;	
+}
+
+.testContent {
+	color: black;
+	/*z-index: 10000000;*/
+}
+
+md-button.logout {
+  background: #f7f7f7;
+  border-radius: 3px;
+  text-align: center;
+  margin: 1em;
+  /*position: relative !important;*/
+  /*padding-bottom: 10px; */
+}
+
+md-radio-button:focus {
+    outline: none;
+    border: 0;
+ }

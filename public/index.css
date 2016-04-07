@@ -1,0 +1,27 @@
+html{
+	background-color: #eee;
+}
+
+body {
+	background-color: #eee;
+	color:#444;
+}
+
+.wrapper {
+	/*margin: 0 auto;*/
+	/*position: relative;*/
+}
+
+.fixed-wrapper {
+	/*position: absolute;*/
+}
+
+.fixed{
+	/*position: fixed;*/
+	/*margin-top:0px;*/
+	/*z-index:1;*/
+	/*width: 100%;*/
+}
+/*div.main{
+	position:relative;
+}*/
