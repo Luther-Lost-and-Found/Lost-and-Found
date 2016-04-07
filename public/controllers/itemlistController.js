@@ -176,6 +176,7 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     }
   };
 
+<<<<<<< HEAD
   jQuery.fn.sort = function() {  
       return this.pushStack( [].sort.apply( this, arguments ), []);  
   };  
@@ -198,6 +199,36 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     }
     return a.time_stamp> b.time_stamp ? 1 : -1;
   };
+=======
+
+  // $scope.sortAlpha = function(){
+  //   $http.get("/itemlist/alpha").success(function(response){
+  //     $scope.$applyAsync(function(){
+  //       $scope.itemlist = response;
+  //       $scope.item = "";
+  //     });
+  //   });
+  // };
+
+  // $scope.sortLoc = function(){
+  //   $http.get("/itemlist/location").success(function(response){
+  //     $scope.$applyAsync(function(){
+  //       $scope.itemlist = response;
+  //       $scope.item = "";
+  //     });
+  //   });
+  // };
+
+  // $scope.sortDate = function(){
+  //   $http.get("/itemlist/date").success(function(response){
+  //     $scope.$applyAsync(function(){
+  //       $scope.itemlist = response;
+  //       $scope.item = "";
+  //     });
+  //   });
+  // };
+
+>>>>>>> 81e1bde045f6e5989b5c64a909f8e09206529bce
 
   // function sortAlpha() {
   //   $http.get("/itemlist/alpha").success(function(response){
@@ -240,6 +271,11 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     var current_id = ($element.itemID);
     console.log(current_id); 
     $http.get("/itemlist/" + current_id).success(function(response){
+<<<<<<< HEAD
+=======
+
+      $rootScope.itemTags = response[0].tags;
+>>>>>>> 81e1bde045f6e5989b5c64a909f8e09206529bce
 
       $rootScope.itemTags = response[0].tags;
 
@@ -298,6 +334,7 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
     var current_id = ($element.itemID);
     $http.get("/itemlist/" + current_id).success(function(response){
 
+<<<<<<< HEAD
       for(i=0;i<response.length;i++){
         itemEditTags.push({'name':response[i].tags});
       }
@@ -312,6 +349,8 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
       console.log("SELECTED TAGS",$rootScope.tagsFromItem);
 
 
+=======
+>>>>>>> 81e1bde045f6e5989b5c64a909f8e09206529bce
 
       if(response[0].claimed == 0){
         response[0].claimed = false;

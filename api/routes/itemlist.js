@@ -121,6 +121,7 @@ module.exports = function(app, passport, isLoggedIn) {
 
                 //console.log(auth.user.username);
                 res.json(rows);
+
             });
     });
 
@@ -134,6 +135,7 @@ module.exports = function(app, passport, isLoggedIn) {
 
             db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_send + "'",locationID[0], function(err,result){
                 res.json(result);
+
             });
         });
     });

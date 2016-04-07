@@ -8,10 +8,12 @@ app.controller('NavBarCtrl', ['$rootScope',
 
   getTagsFromDatabase();
 
+
     $scope.toggleRight = buildToggler('right');
     $scope.onSearch = function(searchValue) {
       $scope.search = searchValue;
       $rootScope.search = $scope.search;
+
     };
 
     function buildToggler(navID) {
