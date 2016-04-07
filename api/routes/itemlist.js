@@ -9,8 +9,9 @@ db.query('USE ' + dbconfig.database);
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/itemlist", isLoggedIn, function(req,res){
 
-            db.query('SELECT * from ItemLF', function(err, rows, fields) {
-                    
+
+            db.query('SELECT *, CONVERT(tags USING utf8) as convTags from ItemLF, ItemTags where ItemLF.itemID = ItemTags.itemID;', function(err, rows, fields) {
+
                 for (i = 0; i < rows.length; i++) { 
                     if(rows[i].imagePrimColor == null){
                         rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';
@@ -18,6 +19,9 @@ module.exports = function(app, passport, isLoggedIn) {
                     else{
                         rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
                     }
+
+                    rows[i].tags = (rows[i].convTags).split("@@@");
+
                 }
 
                 //console.log(auth.user.username);
@@ -102,17 +106,21 @@ module.exports = function(app, passport, isLoggedIn) {
 
     app.get('/itemlist/:id', function(req, res) {
             var to_edit = req.params["id"];
-            db.query("SELECT * FROM ItemTags,ItemLF WHERE ItemLF.itemID = ItemTags.itemID and ItemTags.itemID = '" + to_edit + "'", function(err,result){
-                
-                for (i = 0; i < result.length; i++) { 
-                    if(result[i].imagePrimColor == null){
-                        result[i].currentImage = '../itemImages/'+ result[i].itemColor + '.jpg';
+
+            db.query("SELECT *, CONVERT(tags USING utf8) as convTags from ItemLF, ItemTags where ItemLF.itemID = ItemTags.itemID and ItemTags.itemID = '" + to_edit + "'", function(err, rows, fields) {
+
+                for (i = 0; i < rows.length; i++) { 
+                    if(rows[i].imagePrimColor == null){
+                        rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';
                     }
                     else{
-                        result[i].currentImage = '../itemImages/' + result[i].itemID + '.jpg';
+                        rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
                     }
+                    rows[i].tags = (rows[i].convTags).split("@@@");
                 }
-                res.json(result);
+
+                //console.log(auth.user.username);
+                res.json(rows);
             });
     });
 
@@ -131,23 +139,22 @@ module.exports = function(app, passport, isLoggedIn) {
     });
 
     app.put('/itemlist/:id',function(req,res){
-            var to_update = req.params["id"];
-            var tags = req.body.newTags;
-            delete req.body["currentImage"];
-            delete req.body["tag"];
-            delete req.body["newTags"];
-            db.query("UPDATE ItemLF SET ? WHERE locationID = '" + to_update + "'", req.body, function(err,result){
-                    
-                for (var i = 0; i < tags.length; i++) {
-                    var newTag = tags[i].name;
-                    db.query("INSERT INTO ItemTags (itemID,tag) VALUES (" +
-                    to_update + ",'" + newTag + "');",function(err){
+        var to_update = req.params["id"];
+        var tags = req.body.tags;
+        var fullTag = {"tags": tags.join("@@@")};
+        console.log("UPDATING ITEMS:+++++++++========++++++++++ ", req.body);
+        delete req.body["currentImage"];
+        delete req.body["tags"];
+        delete req.body["newTags"];
+        delete req.body["convTags"];
+        db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_update + "'", req.body, function(err,result){
+            console.log("UPDATING TAGS::::::::", to_update, ":::::",fullTag);    
+            db.query("UPDATE ItemTags SET ? WHERE itemID = '" + to_update + "'",  fullTag,function(err){
 
-                    });
-                }
-
-                res.json(result);
             });
+
+            res.json(result);
+        });
     });
 
 };

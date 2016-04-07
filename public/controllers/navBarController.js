@@ -2,15 +2,17 @@ var app = angular.module('navBarApp',['ngMaterial','ngFileUpload']);
 
 app.controller('NavBarCtrl', ['$rootScope',
   '$timeout', '$scope', '$http', '$location', "$mdSidenav", 'sharedProperties','sharedService',
-  '$animate','$uibModal', 'sharedServiceUploadModal','sharedPropertiesTags',
+  '$animate', 'sharedServiceUploadModal','sharedPropertiesTags',
   function($rootScope,$timeout, $scope, $http, $location, $mdSidenav, sharedProperties, 
-    sharedService,$animate,$uibModal,sharedServiceUploadModal,sharedPropertiesTags) {
+    sharedService,$animate,sharedServiceUploadModal,sharedPropertiesTags) {
 
   getTagsFromDatabase();
 
-
     $scope.toggleRight = buildToggler('right');
-    
+    $scope.onSearch = function(searchValue) {
+      $scope.search = searchValue;
+      $rootScope.search = $scope.search;
+    };
 
     function buildToggler(navID) {
       return function() {
@@ -22,6 +24,7 @@ app.controller('NavBarCtrl', ['$rootScope',
                 $rootScope.locationID = response.locationID;
                 var fullEmail = response.email;
                 $rootScope.username = "Hello "+fullEmail.split("@")[0]
+                $rootScope.ownLocation = response.locationID;
               });
             });
           });
@@ -40,6 +43,8 @@ app.controller('NavBarCtrl', ['$rootScope',
         }, wait || 10);
       }
     }
+
+    $scope.search = '';
 
     $scope.readonly = false;
     $scope.selectedItem = null;

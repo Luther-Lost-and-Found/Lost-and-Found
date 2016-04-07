@@ -1,4 +1,4 @@
-var app = angular.module('guestApp',['ui.bootstrap','ngMaterial']);
+var app = angular.module('guestApp',['ngMaterial']);
 
 app.controller('guestController', function($timeout, $scope, $http, $animate,$rootScope,sharedProperties,$mdDialog, $mdMedia) {
 

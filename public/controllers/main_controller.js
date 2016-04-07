@@ -10,8 +10,8 @@ angular.module('404App',[]);
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
     'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
 
-myApp.config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider,$urlRouterProvider) {
+myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
+    function($stateProvider,$urlRouterProvider,$httpProvider) {
 
         $stateProvider
             .state('rootIL', {
@@ -97,6 +97,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider',
             $urlRouterProvider.otherwise('/404');
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
+            
 
             return {
                 response: function(response) {
@@ -114,7 +115,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider',
             };
         }];
 
-        // $httpProvider.interceptors.push(interceptor);
+        $httpProvider.interceptors.push(interceptor);
     }
 ]);
 

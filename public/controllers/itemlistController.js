@@ -1,4 +1,4 @@
-var app = angular.module('ItemApp',['ui.bootstrap','ngMaterial']);
+var app = angular.module('ItemApp',['ngMaterial']);
 
 app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope,sharedService,sharedServiceUploadModal,$mdDialog, $mdMedia) {
 
@@ -105,7 +105,6 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   }
 
   refresh();
-
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
@@ -241,11 +240,8 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     var current_id = ($element.itemID);
     console.log(current_id); 
     $http.get("/itemlist/" + current_id).success(function(response){
-      var itemTags = [];
-      for(i=0;i<response.length;i++){
-        itemTags.push(response[i].tag);
-      }
-      $rootScope.itemTags = itemTags;
+
+      $rootScope.itemTags = response[0].tags;
 
       if(response[0].claimed == 0){
         response[0].claimed = false;
@@ -280,7 +276,8 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   };
 
   $scope.$on('handleBroadcast', function() {
-    refresh();
+    console.log("LOCATION",$rootScope.userLocation);
+    refreshAfetSend($rootScope.ownLocation);
   });
 
   $scope.isCollapsed = true;
@@ -297,13 +294,24 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
   var itemEditTags = [];
 
   $scope.editItem = function (ev,$element) {
+    
     var current_id = ($element.itemID);
     $http.get("/itemlist/" + current_id).success(function(response){
 
       for(i=0;i<response.length;i++){
-        itemEditTags.push({'name':response[i].tag});
+        itemEditTags.push({'name':response[i].tags});
       }
-      $rootScope.selectedTags = itemEditTags;
+      var tagsInProcess = []
+      var curTagsList = itemEditTags[0].name;
+      console.log("Preprocessing TAGS",curTagsList);
+      for (var i = 0; i < curTagsList.length; i++) {
+        tagsInProcess.name = curTagsList[i]
+      }
+      $rootScope.tagsFromItem = curTagsList;
+
+      console.log("SELECTED TAGS",$rootScope.tagsFromItem);
+
+
 
       if(response[0].claimed == 0){
         response[0].claimed = false;
@@ -378,7 +386,7 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
       return chip;
     }
     // Otherwise, create a new one
-    return {tagname: chip};
+    return {lowername: chip};
     // return {name: chip,type='color'};
   }
   /* Search for tags. */
@@ -458,13 +466,18 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
       return chip;
     }
     // Otherwise, create a new one
-    return {tagname: chip};
+    return {lowername: chip};
     // return {name: chip,type='color'};
   }
   /* Search for tags. */
   function querySearch(query) {
     var results = query ? $scope.allTags.filter(createFilterFor(query)) : [];
-    return results;
+    var finalResults = [];
+    for (var i = 0;i< results.length; i++) {
+      finalResults.push(results[i].lowername);
+    }
+    console.log("RESULTS++++++: ",finalResults);
+    return finalResults;
   }
   /* Create filter function for a query string */
   function createFilterFor(query) {
@@ -492,6 +505,8 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     };
 
   $scope.addItem = function(){
+
+    console.log("++++++++++++++++TESTING ADD ITEM within modeal==============");
 
     $scope.errorMsg = null;
     var fullTagsRaw = $scope.selectedTags;

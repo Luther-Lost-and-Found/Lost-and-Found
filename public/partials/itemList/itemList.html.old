@@ -107,7 +107,7 @@
 				            md-require-match="autocompleteDemoRequireMatch">
 
 				          <md-autocomplete
-				          		class="chipsdemoCustomInputs" 
+				          		class="editingTags" 
 				              md-selected-item="selectedItem"
 				              md-search-text="searchText"
 				              md-items="item in querySearch(searchText)"

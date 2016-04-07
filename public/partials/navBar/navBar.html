@@ -8,30 +8,20 @@
         </md-button>
 
         <div class="navBarSearch">
-          <md-autocomplete
-            ng-disabled="ctrl.isDisabled"
-            md-no-cache="ctrl.noCache"
-            md-selected-item="ctrl.selectedItem"
-            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-            md-search-text="ctrl.searchText"
-            md-selected-item-change="ctrl.selectedItemChange(item)"
-            md-items="item in ctrl.querySearch(ctrl.searchText)"
-            md-item-text="item.name"
-            md-min-length="0"
-            placeholder="Search ...">
 
-            <md-item-template>
-              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
-            </md-item-template>
-            
-          </md-autocomplete>
+
+          <md-input-container class="navBarSearchContainer" md-no-float flex>
+            <input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)"placeholder=" search...">
+          </md-input-container>
+
         </div>
         
         <span flex></span>
         
         <div class="md-menu-demo" ng-cloak="">
           <md-menu>
-            <md-button class="md-icon-button testclass" aria-label="menu icon" ng-click="toggleRight()" ng-hide="isOpenRight()">
+            <md-button class="md-icon-button testclass" aria-label="menu icon" ng-click="doTest();toggleRight()" ng-hide="isOpenRight()">
+
                 <md-icon md-menu-origin md-svg-icon="img/icons/sortWhite.svg"></md-icon>
             </md-button>
 

@@ -3,11 +3,24 @@ md-content.fixed {
 	width: 100%;
 	/*z-index: 1000;*/
 }
+
 div.navBarSearch {
-	color: black;
+	color: white;
 	width: 100%;
+	padding: 0px;
 	padding-right: 4%;
 	padding-left: 4%;
+}
+
+
+md-input-container.navBarSearchContainer {
+	padding: 0px;
+}
+
+input.navBarSearchTextInput {
+	background-color: white;
+	border-radius: 1.1px;
+	font-size: 16px;
 }
 
 md-toolbar.navBarClass {

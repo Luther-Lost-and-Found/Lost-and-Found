@@ -1,4 +1,4 @@
-angular.module('searchItemApp',['ui.bootstrap']).controller('searchItemController',
+angular.module('searchItemApp',[]).controller('searchItemController',
 	['$timeout', '$scope', '$http', '$animate','$uibModal','$rootScope','sharedProperties',
 	function($timeout, $scope, $http, $animate,$uibModal,$rootScope, sharedProperties) {
 
