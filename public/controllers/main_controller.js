@@ -10,10 +10,22 @@ angular.module('404App',[]);
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
     'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
 
-myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-    function($stateProvider,$urlRouterProvider, $httpProvider) {
+myApp.config(['$stateProvider', '$urlRouterProvider',
+    function($stateProvider,$urlRouterProvider) {
 
         $stateProvider
+            .state('rootIL', {
+                abstract: true,
+                //url: '/',
+                views: {
+                    '@' : {
+                        templateUrl: '../partials/tpl/main/layoutIL.html',
+                        action: 'rootILApp.rootController'
+                    },
+                    'top@rootIL' : { templateUrl: '../partials/tpl/main/tpl.top.html',},
+                    'main@rootIL' : { templateUrl: '../partials/tpl/main/tpl.main.html',},
+                },
+              })
 
         	.state('login',{
                 url: '/',
@@ -25,13 +37,14 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 }
         	})
             .state('itemlist', {
+                parent:'rootIL',
                 url:'/itemlist',
                 views: {
-                    'navBar': {
+                    'navBar@rootIL': {
                         templateUrl : '../partials/navBar/navBar.html',
                         action : 'navBarApp.NavBarCtrl'
                     },
-                    'itemlist': {
+                    'itemlist@rootIL': {
                         templateUrl : '../partials/itemList/itemList.html',
                         action : 'ItemApp.ItemCtrl'
                     }
@@ -85,8 +98,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
 
-            console.log("inside the interceptor");
-
             return {
                 response: function(response) {
                     return response; 
@@ -103,7 +114,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             };
         }];
 
-        $httpProvider.interceptors.push(interceptor);
+        // $httpProvider.interceptors.push(interceptor);
     }
 ]);
 
