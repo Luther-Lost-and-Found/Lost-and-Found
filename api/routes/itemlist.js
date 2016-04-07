@@ -83,6 +83,16 @@ module.exports = function(app, passport, isLoggedIn) {
 
     });
 
+    app.get("/itemlist/locationsAll", isLoggedIn, function(req,res){
+
+        db.query('SELECT building_name from LocationLF ORDER BY building_name ASC', function(err, rows, fields) {
+            // console.log("ALL LOCATIONS: ", rows);
+            //console.log(auth.user.username);
+            res.json(rows);
+        });
+
+    });
+
     app.delete('/itemlist/', function(req, res) {
             var to_delete = Object.keys(req.query)[0];
             db.query("DELETE FROM ItemLF WHERE itemID = '" + to_delete + "'", function(err,result){
@@ -102,9 +112,22 @@ module.exports = function(app, passport, isLoggedIn) {
                         result[i].currentImage = '../itemImages/' + result[i].itemID + '.jpg';
                     }
                 }
-                console.log(result);
                 res.json(result);
             });
+    });
+
+    app.put('/itemlist/', function(req, res) {
+        console.log(req.body.location);
+        var to_send = Object.keys(req.query)[0];
+        console.log("HELLO FROM LOCATION:",to_send);
+        db.query("SELECT locationID FROM LocationLF WHERE building_name = '" + req.body.location + "';",
+        function(error,locationID){
+            console.log("LOCATION ID IS: ", locationID);
+
+            db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_send + "'",locationID[0], function(err,result){
+                res.json(result);
+            });
+        });
     });
 
     app.put('/itemlist/:id',function(req,res){
@@ -113,13 +136,10 @@ module.exports = function(app, passport, isLoggedIn) {
             delete req.body["currentImage"];
             delete req.body["tag"];
             delete req.body["newTags"];
-            console.log(req.body);
-            console.log(tags);
-            db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_update + "'", req.body, function(err,result){
+            db.query("UPDATE ItemLF SET ? WHERE locationID = '" + to_update + "'", req.body, function(err,result){
                     
                 for (var i = 0; i < tags.length; i++) {
                     var newTag = tags[i].name;
-                    console.log(newTag);
                     db.query("INSERT INTO ItemTags (itemID,tag) VALUES (" +
                     to_update + ",'" + newTag + "');",function(err){
 
