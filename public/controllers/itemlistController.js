@@ -7,10 +7,102 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
       $scope.$applyAsync(function(){
         console.log(response);
         $scope.itemlist = response;
+        $scope.allItems = response;
         $scope.item = "";
+        $scope.buttonDisable = true;
+        $scope.locationsAll = findUnique();
       });
     });
   };
+
+  var findUnique = function(){
+    var locations = [];
+    $http.get("/itemlist/locationsAll").success(function(response){
+      $scope.$applyAsync(function(){
+        $scope.locationsAll = response;
+      });
+    });
+    return locations;
+  };
+
+  $scope.buttonDisable = true;
+
+  $scope.checked = function(args){
+    var foundToDelete = 0;
+    for (i=0;i<$scope.itemlist.length;i++){
+      if ($scope.itemlist[i].toDelete == true){
+        foundToDelete++;
+      } 
+    }
+    if(foundToDelete > 0){
+      $scope.buttonDisable = false;
+    }
+    else{
+      $scope.buttonDisable = true;
+    }
+  }
+
+  $scope.sendToLocation = function(locationID){
+    var foundToSend = 0;
+    for (i=0;i<$scope.itemlist.length;i++){
+      if ($scope.itemlist[i].toDelete == true){
+        foundToSend++;
+        var current_id = ($scope.itemlist[i].itemID);
+        $rootScope.ownLocation = ($scope.itemlist[i].locationID);
+        // $http.delete("/itemlist/?" + current_id).success(function(response){
+        // });
+        $http.put("/itemlist/?" + current_id, {'location': locationID}).success(function(response){
+        });
+      } 
+    }
+    if(foundToSend > 0){
+      // refreshAfetSend();
+
+      // console.log("HELLO: ", foundToSend);
+      // refresh();
+      refreshAfetSend($rootScope.ownLocation);
+    }
+  };
+
+  var showAllLocations = function(){
+    // $scope.itemlist = $scope.allItems;
+    $scope.itemlist = $scope.allItems;
+    if(currentSorting.isSorted == true){
+      $rootScope.$emit(currentSorting.method);
+    }
+  }
+
+  var refreshAfetSend = function(locationID){
+    $http.get("/itemlist").success(function(response){
+      $scope.$applyAsync(function(){
+        $scope.allItems = response;
+        $scope.item = "";
+        $scope.buttonDisable = true;
+        $scope.locationsAll = findUnique();
+
+        var matches = $.grep($scope.allItems, function(element) {
+          return element.locationID == locationID;
+        });
+        $scope.itemlist = matches;
+
+        if(currentSorting.isSorted == true){
+          $rootScope.$emit(currentSorting.method);
+        }
+
+      });
+    });
+  };
+
+  var showCurrentLocation = function(locationID){
+    var matches = $.grep($scope.allItems, function(element) {
+      return element.locationID == locationID;
+    });
+    $scope.itemlist = matches;    
+
+    if(currentSorting.isSorted == true){
+      $rootScope.$emit(currentSorting.method);
+    }
+  }
 
   refresh();
 
@@ -39,47 +131,101 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     //   });
   };
 
+  var currentSorting = {
+    isSorted: false,
+    method: ""
+  }
+
+  $rootScope.$on('sortAlpha', function(event, args) {
+    currentSorting.isSorted = true;
+    currentSorting.method = event.name;
+    $scope.itemlist=$($scope.itemlist).sort(sortAlpha);
+  });
+  $rootScope.$on('sortLoc', function(event, args) {
+    currentSorting.isSorted = true;
+    currentSorting.method = event.name;
+    $scope.itemlist=$($scope.itemlist).sort(sortLoc);
+  });
+  $rootScope.$on('sortDate', function(event, args) {
+    currentSorting.isSorted = true;
+    currentSorting.method = event.name;
+    $scope.itemlist=$($scope.itemlist).sort(sortDate);
+  });
+
+  $rootScope.$on('TEST', function(event, args) {
+    if(args.state == true){
+      showAllLocations();
+    }
+    else{
+      showCurrentLocation(args.location);
+    }
+  });
+
   $scope.deleteAll = function(){
     var foundToDelete = 0;
     for (i=0;i<$scope.itemlist.length;i++){
       if ($scope.itemlist[i].toDelete == true){
         foundToDelete++;
         var current_id = ($scope.itemlist[i].itemID); 
+        $rootScope.ownLocation = ($scope.itemlist[i].locationID);
         $http.delete("/itemlist/?" + current_id).success(function(response){
         });
       } 
     }
     if(foundToDelete > 0){
-      refresh();
+      refreshAfetSend($rootScope.ownLocation);
     }
   };
 
-  $scope.sortAlpha = function(){
-    $http.get("/itemlist/alpha").success(function(response){
-      $scope.$applyAsync(function(){
-        $scope.itemlist = response;
-        $scope.item = "";
-      });
-    });
+  jQuery.fn.sort = function() {  
+      return this.pushStack( [].sort.apply( this, arguments ), []);  
+  };  
+
+  function sortAlpha(a,b){  
+    if (a.title == b.title){
+      return 0;
+    }
+    return a.title> b.title ? 1 : -1;  
+  };  
+  function sortLoc(a,b){  
+    if (a.locationID == b.locationID){
+      return 0;
+    }
+    return a.locationID> b.locationID ? 1 : -1;  
+  };
+  function sortDate(a,b){  
+    if (a.time_stamp == b.time_stamp){
+      return 0;
+    }
+    return a.time_stamp> b.time_stamp ? 1 : -1;
   };
 
-  $scope.sortLoc = function(){
-    $http.get("/itemlist/location").success(function(response){
-      $scope.$applyAsync(function(){
-        $scope.itemlist = response;
-        $scope.item = "";
-      });
-    });
-  };
+  // function sortAlpha() {
+  //   $http.get("/itemlist/alpha").success(function(response){
+  //     $scope.$applyAsync(function(){
+  //       $scope.itemlist = response;
+  //       $scope.item = "";
+  //     });
+  //   });
+  // };
 
-  $scope.sortDate = function(){
-    $http.get("/itemlist/date").success(function(response){
-      $scope.$applyAsync(function(){
-        $scope.itemlist = response;
-        $scope.item = "";
-      });
-    });
-  };
+  // function sortLoc() {
+  //   $http.get("/itemlist/location").success(function(response){
+  //     $scope.$applyAsync(function(){
+  //       $scope.itemlist = response;
+  //       $scope.item = "";
+  //     });
+  //   });
+  // };
+
+  // function sortDate() {
+  //   $http.get("/itemlist/date").success(function(response){
+  //     $scope.$applyAsync(function(){
+  //       $scope.itemlist = response;
+  //       $scope.item = "";
+  //     });
+  //   });
+  // };
 
   $scope.updateItem = function($element){
     var current_id = ($element.itemID);
@@ -101,9 +247,6 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
       }
       $rootScope.itemTags = itemTags;
 
-      console.log("+++++++RESPONSE1++++++++");
-      console.log(response[0]);
-
       if(response[0].claimed == 0){
         response[0].claimed = false;
       }
@@ -117,8 +260,6 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     });
 
     $scope.parentSelected = $element;
-    console.log("PARENT SELECTED");
-    console.log($scope.parentSelected);
 
     $mdDialog.show({
       controller: ModalInstanceCtrl,
@@ -149,7 +290,6 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
   
   $rootScope.item = $scope.parentSelected;
   $scope.item = $scope.parentSelected;
-  console.log($scope.parentSelected);
   $scope.selected = {
       item: $scope.parentSelected
   };
@@ -157,18 +297,13 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
   var itemEditTags = [];
 
   $scope.editItem = function (ev,$element) {
-    var current_id = ($element.itemID); 
-    console.log(current_id);
+    var current_id = ($element.itemID);
     $http.get("/itemlist/" + current_id).success(function(response){
 
       for(i=0;i<response.length;i++){
         itemEditTags.push({'name':response[i].tag});
       }
-      console.log(itemEditTags);
       $rootScope.selectedTags = itemEditTags;
-
-      console.log("+++++++RESPONSE++++++++");
-      console.log(response[0].claimed);
 
       if(response[0].claimed == 0){
         response[0].claimed = false;
@@ -193,7 +328,6 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
   };
 
   $scope.updateItem = function(ev,$element){
-    console.log("HI UPDATEITEM");
     var current_id = $scope.parentSelected.itemID;
     var fullTagsRaw = $rootScope.selectedTags;
     $scope.parentSelected.newTags = fullTagsRaw;
@@ -283,7 +417,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   var myList = [];
 
   $scope.updateItem = function(ev,$element){
-    console.log($rootScope.item);
     var current_id = $rootScope.item.itemID;
     var fullTagsRaw = $rootScope.selectedTags;
     $rootScope.item.newTags = fullTagsRaw;
@@ -409,3 +542,71 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   };
 
 };
+
+app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdSidenav, $log) {
+  $scope.close = function () {
+    $mdSidenav('right').close()
+      .then(function () {
+        $http.get("/loggedin").success(function(response){
+          $scope.$applyAsync(function(){
+            $scope.username = response.norsekeyID;
+          });
+        });
+      });
+  };
+
+  var sections= {
+    pages: [{
+      name: 'A-Z',
+      type: 'alpha'
+    }, {
+      name: 'Location',
+      type: 'location'
+    },
+    {
+      name: 'Date',
+      type: 'date'
+    }]
+  };
+  $rootScope.sections = sections;
+
+  $rootScope.slideData = {
+    available: false,
+    value: 5
+  };
+  $scope.onSlide = function(cbState) {
+    $rootScope.slideData.value = cbState;
+    
+  };
+
+  // This controller initates response in the itemlistcontroller to change the sorting and refresh the main page
+
+  $scope.sort = function(sort){
+    if (sort == "alpha"){
+      $rootScope.$emit('sortAlpha');
+    }
+    if (sort == "location"){
+      $scope.$emit('sortLoc');
+    }
+    if (sort == "date"){
+      $rootScope.$emit('sortDate');
+    }
+  };
+  $rootScope.switchData = {
+    seeAll: true
+  };
+  $scope.message = 'ON';
+  $scope.onSwitchChange = function(cbState) {
+    var args = {
+        state: cbState,
+        location: $rootScope.locationID        
+    }
+    $rootScope.$emit("TEST",args);
+    if(cbState == true){
+      $scope.message = "ON";
+    }
+    else{
+      $scope.message = "OFF";
+    }
+  };
+});
