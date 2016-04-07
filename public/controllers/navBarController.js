@@ -8,21 +8,10 @@ app.controller('NavBarCtrl', ['$rootScope',
 
   getTagsFromDatabase();
 
-  $scope.toggleLeft = buildDelayedToggler('left');
-    $scope.toggleRight = buildToggler('right');
-    $scope.isOpenRight = function(){
-      return $mdSidenav('right').isOpen();
-    };
 
-    function buildDelayedToggler(navID) {
-      return debounce(function() {
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }, 200);
-    }
+    $scope.toggleRight = buildToggler('right');
+    
+
     function buildToggler(navID) {
       return function() {
         $mdSidenav(navID)
@@ -30,11 +19,11 @@ app.controller('NavBarCtrl', ['$rootScope',
           .then(function () {
             $http.get("/loggedin").success(function(response){
               $scope.$applyAsync(function(){
-                console.log(response.norsekeyID);
-                $scope.username = response.norsekeyID;
+                $rootScope.locationID = response.locationID;
+                var fullEmail = response.email;
+                $rootScope.username = "Hello "+fullEmail.split("@")[0]
               });
             });
-            // $log.debug("toggle " + navID + " is done");
           });
       }
     }
@@ -82,7 +71,6 @@ app.controller('NavBarCtrl', ['$rootScope',
   }
 
   $scope.logout = function(){
-    console.log("HELLLLOOOOO");
     $http.get("/signout").success(function(req,res){
       $location.url("/");
     });
@@ -97,11 +85,8 @@ app.controller('NavBarCtrl', ['$rootScope',
       var current_search = sharedProperties.getProperty().title;
 
       $http.get("/searchItem/?"+current_search).success(function(response){
-        console.log("should be good");
-        console.log(response);
         $rootScope.searchitemlist = response;
       });
-
 
       $location.url("/searchItem");
     });
@@ -150,74 +135,7 @@ app.controller('NavBarCtrl', ['$rootScope',
         return tag;
       });
     }
-
 }]);
 
-app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdSidenav, $log) {
-  $scope.close = function () {
-    $mdSidenav('right').close()
-      .then(function () {
-        $http.get("/loggedin").success(function(response){
-          $scope.$applyAsync(function(){
-            console.log(response.norsekeyID);
-            $scope.username = response.norsekeyID;
-          });
-        });
-        // $log.debug($rootScope.username);
-      });
-  };
 
-  var sections= {
-    pages: [{
-      name: 'A-Z',
-      type: 'alpha',
-      state: 'beers.ipas',
-      icon: 'fa fa-group'
-    }, {
-      name: 'Location',
-      state: 'home.toollist',
-      type: 'location',
-      icon: 'fa fa-map-marker'
-    },
-    {
-      name: 'Date',
-      state: 'home.createTool',
-      type: 'date',
-      icon: 'fa fa-plus'
-    }]
-  };
-  $rootScope.sections = sections;
-
-  $scope.sort = function(sort){
-    console.log(sort);
-    if (sort == "alpha"){
-      $scope.$emit('sortAlpha');
-    }
-    if (sort == "location"){
-      $scope.$emit('sortAlpha');
-    }
-    if (sort == "date"){
-      $scope.$emit('sortAlpha');
-    }
-  }
-
-  function alpa($scope) 
-  {
-    $scope.$emit('sortAlpha');
-  };
-  function location($scope) 
-  {
-    $scope.$emit('sortLoc');
-  };
-  function date($scope) 
-  {
-    $scope.$emit('sortDate');
-  };
-
-
-});
-
-
-//create a service between navbar controller and itemlistcontroller trigger an event,
-//$scope.editItem = function ($element) {
     
