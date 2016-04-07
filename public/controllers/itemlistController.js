@@ -13,8 +13,6 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   };
 
   refresh();
-
-
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
@@ -55,6 +53,7 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     }
   };
 
+
   // $scope.sortAlpha = function(){
   //   $http.get("/itemlist/alpha").success(function(response){
   //     $scope.$applyAsync(function(){
@@ -82,6 +81,7 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   //   });
   // };
 
+
   $scope.updateItem = function($element){
     var current_id = ($element.itemID);
     $http.put("/itemlist/" + current_id, $scope.item).success(function(response){
@@ -96,6 +96,7 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     var current_id = ($element.itemID);
     console.log(current_id); 
     $http.get("/itemlist/" + current_id).success(function(response){
+
       $rootScope.itemTags = response[0].tags;
 
       console.log("+++++++RESPONSE1++++++++");
@@ -157,7 +158,6 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
     var current_id = ($element.itemID); 
     console.log(current_id);
     $http.get("/itemlist/" + current_id).success(function(response){
-
 
 
       if(response[0].claimed == 0){

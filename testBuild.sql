@@ -180,6 +180,7 @@ INSERT INTO Tags (tag) VALUES ("Gray");
 
 CREATE TABLE ItemTags (
 	itemID INT NOT NULL,
+
 	tags BLOB NOT NULL,
 	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
 	PRIMARY KEY (itemID)
@@ -202,6 +203,7 @@ INSERT INTO ItemTags (itemID, tags) VALUES (13, "Blue@@@Black@@@Brown@@@Gray");
 INSERT INTO ItemTags (itemID, tags) VALUES (14, "White@@@Pink@@@Brown@@@Gray");
 INSERT INTO ItemTags (itemID, tags) VALUES (15, "Blue@@@Black@@@Purple@@@Green");
 INSERT INTO ItemTags (itemID, tags) VALUES (16, "Blue@@@Black@@@Purple@@@Green");
+
 
 
 

@@ -29,6 +29,7 @@ app.controller('NavBarCtrl', ['$rootScope',
     //   console.log(itemlist);
     // }
 
+
     $scope.isOpenRight = function(){
       return $mdSidenav('right').isOpen();
     };
@@ -72,6 +73,7 @@ app.controller('NavBarCtrl', ['$rootScope',
     }
 
     $scope.search = '';
+
     $scope.readonly = false;
     $scope.selectedItem = null;
     $scope.searchText = null;

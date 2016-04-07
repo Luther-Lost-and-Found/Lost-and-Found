@@ -6,6 +6,7 @@
 	</head>
 	<body>
 		<div class="container" ng-controller="ItemCtrl" ng-cloak>
+
 			<table>
 				<tbody>
 					<tr>
@@ -184,14 +185,18 @@
 			        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="5"
 			        md-row-height-gt-md="1:1.2" md-row-height="4:3"
 			        md-gutter="8px" md-gutter-gt-sm="4px" >
+
 			    <md-grid-tile ng-repeat="item in itemlist | filter:search"
+
 			                  md-rowspan="{{item.span.row}}"
 			                  md-colspan="{{item.span.col}}"
 			                  md-colspan-sm="1"
 			                  md-colspan-xs="1"
 			                  ng-class="tile.background"
 			                  >
+
 			        <img ng-src="{{item.currentImage}}" height="300" class="tilesT" ng-click="clicked($event,item)" ></img>
+
 			        <md-grid-tile-footer class="tile-footer-darker">
 			        	<md-checkbox ng-model="item.toDelete" aria-label="Checkbox">{{item.title}}</md-checkbox>
 			        	<h3>{{tile.title}}</h3>

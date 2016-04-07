@@ -9,6 +9,7 @@ db.query('USE ' + dbconfig.database);
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/itemlist", isLoggedIn, function(req,res){
 
+
             db.query('SELECT *, CONVERT(tags USING utf8) as convTags from ItemLF, ItemTags where ItemLF.itemID = ItemTags.itemID;', function(err, rows, fields) {
 
                 for (i = 0; i < rows.length; i++) { 
@@ -18,7 +19,9 @@ module.exports = function(app, passport, isLoggedIn) {
                     else{
                         rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
                     }
+
                     rows[i].tags = (rows[i].convTags).split("@@@");
+
                 }
 
                 //console.log(auth.user.username);
@@ -108,6 +111,7 @@ module.exports = function(app, passport, isLoggedIn) {
 
                 //console.log(auth.user.username);
                 res.json(rows);
+
             });
     });
 
