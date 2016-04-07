@@ -52,11 +52,32 @@
 		<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="50">
 			<md-dialog-content>
 			    <div class="md-dialog-content">
-					<pre><img class="images" ng-src="{{item.currentImage}}"></img> </pre>
-			        <label for="itemName">Item Name:</label> <p id="itemName"> {{item.title}} </p>
+					<pre><img style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}"></img> </pre>
+					<div layout-gt-sm="row">
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Title</label>
+			        		<input disabled ng-model="item.title">
+			        	</md-input-container>
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Location</label>
+			        		<input disabled ng-model="item.locationID">
+			        	</md-input-container>
+			        </div>
+		        	<div layout-gt-sm="row">
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Accepted By</label>
+			        		<input disabled ng-model="item.accepted_by">
+			        	</md-input-container>
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Claimed By</label>
+			        		<input disabled ng-model="item.claimed_by">
+			        	</md-input-container flex-gt-sm>
+			        	<md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
+			        </div>
+			        <!-- <label for="itemName">Item Name:</label> <p id="itemName"> {{item.title}} </p>
 			        <label for "located" > Current Location </label> <p id="located"> {{item.locationID}} </p>
 			        <label for="accepted">Accepted By: </label>  <p id="accepted" >{{item.accepted_by}} </p>
-			        <td><md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox></td>
+			        <td><md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox></td> -->
 			        <div layout="column" ng-cloak>
 					  <md-content class="md-padding" layout="column">
 					    <h2 class="md-title">Tags</h2>
@@ -104,24 +125,24 @@
 	            <h3 class="modal-title">Item Description</h3>
 	        </div>
 	        <div class="modal-body" style="z-index:20;">
-	        <pre><img class="images" ng-src="{{item.currentImage}}"></img> </pre>
-	        <div layout-gt-xs="row">
-	        	<md-input-container class="md-block" flex-gt-xs>
+	        <pre><img style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}"></img> </pre>
+	        <div layout-gt-sm="row">
+	        	<md-input-container class="md-block" flex-gt-sm>
 	        		<label>Title</label>
 	        		<input ng-model="item.title">
 	        	</md-input-container>
-	        	<md-input-container class="md-block" flex-gt-xs>
+	        	<!-- <md-input-container class="md-block" flex-gt-xs>
 	        		<label>Location</label>
 	        		<input ng-model="item.locationID">
 	        	</md-input-container>
 	        	<md-input-container class="md-block" flex-gt-xs>
 	        		<label>Accepted By</label>
 	        		<input ng-model="item.accepted_by">
-	        	</md-input-container>
-	        	<md-input-container class="md-block" flex-gt-xs>
+	        	</md-input-container> -->
+	        	<md-input-container class="md-block" flex-gt-sm>
 	        		<label>Claimed By</label>
 	        		<input ng-model="item.claimed_by">
-	        	</md-input-container>
+	        	</md-input-container flex-gt-sm>
 	        	<md-checkbox ng-model="item.claimed" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
 	        </div>
         <!-- <table class="table">
