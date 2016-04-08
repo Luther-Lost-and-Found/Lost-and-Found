@@ -45,6 +45,7 @@ imageSecColor VARCHAR(20),
 imageThirdColor VARCHAR(20),
 itemColor VARCHAR(10),
 FULLTEXT (title),
+FULLTEXT (imagePrimColor,itemColor),
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
 ENGINE=MyISAM;
@@ -172,6 +173,7 @@ CREATE TABLE ItemTags (
 	itemID INT NOT NULL,
 
 	tags BLOB NOT NULL,
+	FULLTEXT(tags),
 	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
 	PRIMARY KEY (itemID)
 	)

@@ -1,6 +1,6 @@
 var app = angular.module('guestApp',['ngMaterial']);
 
-app.controller('guestController', function($timeout, $scope, $http, $animate,$rootScope,sharedProperties,$mdDialog, $mdMedia) {
+app.controller('guestController', function($location,$timeout, $scope, $http, $animate,$rootScope,sharedProperties,$mdDialog, $mdMedia) {
 
 	var refresh = function(){
 		$http.get("/guest").success(function(response){
@@ -10,6 +10,11 @@ app.controller('guestController', function($timeout, $scope, $http, $animate,$ro
 			});
 		});
 	};
+
+	$scope.login = function(){
+		console.log("GOODBYE GUEST");
+		$location.url("/");
+	}
 	
 	$scope.submitGuestSearch = function(ev, $scope){
 

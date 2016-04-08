@@ -25,7 +25,7 @@ INSERT INTO AdminLF (norsekeyID,password,locationID,first_name,last_name,email)
 VALUES ("111115", "$2a$10$bc7qhIYLq7pZNAW/XWwwGeuecEW3KfYTY7UjZTF1hsNQnM8QPQpnW", 2, "Sergei", "Hanka", "jarjar@binks.edu");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (1,CURDATE(),"Bag","Blue",1,"111111");
+VALUES (1,CURDATE(),"Bag",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
 VALUES (2,CURDATE(),"Bottle",1,"111111","black");
