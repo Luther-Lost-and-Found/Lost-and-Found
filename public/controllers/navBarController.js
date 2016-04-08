@@ -2,47 +2,91 @@ var app = angular.module('navBarApp',['ngMaterial','ngFileUpload']);
 
 app.controller('NavBarCtrl', ['$rootScope',
   '$timeout', '$scope', '$http', '$location', "$mdSidenav", 'sharedProperties','sharedService',
-  '$animate','$uibModal', 'sharedServiceUploadModal','sharedPropertiesTags',
-  function($rootScope,$timeout, $scope, $http, $location, $mdSidenav, sharedProperties, 
-    sharedService,$animate,$uibModal,sharedServiceUploadModal,sharedPropertiesTags) {
+  '$animate', 'sharedServiceUploadModal','sharedPropertiesTags','$filter',
+  function($rootScope,$timeout, $scope, $http, $location, $mdSidenav, sharedProperties,
+    sharedService,$animate,sharedServiceUploadModal,sharedPropertiesTags,$filter) {
 
   getTagsFromDatabase();
 
-  $scope.onSearch = function(searchValue) {
-        $scope.search = searchValue;
-        $rootScope.search = $scope.search;
-  };
+  // var finalItems = [];
 
-    $scope.toggleLeft = buildDelayedToggler('left');
 
     $scope.toggleRight = buildToggler('right');
+    $scope.onSearch = function(searchValue) {
+      $scope.search = searchValue;
+      $rootScope.search = $scope.search;
 
-    // $scope.doTest = function() {
-    //   // document.body.insertAdjacentHTML( 'afterbegin', '<div id="myID">...</div>' );
-    //   var backdropStr = "<md-backdrop class=""md-sidenav-backdrop md-opaque ng-scope"" style=""></md-backdrop>"
-    //   var itemlist = document.querySelector("#main");
-
-    //   itemlist.innerHTML = backdropStr;
-    //   while (itemlist.firstChild) {
-    //       itemlist.appendChild(itemlist.firstChild);
-    //   }
-    //   console.log(itemlist);
-    // }
-
-
-    $scope.isOpenRight = function(){
-      return $mdSidenav('right').isOpen();
     };
+    // $scope.onSearch = function(searchValue) {
+    //   $scope.search = searchValue;
+    //   $rootScope.search = $scope.search;
+    //   var searchList = $scope.search.split(" ");
+    //   var newItems;
+      
+    //   for (var i = 0; i < searchList.length; i++) {
+    //     newItems = $filter('filter')($rootScope.allItems, searchList[i]);
+    //     for (var x = 0; x < newItems.length; x++) {
+    //       if(finalItems.length == 0){
+    //         finalItems.push({
+    //             item:newItems[x],
+    //             matches: 0
+    //           });
+    //       }
+    //       else{
+    //         console.log("NEW ITEM",newItems[x])
 
-    function buildDelayedToggler(navID) {
-      return debounce(function() {
-        $mdSidenav(navID)
-          .toggle()
-          .then(function () {
-            $log.debug("toggle " + navID + " is done");
-          });
-      }, 200);
-    }
+    //         for (var y = 0; y < finalItems.length; y++) {
+    //           console.log("EXPR: ", newItems[x]==finalItems[y].item)
+    //           console.log("INSIDE")
+    //           if(newItems[x] == finalItems[y].item){
+    //             finalItems.matches = finalItems.matches+1;
+    //           }
+    //           else{
+    //             console.log("HELLO FROM ELSE")
+    //             // finalItems.push({
+    //             //   item:newItems[x],
+    //             //   matches: 0
+    //             // });
+    //           }
+    //         }
+    //       }
+          
+    //     }
+    //   }
+
+      // for (var i = 0; i < searchList.length; i++) {
+      //   newItems = $filter('filter')($rootScope.allItems, searchList[i]);
+      //   if(finalItems.length > 0){
+      //     for (var x = 0; x < newItems.length; x++) {
+      //     // if(finalItems.length > 0){}
+      //       for (var y = 0; y < finalItems.length; y++) {
+      //         if(newItems[x] == finalItems[y].item){
+      //           finalItems[y].matches = finalItems[y].matches+1;
+      //         }
+      //         else{
+      //           finalItems.push({
+      //             item:newItems[x],
+      //             matches: 0
+      //           });
+      //         }
+      //       }
+      //     } 
+      //   }
+      //   else{
+      //     console.log("HO");
+      //     for (var x = 0; x < newItems.length; x++) {
+      //       finalItems.push({
+      //         item:newItems[x],
+      //         matches: 0
+      //       });
+      //     }
+      //   }
+      // }
+    //   console.log("FINAL ITEMS",finalItems);
+    //   $rootScope.itemlist = newItems;
+
+    // };
+
     function buildToggler(navID) {
       return function() {
         $mdSidenav(navID)
@@ -50,11 +94,12 @@ app.controller('NavBarCtrl', ['$rootScope',
           .then(function () {
             $http.get("/loggedin").success(function(response){
               $scope.$applyAsync(function(){
-                console.log(response.norsekeyID);
-                $scope.username = response.norsekeyID;
+                $rootScope.locationID = response.locationID;
+                var fullEmail = response.email;
+                $rootScope.username = "Hello "+fullEmail.split("@")[0]
+                $rootScope.ownLocation = response.locationID;
               });
             });
-            // $log.debug("toggle " + navID + " is done");
           });
       }
     }
@@ -104,7 +149,6 @@ app.controller('NavBarCtrl', ['$rootScope',
   }
 
   $scope.logout = function(){
-    console.log("HELLLLOOOOO");
     $http.get("/signout").success(function(req,res){
       $location.url("/");
     });
@@ -119,11 +163,8 @@ app.controller('NavBarCtrl', ['$rootScope',
       var current_search = sharedProperties.getProperty().title;
 
       $http.get("/searchItem/?"+current_search).success(function(response){
-        console.log("should be good");
-        console.log(response);
         $rootScope.searchitemlist = response;
       });
-
 
       $location.url("/searchItem");
     });
@@ -172,74 +213,7 @@ app.controller('NavBarCtrl', ['$rootScope',
         return tag;
       });
     }
-
 }]);
 
-app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdSidenav, $log) {
-  $scope.close = function () {
-    $mdSidenav('right').close()
-      .then(function () {
-        $http.get("/loggedin").success(function(response){
-          $scope.$applyAsync(function(){
-            console.log(response.norsekeyID);
-            $scope.username = response.norsekeyID;
-          });
-        });
-        // $log.debug($rootScope.username);
-      });
-  };
 
-  var sections= {
-    pages: [{
-      name: 'A-Z',
-      type: 'alpha',
-      state: 'beers.ipas',
-      icon: 'fa fa-group'
-    }, {
-      name: 'Location',
-      state: 'home.toollist',
-      type: 'location',
-      icon: 'fa fa-map-marker'
-    },
-    {
-      name: 'Date',
-      state: 'home.createTool',
-      type: 'date',
-      icon: 'fa fa-plus'
-    }]
-  };
-  $rootScope.sections = sections;
-
-  $scope.sort = function(sort){
-    console.log(sort);
-    if (sort == "alpha"){
-      $scope.$emit('sortAlpha');
-    }
-    if (sort == "location"){
-      $scope.$emit('sortAlpha');
-    }
-    if (sort == "date"){
-      $scope.$emit('sortAlpha');
-    }
-  }
-
-  function alpa($scope) 
-  {
-    $scope.$emit('sortAlpha');
-  };
-  function location($scope) 
-  {
-    $scope.$emit('sortLoc');
-  };
-  function date($scope) 
-  {
-    $scope.$emit('sortDate');
-  };
-
-
-});
-
-
-//create a service between navbar controller and itemlistcontroller trigger an event,
-//$scope.editItem = function ($element) {
     

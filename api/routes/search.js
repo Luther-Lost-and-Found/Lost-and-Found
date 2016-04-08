@@ -17,20 +17,6 @@ var connection = mysql.createConnection(
     }
 );
 
-var querystr = "SELECT title FROM ItemLF limit 100;";
-
-connection.connect();
-
-connection.query(querystr, function(err, rows, fields) {
-    if (err) throw err;
- 
-    for (var i in rows) {
-        console.log('title:', rows[i].title);
-    }
-});
-
-connection.end();
-
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/searchItem", isLoggedIn, function(req,res){
         console.log('hello from search route');

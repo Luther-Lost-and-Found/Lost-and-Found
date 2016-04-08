@@ -87,6 +87,16 @@ module.exports = function(app, passport, isLoggedIn) {
 
     });
 
+    app.get("/itemlist/locationsAll", isLoggedIn, function(req,res){
+
+        db.query('SELECT building_name from LocationLF ORDER BY building_name ASC', function(err, rows, fields) {
+            // console.log("ALL LOCATIONS: ", rows);
+            //console.log(auth.user.username);
+            res.json(rows);
+        });
+
+    });
+
     app.delete('/itemlist/', function(req, res) {
             var to_delete = Object.keys(req.query)[0];
             db.query("DELETE FROM ItemLF WHERE itemID = '" + to_delete + "'", function(err,result){
@@ -115,27 +125,38 @@ module.exports = function(app, passport, isLoggedIn) {
             });
     });
 
-    app.put('/itemlist/:id',function(req,res){
-            var to_update = req.params["id"];
-            var tags = req.body.newTags;
-            delete req.body["currentImage"];
-            delete req.body["tag"];
-            delete req.body["newTags"];
-            console.log(req.body);
-            console.log(tags);
-            db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_update + "'", req.body, function(err,result){
-                    
-                for (var i = 0; i < tags.length; i++) {
-                    var newTag = tags[i].name;
-                    console.log(newTag);
-                    db.query("INSERT INTO ItemTags (itemID,tag) VALUES (" +
-                    to_update + ",'" + newTag + "');",function(err){
+    app.put('/itemlist/', function(req, res) {
+        console.log(req.body.location);
+        var to_send = Object.keys(req.query)[0];
+        console.log("HELLO FROM LOCATION:",to_send);
+        db.query("SELECT locationID FROM LocationLF WHERE building_name = '" + req.body.location + "';",
+        function(error,locationID){
+            console.log("LOCATION ID IS: ", locationID);
 
-                    });
-                }
-
+            db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_send + "'",locationID[0], function(err,result){
                 res.json(result);
+
             });
+        });
+    });
+
+    app.put('/itemlist/:id',function(req,res){
+        var to_update = req.params["id"];
+        var tags = req.body.tags;
+        var fullTag = {"tags": tags.join("@@@")};
+        console.log("UPDATING ITEMS:+++++++++========++++++++++ ", req.body);
+        delete req.body["currentImage"];
+        delete req.body["tags"];
+        delete req.body["newTags"];
+        delete req.body["convTags"];
+        db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_update + "'", req.body, function(err,result){
+            console.log("UPDATING TAGS::::::::", to_update, ":::::",fullTag);    
+            db.query("UPDATE ItemTags SET ? WHERE itemID = '" + to_update + "'",  fullTag,function(err){
+
+            });
+
+            res.json(result);
+        });
     });
 
 };

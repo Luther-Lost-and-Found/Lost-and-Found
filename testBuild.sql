@@ -104,10 +104,10 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (10,CURDATE(),"Textbook",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (11,CURDATE(),"Launch",1,"111111");
+VALUES (11,CURDATE(),"Launch",2,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (12,CURDATE(),"Coat",1,"111111");
+VALUES (12,CURDATE(),"Coat",2,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
 VALUES (13,CURDATE(),"Marker",1,"111111","blue");

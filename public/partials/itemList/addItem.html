@@ -17,15 +17,15 @@
                     md-selected-item="selectedItem"
                     md-search-text="searchText"
                     md-items="item in querySearch(searchText)"
-                    md-item-text="item.name"
+                    md-item-text="item"
                     placeholder="Start Typing...">
-                  <span md-highlight-text="searchText">{{item.name}}</span>
+                  <span md-highlight-text="searchText">{{item}}</span>
 
                 </md-autocomplete>
 
                 <md-chip-template>
                   <span>
-                    <strong>{{$chip.name}}</strong>
+                    <strong>{{$chip.lowername}}</strong>
                   </span>
                 </md-chip-template>
               </md-chips>

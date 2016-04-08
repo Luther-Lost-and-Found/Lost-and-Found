@@ -57,8 +57,9 @@ hr {
 }
 
 .tile-footer-darker{
-        background-color: #093A7D;
-        opacity: 0.93;
+  background-color: #093A7D;
+  opacity: 0.93;
+}
 
 footer h5{
   padding-top: 50px;

@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="/partials/addItem/addItem.css">
   </head>
   <body ng-app="LostApp">
-    <div ui-view></div>
     <div ui-view="navBar" class="fixed"></div>
     <div ui-view="login"></div>
     <div ui-view="itemlist"></div>

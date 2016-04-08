@@ -11,21 +11,9 @@ var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
     'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-    function($stateProvider,$urlRouterProvider,$httpProvider) {
+    function($stateProvider,$urlRouterProvider, $httpProvider) {
 
         $stateProvider
-            .state('rootIL', {
-                abstract: true,
-                //url: '/',
-                views: {
-                    '@' : {
-                        templateUrl: '../partials/tpl/main/layoutIL.html',
-                        action: 'rootILApp.rootController'
-                    },
-                    'top@rootIL' : { templateUrl: '../partials/tpl/main/tpl.top.html',},
-                    'main@rootIL' : { templateUrl: '../partials/tpl/main/tpl.main.html',},
-                },
-              })
 
         	.state('login',{
                 url: '/',
@@ -37,14 +25,13 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 }
         	})
             .state('itemlist', {
-                parent:'rootIL',
                 url:'/itemlist',
                 views: {
-                    'navBar@rootIL': {
+                    'navBar': {
                         templateUrl : '../partials/navBar/navBar.html',
                         action : 'navBarApp.NavBarCtrl'
                     },
-                    'itemlist@rootIL': {
+                    'itemlist': {
                         templateUrl : '../partials/itemList/itemList.html',
                         action : 'ItemApp.ItemCtrl'
                     }
@@ -97,7 +84,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             $urlRouterProvider.otherwise('/404');
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-            
 
             return {
                 response: function(response) {

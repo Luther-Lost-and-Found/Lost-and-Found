@@ -1,4 +1,4 @@
-var app = angular.module('addItemApp', ['ui.bootstrap','ngFileUpload']);
+var app = angular.module('addItemApp', ['ngFileUpload']);
 
 app.controller('addItemCtrl', ['$timeout', '$scope', '$http', '$window',
 	'$animate','$uibModal','$rootScope','sharedServiceUploadModal',

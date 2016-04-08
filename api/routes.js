@@ -8,6 +8,7 @@ module.exports = function(app, passport) {
     require('./routes/additem.js')(app, passport, isLoggedIn)
     require('./routes/search.js')(app, passport, isLoggedIn)
     require('./routes/tagsRoute.js')(app, passport, isLoggedIn)
+    require('./routes/settings.js')(app, passport, isLoggedIn)
     require('./routes/guest.js')(app)
 
     app.get('*',isLoggedIn, function(req, res){
