@@ -605,7 +605,7 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
     }
     console.log("HEY YOU",currentSettings);
     $http.post("/saveSettings",currentSettings).success(function(response){
-      scope.settingsSaved = true;
+      $scope.settingsSaved = true;
     });
   };
 

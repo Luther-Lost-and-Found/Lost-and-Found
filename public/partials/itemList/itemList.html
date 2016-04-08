@@ -235,7 +235,7 @@
               <div>
                 <div layout-gt-xs="row" style="width: 100%;display: table;">
                   <div style="display: table-cell;">
-                    <h1 class="md-toolbar-tools">{{username}}</h1>
+                    <h1 class="md-toolbar-tools" ng-cloak>{{username}}</h1>
                   </div>
                   <div >
                     <md-button class="logout" aria-label="More" ng-click="logout()" >
@@ -286,7 +286,7 @@
                 </md-slider-container>
               </form>
               
-              <md-button ng-click="saveSettings()" class="md-primary" style="position:fixed; bottom:0;">
+              <md-button ng-click="saveSettings()" class="md-primary" ng-hide="settingsSaved" style="position:fixed; bottom:0;">
                 Save Settings
               </md-button>
             </md-content>
