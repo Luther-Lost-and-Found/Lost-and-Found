@@ -96,7 +96,7 @@ app.controller('NavBarCtrl', ['$rootScope',
               $scope.$applyAsync(function(){
                 $rootScope.locationID = response.locationID;
                 var fullEmail = response.email;
-                $rootScope.username = "Hello "+fullEmail.split("@")[0]
+                $rootScope.username = "Hello, "+fullEmail.split("@")[0]+"!"
                 $rootScope.ownLocation = response.locationID;
               });
             });
