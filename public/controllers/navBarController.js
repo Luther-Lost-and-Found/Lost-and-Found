@@ -95,8 +95,8 @@ app.controller('NavBarCtrl', ['$rootScope',
             $http.get("/loggedin").success(function(response){
               $scope.$applyAsync(function(){
                 $rootScope.locationID = response.locationID;
-                var fullEmail = response.email;
-                $rootScope.username = "Hello, "+fullEmail.split("@")[0]+"!"
+                var name = response.first_name;
+                $rootScope.username = "Hello, "+name+"!"
                 $rootScope.ownLocation = response.locationID;
               });
             });
