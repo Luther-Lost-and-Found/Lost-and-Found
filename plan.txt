@@ -27,14 +27,8 @@
 
 Need to provide a full database (that will have items for multiple administrators, locations and so on)
 Get a smaller dictionary to use as tags.
-<<<<<<< HEAD
 In the database we need to create a new table/new fields for user settings.
-
-
-----------------------------------------
 
 1. md-swipe-left
 2. pull tags from database in initial database query to populate itemlist
-=======
-In the database we need to create a new table/new fields for user settings.
->>>>>>> 92d57d5dc674d55cbf5b990ca8668ba06a9dbbb0
+3. In the database we need to create a new table/new fields for user settings.
