@@ -1,13 +1,14 @@
 var app = angular.module('ItemApp',['ngMaterial']);
 
-app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope,sharedService,sharedServiceUploadModal,$mdDialog, $mdMedia) {
+app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,$rootScope,sharedService,sharedServiceUploadModal,$mdDialog, $mdMedia) {
 
   var refresh = function(){
     $http.get("/itemlist").success(function(response){
       $scope.$applyAsync(function(){
         console.log(response);
-        $scope.itemlist = response;
-        $scope.allItems = response;
+        $rootScope.itemlist = response;
+        $rootScope.itemlist = response;
+        $rootScope.allItems = response;
         $scope.item = "";
         $scope.buttonDisable = true;
         $scope.locationsAll = findUnique();
@@ -25,12 +26,16 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
     return locations;
   };
 
+  $scope.gridChange = function(arg){
+    console.log("HI FROM GRID+++ ",args);
+  }
+
   $scope.buttonDisable = true;
 
   $scope.checked = function(args){
     var foundToDelete = 0;
-    for (i=0;i<$scope.itemlist.length;i++){
-      if ($scope.itemlist[i].toDelete == true){
+    for (i=0;i<$rootScope.itemlist.length;i++){
+      if ($rootScope.itemlist[i].toDelete == true){
         foundToDelete++;
       } 
     }
@@ -44,11 +49,11 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
 
   $scope.sendToLocation = function(locationID){
     var foundToSend = 0;
-    for (i=0;i<$scope.itemlist.length;i++){
-      if ($scope.itemlist[i].toDelete == true){
+    for (i=0;i<$rootScope.itemlist.length;i++){
+      if ($rootScope.itemlist[i].toDelete == true){
         foundToSend++;
-        var current_id = ($scope.itemlist[i].itemID);
-        $rootScope.ownLocation = ($scope.itemlist[i].locationID);
+        var current_id = ($rootScope.itemlist[i].itemID);
+        $rootScope.ownLocation = ($rootScope.itemlist[i].locationID);
         // $http.delete("/itemlist/?" + current_id).success(function(response){
         // });
         $http.put("/itemlist/?" + current_id, {'location': locationID}).success(function(response){
@@ -65,25 +70,39 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   };
 
   var showAllLocations = function(){
-    // $scope.itemlist = $scope.allItems;
-    $scope.itemlist = $scope.allItems;
+    // $rootScope.itemlist = $rootScope.allItems;
+    $rootScope.itemlist = $rootScope.allItems;
     if(currentSorting.isSorted == true){
       $rootScope.$emit(currentSorting.method);
     }
   }
 
+  $scope.logout = function(){
+    $http.get("/signout").success(function(req,res){
+      $location.url("/");
+    });
+  }
+
   var refreshAfetSend = function(locationID){
     $http.get("/itemlist").success(function(response){
       $scope.$applyAsync(function(){
-        $scope.allItems = response;
+        $rootScope.allItems = response;
         $scope.item = "";
         $scope.buttonDisable = true;
         $scope.locationsAll = findUnique();
 
-        var matches = $.grep($scope.allItems, function(element) {
-          return element.locationID == locationID;
-        });
-        $scope.itemlist = matches;
+        if(!$rootScope.switchData.seeAll){
+
+          var matches = $.grep($rootScope.allItems, function(element) {
+            return element.locationID == locationID;
+          });
+          $rootScope.itemlist = matches;
+        }
+
+        else{
+
+          $rootScope.itemlist = response;
+        }
 
         if(currentSorting.isSorted == true){
           $rootScope.$emit(currentSorting.method);
@@ -94,10 +113,10 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   };
 
   var showCurrentLocation = function(locationID){
-    var matches = $.grep($scope.allItems, function(element) {
+    var matches = $.grep($rootScope.allItems, function(element) {
       return element.locationID == locationID;
     });
-    $scope.itemlist = matches;    
+    $rootScope.itemlist = matches;    
 
     if(currentSorting.isSorted == true){
       $rootScope.$emit(currentSorting.method);
@@ -138,17 +157,17 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   $rootScope.$on('sortAlpha', function(event, args) {
     currentSorting.isSorted = true;
     currentSorting.method = event.name;
-    $scope.itemlist=$($scope.itemlist).sort(sortAlpha);
+    $rootScope.itemlist=$($rootScope.itemlist).sort(sortAlpha);
   });
   $rootScope.$on('sortLoc', function(event, args) {
     currentSorting.isSorted = true;
     currentSorting.method = event.name;
-    $scope.itemlist=$($scope.itemlist).sort(sortLoc);
+    $rootScope.itemlist=$($rootScope.itemlist).sort(sortLoc);
   });
   $rootScope.$on('sortDate', function(event, args) {
     currentSorting.isSorted = true;
     currentSorting.method = event.name;
-    $scope.itemlist=$($scope.itemlist).sort(sortDate);
+    $rootScope.itemlist=$($rootScope.itemlist).sort(sortDate);
   });
 
   $rootScope.$on('TEST', function(event, args) {
@@ -162,11 +181,11 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
 
   $scope.deleteAll = function(){
     var foundToDelete = 0;
-    for (i=0;i<$scope.itemlist.length;i++){
-      if ($scope.itemlist[i].toDelete == true){
+    for (i=0;i<$rootScope.itemlist.length;i++){
+      if ($rootScope.itemlist[i].toDelete == true){
         foundToDelete++;
-        var current_id = ($scope.itemlist[i].itemID); 
-        $rootScope.ownLocation = ($scope.itemlist[i].locationID);
+        var current_id = ($rootScope.itemlist[i].itemID); 
+        $rootScope.ownLocation = ($rootScope.itemlist[i].locationID);
         $http.delete("/itemlist/?" + current_id).success(function(response){
         });
       } 
@@ -203,7 +222,7 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   // function sortAlpha() {
   //   $http.get("/itemlist/alpha").success(function(response){
   //     $scope.$applyAsync(function(){
-  //       $scope.itemlist = response;
+  //       $rootScope.itemlist = response;
   //       $scope.item = "";
   //     });
   //   });
@@ -212,7 +231,7 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   // function sortLoc() {
   //   $http.get("/itemlist/location").success(function(response){
   //     $scope.$applyAsync(function(){
-  //       $scope.itemlist = response;
+  //       $rootScope.itemlist = response;
   //       $scope.item = "";
   //     });
   //   });
@@ -221,7 +240,7 @@ app.controller('ItemCtrl', function($timeout, $scope, $http, $animate,$rootScope
   // function sortDate() {
   //   $http.get("/itemlist/date").success(function(response){
   //     $scope.$applyAsync(function(){
-  //       $scope.itemlist = response;
+  //       $rootScope.itemlist = response;
   //       $scope.item = "";
   //     });
   //   });
@@ -570,6 +589,26 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
       });
   };
 
+  $scope.saveSettings = function () {
+    var matches = $.grep($scope.sections.pages, function(element) {
+      return element.state == true;
+    });
+
+    if (matches.length == 0){
+      matches = 'none';
+    }
+
+    var currentSettings = {
+      allItems:$scope.switchData.seeAll,
+      sorting: matches[0].type,
+      gridSize: $scope.slideData.value
+    }
+    console.log("HEY YOU",currentSettings);
+    $http.post("/saveSettings",currentSettings).success(function(response){
+      scope.settingsSaved = true;
+    });
+  };
+
   var sections= {
     pages: [{
       name: 'A-Z',
@@ -597,14 +636,39 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
   // This controller initates response in the itemlistcontroller to change the sorting and refresh the main page
 
   $scope.sort = function(sort){
+    var curSet = $rootScope.sections.pages;
     if (sort == "alpha"){
       $rootScope.$emit('sortAlpha');
+      for (var i = 0; i < curSet.length; i++) {
+        if(curSet[i].type == sort){
+          $rootScope.sections.pages[i].state = true;
+        }
+        else{
+          $rootScope.sections.pages[i].state = false;
+        }
+      }
     }
     if (sort == "location"){
       $scope.$emit('sortLoc');
+      for (var i = 0; i < curSet.length; i++) {
+        if(curSet[i].type == sort){
+          $rootScope.sections.pages[i].state = true;
+        }
+        else{
+          $rootScope.sections.pages[i].state = false;
+        }
+      }
     }
     if (sort == "date"){
       $rootScope.$emit('sortDate');
+      for (var i = 0; i < curSet.length; i++) {
+        if(curSet[i].type == sort){
+          $rootScope.sections.pages[i].state = true;
+        }
+        else{
+          $rootScope.sections.pages[i].state = false;
+        }
+      }
     }
   };
   $rootScope.switchData = {
