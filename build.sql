@@ -13,8 +13,10 @@ DROP USER senior;
 CREATE USER senior IDENTIFIED BY 'qwerty';
 GRANT ALL PRIVILEGES ON *.* TO senior;
 FLUSH PRIVILEGES;
+
 CREATE DATABASE lost;
 USE lost;
+
 CREATE TABLE LocationLF (locationID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
 phonenumber VARCHAR(20) NOT NULL,
 email VARCHAR(50) NOT NULL,
@@ -23,6 +25,9 @@ room_name VARCHAR(30) NOT NULL)
 engine=InnoDB;
 
 CREATE TABLE AdminLF (norsekeyID varchar(30) NOT NULL PRIMARY KEY, 
+allItems BOOL NOT NULL,
+sorting VARCHAR(15),
+gridSize INT NOT NULL,
 password VARCHAR(128) NOT NULL,
 locationID INT NOT NULL,
 first_name VARCHAR(20) NOT NULL, 
