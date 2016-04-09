@@ -53,6 +53,19 @@ app.controller('guestController', function($location,$timeout, $scope, $http, $a
 	};
 });
 
+app.directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown", function(e) {
+            if(e.which === 13) {
+                scope.$apply(function(){
+                    scope.$eval(attrs.ngEnter, {'e': e});
+                });
+                e.preventDefault();
+            }
+        });
+    };
+});
+
 function guestModalInstanceCtrl($http,$rootScope,$scope, sharedProperties, $mdDialog) {
 
 	

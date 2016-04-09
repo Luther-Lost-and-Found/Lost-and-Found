@@ -34,13 +34,13 @@ module.exports = function(app) {
             console.log("I RECEIVED",req.body);
             
             db.query("select distinct LocationLF.*, match (ItemLF.title) against ('"+req.body.description + "') as title_relevance, \
-    LEVENSHTEIN_RATIO (ItemTags.tags, '"+req.body.description + "') as desc_relevance, \
+    LEVENSHTEIN_RATIO (ItemTags.tags, '"+req.body.description + "') >70 as desc_relevance, \
     match (ItemLF.imagePrimColor,ItemLF.itemColor) against ('"+req.body.description + "') as color_relevance \
     from LocationLF, ItemLF, ItemTags where ItemLF.locationID = LocationLF.LocationID \
     and ItemLF.ItemID = ItemTags.ItemID  and (match (ItemLF.title) against ('"+req.body.description + "') \
-    or LEVENSHTEIN (ItemTags.tags, '"+req.body.description + "') or match (ItemLF.imagePrimColor,ItemLF.itemColor) \
+    or LEVENSHTEIN_RATIO (ItemTags.tags, '"+req.body.description + "') or match (ItemLF.imagePrimColor,ItemLF.itemColor) \
     against ( '"+req.body.description + "')) order by title_relevance desc, desc_relevance desc, color_relevance desc;", function(err, rows, fields){        
-                    
+                    console.log(rows);
                     for(var i = 0; i < rows.length; i++) {
                         delete rows[i]['title_relevance'];
                         delete rows[i]['desc_relevance'];
