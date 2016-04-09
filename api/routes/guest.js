@@ -40,8 +40,21 @@ module.exports = function(app) {
     and ItemLF.ItemID = ItemTags.ItemID  and (match (ItemLF.title) against ('"+req.body.description + "') \
     or LEVENSHTEIN (ItemTags.tags, '"+req.body.description + "') or match (ItemLF.imagePrimColor,ItemLF.itemColor) \
     against ( '"+req.body.description + "')) order by title_relevance desc, desc_relevance desc, color_relevance desc;", function(err, rows, fields){        
-                    console.log(rows);
-                    //console.log(auth.user.username);
+                    
+                    for(var i = 0; i < rows.length; i++) {
+                        delete rows[i]['title_relevance'];
+                        delete rows[i]['desc_relevance'];
+                        delete rows[i]['color_relevance'];
+                    }
+
+                    var arr = {};
+
+                    for ( var i=0, len=rows.length; i < len; i++ )
+                        arr[rows[i]['locationID']] = rows[i];
+
+                    rows = new Array();
+                    for ( var key in arr )
+                        rows.push(arr[key]);
                     res.json(rows);
             });
     });
