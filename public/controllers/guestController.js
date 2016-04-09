@@ -3,13 +3,15 @@ var app = angular.module('guestApp',['ngMaterial']);
 app.controller('guestController', function($location,$timeout, $scope, $http, $animate,$rootScope,sharedProperties,$mdDialog, $mdMedia) {
 
 	var refresh = function(){
-		$http.get("/guest").success(function(response){
-			$scope.$applyAsync(function(){
-				$scope.itemlist = response;
-				$scope.item = "";
-			});
-		});
+		$scope.description = "";
+		console.log($scope.description);
+		
+		
 	};
+
+	$rootScope.$on('REFRESH_GUEST', function(event, args) {
+	    refresh();
+	});
 
 	$scope.login = function(){
 		console.log("GOODBYE GUEST");
@@ -46,7 +48,7 @@ app.controller('guestController', function($location,$timeout, $scope, $http, $a
 	    	parent: angular.element(document.body),
 	    	targetEvent: ev,
 	    	clickOutsideToClose:true,
-	    	scope: $rootScope
+	    	scope: $rootScope.$new()
 	    })
 	};
 });
@@ -73,6 +75,7 @@ function guestModalInstanceCtrl($http,$rootScope,$scope, sharedProperties, $mdDi
 	    $mdDialog.hide();
 	};
 	$scope.cancel = function() {
+		$rootScope.$emit("REFRESH_GUEST");
 	    $mdDialog.cancel();
 	};
 	$scope.answer = function(answer) {
