@@ -3,8 +3,29 @@ var express = require('express'),
     mysql = require('mysql'),
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
+// var level = require('level-js');
     
 db.query('USE ' + dbconfig.database);
+
+// var searchIndex = require('search-index')
+
+// var dataset = {
+//     pages: ["usa"]
+//   };
+
+// searchIndex({indexPath:'reutersindex', db: level}, function(err, si) {
+//   si.add(dataset, {'batchName': 'reuters'}, function (err) {
+//     //add stuff to index
+//   });
+
+//   var q = {};
+//     q.query = {'*': ['usa']};
+
+//   si.search(q, function (err, searchResults) {
+//     //search in index
+//     console.log(searchResults);
+//   });
+// });
 
 module.exports = function(app) {
     app.post("/guest", function(req,res){

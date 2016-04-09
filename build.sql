@@ -6,9 +6,9 @@
 #============ and run the following script ============
 #======================================================
 
-DROP DATABASE lost;
+DROP DATABASE IF EXISTS lost;
 
-DROP USER senior;
+DROP USER IF EXISTS senior;
 
 CREATE USER senior IDENTIFIED BY 'qwerty';
 GRANT ALL PRIVILEGES ON *.* TO senior;
@@ -59,12 +59,13 @@ engine=MyISAM;
 
 CREATE TABLE ItemTags (
 	itemID INT NOT NULL,
-
 	tags LONGTEXT NOT NULL,
-	FULLTEXT(tags),
 	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
-	PRIMARY KEY (itemID)
+	PRIMARY KEY (itemID),
+	FULLTEXT (tags)
 	)
 engine=MyISAM;
 
 source populateTables.sql;
+
+source functions.sql;
