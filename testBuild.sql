@@ -195,7 +195,3 @@ INSERT INTO ItemTags (itemID, tags) VALUES (13, "Blue@@@Black@@@Brown@@@Gray");
 INSERT INTO ItemTags (itemID, tags) VALUES (14, "White@@@Pink@@@Brown@@@Gray");
 INSERT INTO ItemTags (itemID, tags) VALUES (15, "Blue@@@Black@@@Purple@@@Green");
 INSERT INTO ItemTags (itemID, tags) VALUES (16, "Blue@@@Black@@@Purple@@@Green");
-
-
-
-

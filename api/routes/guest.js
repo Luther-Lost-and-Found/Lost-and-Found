@@ -55,11 +55,11 @@ module.exports = function(app) {
                     rows = new Array();
                     for ( var key in arr )
                         rows.push(arr[key]);
+
                     res.json(rows);
             });
     });
 };
-
 
 // /*"select LocationLF.*, match (ItemLF.title) against ('"+req.body.title+"') as title_relevance, \
 //                     match (ItemLF.tags) against ('"+req.body.description+"') as desc_relevance \

@@ -98,7 +98,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
             
-
             return {
                 response: function(response) {
                     return response; 

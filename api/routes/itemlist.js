@@ -9,7 +9,6 @@ db.query('USE ' + dbconfig.database);
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/itemlist", isLoggedIn, function(req,res){
 
-
             db.query('SELECT *, CONVERT(tags USING utf8) as convTags from ItemLF, ItemTags where ItemLF.itemID = ItemTags.itemID;', function(err, rows, fields) {
 
                 for (i = 0; i < rows.length; i++) { 
