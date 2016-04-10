@@ -72,6 +72,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'itemlist@rootIL': {
                         templateUrl : '../partials/itemList/itemList.html',
                         action : 'ItemApp.ItemCtrl'
+                    },
+                    'footerAdmin': {
+                        templateUrl : '../partials/general/footer.html',
+                        action : 'footerApp.footerController'
                     }
                 }
             })
@@ -122,7 +126,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             $urlRouterProvider.otherwise('/404');
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-            
+
             return {
                 response: function(response) {
                     return response; 

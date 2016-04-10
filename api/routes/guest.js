@@ -31,6 +31,7 @@ module.exports = function(app) {
     app.post("/guest", function(req,res){
             console.log('i received the request');
             //info in req.body
+
             console.log("I RECEIVED",req.body);
             
             db.query("select distinct LocationLF.*, match (ItemLF.title) against ('"+req.body.description + "') as title_relevance, \

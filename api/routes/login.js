@@ -47,14 +47,14 @@ module.exports = function(app, passport) {
 
 	// route to log in
 	app.post('/login', passport.authenticate('local'), function(req, res) {
-		console.log("inside pass login");
 		res.send(req.user);
 	});
 
 	var auth = function(req, res, next){
 		console.log("AUTHENTICATION");
 		if (!req.isAuthenticated()){
-			console.log("REQUIRES AUTHENTICATION");
+
+			console.log("401 from authentication");
 			res.send(401);
 		} 
 		else next();

@@ -8,16 +8,15 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	      	password: $scope.password,
 	    })
 	    .success(function(user){
-	     	$window.location.href = "/#itemlist";
+	    	$location.url("/itemlist");
 	    })
 	    .error(function(){
 	    	$rootScope.message = 'Authentication failed.';
-	    	$window.location.href = "/";
+	    	$location.url("/");
 	    });
   	};
 
   	$scope.guestLoginSubmit = function(){
-  		console.log("going to guest");
-  		$window.location.href = "/#guestPage";
+  		$location.url("/guestPage");
   	}
 }]);

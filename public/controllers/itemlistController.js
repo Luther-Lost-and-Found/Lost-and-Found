@@ -633,5 +633,4 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   $scope.answer = function(answer) {
     $mdDialog.hide(answer);
   };
-
 };

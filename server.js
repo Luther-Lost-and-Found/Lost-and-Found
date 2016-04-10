@@ -25,7 +25,6 @@ app.locals.rootDir = __dirname;
 
 require(path.join(__dirname + '/api/routes.js'))(app, passport)
 
-
 var start = exports.start = function start(port, callback) {
     server = app.listen(port, callback);
 };
