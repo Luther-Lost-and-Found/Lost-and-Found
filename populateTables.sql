@@ -43,7 +43,7 @@ VALUES ("111115", false, "date", 5, "$2a$10$bc7qhIYLq7pZNAW/XWwwGeuecEW3KfYTY7Uj
 # ItemLF =============================================
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (1,CURDATE(),"Bag","Blue",1,"111111");
+VALUES (1,CURDATE(),"Bag",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
 VALUES (2,CURDATE(),"Bottle",1,"111111","black");

@@ -29,10 +29,6 @@ module.exports = function(app) {
     });
 };
 
+"select distinct LocationLF.*,(ItemTags.tag) against ('blue') as tag_relevance from LocationLF, ItemLF, ItemTags where ItemLF.locationID = LocationLF.LocationID and ItemLF.ItemID = ItemTags.ItemID and match (ItemTags.tag) against ( 'blue');"
 
-/*"select LocationLF.*, match (ItemLF.title) against ('"+req.body.title+"') as title_relevance, \
-                    match (ItemLF.tags) against ('"+req.body.description+"') as desc_relevance \
-                    from LocationLF, ItemLF where ItemLF.locationID = LocationLF.locationID and \
-                    (match (ItemLF.title) against ('" + req.body.title + "') or \
-                    match (ItemLF.tags) against ('" + req.body.description + "'))\
-                    order by title_relevance desc, desc_relevance desc;"*/
+
