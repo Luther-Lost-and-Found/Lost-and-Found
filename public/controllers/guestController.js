@@ -1,15 +1,22 @@
 var app = angular.module('guestApp',['ngMaterial']);
 
-app.controller('guestController', function($timeout, $scope, $http, $animate,$rootScope,sharedProperties,$mdDialog, $mdMedia) {
+app.controller('guestController', function($location,$timeout, $scope, $http, $animate,$rootScope,sharedProperties,$mdDialog, $mdMedia) {
 
 	var refresh = function(){
-		$http.get("/guest").success(function(response){
-			$scope.$applyAsync(function(){
-				$scope.itemlist = response;
-				$scope.item = "";
-			});
-		});
+		$scope.description = "";
+		console.log($scope.description);
+		
+		
 	};
+
+	$rootScope.$on('REFRESH_GUEST', function(event, args) {
+	    refresh();
+	});
+
+	$scope.login = function(){
+		console.log("GOODBYE GUEST");
+		$location.url("/");
+	}
 	
 	$scope.submitGuestSearch = function(ev, $scope){
 
@@ -41,9 +48,22 @@ app.controller('guestController', function($timeout, $scope, $http, $animate,$ro
 	    	parent: angular.element(document.body),
 	    	targetEvent: ev,
 	    	clickOutsideToClose:true,
-	    	scope: $rootScope
+	    	scope: $rootScope.$new()
 	    })
 	};
+});
+
+app.directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown", function(e) {
+            if(e.which === 13) {
+                scope.$apply(function(){
+                    scope.$eval(attrs.ngEnter, {'e': e});
+                });
+                e.preventDefault();
+            }
+        });
+    };
 });
 
 function guestModalInstanceCtrl($http,$rootScope,$scope, sharedProperties, $mdDialog) {
@@ -68,6 +88,7 @@ function guestModalInstanceCtrl($http,$rootScope,$scope, sharedProperties, $mdDi
 	    $mdDialog.hide();
 	};
 	$scope.cancel = function() {
+		$rootScope.$emit("REFRESH_GUEST");
 	    $mdDialog.cancel();
 	};
 	$scope.answer = function(answer) {

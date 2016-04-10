@@ -6,9 +6,9 @@
 #============ and run the following script ============
 #======================================================
 
-DROP DATABASE lost;
+DROP DATABASE IF EXISTS lost;
 
-DROP USER senior;
+DROP USER IF EXISTS senior;
 
 CREATE USER senior IDENTIFIED BY 'qwerty';
 GRANT ALL PRIVILEGES ON *.* TO senior;
@@ -49,6 +49,7 @@ imageSecColor VARCHAR(20),
 imageThirdColor VARCHAR(20),
 itemColor VARCHAR(10),
 FULLTEXT (title),
+FULLTEXT (imagePrimColor,itemColor),
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID),
 FOREIGN KEY (accepted_by) REFERENCES AdminLF(norsekeyID))
 ENGINE=MyISAM;
@@ -66,3 +67,5 @@ CREATE TABLE ItemTags (
 engine=MyISAM;
 
 source populateTables.sql;
+
+source functions.sql;

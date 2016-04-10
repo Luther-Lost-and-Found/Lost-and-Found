@@ -9,8 +9,7 @@ db.query('USE ' + dbconfig.database);
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/itemlist", isLoggedIn, function(req,res){
 
-
-            db.query('SELECT *, CONVERT(tags USING utf8) as convTags from ItemLF, ItemTags where ItemLF.itemID = ItemTags.itemID;', function(err, rows, fields) {
+            db.query('SELECT *, CONVERT(tags USING utf8) as convTags, building_name, room_name from ItemLF, ItemTags, LocationLF where ItemLF.itemID = ItemTags.itemID AND ItemLF.locationID = LocationLF.locationID;', function(err, rows, fields) {
 
                 for (i = 0; i < rows.length; i++) { 
                     if(rows[i].imagePrimColor == null){

@@ -2,6 +2,8 @@ var app = angular.module('ItemApp',['ngMaterial']);
 
 app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,$rootScope,sharedService,sharedServiceUploadModal,$mdDialog, $mdMedia) {
 
+  var doneRefreshInit = false;
+
   var refresh = function(){
     $http.get("/itemlist").success(function(response){
       $scope.$applyAsync(function(){
@@ -12,9 +14,70 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
         $scope.item = "";
         $scope.buttonDisable = true;
         $scope.locationsAll = findUnique();
+        doneRefreshInit = true;
       });
     });
   };
+
+  refresh();
+
+  var sections= {
+    pages: [{
+      name: 'A-Z',
+      type: 'alpha'
+    }, {
+      name: 'Location',
+      type: 'location'
+    },
+    {
+      name: 'Date',
+      type: 'date'
+    }],
+    active: ''
+
+  };
+
+  var setGlobalSettings = function() {
+    if(doneRefreshInit){
+      $http.get("/loggedin").success(function(response){
+        if(response != 0){
+          delete response['password'];
+          $rootScope.userSettings = response;
+          $rootScope.locationID = response.locationID;
+          $rootScope.ownLocation = response.locationID;
+          console.log($rootScope.userSettings);
+          
+          if(response.allItems == 1){
+            $rootScope.switchData = {
+              seeAll: true
+            };
+            $rootScope.message = 'ON';
+          }
+          else{
+            $rootScope.switchData = {
+              seeAll: false
+            };
+            $rootScope.message = 'OFF';
+            var matches = $.grep($rootScope.allItems, function(element) {
+              return element.locationID == $rootScope.locationID;
+            });
+            $rootScope.itemlist = matches;
+
+          }
+          
+          $rootScope.sections = sections;
+          $rootScope.sections.active = response.sorting;
+          $scope.sort(response.sorting);
+        }
+      });
+    }
+
+    else{
+      setTimeout(setGlobalSettings, 1);
+    }
+  };
+
+  setGlobalSettings();
 
   var findUnique = function(){
     var locations = [];
@@ -122,8 +185,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
       $rootScope.$emit(currentSorting.method);
     }
   }
-
-  refresh();
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
@@ -525,8 +586,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
 
   $scope.addItem = function(){
 
-    console.log("++++++++++++++++TESTING ADD ITEM within modeal==============");
-
     $scope.errorMsg = null;
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
@@ -576,116 +635,3 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   };
 
 };
-
-app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdSidenav, $log) {
-  $scope.close = function () {
-    $mdSidenav('right').close()
-      .then(function () {
-        $http.get("/loggedin").success(function(response){
-          $scope.$applyAsync(function(){
-            $scope.username = response.norsekeyID;
-          });
-        });
-      });
-  };
-
-  $scope.saveSettings = function () {
-    var matches = $.grep($scope.sections.pages, function(element) {
-      return element.state == true;
-    });
-
-    if (matches.length == 0){
-      matches = 'none';
-    }
-
-    var currentSettings = {
-      allItems:$scope.switchData.seeAll,
-      sorting: matches[0].type,
-      gridSize: $scope.slideData.value
-    }
-    console.log("HEY YOU",currentSettings);
-    $http.post("/saveSettings",currentSettings).success(function(response){
-      $scope.settingsSaved = true;
-    });
-  };
-
-  var sections= {
-    pages: [{
-      name: 'A-Z',
-      type: 'alpha'
-    }, {
-      name: 'Location',
-      type: 'location'
-    },
-    {
-      name: 'Date',
-      type: 'date'
-    }]
-  };
-  $rootScope.sections = sections;
-
-  $rootScope.slideData = {
-    available: false,
-    value: 5
-  };
-  $scope.onSlide = function(cbState) {
-    $rootScope.slideData.value = cbState;
-    
-  };
-
-  // This controller initates response in the itemlistcontroller to change the sorting and refresh the main page
-
-  $scope.sort = function(sort){
-    var curSet = $rootScope.sections.pages;
-    if (sort == "alpha"){
-      $rootScope.$emit('sortAlpha');
-      for (var i = 0; i < curSet.length; i++) {
-        if(curSet[i].type == sort){
-          $rootScope.sections.pages[i].state = true;
-        }
-        else{
-          $rootScope.sections.pages[i].state = false;
-        }
-      }
-    }
-    if (sort == "location"){
-      $scope.$emit('sortLoc');
-      for (var i = 0; i < curSet.length; i++) {
-        if(curSet[i].type == sort){
-          $rootScope.sections.pages[i].state = true;
-        }
-        else{
-          $rootScope.sections.pages[i].state = false;
-        }
-      }
-    }
-    if (sort == "date"){
-      $rootScope.$emit('sortDate');
-      for (var i = 0; i < curSet.length; i++) {
-        if(curSet[i].type == sort){
-          $rootScope.sections.pages[i].state = true;
-        }
-        else{
-          $rootScope.sections.pages[i].state = false;
-        }
-      }
-    }
-  };
-  $rootScope.switchData = {
-    seeAll: true
-  };
-  $scope.message = 'ON';
-  $scope.onSwitchChange = function(cbState) {
-    var args = {
-        state: cbState,
-        location: $rootScope.locationID        
-    }
-    $rootScope.$emit("TEST",args);
-    if(cbState == true){
-      $scope.message = "ON";
-    }
-    else{
-      $scope.message = "OFF";
-    }
-  };
-});

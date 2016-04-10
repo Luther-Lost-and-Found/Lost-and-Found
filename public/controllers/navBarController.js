@@ -92,13 +92,7 @@ app.controller('NavBarCtrl', ['$rootScope',
         $mdSidenav(navID)
           .toggle()
           .then(function () {
-            $http.get("/loggedin").success(function(response){
-              $scope.$applyAsync(function(){
-                $rootScope.locationID = response.locationID;
-                $rootScope.username = "Hello, "+response.first_name+"!"
-                $rootScope.ownLocation = response.locationID;
-              });
-            });
+            
           });
       }
     }

@@ -6,12 +6,37 @@ angular.module('navBarApp',[]);
 angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
 angular.module('404App',[]);
+angular.module('SideNavApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
+
+        var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
+            
+            console.log("inside interceptor");
+            return {
+                // response: function(response) {
+                //     console.log("NO ERROR NO ERROR");
+                //     return response; 
+                // },
+                responseError: function(response) { 
+                    if (response.status === 401){
+                        console.log("4010401401401");
+                        $location.url('/');
+                    }
+                    if (response.status === 404){
+                        console.log("4040404040404");
+                        $location.url('/404');
+                    } 
+                    return $q.reject(response); 
+                } 
+            };
+        }];
+
+        $httpProvider.interceptors.push(interceptor);
 
         $stateProvider
             .state('rootIL', {
@@ -68,7 +93,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 views: {
                     'navBar': {
                         templateUrl : '../partials/guest/guestNav.html',
-                        action : 'navBarApp.NavBarCtrl'
+                        action : 'guestApp.guestController'
                     },
                     'guestPage': {
                         templateUrl : '../partials/guest/guest.html',
@@ -95,27 +120,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             $urlRouterProvider.when('','/');
 
             $urlRouterProvider.otherwise('/404');
-
-        var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-            
-
-            return {
-                response: function(response) {
-                    return response; 
-                },
-                responseError: function(response) { 
-                    if (response.status === 401){
-                        $location.url('/login');
-                    }
-                    if (response.status === 404){
-                        $location.url('/404');
-                    } 
-                    return $q.reject(response); 
-                } 
-            };
-        }];
-
-        $httpProvider.interceptors.push(interceptor);
     }
 ]);
 
@@ -166,3 +170,21 @@ myApp.service('sharedPropertiesTags',function(){
         }
     };
 });
+
+// myApp.run(function($rootScope,$http) {
+
+//     var setRootScope = function(){
+//         $http.get("/getSettings").success(function(response){
+//           $scope.$applyAsync(function(){
+//             console.log(response);
+//             $rootScope.userSettings = response;
+//           });
+//         });
+//         console.log("REFRESH");       
+//     };
+
+//     setRootScope();
+
+//     console.log("MAIN CONTROLLER");
+// });
+

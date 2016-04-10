@@ -13,5 +13,16 @@ module.exports = function(app, passport, isLoggedIn) {
             console.log(req.body);
             console.log(req.user);
         });
+        res.json("success");
+    });
+
+    app.get("/getSettings", isLoggedIn, function(req,res){
+        db.query("SELECT allItems, sorting, gridSize FROM AdminLF WHERE norsekeyID="+req.user.norsekeyID+";", function(err,rows,fields){
+
+            console.log("REQUEST",req.body);
+            console.log("USER:",req.user);
+            console.log("RESULT SETTINGS:",rows);
+            res.json(rows);
+        });
     });
 };

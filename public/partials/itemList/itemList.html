@@ -1,5 +1,4 @@
 <div ng-app="LostApp" class="container" ng-controller="ItemCtrl" ng-cloak>
-	
 	<table>
 		<tbody>
 			<tr>
@@ -9,7 +8,7 @@
 			      	</md-button>
 			      	<md-menu md-offset="0 -7">
 			          <md-button aria-label="Open demo menu" class="md-fab md-fab-bottom-left" ng-hide="buttonDisable || switchData.seeAll" ng-click="$mdOpenMenu($event)">
-			            <md-icon md-menu-origin md-svg-icon="img/icons/menu.svg"></md-icon>
+			            <md-icon md-menu-origin md-svg-icon="img/icons/send.svg"></md-icon>
 			          </md-button>
 			          <md-menu-content width="4">
 			          	<md-input-container class="Locations" md-no-float flex>
@@ -20,24 +19,6 @@
 			            </md-menu-item>
 			          </md-menu-content>
 			        </md-menu>
-			      	<!-- <md-fab-speed-dial md-open="demo.isOpen" md-direction="right" class="md-fab md-fab-bottom-left" ng-class="demo.selectedMode">
-				        <md-fab-trigger>
-				          <md-button aria-label="menu" class="md-fab md-primary md-fab-bottom-left" ng-hide="buttonDisable">
-				            <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
-				          </md-button>
-				        </md-fab-trigger>
-				        <md-fab-actions>
-				          <md-button aria-label="Alphabetically" class="md-fab md-raised" ng-click="sortAlpha()">
-				            <md-icon md-svg-src="img/icons/alpha.svg" aria-label="Alpha" title="Sort Alphabetically"></md-icon>
-				          </md-button>
-				          <md-button aria-label="Location" class="md-fab md-raised" ng-click="sortLoc()">
-				            <md-icon md-svg-src="img/icons/location.svg" aria-label="Location" title="Sort by Location"></md-icon>
-				          </md-button>
-				          <md-button aria-label="Date" class="md-fab md-raised" ng-click="sortDate()">
-				            <md-icon md-svg-src="img/icons/calendar.svg" aria-label="Date" title="Sort By Date"></md-icon>
-				          </md-button>
-				        </md-fab-actions>
-				      </md-fab-speed-dial> -->
 			    </td>
 				<td>
 					<md-button class="md-fab md-warn md-fab-bottom-right" ng-hide="buttonDisable || switchData.seeAll" aria-label="Delete All" ng-click="deleteAll()">
@@ -56,28 +37,24 @@
 					<div layout-gt-sm="row">
 			        	<md-input-container class="md-block" flex-gt-sm>
 			        		<label>Title</label>
-			        		<input disabled ng-model="item.title">
+			        		<input disabled style="color:black" ng-model="item.title">
 			        	</md-input-container>
 			        	<md-input-container class="md-block" flex-gt-sm>
 			        		<label>Location</label>
-			        		<input disabled ng-model="item.locationID">
+			        		<input disabled style="color:black" ng-model="item.building_name">
 			        	</md-input-container>
 			        </div>
 		        	<div layout-gt-sm="row">
 			        	<md-input-container class="md-block" flex-gt-sm>
 			        		<label>Accepted By</label>
-			        		<input disabled ng-model="item.accepted_by">
+			        		<input disabled style="color:black" ng-model="item.accepted_by">
 			        	</md-input-container>
 			        	<md-input-container class="md-block" flex-gt-sm>
 			        		<label>Claimed By</label>
-			        		<input disabled ng-model="item.claimed_by">
+			        		<input disabled style="color:black" ng-model="item.claimed_by">
 			        	</md-input-container flex-gt-sm>
 			        	<md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
 			        </div>
-			        <!-- <label for="itemName">Item Name:</label> <p id="itemName"> {{item.title}} </p>
-			        <label for "located" > Current Location </label> <p id="located"> {{item.locationID}} </p>
-			        <label for="accepted">Accepted By: </label>  <p id="accepted" >{{item.accepted_by}} </p>
-			        <td><md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox></td> -->
 			        <div layout="column" ng-cloak>
 					  <md-content class="md-padding" layout="column">
 					    <h2 class="md-title">Tags</h2>
@@ -90,7 +67,6 @@
 					      </md-chips>
 					      
 					    </form>
-					    
 					  </md-content>
 					</div>
 				</div>
@@ -131,42 +107,12 @@
 	        		<label>Title</label>
 	        		<input ng-model="item.title">
 	        	</md-input-container>
-	        	<!-- <md-input-container class="md-block" flex-gt-xs>
-	        		<label>Location</label>
-	        		<input ng-model="item.locationID">
-	        	</md-input-container>
-	        	<md-input-container class="md-block" flex-gt-xs>
-	        		<label>Accepted By</label>
-	        		<input ng-model="item.accepted_by">
-	        	</md-input-container> -->
 	        	<md-input-container class="md-block" flex-gt-sm>
 	        		<label>Claimed By</label>
 	        		<input ng-model="item.claimed_by">
 	        	</md-input-container flex-gt-sm>
 	        	<md-checkbox ng-model="item.claimed" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
 	        </div>
-        <!-- <table class="table">
-			<thead>
-				<tr>
-					<th>Title</th>
-					<th>Location</th>				
-					<th>Accepted By</th>
-					<th>Claimed By</th>
-					<th>Claimed</th>
-					<th>&nbsp;</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><input class="form-control" ng-model="item.title"></td>
-					<td><input class="form-control" ng-model="item.locationID"></td>
-					<td><input class="form-control" ng-model="item.accepted_by"></td>
-					<td><input class="form-control" ng-model="item.claimed_by"></td>
-					<td><md-checkbox ng-model="item.claimed" ng-init="item.claimed" aria-label="Checkbox"></md-checkbox></td>
-					
-				</tr>
-			</tbody>
-		</table> -->
 			<div>
 				<md-content class="md-padding" layout="row">
 			        <form name="tagForm">
@@ -205,7 +151,7 @@
 		</md-dialog>
 	</script>
 	<md-grid-list
-	        md-cols-sm="{{10-slideData.value}}" md-cols-md="{{10-slideData.value}}" md-cols-gt-md="{{10-slideData.value}}"
+	        md-cols-sm="{{10-userSettings.gridSize}}" md-cols-md="{{10-userSettings.gridSize}}" md-cols-gt-md="{{10-userSettings.gridSize}}"
 	        md-row-height-gt-md="1:1.2" md-row-height="4:3"
 	        md-gutter="8px" md-gutter-gt-sm="4px" >
 	    <md-grid-tile ng-repeat="item in itemlist | filter:search"
@@ -221,75 +167,49 @@
 	        	<md-checkbox ng-model="item.toDelete" ng-hide="switchData.seeAll" ng-change="checked(item.claimed)" aria-label="Checkbox">{{item.title}}</md-checkbox>
 	        	<h3 ng-show="switchData.seeAll">{{item.title}}</h3>
 	        </md-grid-tile-footer>
-
-	    	<!-- <md-card>
-		   		<img class="images" ng-src="{{item.currentImage}}" ng-class="tile.background" ng-click="clicked($event,item)"></img>
-		        <md-card-actions layout-align="end center">
-		        <md-checkbox ng-model="item.toDelete" aria-label="Checkbox">{{item.title}}</md-checkbox>
-	    	</md-card> -->
 	    </md-grid-tile>
 	</md-grid-list>
 	<div layout="vertical">
-          <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="position:fixed;" md-is-locked-open="lockSideNav" md-component-id="right" flex>
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="position:fixed;" md-is-locked-open="lockSideNav" md-component-id="right" flex>
             <md-toolbar class="md-theme-light">
               <div>
                 <div layout-gt-xs="row" style="width: 100%;display: table;">
-                  <div style="display: table-cell;">
-                    <h1 class="md-toolbar-tools" ng-cloak>{{username}}</h1>
-                  </div>
-                  <div >
-                    <md-button class="logout" aria-label="More" ng-click="logout()" >
-                      <md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>
-                    </md-button>
-                  </div>
+					<div style="display: table-cell;">
+						<h1 class="md-toolbar-tools" ng-cloak>Hello, {{userSettings.first_name}}!</h1>
+					</div>
+					<div >
+						<md-button class="logout" aria-label="More" ng-click="logout()" >
+							<md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>
+						</md-button>
+					</div>
                 </div>
               </div>
               
             </md-toolbar>
             <md-content ng-controller="SideNavCtrl" layout-padding>
-              <form>
-                <md-switch aria-label="SwitchAll" ng-model="switchData.seeAll" ng-change="onSwitchChange(switchData.seeAll)">
-                  See All Items: {{ message }}
-                </md-switch>
-                <md-toolbar class="md-theme-light" style="height:10px;width:100%;">
-                  <h2 class="md-toolbar-tools">
-                    <span>Sort By</span>
-                  </h2>
-                </md-toolbar>
-                 <md-radio-group ng-model="data">
-                  <md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.type)">{{it.name}}</md-radio-button>
-                </md-radio-group>
-                <!-- <md-radio-group ng-model="cc.selectedId" >
-                  <div ng-repeat='it in sections.pages' class="row">
-                    <div flex layout='row' layout-padding layout-align="start center" >
-                      
-                      <md-radio-button flex
-                          ng-value="it.name"
-                          class="md-primary"
-                          ng-click="sort(it.type)" >
-                      </md-radio-button>
-                      <div flex style="max-width:200px;">
-                        {{it.name}}
-                      </div>
-                    </div>
-                  </div>
-                </md-radio-group> -->
-                <md-slider-container>
-                  <md-toolbar class="md-theme-light" style="height:10px;width:100%;">
-                    <h2 class="md-toolbar-tools">
-                      <span>Size</span>
-                    </h2>
-                  </md-toolbar>
-                  <md-slider flex min="1" max="10" aria-label="red" ng-model="slideData.value" ng-change="onSlide(slideData.value)">
-                  </md-slider>
-                  
-                </md-slider-container>
-              </form>
-              
-              <md-button ng-click="saveSettings()" class="md-primary" ng-hide="settingsSaved" style="position:fixed; bottom:0;">
-                Save Settings
-              </md-button>
+				<form>
+					<md-switch aria-label="SwitchAll" ng-model="switchData.seeAll" ng-change="onSwitchChange(switchData.seeAll)">See All Items: {{ message }}</md-switch>
+					<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+						<h2 class="md-toolbar-tools">
+							<span>Sort By</span>
+						</h2>
+					</md-toolbar>
+					<md-radio-group ng-model="sections.active">
+						<md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.name)">{{it.name}}</md-radio-button>
+					</md-radio-group>
+					<md-slider-container>
+						<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+							<h2 class="md-toolbar-tools">
+								<span>Size</span>
+							</h2>
+						</md-toolbar>
+						<md-slider flex min="1" max="10" aria-label="red" ng-model="userSettings.gridSize" ng-change="onSlide(userSettings.gridSize)"></md-slider>
+
+					</md-slider-container>
+				</form>
+				<md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary" style="position:fixed; bottom:0;">
+                Save Settings</md-button>
             </md-content>
-          </md-sidenav>
-        </div>
+        </md-sidenav>
+    </div>
 </div>
