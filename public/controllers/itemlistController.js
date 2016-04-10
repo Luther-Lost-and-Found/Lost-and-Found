@@ -18,6 +18,22 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   refresh();
 
+  var sections= {
+    pages: [{
+      name: 'A-Z',
+      type: 'alpha'
+    }, {
+      name: 'Location',
+      type: 'location'
+    },
+    {
+      name: 'Date',
+      type: 'date'
+    }],
+    active: ''
+
+  };
+
   var setGlobalSettings = function() {
 
     $http.get("/loggedin").success(function(response){
@@ -44,7 +60,12 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
           });
           $rootScope.itemlist = matches;
 
-          }
+        }
+
+
+        $rootScope.sections = sections;
+        $rootScope.sections.active = response.sorting;
+        $scope.sort(response.sorting);
       }
     });    
   };
@@ -631,7 +652,7 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
 
     var currentSettings = {
       allItems:$scope.switchData.seeAll,
-      sorting: matches[0].type,
+      sorting: matches[0].name,
       gridSize: $rootScope.userSettings.gridSize
     }
     console.log("HEY YOU",currentSettings);
@@ -639,21 +660,6 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
       $scope.settingsSaved = true;
     });
   };
-
-  var sections= {
-    pages: [{
-      name: 'A-Z',
-      type: 'alpha'
-    }, {
-      name: 'Location',
-      type: 'location'
-    },
-    {
-      name: 'Date',
-      type: 'date'
-    }]
-  };
-  $rootScope.sections = sections;
 
   $scope.onSlide = function(cbState) {
     console.log($rootScope)
@@ -663,12 +669,12 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
 
   // This controller initates response in the itemlistcontroller to change the sorting and refresh the main page
 
-  $scope.sort = function(sort){
+  $rootScope.sort = function(sort){
     var curSet = $rootScope.sections.pages;
-    if (sort == "alpha"){
+    if (sort == "A-Z"){
       $rootScope.$emit('sortAlpha');
       for (var i = 0; i < curSet.length; i++) {
-        if(curSet[i].type == sort){
+        if(curSet[i].name == sort){
           $rootScope.sections.pages[i].state = true;
         }
         else{
@@ -676,10 +682,10 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
         }
       }
     }
-    if (sort == "location"){
+    if (sort == "Location"){
       $scope.$emit('sortLoc');
       for (var i = 0; i < curSet.length; i++) {
-        if(curSet[i].type == sort){
+        if(curSet[i].name == sort){
           $rootScope.sections.pages[i].state = true;
         }
         else{
@@ -687,10 +693,10 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
         }
       }
     }
-    if (sort == "date"){
+    if (sort == "Date"){
       $rootScope.$emit('sortDate');
       for (var i = 0; i < curSet.length; i++) {
-        if(curSet[i].type == sort){
+        if(curSet[i].name == sort){
           $rootScope.sections.pages[i].state = true;
         }
         else{

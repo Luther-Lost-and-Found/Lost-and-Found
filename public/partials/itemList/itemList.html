@@ -256,8 +256,8 @@
                     <span>Sort By</span>
                   </h2>
                 </md-toolbar>
-                 <md-radio-group ng-model="data">
-                  <md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.type)">{{it.name}}</md-radio-button>
+                 <md-radio-group ng-model="sections.active">
+                  <md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.name)">{{it.name}}</md-radio-button>
                 </md-radio-group>
                 <!-- <md-radio-group ng-model="cc.selectedId" >
                   <div ng-repeat='it in sections.pages' class="row">
