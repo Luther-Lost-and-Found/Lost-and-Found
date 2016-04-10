@@ -166,3 +166,20 @@ myApp.service('sharedPropertiesTags',function(){
         }
     };
 });
+
+// myApp.run(function($rootScope,$http) {
+
+//     var setRootScope = function(){
+//         $http.get("/getSettings").success(function(response){
+//           $scope.$applyAsync(function(){
+//             console.log(response);
+//             $rootScope.userSettings = response;
+//           });
+//         });
+//         console.log("REFRESH");       
+//     };
+
+//     setRootScope();
+
+//     console.log("MAIN CONTROLLER");
+// });

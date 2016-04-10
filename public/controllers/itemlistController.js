@@ -16,6 +16,40 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
     });
   };
 
+  refresh();
+
+  var setGlobalSettings = function() {
+
+    $http.get("/loggedin").success(function(response){
+      if(response != 0){
+        delete response['password'];
+        $rootScope.userSettings = response;
+        $rootScope.locationID = response.locationID;
+        $rootScope.ownLocation = response.locationID;
+        console.log($rootScope.userSettings);
+        
+        if(response.allItems == 1){
+          $rootScope.switchData = {
+            seeAll: true
+          };
+          $rootScope.message = 'ON';
+        }
+        else{
+          $rootScope.switchData = {
+            seeAll: false
+          };
+          $rootScope.message = 'OFF';
+          var matches = $.grep($rootScope.allItems, function(element) {
+            return element.locationID == $rootScope.locationID;
+          });
+          $rootScope.itemlist = matches;
+        }
+      }
+    });    
+  };
+
+  setGlobalSettings();
+
   var findUnique = function(){
     var locations = [];
     $http.get("/itemlist/locationsAll").success(function(response){
@@ -122,8 +156,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
       $rootScope.$emit(currentSorting.method);
     }
   }
-
-  refresh();
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
@@ -525,8 +557,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
 
   $scope.addItem = function(){
 
-    console.log("++++++++++++++++TESTING ADD ITEM within modeal==============");
-
     $scope.errorMsg = null;
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
@@ -671,10 +701,6 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
       }
     }
   };
-  $rootScope.switchData = {
-    seeAll: true
-  };
-  $scope.message = 'ON';
   $scope.onSwitchChange = function(cbState) {
     var args = {
         state: cbState,
@@ -682,10 +708,42 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
     }
     $rootScope.$emit("TEST",args);
     if(cbState == true){
-      $scope.message = "ON";
+      $rootScope.message = "ON";
     }
     else{
-      $scope.message = "OFF";
+      $rootScope.message = "OFF";
     }
   };
 });
+
+// app.run(function($rootScope,$http,$location) {
+
+//     var auth = false;
+
+//     var setRootScope = function(){
+//       $http.get("/loggedin").success(function(response){
+
+//         console.log("RESPONSE LOGGEDIN", response);
+
+//         if(response != 0){
+
+//           $http.get("/getSettings").success(function(response){
+            
+//               console.log(response);
+//               console.log("AUTETICATED:",auth);
+//               $rootScope.userSettings = response;
+//           });
+//           auth = true;
+//         }
+//       })
+//       .error(function(response){
+//         console.log("NOT AUTH");
+//       });
+
+//       console.log("REFRESH");       
+//     };
+
+//     setRootScope();
+
+//     console.log("MAIN CONTROLLER");
+// });
