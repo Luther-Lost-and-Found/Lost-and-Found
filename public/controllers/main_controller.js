@@ -6,9 +6,10 @@ angular.module('navBarApp',[]);
 angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
 angular.module('404App',[]);
+angular.module('SideNavApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
@@ -98,7 +99,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
             
-
             return {
                 response: function(response) {
                     return response; 
