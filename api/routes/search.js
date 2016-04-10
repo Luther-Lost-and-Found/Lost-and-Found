@@ -1,10 +1,21 @@
 var express = require('express'),
     path = require('path'),
     mysql = require('mysql'),
+    SphinxClient = require ("sphinxapi"),
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
     
-db.query('USE ' + dbconfig.database);
+// db.query('USE ' + dbconfig.database);
+
+var connection = mysql.createConnection(
+    {
+        localAddress      : '127.0.0.1',
+        port      : '3306',
+        user: 'senior',
+        password: 'qwerty',
+        database: 'lost'
+    }
+);
 
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/searchItem", isLoggedIn, function(req,res){

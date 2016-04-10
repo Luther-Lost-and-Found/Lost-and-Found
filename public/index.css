@@ -1,10 +1,27 @@
-footer {
-  position: static;
-  top: 100%;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background-color: #efefef;
-  text-align: center;
+html{
+	background-color: #eee;
 }
+
+body {
+	background-color: #eee;
+	color:#444;
+}
+
+.wrapper {
+	/*margin: 0 auto;*/
+	/*position: relative;*/
+}
+
+.fixed-wrapper {
+	/*position: absolute;*/
+}
+
+.fixed{
+	/*position: fixed;*/
+	/*margin-top:0px;*/
+	/*z-index:1;*/
+	/*width: 100%;*/
+}
+/*div.main{
+	position:relative;
+}*/

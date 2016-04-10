@@ -1,20 +1,26 @@
-angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$timeout', '$scope', '$http',
-	'$animate','sharedProperties','$uibModal','$rootScope',
-	function($timeout, $scope, $http, $animate, sharedProperties, $uibModal, $rootScope) {
+var app = angular.module('guestApp',['ngMaterial']);
+
+app.controller('guestController', function($location,$timeout, $scope, $http, $animate,$rootScope,sharedProperties,$mdDialog, $mdMedia) {
 
 	var refresh = function(){
-		$http.get("/guest").success(function(response){
-			$scope.$applyAsync(function(){
-				$scope.itemlist = response;
-				$scope.item = "";
-			});
-		});
+		$scope.description = "";
+		console.log($scope.description);
 	};
+
+	$rootScope.$on('REFRESH_GUEST', function(event, args) {
+	    refresh();
+	});
+
+	$scope.login = function(){
+		console.log("GOODBYE GUEST");
+		$location.url("/");
+	}
 	
-	$scope.submitGuestSearch = function($scope){
+	$scope.submitGuestSearch = function(ev, $scope){
 
 		//var current_search = ($scope.itemTitle); 
 		var current_search = {title:$scope.itemTitle, description:$scope.description}
+		console.log(current_search);
 		$http.post("/guest", current_search).success(function(response){
 			$rootScope.$applyAsync(function(){
 				$rootScope.locationlist = response;
@@ -22,38 +28,66 @@ angular.module('guestApp',['ui.bootstrap']).controller('guestController', ['$tim
 		});
 
 		//$rootScope.item = {};
-		var modalInstance = $uibModal.open({
-	    	animation: $scope.animationsEnabled,
+
+		// var modalInstance = $uibModal.open({
+	 //    	animation: $scope.animationsEnabled,
+	 //    	templateUrl: 'guestSearchResult.html',
+	 //    	controller: 'guestModalInstanceCtrl',
+	 //    	size: 'lg',
+	 //    	resolve: {
+	 //        	items: function () {
+	 //          		return $scope.item;
+	 //        	}
+	 //    	}
+	 //    });
+	 	console.log($scope);
+	    $mdDialog.show({
+	    	controller: guestModalInstanceCtrl,
 	    	templateUrl: 'guestSearchResult.html',
-	    	controller: 'guestModalInstanceCtrl',
-	    	size: 'lg',
-	    	resolve: {
-	        	items: function () {
-	          		return $scope.item;
-	        	}
-	    	}
-	    });
+	    	parent: angular.element(document.body),
+	    	targetEvent: ev,
+	    	clickOutsideToClose:true,
+	    	scope: $rootScope.$new()
+	    })
 	};
-}]);
-
-angular.module('guestApp').controller('guestModalInstanceCtrl', function ($http,$rootScope,$scope, $uibModalInstance, items, sharedProperties) {
-
-	$scope.submitGuestSearch = function(){
-
-		var current_search = sharedProperties.getProperty().title;
-
-		$http.post("/guest",$scope.locationlist).success(function(response){
-
-			
-			//sharedService.refreshMain();
-
-			$uibModalInstance.dismiss('cancel');
-
-		});
-
-	}
-
- 	$scope.cancel = function () {
-    	$uibModalInstance.dismiss('cancel');
-  	};
 });
+
+app.directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown", function(e) {
+            if(e.which === 13) {
+                scope.$apply(function(){
+                    scope.$eval(attrs.ngEnter, {'e': e});
+                });
+                e.preventDefault();
+            }
+        });
+    };
+});
+
+function guestModalInstanceCtrl($http,$rootScope,$scope, sharedProperties, $mdDialog) {
+
+	// $scope.submitGuestSearch = function(){
+
+	// 	var current_search = sharedProperties.getProperty().title;
+	// 	console.log($rootScope);
+
+	// 	$http.post("/guest",$scope.locationlist).success(function(response){
+
+	// 		$mdDialog.cancel();
+
+	// 	});
+
+	// }
+
+  	$scope.hide = function() {
+	    $mdDialog.hide();
+	};
+	$scope.cancel = function() {
+		$rootScope.$emit("REFRESH_GUEST");
+	    $mdDialog.cancel();
+	};
+	$scope.answer = function(answer) {
+	    $mdDialog.hide(answer);
+	};
+};

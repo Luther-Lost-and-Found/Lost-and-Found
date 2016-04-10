@@ -5,16 +5,27 @@ angular.module('ItemApp',[]);
 angular.module('navBarApp',[]);
 angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
-angular.module('footerApp',[]);
 angular.module('404App',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','footerApp','404App']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-    function($stateProvider,$urlRouterProvider, $httpProvider) {
+    function($stateProvider,$urlRouterProvider,$httpProvider) {
 
         $stateProvider
+            .state('rootIL', {
+                abstract: true,
+                //url: '/',
+                views: {
+                    '@' : {
+                        templateUrl: '../partials/tpl/main/layoutIL.html',
+                        action: 'rootILApp.rootController'
+                    },
+                    'top@rootIL' : { templateUrl: '../partials/tpl/main/tpl.top.html',},
+                    'main@rootIL' : { templateUrl: '../partials/tpl/main/tpl.main.html',},
+                },
+              })
 
         	.state('login',{
                 url: '/',
@@ -26,13 +37,14 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 }
         	})
             .state('itemlist', {
+                parent:'rootIL',
                 url:'/itemlist',
                 views: {
-                    'navBar': {
+                    'navBar@rootIL': {
                         templateUrl : '../partials/navBar/navBar.html',
                         action : 'navBarApp.NavBarCtrl'
                     },
-                    'itemlist': {
+                    'itemlist@rootIL': {
                         templateUrl : '../partials/itemList/itemList.html',
                         action : 'ItemApp.ItemCtrl'
                     },
@@ -60,7 +72,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 views: {
                     'navBar': {
                         templateUrl : '../partials/guest/guestNav.html',
-                        action : 'navBarApp.NavBarCtrl'
+                        action : 'guestApp.guestController'
                     },
                     'guestPage': {
                         templateUrl : '../partials/guest/guest.html',
@@ -89,8 +101,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             $urlRouterProvider.otherwise('/404');
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-
-            console.log("inside the interceptor");
 
             return {
                 response: function(response) {
@@ -159,3 +169,20 @@ myApp.service('sharedPropertiesTags',function(){
         }
     };
 });
+
+// myApp.run(function($rootScope,$http) {
+
+//     var setRootScope = function(){
+//         $http.get("/getSettings").success(function(response){
+//           $scope.$applyAsync(function(){
+//             console.log(response);
+//             $rootScope.userSettings = response;
+//           });
+//         });
+//         console.log("REFRESH");       
+//     };
+
+//     setRootScope();
+
+//     console.log("MAIN CONTROLLER");
+// });

@@ -121,10 +121,10 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (10,CURDATE(),"Textbook",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (11,CURDATE(),"Launch",1,"111111");
+VALUES (11,CURDATE(),"Launch",2,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
-VALUES (12,CURDATE(),"Coat",1,"111111");
+VALUES (12,CURDATE(),"Coat",2,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
 VALUES (13,CURDATE(),"Marker",1,"111111","blue");
@@ -168,38 +168,44 @@ VALUES (25,CURDATE(),"hat",3,"111113");
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (26,CURDATE(),"beard",3,"111111");
 
+CREATE TABLE Tags (tag VARCHAR(15) NOT NULL PRIMARY KEY) 
+engine=MyISAM;
 
-source allTags.sql
+INSERT INTO Tags (tag) VALUES ("Red");
+INSERT INTO Tags (tag) VALUES ("Black");
+INSERT INTO Tags (tag) VALUES ("Green");
+INSERT INTO Tags (tag) VALUES ("Blue");
+INSERT INTO Tags (tag) VALUES ("Pink");
+INSERT INTO Tags (tag) VALUES ("Purple");
+INSERT INTO Tags (tag) VALUES ("Orange");
+INSERT INTO Tags (tag) VALUES ("Yellow");
+INSERT INTO Tags (tag) VALUES ("White");
+INSERT INTO Tags (tag) VALUES ("Brown");
+INSERT INTO Tags (tag) VALUES ("Gray");
 
+CREATE TABLE ItemTags (
+	itemID INT NOT NULL,
 
-INSERT INTO ItemTags (itemID, tag) VALUES (1, "Black");
+	tags BLOB NOT NULL,
+	FULLTEXT(tags),
+	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
+	PRIMARY KEY (itemID)
+	)
+engine=MyISAM;
 
-INSERT INTO ItemTags (itemID, tag) VALUES (2, "Blue");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (3, "Brown");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (4, "Gray");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (5, "Black");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (6, "Blue");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (7, "Brown");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (8, "Gray");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (9, "Black");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (10, "Blue");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (11, "Brown");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (12, "Gray");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (13, "Black");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (14, "Blue");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (15, "Brown");
-
-INSERT INTO ItemTags (itemID, tag) VALUES (16, "Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (1, "Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (2, "White@@@Pink@@@Purple@@@Green");
+INSERT INTO ItemTags (itemID, tags) VALUES (3, "Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (4, "White@@@Pink@@@Purple@@@Green");
+INSERT INTO ItemTags (itemID, tags) VALUES (5, "Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (6, "White@@@Pink@@@Purple@@@Green");
+INSERT INTO ItemTags (itemID, tags) VALUES (7, "Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (8, "White@@@Pink@@@Purple@@@Green");
+INSERT INTO ItemTags (itemID, tags) VALUES (9,"Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (10, "Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (11, "White@@@Pink@@@Purple@@@Green");
+INSERT INTO ItemTags (itemID, tags) VALUES (12, "Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (13, "Blue@@@Black@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (14, "White@@@Pink@@@Brown@@@Gray");
+INSERT INTO ItemTags (itemID, tags) VALUES (15, "Blue@@@Black@@@Purple@@@Green");
+INSERT INTO ItemTags (itemID, tags) VALUES (16, "Blue@@@Black@@@Purple@@@Green");

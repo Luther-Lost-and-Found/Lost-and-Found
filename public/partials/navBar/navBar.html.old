@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="navBarApp">
+
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+  <md-content class="fixed" ng-controller= "NavBarCtrl as ctrl" ng-cloak>
+    <md-toolbar class="navBarClass" md-scroll-shrink ng-if="true" layout="row" layout-align="space-between center">
+      <div class="md-toolbar-tools md-toolbar-top">
+        
+        <md-button class="md-icon-button" aria-label="More" ui-sref="itemlist">
+           <md-icon class="testbuttonstyle" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
+        </md-button>
+
+        <div class="navBarSearch">
+          <md-autocomplete
+            ng-disabled="ctrl.isDisabled"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
+            md-search-text="ctrl.searchText"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.name"
+            md-min-length="0"
+            placeholder="Search ...">
+
+            <md-item-template>
+              <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+            </md-item-template>
+            
+          </md-autocomplete>
+        </div>
+        
+        <span flex></span>
+        
+        <div class="md-menu-demo" ng-cloak="">
+          <md-menu>
+            <md-button class="md-icon-button testclass" aria-label="menu icon" ng-click="openMenu($mdOpenMenu, $event)">
+                <md-icon md-menu-origin md-svg-icon="img/icons/sortWhite.svg"></md-icon>
+            </md-button>
+
+            <md-menu-content class="testContent" width="2">
+              <md-menu-item>
+                <md-button ng-click="" aria-label="item1">
+                  <md-icon md-svg-icon="img/icons/exitWhite.svg" md-menu-align-target></md-icon> Item1
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        <div>
+          <md-button class="md-icon-button" aria-label="More" ng-click="logout()">
+            <md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>
+          </md-button>
+        </div>
+      
+      </div>
+    </md-toolbar>
+  </md-content>
+</div>
+</html>

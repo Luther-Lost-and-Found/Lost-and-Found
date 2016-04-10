@@ -3,7 +3,7 @@
     mysql = require('mysql'),
     multiparty = require('multiparty'),
     fs = require('fs'),
-    zerorpc = require("zerorpc"),
+    // zerorpc = require("zerorpc"),
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
     
@@ -20,13 +20,22 @@ module.exports = function(app, passport, isLoggedIn) {
                 req.body.title + "'," + currentLocation[0].locationID + ",'" + req.user.norsekeyID +
                 "','" + req.body.itemColor + "',CURDATE());",function(err,result){
 
-                    for (var i = 0; i < req.body.newTags.length; i++) {
-                        var newTag = req.body.newTags[i].lowername;
-                        db.query("INSERT INTO ItemTags (itemID,tag) VALUES (" +
-                        result.insertId + ",'" + newTag + "');",function(err){
+                    var fullTag = "";
 
-                        });
-                    }     
+                    for (var i = 0; i < req.body.newTags.length; i++) {
+                        console.log("ATTEMPTING TAG INSERT");
+                        fullTag = fullTag+req.body.newTags[i].lowername+"@@@";
+                        
+                    }
+
+                    fullTag = fullTag.substring(0, fullTag.length - 3);
+                    
+                    console.log("REQUEST IN PROCESSING:====== ",req.body," +++++ ", fullTag);
+
+                    db.query("INSERT INTO ItemTags (itemID,tags) VALUES (" +
+                    result.insertId + ",'" + fullTag + "');",function(err){
+
+                    });
                     res.json(result);
             });
         });
@@ -68,5 +77,4 @@ module.exports = function(app, passport, isLoggedIn) {
 
         });
     });
-
 };
