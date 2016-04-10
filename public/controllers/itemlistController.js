@@ -43,7 +43,8 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
             return element.locationID == $rootScope.locationID;
           });
           $rootScope.itemlist = matches;
-        }
+
+          }
       }
     });    
   };
@@ -631,7 +632,7 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
     var currentSettings = {
       allItems:$scope.switchData.seeAll,
       sorting: matches[0].type,
-      gridSize: $scope.slideData.value
+      gridSize: $rootScope.userSettings.gridSize
     }
     console.log("HEY YOU",currentSettings);
     $http.post("/saveSettings",currentSettings).success(function(response){
@@ -654,12 +655,9 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
   };
   $rootScope.sections = sections;
 
-  $rootScope.slideData = {
-    available: false,
-    value: 5
-  };
   $scope.onSlide = function(cbState) {
-    $rootScope.slideData.value = cbState;
+    console.log($rootScope)
+    $rootScope.userSettings.gridSize = cbState;
     
   };
 
