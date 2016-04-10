@@ -2,6 +2,8 @@ var app = angular.module('ItemApp',['ngMaterial']);
 
 app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,$rootScope,sharedService,sharedServiceUploadModal,$mdDialog, $mdMedia) {
 
+  var doneRefreshInit = false;
+
   var refresh = function(){
     $http.get("/itemlist").success(function(response){
       $scope.$applyAsync(function(){
@@ -12,6 +14,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
         $scope.item = "";
         $scope.buttonDisable = true;
         $scope.locationsAll = findUnique();
+        doneRefreshInit = true;
       });
     });
   };
@@ -35,39 +38,43 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   };
 
   var setGlobalSettings = function() {
+    if(doneRefreshInit){
+      $http.get("/loggedin").success(function(response){
+        if(response != 0){
+          delete response['password'];
+          $rootScope.userSettings = response;
+          $rootScope.locationID = response.locationID;
+          $rootScope.ownLocation = response.locationID;
+          console.log($rootScope.userSettings);
+          
+          if(response.allItems == 1){
+            $rootScope.switchData = {
+              seeAll: true
+            };
+            $rootScope.message = 'ON';
+          }
+          else{
+            $rootScope.switchData = {
+              seeAll: false
+            };
+            $rootScope.message = 'OFF';
+            var matches = $.grep($rootScope.allItems, function(element) {
+              return element.locationID == $rootScope.locationID;
+            });
+            $rootScope.itemlist = matches;
 
-    $http.get("/loggedin").success(function(response){
-      if(response != 0){
-        delete response['password'];
-        $rootScope.userSettings = response;
-        $rootScope.locationID = response.locationID;
-        $rootScope.ownLocation = response.locationID;
-        console.log($rootScope.userSettings);
-        
-        if(response.allItems == 1){
-          $rootScope.switchData = {
-            seeAll: true
-          };
-          $rootScope.message = 'ON';
+          }
+          
+          $rootScope.sections = sections;
+          $rootScope.sections.active = response.sorting;
+          $scope.sort(response.sorting);
         }
-        else{
-          $rootScope.switchData = {
-            seeAll: false
-          };
-          $rootScope.message = 'OFF';
-          var matches = $.grep($rootScope.allItems, function(element) {
-            return element.locationID == $rootScope.locationID;
-          });
-          $rootScope.itemlist = matches;
+      });
+    }
 
-        }
-
-
-        $rootScope.sections = sections;
-        $rootScope.sections.active = response.sorting;
-        $scope.sort(response.sorting);
-      }
-    });    
+    else{
+      setTimeout(setGlobalSettings, 1);
+    }
   };
 
   setGlobalSettings();
