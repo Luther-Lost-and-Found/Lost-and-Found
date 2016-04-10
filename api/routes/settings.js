@@ -13,6 +13,7 @@ module.exports = function(app, passport, isLoggedIn) {
             console.log(req.body);
             console.log(req.user);
         });
+        res.json("success");
     });
 
     app.get("/getSettings", isLoggedIn, function(req,res){

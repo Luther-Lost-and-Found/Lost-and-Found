@@ -28,11 +28,13 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
     }
     console.log("HEY YOU",currentSettings);
     $http.post("/saveSettings",currentSettings).success(function(response){
-      $scope.settingsSaved = true;
+      $rootScope.settingsSaved = true;
+      console.log("HELLO SETTINGS ARE SAVED");
     });
   };
 
   $scope.onSlide = function(cbState) {
+    $rootScope.settingsSaved = false;
     console.log($rootScope)
     $rootScope.userSettings.gridSize = cbState;
     
@@ -41,6 +43,7 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
   // This controller initates response in the itemlistcontroller to change the sorting and refresh the main page
 
   $rootScope.sort = function(sort){
+    $rootScope.settingsSaved = false;
     var curSet = $rootScope.sections.pages;
     if (sort == "A-Z"){
       $rootScope.$emit('sortAlpha');
@@ -77,6 +80,7 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
     }
   };
   $scope.onSwitchChange = function(cbState) {
+    $rootScope.settingsSaved = false;
     var args = {
         state: cbState,
         location: $rootScope.locationID        
