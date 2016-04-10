@@ -13,13 +13,13 @@ module.exports = function(app, passport) {
 
     app.get('*',isLoggedIn, function(req, res){
       console.log("404 happened in routes");
-      res.status(404).end();
+      // res.status(404);
     });
 
-    app.all('/loggedin', function(req, res) {
-        console.log("does this even happen???");
-        res.send(req.isAuthenticated() ? req.user : '0');
-    });
+    // app.all('/loggedin', function(req, res) {
+    //     console.log("does this even happen???");
+    //     res.send(req.isAuthenticated() ? req.user : '0');
+    // });
 
     
 };

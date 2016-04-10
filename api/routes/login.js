@@ -52,7 +52,9 @@ module.exports = function(app, passport) {
 	});
 
 	var auth = function(req, res, next){
+		console.log("AUTHENTICATION");
 		if (!req.isAuthenticated()){
+			console.log("REQUIRES AUTHENTICATION");
 			res.send(401);
 		} 
 		else next();
