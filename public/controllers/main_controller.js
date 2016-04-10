@@ -6,12 +6,37 @@ angular.module('navBarApp',[]);
 angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
 angular.module('404App',[]);
+angular.module('SideNavApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
+
+        var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
+            
+            console.log("inside interceptor");
+            return {
+                // response: function(response) {
+                //     console.log("NO ERROR NO ERROR");
+                //     return response; 
+                // },
+                responseError: function(response) { 
+                    if (response.status === 401){
+                        console.log("4010401401401");
+                        $location.url('/');
+                    }
+                    if (response.status === 404){
+                        console.log("4040404040404");
+                        $location.url('/404');
+                    } 
+                    return $q.reject(response); 
+                } 
+            };
+        }];
+
+        $httpProvider.interceptors.push(interceptor);
 
         $stateProvider
             .state('rootIL', {
@@ -182,3 +207,4 @@ myApp.service('sharedPropertiesTags',function(){
 
 //     console.log("MAIN CONTROLLER");
 // });
+

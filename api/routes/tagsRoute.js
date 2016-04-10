@@ -9,7 +9,6 @@ db.query('USE ' + dbconfig.database);
 module.exports = function(app) {
 
     app.get("/tags", function(req,res){
-        console.log("tagcontrol");
 
         db.query('Select * from Tags', req.body, function(err, rows, fields){
                 res.json(rows);

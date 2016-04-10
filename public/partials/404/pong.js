@@ -42,7 +42,6 @@ for(c=0; c<brickColumnCount; c++) {
     for(r=0; r<brickRowCount; r++) {
         if(positionsRows[c][r] != 0){
           bricks[c][r] = { x: (positionsRows[c][r]-1)*48, y: c*18, status: 1 };
-          console.log("row is " + r + " column is " + c);
         }
         else{
           bricks[c][r] = { x: 0, y: 0, status: 0 };
@@ -51,8 +50,6 @@ for(c=0; c<brickColumnCount; c++) {
 }
 
 // var bricks = [[{ x: 0, y: 0, status: 1 },{ x: 144, y: 0, status: 1 },{ x: 192, y: 0, status: 1 },{ x: 240, y: 0, status: 1 },{ x: 188, y: 0, status: 1 },{ x: 336, y: 0, status: 1 }]]
-
-console.log(bricks);
 
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
