@@ -187,7 +187,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   }
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
-    // $rootScope.item = {};
+    $rootScope.item = {};
 
     $mdDialog.show({
       controller: itemModalInstanceCtrl,
@@ -261,10 +261,10 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   };  
 
   function sortAlpha(a,b){  
-    if (a.title == b.title){
+    if (a.title.toLowerCase() == b.title.toLowerCase()){
       return 0;
     }
-    return a.title> b.title ? 1 : -1;  
+    return a.title.toLowerCase()> b.title.toLowerCase() ? 1 : -1;  
   };  
   function sortLoc(a,b){  
     if (a.locationID == b.locationID){
@@ -322,18 +322,18 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
     console.log(current_id); 
     $http.get("/itemlist/" + current_id).success(function(response){
 
+
       $rootScope.itemTags = response[0].tags;
 
-      console.log(response[0])
+      if(response[0].claimed == 0){
+        response[0].claimed = false;
+      }
+      else{
+        response[0].claimed = true;
+      }
+
       $rootScope.$applyAsync(function(){
-        $scope.item = response[0];
-        if($scope.item.claimed == 0){
-          $scope.item.claimed = false;
-        }
-        else{
-          $scope.item.claimed = true;
-        }
-        console.log("ITEM::::",$scope.item);
+        $rootScope.item = response[0];
       });
     });
 
@@ -362,7 +362,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
     $mdDialog.show({
       controller: ModalInstanceCtrl,
-      templateUrl: 'partials/itemList/ViewItemModal.html',
+      templateUrl: '/partials/itemList/ViewItemModal.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true,
@@ -401,13 +401,6 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
     var current_id = ($element.itemID);
     $http.get("/itemlist/" + current_id).success(function(response){
 
-      if(response[0].claimed == 0){
-        response[0].claimed = false;
-      }
-      else{
-        response[0].claimed = true;
-      }
-
       for(i=0;i<response.length;i++){
         itemEditTags.push({'name':response[i].tags});
       }
@@ -435,7 +428,7 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
 
     $mdDialog.show({
       controller: itemModalInstanceCtrl,
-      templateUrl: 'partials/itemList/EditItemModal.html',
+      templateUrl: '/partials/itemList/EditItemModal.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true,
@@ -661,4 +654,5 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   $scope.answer = function(answer) {
     $mdDialog.hide(answer);
   };
+
 };
