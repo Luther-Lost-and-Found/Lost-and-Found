@@ -528,6 +528,8 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
 
   var myList = [];
 
+  $scope.errorMessage = "";
+
   var COLORS = [{name: 'Red', colors: [
         {hex: 'F44336' },
         {hex: 'B71C1C' },
@@ -697,9 +699,10 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
         $scope.upload(file)
       }
       else{
+        $scope.imageStatus = null;
         $scope.addItem();
       }
-      $mdDialog.cancel();
+      // $mdDialog.cancel();
     };
 
   $scope.addItem = function(){
@@ -708,11 +711,18 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
     $scope.item.itemColor = itemColor;
-    $http.post("/additem",$scope.item).success(function(response){
 
-      sharedService.refreshMain();
-      $mdDialog.cancel();
-    });
+    console.log($scope.item.itemColor);
+
+    if($scope.item.itemColor == '' & $scope.imageStatus == null){
+      $scope.errorMessage = "Select color or image";
+    }
+    if($scope.item.itemColor !=''){
+      $http.post("/additem",$scope.item).success(function(response){
+        sharedService.refreshMain();
+        $mdDialog.cancel();
+      });
+    }
   };
 
   $scope.upload = function(image) {
