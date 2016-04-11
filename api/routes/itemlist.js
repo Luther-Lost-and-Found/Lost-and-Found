@@ -11,6 +11,7 @@ module.exports = function(app, passport, isLoggedIn) {
 
             db.query('SELECT *, CONVERT(tags USING utf8) as convTags, building_name, room_name from ItemLF, ItemTags, LocationLF where ItemLF.itemID = ItemTags.itemID AND ItemLF.locationID = LocationLF.locationID;', function(err, rows, fields) {
 
+
                 for (i = 0; i < rows.length; i++) { 
                     if(rows[i].imagePrimColor == null){
                         rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';

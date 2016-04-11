@@ -111,7 +111,6 @@ app.controller('NavBarCtrl', ['$rootScope',
     }
 
     $scope.search = '';
-
     $scope.readonly = false;
     $scope.selectedItem = null;
     $scope.searchText = null;
@@ -207,6 +206,3 @@ app.controller('NavBarCtrl', ['$rootScope',
       });
     }
 }]);
-
-
-    

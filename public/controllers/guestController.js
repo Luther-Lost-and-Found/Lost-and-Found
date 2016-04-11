@@ -5,8 +5,6 @@ app.controller('guestController', function($location,$timeout, $scope, $http, $a
 	var refresh = function(){
 		$scope.description = "";
 		console.log($scope.description);
-		
-		
 	};
 
 	$rootScope.$on('REFRESH_GUEST', function(event, args) {
@@ -30,6 +28,7 @@ app.controller('guestController', function($location,$timeout, $scope, $http, $a
 		});
 
 		//$rootScope.item = {};
+
 		// var modalInstance = $uibModal.open({
 	 //    	animation: $scope.animationsEnabled,
 	 //    	templateUrl: 'guestSearchResult.html',
@@ -68,10 +67,7 @@ app.directive('ngEnter', function() {
 
 function guestModalInstanceCtrl($http,$rootScope,$scope, sharedProperties, $mdDialog) {
 
-	
-
 	// $scope.submitGuestSearch = function(){
-
 
 	// 	var current_search = sharedProperties.getProperty().title;
 	// 	console.log($rootScope);

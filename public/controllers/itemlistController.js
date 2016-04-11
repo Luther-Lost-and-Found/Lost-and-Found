@@ -264,10 +264,10 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   };  
 
   function sortAlpha(a,b){  
-    if (a.title == b.title){
+    if (a.title.toLowerCase() == b.title.toLowerCase()){
       return 0;
     }
-    return a.title> b.title ? 1 : -1;  
+    return a.title.toLowerCase()> b.title.toLowerCase() ? 1 : -1;  
   };  
   function sortLoc(a,b){  
     if (a.locationID == b.locationID){
@@ -340,11 +340,32 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
       });
     });
 
+    function filterByID(obj) {
+      if (obj.itemID == current_id) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    var matches = $rootScope.allItems.filter(filterByID);
+
+    if(matches[0].claimed  == 0){
+        matches[0].claimed = false;
+    }
+    else{
+      matches[0].claimed = true;
+    }
+
+    $rootScope.item = matches;
+
+    console.log("FINAL",$rootScope.item)
+
     $scope.parentSelected = $element;
 
     $mdDialog.show({
       controller: ModalInstanceCtrl,
-      templateUrl: 'myModalContent.html',
+      templateUrl: '/partials/itemList/ViewItemModal.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true,
@@ -410,7 +431,7 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
 
     $mdDialog.show({
       controller: itemModalInstanceCtrl,
-      templateUrl: 'myModalContentEdit.html',
+      templateUrl: '/partials/itemList/EditItemModal.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true,
@@ -597,9 +618,11 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
    })();
 
    $scope.chosenColor = "#093A7D"
+   var itemColor = "";
 
   $scope.colorClicked = function(color) {
     $scope.chosenColor = color.color;
+    itemColor = color.color;
     console.log(color);
   };
 
@@ -688,6 +711,7 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     $scope.errorMsg = null;
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
+    $scope.item.itemColor = itemColor;
     $http.post("/additem",$scope.item).success(function(response){
 
       sharedService.refreshMain();

@@ -19,11 +19,30 @@ var connection = mysql.createConnection(
 
 module.exports = function(app, passport, isLoggedIn) {
     app.get("/searchItem", isLoggedIn, function(req,res){
-        console.log('hello from search route');
         var to_search = Object.keys(req.query)[0];
-        db.query("SELECT * from ItemLF WHERE Concat(title,'',tags) like '%" + to_search + "%'", function(err, result) {
-                res.json(result);
-        });
+
+        db.query("select distinct ItemLF.*, \
+                match (ItemLF.title) against ('"+to_search + "') as title_relevance, \
+                match (ItemTags.tag) against ('"+to_search +"') as desc_relevance, \
+                match (ItemLF.imagePrimColor,ItemLF.itemColor) against ('"+to_search + "') as color_relevance \
+                from LocationLF, ItemLF, ItemTags where ItemLF.locationID = LocationLF.LocationID \
+                and ItemLF.ItemID = ItemTags.ItemID and \
+                (match (ItemLF.title) against ('"+to_search+"') or match (ItemTags.tag) against ( '"+to_search+"') \
+                or match (ItemLF.imagePrimColor,ItemLF.itemColor) against ( '"+to_search+"')) \
+                order by title_relevance desc, desc_relevance desc, color_relevance desc;", function(err, rows, fields){  
+
+                    for (i = 0; i < rows.length; i++) { 
+                        if(rows[i].imagePrimColor == null){
+                            rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';
+                        }
+                        else{
+                            rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
+                        }
+                    }      
+                    console.log(rows);
+                    //console.log(auth.user.username);
+                    res.json(rows);
+            });
 
     });
 };

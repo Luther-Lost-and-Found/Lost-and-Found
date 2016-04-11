@@ -31,6 +31,7 @@ module.exports = function(app) {
     app.post("/guest", function(req,res){
             console.log('i received the request');
             //info in req.body
+
             console.log("I RECEIVED",req.body);
             
             db.query("select distinct LocationLF.*, match (ItemLF.title) against ('"+req.body.description + "') as title_relevance, \
@@ -55,12 +56,11 @@ module.exports = function(app) {
                     rows = new Array();
                     for ( var key in arr )
                         rows.push(arr[key]);
+
                     res.json(rows);
             });
     });
 };
-
-"select distinct LocationLF.*,(ItemTags.tag) against ('blue') as tag_relevance from LocationLF, ItemLF, ItemTags where ItemLF.locationID = LocationLF.LocationID and ItemLF.ItemID = ItemTags.ItemID and match (ItemTags.tag) against ( 'blue');"
 
 // /*"select LocationLF.*, match (ItemLF.title) against ('"+req.body.title+"') as title_relevance, \
 //                     match (ItemLF.tags) against ('"+req.body.description+"') as desc_relevance \

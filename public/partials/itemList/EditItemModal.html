@@ -1,0 +1,54 @@
+
+		<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="50">
+			<div class="modal-header">
+	            <h3 class="modal-title">Item Description</h3>
+	        </div>
+	        <div class="modal-body" style="z-index:20;">
+	        <pre><img ng-style="{background: item.itemColor}" style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}"></img> </pre>
+	        <div layout-gt-sm="row">
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        		<label>Title</label>
+	        		<input ng-model="item.title">
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        		<label>Claimed By</label>
+	        		<input ng-model="item.claimed_by">
+	        	</md-input-container flex-gt-sm>
+	        	<md-checkbox ng-model="item.claimed" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
+	        </div>
+			<div>
+				<md-content class="md-padding" layout="row">
+			        <form name="tagForm">
+				      <md-chips ng-model="tagsFromItem" name="presentTags">
+				      	<md-autocomplete
+				                md-selected-item="selectedItem"
+				                md-search-text="searchText"
+				                md-items="item in querySearch(searchText)"
+				                md-item-text="item"
+				                placeholder="+ tags">
+				            <span md-highlight-text="searchText">{{item}}</span>
+				        </md-autocomplete>
+				        <md-chip-template>
+				          <strong>{{$chip}}</strong>
+				        </md-chip-template>
+				      </md-chips>
+				    </form>
+			      </md-content>
+			</div>
+	        <div>
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<md-button aria-label="Update" ng-click="updateItem($event,item)" md-autofocus>Update
+						      	</md-button>
+						    </td>
+						    <td>
+								<md-button aria-label="Remove" ng-click="cancel()" md-autofocus>Cancel
+						      	</md-button>
+						    </td>
+					    </tr>
+				    </tbody>
+			    </table>
+			</div>
+		</md-dialog>

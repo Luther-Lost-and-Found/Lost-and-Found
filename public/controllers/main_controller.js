@@ -72,6 +72,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'itemlist@rootIL': {
                         templateUrl : '../partials/itemList/itemList.html',
                         action : 'ItemApp.ItemCtrl'
+                    },
+                    'footerAdmin': {
+                        templateUrl : '../partials/general/footer.html',
+                        action : 'footerApp.footerController'
                     }
                 }
             })
@@ -120,6 +124,26 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
             $urlRouterProvider.when('','/');
 
             $urlRouterProvider.otherwise('/404');
+
+        var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
+
+            return {
+                response: function(response) {
+                    return response; 
+                },
+                responseError: function(response) { 
+                    if (response.status === 401){
+                        $location.url('/login');
+                    }
+                    if (response.status === 404){
+                        $location.url('/404');
+                    } 
+                    return $q.reject(response); 
+                } 
+            };
+        }];
+
+        $httpProvider.interceptors.push(interceptor);
     }
 ]);
 

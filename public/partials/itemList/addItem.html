@@ -16,20 +16,30 @@
         <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="400">
         <div ng-cloak="">
           <md-content layout-padding="">
-            <md-grid-list md-cols="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter-gt-md="1px" md-gutter-md="1px" md-gutter="1px">
-              <md-grid-tile ng-repeat="tile in colorTiles" ng-style="{'background': tile.color}" ng-click="colorClicked(tile)">
+            <md-grid-list md-cols="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="1px">
+              <md-grid-tile ng-repeat="tile in colorTiles" ng-style="{'background': tile.color}" ng-model="item.itemColor" ng-click="colorClicked(tile)">
               </md-grid-tile>
             </md-grid-list>
           </md-content>
         </div>
       </td>
       <td class="addItemForm">
+        <div layout-gt-xs="row">
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>Title</label>
+            <input ng-model="item.title">
+          </md-input-container>
+<!--           <md-input-container class="md-block" flex-gt-xs>
+            <label>Color</label>
+            <input ng-model="item.itemColor">
+          </md-input-container> -->
+        </div>
+
         <div>
           <md-content class="md-padding" layout="column">
             <md-chips 
                 ng-model="selectedTags" md-autocomplete-snap
                 md-transform-chip="transformChip($chip)"
-                md-require-match="autocompleteDemoRequireMatch">
 
               <md-autocomplete
                   class="chipsdemoCustomInputs" 
@@ -49,18 +59,6 @@
             </md-chips>
           </md-content>
         </div>
-        
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex-gt-xs>
-            <label>Title</label>
-            <input ng-model="item.title">
-          </md-input-container>
-          <md-input-container class="md-block" flex-gt-xs>
-            <label>Color</label>
-            <input ng-model="item.itemColor">
-          </md-input-container>
-        </div>
-
         <md-dialog-actions layout="row">
           <md-button id="picture" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button>
           <md-button aria-label="AddItem" ng-click="uploadImage(picFile)">Add</md-button>

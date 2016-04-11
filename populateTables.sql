@@ -46,7 +46,7 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (1,CURDATE(),"Bag",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (2,CURDATE(),"Bottle",1,"111111","black");
+VALUES (2,CURDATE(),"Bottle",1,"111111","#000000");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (3,CURDATE(),"Wallet",1,"111111");
@@ -55,7 +55,7 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (4,CURDATE(),"Pajama",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (5,CURDATE(),"Palmer",1,"111111","white");
+VALUES (5,CURDATE(),"Palmer",1,"111111","#ffffff");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (6,CURDATE(),"Kylie",1,"111111");
@@ -64,7 +64,7 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (7,CURDATE(),"Wires",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (8,CURDATE(),"Doggie",1,"111111","green");
+VALUES (8,CURDATE(),"Doggie",1,"111111","#00f500");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (9,CURDATE(),"Consciousness",1,"111111");
@@ -79,7 +79,7 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (12,CURDATE(),"Coat",2,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (13,CURDATE(),"Marker",1,"111111","blue");
+VALUES (13,CURDATE(),"Marker",1,"111111","#0000a3");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (14,CURDATE(),"Charger",1,"111111");
@@ -91,7 +91,7 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (16,CURDATE(),"Game",1,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (17,CURDATE(),"test",2,"111112","purple");
+VALUES (17,CURDATE(),"test",2,"111112","#5c005c");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (18,CURDATE(),"cat",2,"111113");
@@ -100,7 +100,7 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (19,CURDATE(),"Bottle",2,"111111");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (20,CURDATE(),"jeans",2,"111112","brown");
+VALUES (20,CURDATE(),"jeans",2,"111112","#5c2e00");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (21,CURDATE(),"Pajama",1,"111111");
@@ -112,7 +112,7 @@ INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (23,CURDATE(),"sweater",3,"111112");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by,itemColor)
-VALUES (24,CURDATE(),"hammer",3,"111112","orange");
+VALUES (24,CURDATE(),"hammer",3,"111112","#ffff00");
 
 INSERT INTO ItemLF (itemID,time_stamp,title,locationID,accepted_by)
 VALUES (25,CURDATE(),"hat",3,"111113");
