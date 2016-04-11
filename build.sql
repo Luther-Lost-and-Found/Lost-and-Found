@@ -59,7 +59,7 @@ engine=MyISAM;
 
 CREATE TABLE ItemTags (
 	itemID INT NOT NULL,
-	tags LONGTEXT NOT NULL,
+	tags LONGTEXT,
 	FOREIGN KEY (itemID) REFERENCES ItemLF (itemID), 
 	PRIMARY KEY (itemID),
 	FULLTEXT (tags)
