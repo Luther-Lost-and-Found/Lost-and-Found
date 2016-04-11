@@ -614,9 +614,11 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
    })();
 
    $scope.chosenColor = "#093A7D"
+   var itemColor = "";
 
   $scope.colorClicked = function(color) {
     $scope.chosenColor = color.color;
+    itemColor = color.color;
     console.log(color);
   };
 
@@ -705,6 +707,7 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     $scope.errorMsg = null;
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
+    $scope.item.itemColor = itemColor;
     $http.post("/additem",$scope.item).success(function(response){
 
       sharedService.refreshMain();
