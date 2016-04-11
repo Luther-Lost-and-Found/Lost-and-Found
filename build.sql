@@ -6,9 +6,9 @@
 #============ and run the following script ============
 #======================================================
 
-DROP DATABASE IF EXISTS lost;
+DROP DATABASE lost;
 
-DROP USER IF EXISTS senior;
+DROP USER senior;
 
 CREATE USER senior IDENTIFIED BY 'qwerty';
 GRANT ALL PRIVILEGES ON *.* TO senior;

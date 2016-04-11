@@ -185,6 +185,9 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
       $rootScope.$emit(currentSorting.method);
     }
   }
+
+
+
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
@@ -503,6 +506,98 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
 function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, Upload, sharedServiceUploadModal,sharedPropertiesTags) {
 
   var myList = [];
+
+  var COLORS = [{name: 'Red', colors: [
+        {hex: 'F44336' },
+        {hex: 'B71C1C' },
+        {hex: 'D50000' }
+  ]}, 
+
+  {name: 'Pink', colors: [
+          {hex: 'FF80AB' },
+          {hex: 'FF4081' },
+          {hex: 'F50057' },
+  ]},
+
+  {name: 'Purple', colors: [
+          {hex: 'E040FB' },
+          {hex: '7B1FA2' },
+          {hex: '4A148C' },
+  ]},
+
+  {name: 'Blue', colors: [
+          {hex: '80D8FF' },
+          {hex: '2962FF' },
+          {hex: '01579B' }
+  ]},
+
+  {name: 'Cyan', colors: [
+          {hex: '1DE9B6' },
+          {hex: '00897B' },
+          {hex: '004D40' },
+  ]}, 
+
+  {name: 'Green', colors: [
+          {hex: 'CCFF90' },
+          {hex: '64DD17' },
+          {hex: '1B5E20' },
+  ]}, 
+
+  {name: 'Yellow', colors: [
+          {hex: 'FFFF8D' },
+          {hex: 'FFFF00' },
+          {hex: 'FFD600' }
+  ]}, 
+
+  {name: 'Orange', colors: [
+          {hex: 'FFD180' },
+          {hex: 'FF9800' },
+          {hex: 'E65100' },
+  ]},
+
+  {name: 'Brown', colors: [
+          {hex: 'A1887F' },
+          {hex: '6D4C41' },
+          {hex: '3E2723' },
+  ]},
+
+  {name: 'Grey', colors: [
+          {hex: 'BDBDBD' },
+          {hex: '757575' },
+          {hex: '424242' },
+  ]},
+
+  {name: 'Black', colors: [
+          {hex: 'FFFFFF' },
+  ]},
+  {name: 'White', colors: [
+          {hex: '000000' },
+  ]}];
+
+
+  
+  $scope.colorTiles = (function() {
+    var tiles = [];
+    for(var primCol=0; primCol< COLORS.length; primCol++){
+      for (var secCol = 0; secCol < COLORS[primCol].colors.length; secCol++) {
+          var actualColor = COLORS[primCol].colors[secCol].hex;
+          tiles.push({
+            color: "#"+actualColor,
+            name: COLORS[primCol].name.toLowerCase()
+            
+          });
+          console.log(COLORS[primCol].name,COLORS[primCol].colors.length)
+      }
+    };
+    return tiles;
+   })();
+
+   $scope.chosenColor = "#093A7D"
+
+  $scope.colorClicked = function(color) {
+    $scope.chosenColor = color.color;
+    console.log(color);
+  };
 
   $scope.updateItem = function(ev,$element){
     var current_id = $rootScope.item.itemID;
