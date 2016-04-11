@@ -572,7 +572,11 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   ]},
   {name: 'White', colors: [
           {hex: '000000' },
-  ]}];
+  ]},
+  {name: 'Norse', colors: [
+          {hex: '093A7D' },
+  ]}
+  ];
 
 
   
