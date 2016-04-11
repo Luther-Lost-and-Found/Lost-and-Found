@@ -25,3 +25,13 @@ body {
 /*div.main{
 	position:relative;
 }*/
+footer {
+  position: static;
+  top: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  text-align: center;
+}

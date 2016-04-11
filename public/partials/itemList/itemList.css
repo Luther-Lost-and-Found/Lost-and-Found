@@ -32,8 +32,16 @@ hr {
   background-color:#ccc;
 }
 
+
+body {
+
+
+}
+
 md-grid-list {
   padding-top: 20px;
+  margin-left: 8%;
+  margin-right: 8%;
 }
 
 .fa {
