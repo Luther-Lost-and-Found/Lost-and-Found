@@ -6,6 +6,8 @@ app.controller('addItemCtrl', ['$timeout', '$scope', '$http', '$window',
 
 	console.log("Hello World from the addItem Controller");
 
+	
+
 	$scope.addItem = function () {
 
 		sharedServiceUploadModal.setProperty($scope.item);
