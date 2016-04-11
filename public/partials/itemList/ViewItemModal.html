@@ -1,0 +1,64 @@
+
+		<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="50">
+			<md-dialog-content>
+			    <div class="md-dialog-content">
+					<pre><img style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}"></img> </pre>
+					<div layout-gt-sm="row">
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Title</label>
+			        		<input disabled style="color:black" ng-model="item.title">
+			        	</md-input-container>
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Location</label>
+			        		<input disabled style="color:black" ng-model="item.building_name">
+			        	</md-input-container>
+			        </div>
+		        	<div layout-gt-sm="row">
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Accepted By</label>
+			        		<input disabled style="color:black" ng-model="item.accepted_by">
+			        	</md-input-container>
+			        	<md-input-container class="md-block" flex-gt-sm>
+			        		<label>Claimed By</label>
+			        		<input disabled style="color:black" ng-model="item.claimed_by">
+			        	</md-input-container flex-gt-sm>
+			        	<md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
+			        </div>
+			        <div layout="column" ng-cloak>
+					  <md-content class="md-padding" layout="column">
+					    <h2 class="md-title">Tags</h2>
+					    
+					    <form name="tagForm">
+					      <md-chips ng-model="itemTags" name="presentTags" readonly="true">
+					        <md-chip-template>
+					          <strong>{{$chip}}</strong>
+					        </md-chip-template>
+					      </md-chips>
+					      
+					    </form>
+					  </md-content>
+					</div>
+				</div>
+				<div>
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									<md-button aria-label="Edit" ng-hide="switchData.seeAll" ng-click="editItem($event,item)" md-autofocus>Edit
+							      	</md-button>
+							    </td>
+								<td>
+									<md-button aria-label="Remove" ng-hide="switchData.seeAll" ng-click="removeItem(item)" md-autofocus>Remove
+							      	</md-button>
+							    </td>
+							    <td>
+									<md-button aria-label="Cancel" ng-click="cancel()" md-autofocus>Cancel
+							      	</md-button>
+							    </td>
+						    </tr>
+					    </tbody>
+				    </table>
+				</div>
+
+			</md-dialog-content>
+		</md-dialog>
