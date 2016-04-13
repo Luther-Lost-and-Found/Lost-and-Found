@@ -23,6 +23,5 @@ sudo cp -r public/* /var/www/static
 
 # front-end dependencies
 bower install
-sudo mkdir -p /var/www/lib
-sudo cp -r bower_components/* /var/www/lib
+sudo cp -r bower_components/* /var/www/static
 
