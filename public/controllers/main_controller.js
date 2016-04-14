@@ -52,7 +52,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 },
               })
 
-        	.state('login',{
+            .state('login',{
                 url: '/',
                 views: {
                     'login': {
@@ -60,7 +60,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                         action : 'LoginApp.loginController'
                     }
                 }
-        	})
+            })
             .state('itemlist', {
                 parent:'rootIL',
                 url:'/itemlist',
@@ -211,4 +211,3 @@ myApp.service('sharedPropertiesTags',function(){
 
 //     console.log("MAIN CONTROLLER");
 // });
-
