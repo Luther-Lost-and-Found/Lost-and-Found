@@ -8,8 +8,15 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 
 	var refresh = function(){
 		$http.get("/superAdminPage").success(function(response){
-			console.log(response);
 			$scope.AdminUsers = response;
+			for (user in $scope.AdminUsers) {
+				if ($scope.AdminUsers[user].superPrivilege == 1) {
+					console.log($scope.AdminUsers[user].superPrivilege);
+					$scope.AdminUsers[user].superPrivilege = true;
+				} else {
+					$scope.AdminUsers[user].superPrivilege = false;
+				}
+			}
 		});
 	}
 
