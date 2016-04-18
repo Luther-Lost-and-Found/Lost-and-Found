@@ -90,11 +90,43 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 		});
 	};
 
+	$scope.AddUSER = function(ev) {
+    	$mdDialog.show({
+	      	controller: addUserController,
+	      	templateUrl: '/partials/superAdmin/addUser.html',
+	      	parent: angular.element(document.body),
+	      	targetEvent: ev,
+	      	clickOutsideToClose:true,
+	      	scope: $rootScope.$new()
+	    })
+  	};
+
+  	$scope.$on('broadcastFromAddUser', function() {
+	    refresh();
+	});
+}]);
+
+function addUserController($scope, $rootScope, $http, $mdDialog) {
+	console.log("hello controller")
+
 	$scope.addUser = function (newUser) {
-		console.log(user);
+		console.log(newUser);
 		$http.post("/addUser",newUser).success(function(response){
 			console.log("CREATED NEW USER", response);
-			$scope.newUserPassword = response;
+			$rootScope.newUserPassword = response;
+			$rootScope.$broadcast('broadcastFromAddUser');
+			$scope.cancel();
 		});
 	};
-}]);
+
+	$scope.hide = function() {
+	    $mdDialog.hide();
+	};
+	$scope.cancel = function() {
+		$mdDialog.cancel();
+	};
+	$scope.answer = function(answer) {
+    	$mdDialog.hide(answer);
+	};
+
+}
