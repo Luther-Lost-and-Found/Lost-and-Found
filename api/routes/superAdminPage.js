@@ -67,16 +67,19 @@ module.exports = function(app, passport, isLoggedIn, isSuper) {
                 return done(err);
             }
             else {
+                console.log("currentPrivilege: ",rows[0].superPrivilege);
 
-            	var currentPrivilege = parseInt(user.superPrivilege);
+            	var currentPrivilege = parseInt(rows[0].superPrivilege);
             	var newPrivilege;
-
-            	if(currentPrivilege == 0){
+                
+            	if(currentPrivilege == 0 || currentPrivilege == false){
+                    console.log("HERRRREEEEE");
             		newPrivilege = 1;
             	}
             	else{
             		newPrivilege = 0;
             	}
+                console.log("newPrivilege: ",newPrivilege);
 
                 db.query("UPDATE AdminLF SET superPrivilege = ? WHERE norsekeyID = '" + user.norsekeyID + "'",newPrivilege, function(err,result){
 	                console.log("PASSWORD CHANGED",result);
