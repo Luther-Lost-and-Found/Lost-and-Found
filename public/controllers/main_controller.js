@@ -7,9 +7,10 @@ angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
 angular.module('404App',[]);
 angular.module('SideNavApp',[]);
+angular.module('superAdminApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp','superAdminApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
@@ -90,6 +91,20 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                         templateUrl : '../partials/search/searchItem.html',
                         action : 'searchItemApp.searchItemController'
                     }
+                }
+            })
+            .state('superAdminPage', {
+                url:'/superAdminPage',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/guest/guestNav.html',
+                        action : 'guestApp.guestController'
+                    },
+                    'superAdminPage': {
+                        templateUrl : '../partials/superAdmin/superAdmin.html',
+                        action : 'superAdminApp.superAdminController'
+                    }
+                    
                 }
             })
             .state('guestPage', {

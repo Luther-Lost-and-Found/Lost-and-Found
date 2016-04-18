@@ -33,6 +33,7 @@ locationID INT NOT NULL,
 first_name VARCHAR(20) NOT NULL, 
 last_name VARCHAR(30) NOT NULL,
 email VARCHAR(50) NOT NULL,
+superPrivilege BOOL NOT NULL DEFAULT false,
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID))
 engine=InnoDB;
 
