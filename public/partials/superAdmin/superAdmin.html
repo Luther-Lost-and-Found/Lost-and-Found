@@ -5,10 +5,10 @@
 	<md-list ng-cloak="" class="listdemoListControls">
 		<md-list-item ng-repeat="user in AdminUsers">
 			<p>{{ user.first_name }}&nbsp;{{user.last_name}}</p>
-			<md-switch ng-model="user.isSuper" aria-label="isSuperUser" />
-			<md-icon class="md-hue-3" md-svg-icon="img/icons/changePasswordBlack.svg" ng-click="resetPassword(user)"></md-icon>
-			<md-icon md-svg-icon="img/icons/superAccountBlack.svg" ng-click="grantSuper(user)"></md-icon>
-			<md-icon md-svg-icon="img/icons/deleteUserBlack.svg" ng-click="deleteUser(user)"></md-icon>
+			<md-switch ng-model="superPrivilege(user.superPrivilege)" aria-label="isSuperUser" />{{user.superPrivilege}}
+			<md-icon class="sadminform" md-svg-icon="img/icons/changePasswordBlack.svg" ng-click="ChangePW($event,user)"></md-icon>
+			<!-- <md-icon md-svg-icon="img/icons/superAccountBlack.svg" ng-click="grantSuper(user)"></md-icon> -->
+			<md-icon class="sadminform" md-svg-icon="img/icons/deleteUserBlack.svg" ng-click="removeUser($event,user)"></md-icon>
 			<md-divider />
 		</md-list-item>
 	</md-list>

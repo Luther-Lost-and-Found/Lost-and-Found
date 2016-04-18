@@ -8,20 +8,20 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 
 	var refresh = function(){
 		$http.get("/superAdminPage").success(function(response){
-			console.log("TRYING TO GET TO THE SUPER ADMIN PAGE", response);
+			console.log(response);
 			$scope.AdminUsers = response;
 		});
 	}
 
 	refresh();
 
-    $scope.deleteUser = function(ev, username) {
+    $scope.removeUser = function(ev, user) {
     // Appending dialog to document.body to cover sidenav in docs app
     var confirm = $mdDialog.confirm()
           .ok('Confirm')
           .cancel('No')
           // .title('Password Change for'+username+'?')
-          .textContent('Are you sure you would like to DELETE USER "'+username+'"?')
+          .textContent('Are you sure you would like to DELETE USER "'+user.norsekeyID+'"?')
           .ariaLabel('remUser')
           .targetEvent(ev)
           .clickOutsideToClose(true)
@@ -29,6 +29,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
           .cancel('Nope!');
 	    $mdDialog.show(confirm).then(function() {
 	      $scope.status = 'User Removed.';
+	      deleteUser(user);
 	      console.log("User Removed.");
 	    }, function() {
 	      $scope.status = 'Canceled.';
@@ -36,14 +37,22 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 	    });
 	  };
 
+	function deleteUser(user) {
+		console.log(user);
+		$http.delete("/deleteUser/?" + user.norsekeyID).success(function(response){
+			console.log("DELETING USER", response);
+			refresh();
+		});
+	};
 
-    $scope.ChangePW = function(ev, username) {
+    $scope.ChangePW = function(ev, user) {
     // Appending dialog to document.body to cover sidenav in docs app
+    console.log(user);
     var confirm = $mdDialog.confirm()
           .ok('Confirm')
           .cancel('No')
           // .title('Password Change for'+username+'?')
-          .textContent('Are you sure you would like to change password for "'+username+'"?')
+          .textContent('Are you sure you would like to change password for "'+user.norsekeyID+'"?')
           .ariaLabel('ChangePW')
           .targetEvent(ev)
           .clickOutsideToClose(true)
@@ -51,6 +60,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
           .cancel('Nope!');
 	    $mdDialog.show(confirm).then(function() {
 	      $scope.status = 'Password has been changed.';
+	      resetPassword(user);
 	      console.log("pw change confirmed");
 	    }, function() {
 	      $scope.status = 'Password change canceled.';
@@ -58,11 +68,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 	    });
   	};
 
-	$scope.test = function (func, user) {
-		console.log(func+" : "+user);
-	};
-
-	$scope.resetPassword = function (user) {
+	function resetPassword(user) {
 		console.log(user);
 		$http.post("/resetPassword",user).success(function(response){
 			console.log("RESETTING PASSWORD", response);
@@ -74,14 +80,6 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 		console.log(user);
 		$http.post("/grantSuper",user).success(function(response){
 			console.log("GRANTED SUPER", response);
-		});
-	};
-
-	$scope.deleteUser = function (user) {
-		console.log(user);
-		$http.delete("/deleteUser/?" + user.norsekeyID).success(function(response){
-			console.log("DELETING USER", response);
-			refresh();
 		});
 	};
 
