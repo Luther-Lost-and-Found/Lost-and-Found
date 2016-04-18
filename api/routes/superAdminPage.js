@@ -102,27 +102,22 @@ module.exports = function(app, passport, isLoggedIn, isSuper) {
         });  
     });
 
-//     app.post("/addUser", isLoggedIn, isSuper, function(req,res){
+    app.post("/addUser", isLoggedIn, isSuper, function(req,res){
 
-// 		console.log("CHANGING PASSWORD", req.body);
-// 		var user = req.body;
+		console.log("ADDING USER", req.body);
+		var user = req.body;
 
-// 		console.log(makeid());
+		console.log(makeid());
 
-//     	var newPassword_NONHASH = makeid();
-//         var newPassword = bcrypt.hashSync(newPassword_NONHASH, salt);
-//         console.log("HASHED PASSWORD", newPassword);
+    	var newPassword_NONHASH = makeid();
+        var newPassword = bcrypt.hashSync(newPassword_NONHASH, salt);
+        console.log("HASHED PASSWORD", newPassword);
 
-//         // var insertQuery = "INSERT INTO AdminLF ( username, password ) values (?,?)";
-
-//         db.query("INSERT INTO ItemLF (title,locationID,accepted_by,itemColor,time_stamp) VALUES ('"+
-//                 req.body.title + "'," + currentLocation[0].locationID + ",'" + req.user.norsekeyID +
-//                 "','" + req.body.itemColor + "',CURDATE());", function(err,result){
-//             console.log("PASSWORD CHANGED",result);
-//             res.json(newPassword_NONHASH);
-//         });
-
-//         INSERT INTO LocationLF (locationID,phonenumber,email,building_name,room_name)
-// VALUES (1,"111-1111","awesome@location.edu","Miller","418");
-//     });
+        db.query("INSERT INTO ItemLF (norsekeyID, password,locationID,first_name,last_name,email) VALUES ('"+
+                user.norsekeyID + "'," + newPassword + ",'" + user.locationID +
+                "','" + user.first_name + "','" + user.last_name+"','" + user.email+");", function(err,result){
+		            console.log("NEW USER CREATED",result);
+		            res.json(newPassword_NONHASH);
+        });
+    });
 }
