@@ -1,13 +1,18 @@
 var express = require('express'),
-	passport = require('passport'),
+	path = require('path'),
 	mysql = require('mysql'),
 	dbconfig = require('../../config/database'),
-	path = require('path'),
 	db = mysql.createConnection(dbconfig.connection);
 	
 db.query('USE ' + dbconfig.database);
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, isLoggedIn, isSuper) {
+
+	app.get("/superAdminPage", isLoggedIn, isSuper, function(req,res){
+
+		console.log("HI SEXY");
+
+    });
 
 	console.log("HELLO FROM SUPER ADMIN");
 }

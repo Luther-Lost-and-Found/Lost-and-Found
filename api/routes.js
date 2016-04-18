@@ -16,7 +16,12 @@ module.exports = function(app, passport) {
     require('./routes/tagsRoute.js')(app, passport, isLoggedIn)
     require('./routes/settings.js')(app, passport, isLoggedIn)
     require('./routes/guest.js')(app)
-    require('./routes/superAdmin.js')(app, isLoggedIn, isSuper)
+    require('./routes/superAdminPage.js')(app, passport, isLoggedIn, isSuper)
+
+    // app.get('superAdminPage',isSuper, function(req, res){
+    //   console.log("401 happened in routes");
+    //   // res.status(404);
+    // });
 
     app.get('*',isLoggedIn, function(req, res){
       console.log("404 happened in routes");
@@ -32,7 +37,7 @@ module.exports = function(app, passport) {
 };
 
 function isLoggedIn(req, res, next) {
-
+    console.log("LOGGING IN");
     if (req.isAuthenticated())
         return next();
 
@@ -44,19 +49,17 @@ function isLoggedIn(req, res, next) {
 }
 
 function isSuper(req,res,next){
+    console.log("SUPER STUFF CHECK");
 
-    db.query("SELECT norsekeyID FROM AdminLF WHERE superPrivilege=" + req.body.username + "'", function(err,result){
-        console.log(req.body);
-        console.log(req.user);
-        if(result.length() == 1){
-            return next();
-        }
-        else{
-            console.log("DOES NOT LOOK LIKE YOU BELONG TO THE SUPER COOL CLUB " + req.route.path);
-            res.redirect('/');
-            res.status(401);
-        }
-    });
+    if(req.user.superPrivilege == 1){
+        console.log("YOU ARE AN AUTHORIZED SUPER PERSON. PLEASURE TO MEET YOU");
+        return next();
+    }
+    else{
+        console.log("DOES NOT LOOK LIKE YOU BELONG TO THE SUPER COOL CLUB " + req.route.path);
+        res.redirect('/itemlist');
+        res.status(454);
+    }
 }
 
 // function isLoggedIn(req, res, next) {

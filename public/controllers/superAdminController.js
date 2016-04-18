@@ -8,6 +8,11 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 
 	$scope.AdminUsers = ["User One","User Two","User Three","User Four"];
 
+	$http.get("/superAdminPage").success(function(response){
+		console.log("TRYING TO GET TO THE SUPER ADMIN PAGE");
+
+	});
+
 	$scope.test = function (func, user) {
 		console.log(func+" : "+user);
 	};
