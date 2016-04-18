@@ -6,10 +6,9 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 
 	console.log("Hello World from the SUPER ADMIN Controller");
 
-	
+	$scope.AdminUsers = ["User One","User Two","User Three","User Four"];
 
-	$scope.addItem = function () {
-
-		
+	$scope.test = function (func, user) {
+		console.log(func+" : "+user);
 	};
 }]);

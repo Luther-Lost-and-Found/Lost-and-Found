@@ -1,0 +1,13 @@
+h3#subheader {
+	padding-left: 2%;
+}
+
+md-icon {
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
+md-icon:focus {
+	outline: none;
+    border: 0;
+}
