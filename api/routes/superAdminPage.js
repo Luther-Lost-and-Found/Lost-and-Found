@@ -93,6 +93,9 @@ module.exports = function(app, passport, isLoggedIn, isSuper) {
             if (err){
                 return done(err);
             }
+            if(req.user.norsekeyID == userID){
+            	console.log("NO CAN DO");
+            }
             else{
 
                 db.query("DELETE FROM AdminLF WHERE norsekeyID = '" + userID + "'", function(err,result){
