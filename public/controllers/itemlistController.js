@@ -4,6 +4,10 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   var doneRefreshInit = false;
 
+  $scope.goChangeSettings = function(){
+    $location.url("/superAdminPage");
+  }
+
   var refresh = function(){
     $http.get("/itemlist").success(function(response){
       $scope.$applyAsync(function(){

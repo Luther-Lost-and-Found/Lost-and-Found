@@ -87,7 +87,9 @@
 				</form>
 				<md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary" style="position: fixed; bottom:0;">
                 Save Settings</md-button>
-                <a ng-href="google.com">
+                <span flex></span>
+                <md-button ng-hide="globalSettings" ng-click="goChangeSettings()" class="md-secondary" style="position:fixed;">
+                GLOBAL SETTINGS</md-button>
             </md-content>
         </md-sidenav>
     </div>
