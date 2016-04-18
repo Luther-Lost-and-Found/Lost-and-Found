@@ -2,7 +2,7 @@
 	<h3 id="subheader"> Super Administrator</h3>
 	<md-list ng-cloak="" class="listdemoListControls">
 		<md-list-item ng-repeat="user in AdminUsers">
-			<p>{{ user }}</p>
+			<p>{{ user.first_name }}&nbsp;{{user.last_name}}</p>
 			<md-icon class="md-hue-3" md-svg-icon="img/icons/changePasswordBlack.svg" ng-click="test('pw',user)"></md-icon>
 			<md-icon md-svg-icon="img/icons/superAccountBlack.svg" ng-click="test('superuser',user)"></md-icon>
 			<md-icon md-svg-icon="img/icons/deleteUserBlack.svg" ng-click="test('delete',user)"></md-icon>

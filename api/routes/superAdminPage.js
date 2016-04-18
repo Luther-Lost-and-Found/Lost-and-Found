@@ -12,6 +12,11 @@ module.exports = function(app, passport, isLoggedIn, isSuper) {
 
 		console.log("HI SEXY");
 
+		db.query('SELECT norsekeyID, locationID, first_name, last_name, email, superPrivilege FROM AdminLF', function(err, rows, fields) {
+
+            res.json(rows);
+        });
+
     });
 
 	console.log("HELLO FROM SUPER ADMIN");
