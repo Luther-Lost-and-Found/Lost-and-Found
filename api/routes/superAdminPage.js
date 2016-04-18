@@ -116,9 +116,13 @@ module.exports = function(app, passport, isLoggedIn, isSuper) {
         var newPassword = bcrypt.hashSync(newPassword_NONHASH, salt);
         console.log("HASHED PASSWORD", newPassword);
 
-        db.query("INSERT INTO ItemLF (norsekeyID, password,locationID,first_name,last_name,email) VALUES ('"+
-                user.norsekeyID + "'," + newPassword + ",'" + user.locationID +
-                "','" + user.first_name + "','" + user.last_name+"','" + user.email+");", function(err,result){
+        var queryTEST = "INSERT INTO AdminLF (norsekeyID, password,locationID,first_name,last_name,email) VALUES ('"+
+                user.norsekeyID + "','" + newPassword + "','" + user.locationID +
+                "','" + user.first_name + "','" + user.last_name+"','" + user.email+"');";
+
+        console.log(queryTEST);
+
+        db.query(queryTEST, function(err,result){
 		            console.log("NEW USER CREATED",result);
 		            res.json(newPassword_NONHASH);
         });
