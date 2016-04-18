@@ -31,6 +31,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     if (response.status === 404){
                         console.log("4040404040404");
                         $location.url('/404');
+                    }
+                    if (response.status === 454){
+                        console.log("45454545454");
+                        $location.url('/itemlist');
                     } 
                     return $q.reject(response); 
                 } 

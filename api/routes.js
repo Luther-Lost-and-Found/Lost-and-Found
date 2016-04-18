@@ -58,7 +58,7 @@ function isSuper(req,res,next){
     else{
         console.log("DOES NOT LOOK LIKE YOU BELONG TO THE SUPER COOL CLUB " + req.route.path);
         res.redirect('/itemlist');
-        res.status(401);
+        res.status(454);
     }
 }
 
