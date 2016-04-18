@@ -87,6 +87,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 		console.log(user);
 		$http.post("/addUser",newUser).success(function(response){
 			console.log("CREATED NEW USER", response);
+			$scope.newUserPassword = response;
 		});
 	};
 }]);
