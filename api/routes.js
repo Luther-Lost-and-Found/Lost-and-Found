@@ -1,3 +1,4 @@
+
 var express = require('express'),
     path = require('path'),
     mysql = require('mysql'),
@@ -40,7 +41,6 @@ function isLoggedIn(req, res, next) {
         res.redirect('/')
         res.status(401);
     }
-
 }
 
 function isSuper(req,res,next){
