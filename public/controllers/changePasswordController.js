@@ -1,4 +1,4 @@
-var app = angular.module('superAdminApp', ['ngMaterial']);
+var app = angular.module('changePasswordApp', ['ngMaterial']);
 
 app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$window',
 	'$animate','$rootScope', '$mdDialog', '$mdMedia',
