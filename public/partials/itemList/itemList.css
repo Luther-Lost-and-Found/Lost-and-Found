@@ -1,3 +1,16 @@
+.addItemForm {
+  padding-right: 20px;
+
+}
+.imgholder img{ 
+  max-height: 70%;
+  min-width: 100%;
+ }
+ .md-padding {
+  padding-left:0px;
+  padding-right:0px;
+ }
+
 /*body {
   background-color: #eee;
   color:#444;

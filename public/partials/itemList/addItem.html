@@ -11,8 +11,22 @@
 
   <table>
     <tr>
-      <td class="addItemColorImage" width="350" style="min-width: 200px; vertical-align: top;">
-        <md-tabs md-align-tabs="top" md-border-bottom style="height:100%; overflow: auto;">
+      <td class="addItemColorImage" width="350" style="min-width: 200px;">
+<!-- 
+        <label>{{picFile.name}}</label>
+        <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="400">
+        <div ng-cloak="">
+          <md-content layout-padding="">
+            <md-grid-list md-cols="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter="1px">
+              <md-grid-tile ng-repeat="tile in colorTiles" ng-style="{'background': tile.color}" ng-model="item.itemColor" ng-click="colorClicked(tile)">
+              </md-grid-tile>
+            </md-grid-list>
+          </md-content>
+        </div>
+        <md-tabs md-align-tabs="top" md-border-bottom style="height:100%; overflow: auto;"> -->
+
+        <md-tabs md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
+
           <md-tab id="colorPickerTab">
             <md-tab-label>Choose Color</md-tab-label>
             <md-tab-body>
@@ -29,8 +43,10 @@
           <md-tab id="imageUploadTab">
             <md-tab-label>Upload Image</md-tab-label>
             <md-tab-body>
+            <div class="imgholder"
               <label>{{picFile.name}}</label>
               <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="400">
+              </div>
               <md-button id="picture" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button>
             </md-tab-body>
           </md-tab>
