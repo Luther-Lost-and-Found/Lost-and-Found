@@ -1,12 +1,16 @@
 var app = angular.module('changePasswordApp', ['ngMaterial']);
 
 app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$window',
-	'$animate','$rootScope', '$mdDialog', '$mdMedia',
-	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia) {
+	'$animate','$rootScope', '$mdDialog', '$mdMedia', '$location',
+	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia, $location) {
 
 	console.log("Hello World from the CHANGE PW Controller");
 
 	$scope.string = "HELLO THERE";
+
+    $scope.something = function(one,two,three) {
+    	alert("old: "+one+" newPass1: "+two+" newPass2: "+three);
+    };
 
 	$http.get("/loggedin").success(function(response){
 		console.log(response);
@@ -14,6 +18,8 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 	});
 
     $scope.ChangePW = function(oldPass, newPass1, newPass2) {
+    	console.log($scope.user);
+    	console.log(oldPass,newPass1,newPass2);
     	if(newPass1 == newPass2){
     		$scope.user.oldPass = oldPass;
     		$scope.user.newPass = newPass1;
