@@ -1,8 +1,8 @@
 var app = angular.module('changePasswordApp', ['ngMaterial']);
 
 app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$window',
-	'$animate','$rootScope', '$mdDialog', '$mdMedia',
-	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia) {
+	'$animate','$rootScope', '$mdDialog', '$mdMedia', '$location',
+	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia, $location) {
 
 	console.log("Hello World from the CHANGE PW Controller");
 	console.log($scope);
