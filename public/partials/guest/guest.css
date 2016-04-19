@@ -2,17 +2,6 @@
 	top: 40px;
 }
 
-form {
-	width: 380px;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top:20px;
-	padding-bottom:20px;
-	margin: auto;
-	margin-top: 2em;
-	background: #ffffff;
-}
-
 .move-up {
 	position: relative;
 	top: -184px;
@@ -27,9 +16,17 @@ form {
 	color: #fff;
 }
 
-#form{
+#desc-form{
 	border: none;
 	box-shadow: none;
+	width: 98%;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top:20px;
+	padding-bottom:20px;
+	margin: auto;
+	margin-top: 2em;
+	background: #ffffff;
 }
 
 #norse{

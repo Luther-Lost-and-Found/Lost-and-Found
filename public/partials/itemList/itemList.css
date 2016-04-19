@@ -4,6 +4,24 @@
   color:#444;
 }*/
 
+#list{
+  position: relative;
+  top: 64px;
+}
+
+.settings-form{
+  margin-top: 0;
+}
+
+#settings{
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+#global, #add, #cancel{
+  color:#666;
+}
+
 .fa {
   color:#666;
 }
