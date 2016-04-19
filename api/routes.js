@@ -17,6 +17,7 @@ module.exports = function(app, passport) {
     require('./routes/settings.js')(app, passport, isLoggedIn)
     require('./routes/guest.js')(app)
     require('./routes/superAdminPage.js')(app, passport, isLoggedIn, isSuper)
+    require('./routes/changePassword.js')(app, passport, isLoggedIn)
 
     // app.get('superAdminPage',isSuper, function(req, res){
     //   console.log("401 happened in routes");
