@@ -13,11 +13,11 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 		$scope.user = response;
 	});
 
-    $scope.ChangePW = function(user,oldPass, newPass1, newPass2) {
+    $scope.ChangePW = function(oldPass, newPass1, newPass2) {
     	if(newPass1 == newPass2){
-    		user.oldPass = oldPass;
-    		user.newPass = newPass1;
-    		$http.post("/changePassword",user).success(function(response){
+    		$scope.user.oldPass = oldPass;
+    		$scope.user.newPass = newPass1;
+    		$http.post("/changePassword",$scope.user).success(function(response){
     			
 				console.log("CHANGING PASSWORD", response);
 			    $http.get("/signout").success(function(req,res){
@@ -32,12 +32,4 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
     		console.log("sorry, passwords do not match");
     	}
   	};
-
-	function resetPassword(user) {
-		console.log(user);
-		$http.post("/changePassword",user).success(function(response){
-			console.log("CHANGING PASSWORD", response);
-			$scope.newPassword = response;
-		});
-	};
 }]);
