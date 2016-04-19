@@ -6,50 +6,31 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 
 	console.log("Hello World from the CHANGE PW Controller");
 
-	var refresh = function(){
-		$http.get("/changePasswordPage").success(function(response){
-			$scope.AdminUsers = response;
-			for (user in $scope.AdminUsers) {
-				if ($scope.AdminUsers[user].superPrivilege == 1) {
-					console.log($scope.AdminUsers[user].superPrivilege);
-					$scope.AdminUsers[user].superPrivilege = true;
-				} else {
-					$scope.AdminUsers[user].superPrivilege = false;
-				}
-			}
-		});
-	}
-
-	refresh();
-
-    $scope.ChangePW = function(ev, user) {
-    // Appending dialog to document.body to cover sidenav in docs app
-    console.log(user);
-    var confirm = $mdDialog.confirm()
-          .ok('Confirm')
-          .cancel('No')
-          // .title('Password Change for'+username+'?')
-          .textContent('Are you sure you would like to change password for "'+user.norsekeyID+'"?')
-          .ariaLabel('ChangePW')
-          .targetEvent(ev)
-          .clickOutsideToClose(true)
-          .ok('Yes, change password')
-          .cancel('Nope!');
-	    $mdDialog.show(confirm).then(function() {
-	      $scope.status = 'Password has been changed.';
-	      resetPassword(user);
-	      console.log("pw change confirmed");
-	    }, function() {
-	      $scope.status = 'Password change canceled.';
-	      console.log("pw change cancelled");
-	    });
+    $scope.ChangePW = function(user,oldPass, newPass1, newPass2) {
+    	if(newPass1 == newPass2){
+    		user.oldPass = oldPass;
+    		user.newPass = newPass;
+    		$http.post("/changePassword",user).success(function(response){
+    			
+				console.log("CHANGING PASSWORD", response);
+			    $http.get("/signout").success(function(req,res){
+			      $location.url("/");
+			    });
+			})
+			.error(function(err){
+				console.log("sorry no can do. probably old password did not match");
+			});
+    	}
+    	else{
+    		console.log("sorry, passwords do not match");
+    	}
   	};
 
 	function resetPassword(user) {
 		console.log(user);
-		$http.post("/resetPassword",user).success(function(response){
-			console.log("RESETTING PASSWORD", response);
+		$http.post("/changePassword",user).success(function(response){
+			console.log("CHANGING PASSWORD", response);
 			$scope.newPassword = response;
 		});
 	};
-}
+}]);
