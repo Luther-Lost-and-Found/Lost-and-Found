@@ -33,4 +33,4 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 			$scope.newPassword = response;
 		});
 	};
-}]);
+}
