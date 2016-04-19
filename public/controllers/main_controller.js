@@ -57,6 +57,21 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 },
               })
 
+            .state('changePassword', {
+                url:'/changePassword',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/guest/guestNav.html',
+                        action : 'guestApp.guestController'
+                    },
+                    'superAdminPage': {
+                        templateUrl : '../partials/changePassword/changePassword.html',
+                        action : 'changePasswordApp.changePasswordController'
+                    }
+                    
+                }
+            })
+
             .state('login',{
                 url: '/',
                 views: {
