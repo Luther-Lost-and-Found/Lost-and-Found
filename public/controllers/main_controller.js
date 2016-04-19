@@ -61,8 +61,8 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url:'/changePassword',
                 views: {
                     'navBar': {
-                        templateUrl : '../partials/guest/guestNav.html',
-                        action : 'guestApp.guestController'
+                        templateUrl : '../partials/navBar/navBar.html',
+                        action : 'navBarApp.NavBarCtrl'
                     },
                     'superAdminPage': {
                         templateUrl : '../partials/changePassword/changePassword.html',
