@@ -10,6 +10,12 @@ db.query('USE ' + dbconfig.database);
 
 module.exports = function(app, passport, isLoggedIn) {
 
+    app.get("/getInfo", isLoggedIn, function(req,res){
+
+        console.log("HI SEXY", req.body);
+        res.json(req.body)
+    });
+
 	app.get("/changePasswordPage", isLoggedIn, function(req,res){
 
 		console.log("HI SEXY");
@@ -26,12 +32,12 @@ module.exports = function(app, passport, isLoggedIn) {
 		console.log("CHANGING PASSWORD", req.body);
 		var user = req.body;
 
-		db.query("SELECT * FROM AdminLF WHERE password = ?",[user.oldPassword], function(err, rows) {
+		db.query("SELECT * FROM AdminLF WHERE password = ?",[user.oldPass], function(err, rows) {
             if (err){
                 return done(err);
             }
             else {
-            	var newPassword_NONHASH = user.newPassword;
+            	var newPassword_NONHASH = user.newPass;
                 var newPassword = bcrypt.hashSync(newPassword_NONHASH, salt);
                 console.log("HASHED PASSWORD", newPassword);
 

@@ -5,12 +5,18 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia) {
 
 	console.log("Hello World from the CHANGE PW Controller");
-
+	console.log($scope);
 	$scope.string = "HELLO THERE";
+
+	$http.get("/loggedin").success(function(response){
+		console.log(response);
+		$scope.user = response;
+	});
+
     $scope.ChangePW = function(user,oldPass, newPass1, newPass2) {
     	if(newPass1 == newPass2){
     		user.oldPass = oldPass;
-    		user.newPass = newPass;
+    		user.newPass = newPass1;
     		$http.post("/changePassword",user).success(function(response){
     			
 				console.log("CHANGING PASSWORD", response);
