@@ -55,11 +55,6 @@
 					<div style="display: table-cell;">
 						<h1 class="md-toolbar-tools" ng-cloak>Hello, {{userSettings.first_name}}!</h1>
 					</div>
-					<div >
-						<md-button class="logout" aria-label="More" ng-click="logout()" >
-							<md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>
-						</md-button>
-					</div>
                 </div>
               </div>
               
@@ -87,6 +82,7 @@
 				</form>
 				<md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary" style="position: fixed; bottom:0;">
                 Save Settings</md-button>
+                <md-button class="md-primary" aria-label="More" ng-click="logout()" style="position: fixed; bottom:0; right:0;">Logout</md-button>
                 <span flex></span>
                 <md-button id="global" ng-hide="globalSettings" ng-click="goChangeSettings()" class="md-secondary" style="position:fixed;">
                 GLOBAL SETTINGS</md-button>

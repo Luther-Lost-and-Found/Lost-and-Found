@@ -4,11 +4,6 @@
   color:#444;
 }*/
 
-#list{
-  position: relative;
-  top: 64px;
-}
-
 .settings-form{
   margin-top: 0;
 }
@@ -16,6 +11,10 @@
 #settings{
   overflow-y: visible;
   overflow-x: hidden;
+}
+
+#logout{
+  color:#666;
 }
 
 #global, #add, #cancel{

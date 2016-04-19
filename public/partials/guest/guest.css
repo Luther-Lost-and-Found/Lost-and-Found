@@ -47,7 +47,7 @@
   border-radius: 3px;
   font-size: 14px;
   text-align: center;
-  color:white;
+  
   text-transform: uppercase;
   text-decoration:none;
   border: black;
@@ -57,6 +57,7 @@
 .btn1 {
  	background-color: #093A7D;
  	align-items: right;
+ 	color:white;
 }
 
 .buttonHolder {
