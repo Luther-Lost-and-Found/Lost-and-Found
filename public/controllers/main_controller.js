@@ -8,9 +8,10 @@ angular.module('guestApp',[]);
 angular.module('404App',[]);
 angular.module('SideNavApp',[]);
 angular.module('superAdminApp',[]);
+angular.module('changePasswordApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp','superAdminApp']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp','superAdminApp', 'changePasswordApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
