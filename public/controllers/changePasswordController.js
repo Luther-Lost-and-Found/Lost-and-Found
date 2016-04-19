@@ -6,7 +6,10 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 
 	console.log("Hello World from the CHANGE PW Controller");
 
-	$scope.string = "HELLO THERE";
+	$scope.test = function() {
+		alert("test");
+	}
+
     $scope.ChangePW = function(user,oldPass, newPass1, newPass2) {
     	if(newPass1 == newPass2){
     		user.oldPass = oldPass;
