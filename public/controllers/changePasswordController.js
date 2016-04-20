@@ -8,10 +8,6 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 
 	$scope.string = "HELLO THERE";
 
-    $scope.something = function(one,two,three) {
-    	alert("old: "+one+" newPass1: "+two+" newPass2: "+three);
-    };
-
 	$http.get("/loggedin").success(function(response){
 		console.log(response);
 		$scope.user = response;
@@ -38,4 +34,8 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
     		console.log("sorry, passwords do not match");
     	}
   	};
+
+	$scope.goHome = function() {
+		$location.url("/itemlist")
+	}
 }]);

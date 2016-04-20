@@ -10,7 +10,7 @@ db.query('USE ' + dbconfig.database);
 
 module.exports = function(app, passport, isLoggedIn, isSuper) {
 
-	app.get("/superAdminPage", isLoggedIn, isSuper, function(req,res){
+	app.get("/superAdminPage1", isLoggedIn, isSuper, function(req,res){
 
 		console.log("HI SEXY");
 

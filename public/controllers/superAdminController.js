@@ -1,17 +1,17 @@
 var app = angular.module('superAdminApp', ['ngMaterial']);
 
 app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window',
-	'$animate','$rootScope', '$mdDialog', '$mdMedia',
-	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia) {
+	'$animate','$rootScope', '$mdDialog', '$mdMedia', '$location',
+	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia, $location) {
 
 	console.log("Hello World from the SUPER ADMIN Controller");
 
 	var refresh = function(){
-		$http.get("/superAdminPage").success(function(response){
+		$http.get("/superAdminPage1").success(function(response){
 			$scope.AdminUsers = response;
 			for (user in $scope.AdminUsers) {
 				if ($scope.AdminUsers[user].superPrivilege == 1) {
-					console.log($scope.AdminUsers[user].superPrivilege);
+					console.log("PRIVVVVV:",$scope.AdminUsers[user].superPrivilege);
 					$scope.AdminUsers[user].superPrivilege = true;
 				} else {
 					$scope.AdminUsers[user].superPrivilege = false;
@@ -83,7 +83,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 		});
 	};
 
-	$scope.grantSuper = function (user) {
+	$scope.grantSuper = function (ev,user) {
 		console.log(user);
 		$http.post("/grantSuper",user).success(function(response){
 			console.log("GRANTED SUPER", response);
