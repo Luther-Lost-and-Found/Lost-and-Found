@@ -16,7 +16,9 @@
         </div>
         
         <span flex></span>
-        
+        <md-button class="md-icon-button" id="add-button" aria-label="Add Item" ng-click="addItem($event)">
+                  <md-icon md-svg-icon="img/icons/add.svg" style="color: rgba(255,255,255,1);"></md-icon>
+              </md-button>
         <div class="md-menu-demo" ng-cloak="">
           <md-menu>
             <md-button class="md-icon-button testclass" aria-label="menu icon" ng-click="doTest();toggleRight()" ng-hide="isOpenRight()">
