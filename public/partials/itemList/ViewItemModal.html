@@ -1,29 +1,34 @@
 
 		<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="50">
 			<md-dialog-content>
+			  <md-toolbar md-scroll-shrink="">
+    			<div class="md-toolbar-tools navbarColor">Edit Item</div>
+  				</md-toolbar>
 			    <div class="md-dialog-content">
-					<pre><img ng-style="{background: item.itemColor}" style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}"></img> </pre>
-					<div layout-gt-sm="row">
-			        	<md-input-container class="md-block" flex-gt-sm>
-			        		<label>Title</label>
-			        		<input disabled style="color:black" ng-model="item.title">
-			        	</md-input-container>
-			        	<md-input-container class="md-block" flex-gt-sm>
-			        		<label>Location</label>
-			        		<input disabled style="color:black" ng-model="item.building_name">
-			        	</md-input-container>
-			        </div>
-		        	<div layout-gt-sm="row">
-			        	<md-input-container class="md-block" flex-gt-sm>
-			        		<label>Accepted By</label>
-			        		<input disabled style="color:black" ng-model="item.accepted_by">
-			        	</md-input-container>
-			        	<md-input-container class="md-block" flex-gt-sm>
-			        		<label>Claimed By</label>
-			        		<input disabled style="color:black" ng-model="item.claimed_by">
-			        	</md-input-container flex-gt-sm>
-			        	<md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
-			        </div>
+			    <div class="left">
+			    	<img ng-style="{background: item.itemColor}" style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}">
+			    </div>
+			    <div class=right >
+
+			       	<md-input-container class="md-block " flex-gt-sm>
+			        	<label>Title</label>
+			        	<input disabled style="color:black" ng-model="item.title"> <br>
+			        </md-input-container>
+			        <md-input-container class="md-block" flex-gt-sm>
+			        	<label>Location</label>
+			        	<input disabled style="color:black" ng-model="item.building_name">
+			        </md-input-container>>
+			        <md-input-container class="md-block" flex-gt-sm>
+			        	<label>Accepted By</label>
+			        	<input disabled style="color:black" ng-model="item.accepted_by">
+			        </md-input-container>
+			        <md-input-container class="md-block" flex-gt-sm>
+			        	<label>Claimed </label>
+			        	<input disabled style="color:black" ng-model="item.claimed_by">
+			        </md-input-container flex-gt-sm>
+			        <md-checkbox ng-model="item.claimed" ng-disabled="true" ng-init="item.claimed" aria-label="Checkbox">Claimed</md-checkbox>
+			       </div>
+
 			        <div layout="column" ng-cloak>
 					  <md-content class="md-padding" layout="column">
 					    <h2 class="md-title">Tags</h2>
@@ -58,7 +63,7 @@
 						    </tr>
 					    </tbody>
 				    </table>
-				</div>
+				</div> -->
 
 			</md-dialog-content>
 		</md-dialog>

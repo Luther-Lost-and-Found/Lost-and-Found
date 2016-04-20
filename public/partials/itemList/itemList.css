@@ -1,3 +1,16 @@
+.navbarColor {
+  background-color: #003C72;
+}
+.left {
+  float:left;
+}
+.right {
+  float: right;
+  padding: 8px;
+}
+.md-block {
+  padding: 2px;
+}
 .addItemForm {
   padding-right: 20px;
 
