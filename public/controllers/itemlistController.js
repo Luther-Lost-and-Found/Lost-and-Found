@@ -192,7 +192,30 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
 
 
+  $scope.addItem = function(ev){
+    sharedServiceUploadModal.setProperty($scope.item);
+    $rootScope.item = {};
 
+    $mdDialog.show({
+      controller: itemModalInstanceCtrl,
+      templateUrl: 'partials/itemList/addItem.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      scope: $scope.$new()
+    })
+    // var modalInstance = $uibModal.open({
+    //     animation: $scope.animationsEnabled,
+    //     templateUrl: 'partials/itemList/addItem.html',
+    //     controller: 'itemModalInstanceCtrl',
+    //     size: 'lg',
+    //     resolve: {
+    //         items: function () {
+    //             return $scope.item;
+    //         }
+    //     }
+    //   });
+  };
 
   var currentSorting = {
     isSorted: false,
@@ -435,7 +458,7 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
     var current_id = ($scope.itemID); 
     $http.delete("/itemlist/?" + current_id).success(function(response){
       $rootScope.$broadcast('handleBroadcast');
-      $uibModalInstance.dismiss('cancel');
+      $mdDialog.cancel('cancel');
     });
   };
 
