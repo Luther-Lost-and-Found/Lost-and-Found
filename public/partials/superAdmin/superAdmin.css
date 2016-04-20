@@ -1,13 +1,19 @@
-h3#subheader {
-	padding-left: 2%;
-}
-
 md-icon.sadminform:hover {
 	background-color: lightgray;
 	border-radius: 10px;
 }
 
+md-toolbar.subNav {
+	background-color: lightgray;
+	color: black;	
+}
+
 md-icon.sadminform:focus {
 	outline: none;
     border: 0;
+}
+
+md-button {
+	background-color: blue;
+	color: black;
 }

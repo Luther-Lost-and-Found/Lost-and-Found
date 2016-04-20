@@ -1,7 +1,26 @@
-<div ng-app="superAdminApp" class="container" ng-controller="superAdminController" ng-cloak>
-	<h3 id="subheader"> Super Administrator</h3>
-	<md-button aria-label="Add USER" ng-click="AddUSER($event)">+ Add User</md-button>
-	<h1> {{newPassword}} </h1>
+<div ng-app="superAdminApp" class="container" ng-controller="superAdminController as ctrl" ng-cloak>
+	<md-toolbar class="subNav " md-scroll-shrink ng-if="true">
+		<div class="md-toolbar-tools">
+			
+			<p>Account Settings |</p>
+			<md-button class="md-primary" value="Hello" aria-label="changeMyPassword" ng-click="changeMyPassword()">
+				<md-icon md-svg-icon="img/icons/changePasswordBlack.svg"></md-icon>	
+				<md-tooltip md-visible="demo.showTooltip" md-direction="right" style="color: black;">
+		            Change My Password
+		          </md-tooltip>
+			</md-button>
+
+			
+			<span flex></span>
+			<h5 id="subheader">Admin Options |</h5>
+			<md-button aria-label="Add USER" ng-click="AddUSER($event)">
+				<md-icon md-svg-icon="img/icons/addUserBlack36.svg"></md-icon>	
+			</md-button>	
+
+		</div>
+	</md-toolbar>
+	
+	<h1 style="color: red; padding-left: 20px;"> {{newPassword}} </h1>
 	<h1>{{newUserPassword}}</h1>
 	<md-list ng-cloak="">
 		<md-list-item ng-repeat="user in AdminUsers">

@@ -101,6 +101,10 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 	    })
   	};
 
+	$scope.changeMyPassword = function(){
+		$location.url("/changePassword");
+	}
+
   	$scope.$on('broadcastFromAddUser', function() {
 	    refresh();
 	});

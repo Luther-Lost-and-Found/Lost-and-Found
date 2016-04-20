@@ -33,10 +33,6 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
     	}
   	};
 
-	$scope.changeMyPassword = function(){
-		$location.url("/changePassword");
-	}
-
 	$scope.goHome = function() {
 		$location.url("/itemlist")
 	}
