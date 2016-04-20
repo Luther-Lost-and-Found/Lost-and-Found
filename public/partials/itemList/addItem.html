@@ -43,8 +43,9 @@
           <md-tab id="imageUploadTab">
             <md-tab-label>Upload Image</md-tab-label>
             <md-tab-body>
+              
+              <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="100%">
               <label>{{picFile.name}}</label>
-              <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="400">
               <md-button id="picture" class="md-primary" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button>
             </md-tab-body>
           </md-tab>
