@@ -20,20 +20,23 @@ module.exports = function(app, passport, isLoggedIn) {
                 req.body.title + "'," + currentLocation[0].locationID + ",'" + req.user.norsekeyID +
                 "','" + req.body.itemColor + "',CURDATE());",function(err,result){
 
+                    console.log(req.body.newTags[0], "length", req.body.newTags.length);
+
                     var fullTag = "";
 
                     for (var i = 0; i < req.body.newTags.length; i++) {
-                        console.log("ATTEMPTING TAG INSERT");
-                        fullTag = fullTag+req.body.newTags[i].lowername+"@@@";
+                        console.log("ATTEMPTING TAG INSERT" , req.body.newTags[i]);
+                        fullTag = fullTag+req.body.newTags[i]+"@@@";
                         
                     }
+                    console.log(fullTag);
 
                     fullTag = fullTag.substring(0, fullTag.length - 3);
                     
                     console.log("REQUEST IN PROCESSING:====== ",req.body," +++++ ", fullTag);
 
                     db.query("INSERT INTO ItemTags (itemID,tags) VALUES (" +
-                    result.insertId + ",'" + fullTag + "');",function(err){
+                        result.insertId + ",'" + fullTag + "');",function(err){
 
                     });
                     res.json(result);
