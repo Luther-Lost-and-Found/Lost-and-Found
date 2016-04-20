@@ -4,8 +4,14 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   var doneRefreshInit = false;
 
-  $scope.goChangeSettings = function(){
-    $location.url("/superAdminPage");
+  $scope.goToAppSettings = function(){
+    if ($rootScope.userSettings.superPrivilege) {
+      console.log("IFSTATEMENT");
+      $location.url("/superAdminPage");
+    } else {
+      console.log("ELSESTATEMENT");
+      $location.url("/changePassword");
+    }
   }
 
   var refresh = function(){
