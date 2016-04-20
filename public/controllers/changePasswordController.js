@@ -6,8 +6,6 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 
 	console.log("Hello World from the CHANGE PW Controller");
 
-	$scope.string = "HELLO THERE";
-
 	$http.get("/loggedin").success(function(response){
 		console.log(response);
 		$scope.user = response;
@@ -34,6 +32,10 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
     		console.log("sorry, passwords do not match");
     	}
   	};
+
+	$scope.changeMyPassword = function(){
+		$location.url("/changePassword");
+	}
 
 	$scope.goHome = function() {
 		$location.url("/itemlist")
