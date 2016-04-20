@@ -4,6 +4,10 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 	'$animate','$rootScope', '$mdDialog', '$mdMedia', '$location',
 	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia, $location) {
 
+	$scope.newPW = false;
+	$scope.newUserPW = false;
+
+
 	console.log("Hello World from the SUPER ADMIN Controller");
 
 	var refresh = function(){
@@ -11,7 +15,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 			$scope.AdminUsers = response;
 			for (user in $scope.AdminUsers) {
 				if ($scope.AdminUsers[user].superPrivilege == 1) {
-					console.log("PRIVVVVV:",$scope.AdminUsers[user].superPrivilege);
+					// console.log("PRIVVVVV:",$scope.AdminUsers[user].superPrivilege);
 					$scope.AdminUsers[user].superPrivilege = true;
 				} else {
 					$scope.AdminUsers[user].superPrivilege = false;
@@ -79,6 +83,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 		console.log(user);
 		$http.post("/resetPassword",user).success(function(response){
 			console.log("RESETTING PASSWORD", response);
+			$scope.newPW = true;
 			$scope.newPassword = response;
 		});
 	};
@@ -117,6 +122,7 @@ function addUserController($scope, $rootScope, $http, $mdDialog) {
 		console.log(newUser);
 		$http.post("/addUser",newUser).success(function(response){
 			console.log("CREATED NEW USER", response);
+			$scope.newUserPW = true;
 			$rootScope.newUserPassword = response;
 			$rootScope.$broadcast('broadcastFromAddUser');
 			$scope.cancel();
