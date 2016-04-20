@@ -63,6 +63,24 @@
         </div>
 
         <div>
+        <md-content class="md-padding" layout="row">
+              <md-chips ng-model="selectedTags">
+                <md-autocomplete
+                        md-selected-item="selectedItem"
+                        md-search-text="searchText"
+                        md-items="item in querySearch(searchText)"
+                        md-item-text="item"
+                        placeholder="+ tags">
+                    <span md-highlight-text="searchText">{{item}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                  <strong>{{$chip}}</strong>
+                </md-chip-template>
+              </md-chips>
+            </md-content>
+      </div>
+
+       <!--  <div>
           <md-content class="md-padding" layout="column">
             <md-chips 
                 ng-model="selectedTags" md-autocomplete-snap
@@ -85,7 +103,7 @@
               </md-chip-template>
             </md-chips>
           </md-content>
-        </div>
+        </div> -->
         <md-dialog-actions layout="row">
           <md-button aria-label="AddItem" ng-click="uploadImage(picFile)">Add</md-button>
           <md-button aria-label="Remove" ng-click="cancel()">Cancel</md-button>
