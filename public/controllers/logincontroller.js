@@ -13,6 +13,7 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	    })
 	    .error(function(){
 	    	$rootScope.message = 'Authentication failed.';
+        $scope.password = "";
 	    	$location.url("/");
 	    });
   	};
