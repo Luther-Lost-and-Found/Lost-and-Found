@@ -1,4 +1,10 @@
-var app = angular.module('ItemApp',['ngMaterial']);
+var app = angular.module('ItemApp',['ngMaterial'])
+  .config(function($mdThemingProvider) {
+  $mdThemingProvider.theme('default')
+    .accentPalette('blue', {
+      'default': 'A200' // use shade 200 for default, and keep all other shades the same
+    });
+});
 
 app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,$rootScope,sharedService,sharedServiceUploadModal,$mdDialog, $mdMedia) {
 
