@@ -5,7 +5,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 	function($timeout, $scope, $http, $window, $animate,$rootScope, $mdDialog, $mdMedia, $location) {
 
 	$scope.newPW = false;
-	$scope.newUserPW = false;
+	$rootScope.newUserPW = false;
 
 
 	console.log("Hello World from the SUPER ADMIN Controller");
@@ -122,7 +122,7 @@ function addUserController($scope, $rootScope, $http, $mdDialog) {
 		console.log(newUser);
 		$http.post("/addUser",newUser).success(function(response){
 			console.log("CREATED NEW USER", response);
-			$scope.newUserPW = true;
+			$rootScope.newUserPW = true;
 			$rootScope.newUserPassword = response;
 			$rootScope.$broadcast('broadcastFromAddUser');
 			$scope.cancel();
