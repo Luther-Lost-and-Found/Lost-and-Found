@@ -64,7 +64,7 @@
         </div>
 
         <div>
-          <md-content class="md-padding" layout="column">
+          <md-content id="descForm" class="md-padding" layout="column">
             <md-chips 
                 ng-model="selectedTags" md-autocomplete-snap
                 md-transform-chip="transformChip($chip)"
@@ -75,7 +75,7 @@
                   md-search-text="searchText"
                   md-items="item in querySearch(searchText)"
                   md-item-text="item"
-                  placeholder="Start Typing...">
+                  placeholder="Description">
                 <span md-highlight-text="searchText">{{item}}</span>
 
               </md-autocomplete>

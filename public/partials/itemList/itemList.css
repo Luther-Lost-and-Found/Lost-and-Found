@@ -8,6 +8,15 @@
   margin-top: 0;
 }
 
+.addItemForm{
+  padding-right: 4%;
+}
+
+#descForm{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 #settings{
   overflow-y: visible;
   overflow-x: hidden;
@@ -17,8 +26,18 @@
   color:#666;
 }
 
-#global, #add, #cancel{
+#global{
   color:#666;
+}
+
+#add{
+  background-color: #4F97E9;
+  color:white;
+}
+
+#cancel{
+  background-color: #666;
+  color:white;
 }
 
 .fa {
