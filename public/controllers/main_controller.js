@@ -17,24 +17,15 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-            
-            console.log("inside interceptor");
             return {
-                // response: function(response) {
-                //     console.log("NO ERROR NO ERROR");
-                //     return response; 
-                // },
                 responseError: function(response) { 
                     if (response.status === 401){
-                        console.log("4010401401401");
                         $location.url('/');
                     }
                     if (response.status === 404){
-                        console.log("4040404040404");
                         $location.url('/404');
                     }
                     if (response.status === 454){
-                        console.log("45454545454");
                         $location.url('/itemlist');
                     } 
                     return $q.reject(response); 
@@ -229,20 +220,3 @@ myApp.service('sharedPropertiesTags',function(){
         }
     };
 });
-
-// myApp.run(function($rootScope,$http) {
-
-//     var setRootScope = function(){
-//         $http.get("/getSettings").success(function(response){
-//           $scope.$applyAsync(function(){
-//             console.log(response);
-//             $rootScope.userSettings = response;
-//           });
-//         });
-//         console.log("REFRESH");       
-//     };
-
-//     setRootScope();
-
-//     console.log("MAIN CONTROLLER");
-// });

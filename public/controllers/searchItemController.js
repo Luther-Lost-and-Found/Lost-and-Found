@@ -2,16 +2,8 @@ angular.module('searchItemApp',[]).controller('searchItemController',
 	['$timeout', '$scope', '$http', '$animate','$uibModal','$rootScope','sharedProperties',
 	function($timeout, $scope, $http, $animate,$uibModal,$rootScope, sharedProperties) {
 
-	console.log("Hello World from SEARCH controller");
-	for (var object in $rootScope.searchitemlist){
-		console.log($rootScope.searchitemlist[object]);
-		// $rootScope.searchitemlist[object].currentImage = "../itemImages/" + $rootScope.searchitemlist[object].itemID + ".jpg";
-	}
-	console.log($rootScope.searchitemlist);
-
 	$scope.clicked = function($element){
 		var current_id = ($element.itemID);
-		console.log(current_id); 
 		$http.get("/itemlist/" + current_id).success(function(response){
 			var itemTags = [];
 			for(i=0;i<response.length;i++){
@@ -38,7 +30,6 @@ angular.module('searchItemApp',[]).controller('searchItemController',
 		    size: 'md',
 		    resolve: {
 		        items: function () {
-		        	console.log($scope.item);
 		          	return $scope.item;
 		        }
 	      	}
@@ -73,7 +64,6 @@ angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootS
 			for(i=0;i<response.length;i++){
 				itemEditTags.push({'name':response[i].tag});
 			}
-			console.log(itemEditTags);
 
     		$rootScope.selectedTags = itemEditTags;
 
@@ -110,13 +100,6 @@ angular.module('ItemApp').controller('ModalInstanceCtrl', function ($http,$rootS
 		var current_id = $rootScope.item.itemID;
 		var fullTagsRaw = $rootScope.selectedTags;
 	    $scope.item.newTags = fullTagsRaw;
-	    console.log("======================");
-	    console.log("======================");
-	    console.log("======================");
-	    console.log($scope.item);
-	    console.log("======================");
-	    console.log("======================");
-	    console.log("======================");
 
 		$http.put("/itemlist/" + current_id, $scope.item).success(function(response){
 			$rootScope.$broadcast('handleBroadcast');
