@@ -37,16 +37,16 @@ Senior project
 
 >> ~~advanced search functionality (colors and other options)~~
 
->> perhaps consider using actual search libraries
+>> ~~perhaps consider using actual search libraries~~
 
 >> ~~refining user interface (html, css, etc…) ~~
 
->> ~~User preferences:
+>> ~~User preferences:~~
 
->>> password
+>>> ~~password~~
 
->>> default views
+>>> ~~default views~~
 
->>> etc...~~
+>>> ~~etc...~~
 
->> ~~#HAVE FUN!~~
+>> #HAVE FUN!
