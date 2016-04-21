@@ -12,8 +12,8 @@ div.navBarSearch {
 	padding-left: 1%;
 }
 
-#add-button{
-	color: rgba(255,255,255,1);
+.buttonstyle{
+	vertical-align: text-bottom;
 }
 
 md-input-container.navBarSearchContainer {
