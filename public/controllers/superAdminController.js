@@ -122,8 +122,8 @@ function addUserController($scope, $rootScope, $http, $mdDialog) {
 		console.log(newUser);
 		$http.post("/addUser",newUser).success(function(response){
 			console.log("CREATED NEW USER", response);
-			$scope.newUserPW = true;
 			$rootScope.newUserPassword = response;
+			$rootScope.newUserPW = true;
 			$rootScope.$broadcast('broadcastFromAddUser');
 			$scope.cancel();
 		});
