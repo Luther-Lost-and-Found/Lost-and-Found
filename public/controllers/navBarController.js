@@ -1,9 +1,9 @@
 var app = angular.module('navBarApp',['ngMaterial','ngFileUpload']);
 
 app.controller('NavBarCtrl', ['$rootScope',
-  '$timeout', '$scope', '$http', '$location', "$mdSidenav", 'sharedProperties','sharedService',
+  '$timeout', '$scope', '$http', '$location', "$mdSidenav", '$mdDialog', 'sharedProperties','sharedService',
   '$animate', 'sharedServiceUploadModal','sharedPropertiesTags','$filter',
-  function($rootScope,$timeout, $scope, $http, $location, $mdSidenav, sharedProperties,
+  function($rootScope,$timeout, $scope, $http, $location, $mdSidenav, $mdDialog, sharedProperties,
     sharedService,$animate,sharedServiceUploadModal,sharedPropertiesTags,$filter) {
 
   getTagsFromDatabase();
@@ -161,6 +161,31 @@ app.controller('NavBarCtrl', ['$rootScope',
       $location.url("/searchItem");
     });
   }
+
+    $scope.addItem = function(ev){
+    sharedServiceUploadModal.setProperty($scope.item);
+    $rootScope.item = {};
+
+    $mdDialog.show({
+      controller: itemModalInstanceCtrl,
+      templateUrl: 'partials/itemList/addItem.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      scope: $scope.$new()
+    })
+    // var modalInstance = $uibModal.open({
+    //     animation: $scope.animationsEnabled,
+    //     templateUrl: 'partials/itemList/addItem.html',
+    //     controller: 'itemModalInstanceCtrl',
+    //     size: 'lg',
+    //     resolve: {
+    //         items: function () {
+    //             return $scope.item;
+    //         }
+    //     }
+    //   });
+  };
 
   var myList = [];
 
