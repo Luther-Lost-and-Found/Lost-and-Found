@@ -390,6 +390,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   });
 
   $scope.isCollapsed = true;
+
 }).$inject = ['$scope', 'sharedServiceUpdateModal'];
 
 function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, Upload, sharedServiceUploadModal,sharedPropertiesTags) {
