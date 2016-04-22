@@ -137,8 +137,8 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url:'/404',
                 views:{
                     'navBar': {
-                        templateUrl : '../partials/navBar/navBar.html',
-                        action : 'navBarApp.NavBarCtrl'
+                        templateUrl : '../partials/404/404Nav.html',
+                        action : '404App.404Controller'
                     },
                     '404':{
                         templateUrl : '../partials/404/404.html',
