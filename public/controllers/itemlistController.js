@@ -323,6 +323,9 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   $scope.updateItem = function($element){
     var current_id = ($element.itemID);
     $http.put("/itemlist/" + current_id, $scope.item).success(function(response){
+      console.log($scope.item)
+
+
       refresh();
     });
   };
@@ -370,6 +373,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
     $rootScope.item = matches;
 
     console.log("FINAL",$rootScope.item)
+    console.log('I am here' + $rootScope.item.building_name);
 
     $scope.parentSelected = $element;
 
@@ -393,6 +397,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   $scope.$on('handleBroadcast', function() {
     console.log("LOCATION",$rootScope.userLocation);
+
     refreshAfetSend($rootScope.ownLocation);
   });
 
@@ -400,7 +405,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 }).$inject = ['$scope', 'sharedServiceUpdateModal'];
 
 function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, Upload, sharedServiceUploadModal,sharedPropertiesTags) {
-  
   $rootScope.item = $scope.parentSelected;
   $scope.item = $scope.parentSelected;
   $scope.selected = {
@@ -426,7 +430,7 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
       $rootScope.tagsFromItem = curTagsList;
 
       console.log("SELECTED TAGS",$rootScope.tagsFromItem);
-
+      console.log('I am here' + response[0].location);
       if(response[0].claimed == 0){
         response[0].claimed = false;
       }
