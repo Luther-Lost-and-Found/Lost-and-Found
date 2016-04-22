@@ -1,9 +1,10 @@
-    var express = require('express'),
+var express = require('express'),
     path = require('path'),
     mysql = require('mysql'),
     multiparty = require('multiparty'),
     fs = require('fs'),
     // zerorpc = require("zerorpc"),
+
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
     
@@ -49,7 +50,6 @@ module.exports = function(app, passport, isLoggedIn) {
             var contentType = file.headers['content-type'];
             var extension = file.path.substring(file.path.lastIndexOf('.'));
             var destPath = '/home/sparrow/CS/cs490/Colab';
-
             var headers = {
                 'x-amz-acl': 'public-read',
                 'Content-Length': file.size,

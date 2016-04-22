@@ -115,7 +115,6 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                         templateUrl : '../partials/superAdmin/superAdmin.html',
                         action : 'superAdminApp.superAdminController'
                     }
-                    
                 }
             })
             .state('guestPage', {
@@ -128,8 +127,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'guestPage': {
                         templateUrl : '../partials/guest/guest.html',
                         action : 'guestApp.guestController'
-                    }
-                    
+                    }                    
                 }
             })
 
@@ -168,11 +166,9 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 } 
             };
         }];
-
         $httpProvider.interceptors.push(interceptor);
     }
 ]);
-
 
 myApp.service('sharedService',function($rootScope) {
     return{
