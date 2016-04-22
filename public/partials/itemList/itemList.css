@@ -4,6 +4,42 @@
   color:#444;
 }*/
 
+.settings-form{
+  margin-top: 0;
+}
+
+.addItemForm{
+  padding-right: 4%;
+}
+
+#descForm{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+#settings{
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+#logout{
+  color:#666;
+}
+
+#global{
+  color:#666;
+}
+
+#add{
+  background-color: #4F97E9;
+  color:white;
+}
+
+#cancel{
+  background-color: #666;
+  color:white;
+}
+
 .fa {
   color:#666;
 }
