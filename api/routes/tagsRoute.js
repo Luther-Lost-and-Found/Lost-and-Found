@@ -11,7 +11,7 @@ module.exports = function(app) {
     app.get("/tags", function(req,res){
 
         db.query('Select * from Tags', req.body, function(err, rows, fields){
-                res.json(rows);
+            res.json(rows);
         });
     });
 };

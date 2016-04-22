@@ -1,14 +1,12 @@
 var app = angular.module('navBarApp',['ngMaterial','ngFileUpload']);
 
 app.controller('NavBarCtrl', ['$rootScope',
-  '$timeout', '$scope', '$http', '$location', "$mdSidenav", 'sharedProperties','sharedService',
+  '$timeout', '$scope', '$http', '$location', "$mdSidenav", '$mdDialog', 'sharedProperties','sharedService',
   '$animate', 'sharedServiceUploadModal','sharedPropertiesTags','$filter',
-  function($rootScope,$timeout, $scope, $http, $location, $mdSidenav, sharedProperties,
+  function($rootScope,$timeout, $scope, $http, $location, $mdSidenav, $mdDialog, sharedProperties,
     sharedService,$animate,sharedServiceUploadModal,sharedPropertiesTags,$filter) {
 
-  getTagsFromDatabase();
-
-  // var finalItems = [];
+    getTagsFromDatabase();
 
 
     $scope.toggleRight = buildToggler('right');
@@ -17,75 +15,6 @@ app.controller('NavBarCtrl', ['$rootScope',
       $rootScope.search = $scope.search;
 
     };
-    // $scope.onSearch = function(searchValue) {
-    //   $scope.search = searchValue;
-    //   $rootScope.search = $scope.search;
-    //   var searchList = $scope.search.split(" ");
-    //   var newItems;
-      
-    //   for (var i = 0; i < searchList.length; i++) {
-    //     newItems = $filter('filter')($rootScope.allItems, searchList[i]);
-    //     for (var x = 0; x < newItems.length; x++) {
-    //       if(finalItems.length == 0){
-    //         finalItems.push({
-    //             item:newItems[x],
-    //             matches: 0
-    //           });
-    //       }
-    //       else{
-    //         console.log("NEW ITEM",newItems[x])
-
-    //         for (var y = 0; y < finalItems.length; y++) {
-    //           console.log("EXPR: ", newItems[x]==finalItems[y].item)
-    //           console.log("INSIDE")
-    //           if(newItems[x] == finalItems[y].item){
-    //             finalItems.matches = finalItems.matches+1;
-    //           }
-    //           else{
-    //             console.log("HELLO FROM ELSE")
-    //             // finalItems.push({
-    //             //   item:newItems[x],
-    //             //   matches: 0
-    //             // });
-    //           }
-    //         }
-    //       }
-          
-    //     }
-    //   }
-
-      // for (var i = 0; i < searchList.length; i++) {
-      //   newItems = $filter('filter')($rootScope.allItems, searchList[i]);
-      //   if(finalItems.length > 0){
-      //     for (var x = 0; x < newItems.length; x++) {
-      //     // if(finalItems.length > 0){}
-      //       for (var y = 0; y < finalItems.length; y++) {
-      //         if(newItems[x] == finalItems[y].item){
-      //           finalItems[y].matches = finalItems[y].matches+1;
-      //         }
-      //         else{
-      //           finalItems.push({
-      //             item:newItems[x],
-      //             matches: 0
-      //           });
-      //         }
-      //       }
-      //     } 
-      //   }
-      //   else{
-      //     console.log("HO");
-      //     for (var x = 0; x < newItems.length; x++) {
-      //       finalItems.push({
-      //         item:newItems[x],
-      //         matches: 0
-      //       });
-      //     }
-      //   }
-      // }
-    //   console.log("FINAL ITEMS",finalItems);
-    //   $rootScope.itemlist = newItems;
-
-    // };
 
     function buildToggler(navID) {
       return function() {
@@ -161,6 +90,31 @@ app.controller('NavBarCtrl', ['$rootScope',
       $location.url("/searchItem");
     });
   }
+
+    $scope.addItem = function(ev){
+    sharedServiceUploadModal.setProperty($scope.item);
+    $rootScope.item = {};
+
+    $mdDialog.show({
+      controller: itemModalInstanceCtrl,
+      templateUrl: 'partials/itemList/addItem.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      scope: $scope.$new()
+    })
+    // var modalInstance = $uibModal.open({
+    //     animation: $scope.animationsEnabled,
+    //     templateUrl: 'partials/itemList/addItem.html',
+    //     controller: 'itemModalInstanceCtrl',
+    //     size: 'lg',
+    //     resolve: {
+    //         items: function () {
+    //             return $scope.item;
+    //         }
+    //     }
+    //   });
+  };
 
   var myList = [];
 

@@ -13,40 +13,40 @@ Senior project
 
 ####Having met last semester’s requirements, this semester we plan on refining our application by doing the following.
 
->> Replace Bootstrap with Angular Material
+>> ~~Replace Bootstrap with Angular Material~~
 
 >> Put application on permanent server
 
 >> Set administrators up with application to get feedback
 
->> Implement the migration of items
+>> ~~Implement the migration of items~~
 
->> Set up site-specific elements (displaying items based on admin’s default location, etc.)
+>> ~~Set up site-specific elements (displaying items based on admin’s default location, etc.)~~
 
 >> Item expiration date
 
->> Switch over to using Python (Flask) and nginx for static files (uWSGI to connect nginx with Flask for API)
+>> ~~Switch over to using nginx for static files~~
 
 >> Active Directory integration?
 
->> refining search engine:
+>> ~~refining search engine:~~
 
->> refining tagging system
+>> ~~refining tagging system~~
 
->> search by tags
+>> ~~search by tags~~
 
->> advanced search functionality (colors and other options)
+>> ~~advanced search functionality (colors and other options)~~
 
->> perhaps consider using actual search libraries
+>> ~~perhaps consider using actual search libraries~~
 
->> refining user interface (html, css, etc…) 
+>> ~~refining user interface (html, css, etc…) ~~
 
->> User preferences:
+>> ~~User preferences:~~
 
->>> password
+>>> ~~password~~
 
->>> default views
+>>> ~~default views~~
 
->>> etc...
+>>> ~~etc...~~
 
 >> #HAVE FUN!

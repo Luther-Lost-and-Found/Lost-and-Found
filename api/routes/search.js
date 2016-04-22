@@ -4,8 +4,6 @@ var express = require('express'),
     SphinxClient = require ("sphinxapi"),
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
-    
-// db.query('USE ' + dbconfig.database);
 
 var connection = mysql.createConnection(
     {
@@ -31,18 +29,15 @@ module.exports = function(app, passport, isLoggedIn) {
                 or match (ItemLF.imagePrimColor,ItemLF.itemColor) against ( '"+to_search+"')) \
                 order by title_relevance desc, desc_relevance desc, color_relevance desc;", function(err, rows, fields){  
 
-                    for (i = 0; i < rows.length; i++) { 
-                        if(rows[i].imagePrimColor == null){
-                            rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';
-                        }
-                        else{
-                            rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
-                        }
-                    }      
-                    console.log(rows);
-                    //console.log(auth.user.username);
-                    res.json(rows);
-            });
-
+            for (i = 0; i < rows.length; i++) { 
+                if(rows[i].imagePrimColor == null){
+                    rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';
+                }
+                else{
+                    rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
+                }
+            }
+            res.json(rows);
+        });
     });
 };

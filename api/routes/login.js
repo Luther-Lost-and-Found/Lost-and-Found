@@ -7,32 +7,6 @@ var express = require('express'),
 	
 db.query('USE ' + dbconfig.database);
 
-// // module.exports = function(router,db){
-
-//     router.post('/login', function(req, res, next) {
-//       passport.authenticate('local', function(err, user, info) {
-//         if (err) {
-//           return res.status(500).json({err: err});
-//         }
-//         if (!user) {
-//           return res.status(401).json({err: info});
-//         }
-//         req.logIn(user, function(err) {
-//           if (err) {
-//             return res.status(500).json({err: 'Could not log in user'});
-//           }
-//           res.status(200).json({status: 'Login successful!'});
-//         });
-//       })(req, res, next);
-//     });
-
-//     router.get('/logout', function(req, res) {
-//       req.logout();
-//       res.status(200).json({status: 'Bye!'});
-//     });
-
-// }
-
 module.exports = function(app, passport) {
 
 	app.use(express.static(path.join(__dirname, '/views')));
@@ -45,17 +19,12 @@ module.exports = function(app, passport) {
 		res.send(req.isAuthenticated() ? req.user : '0');
 	});
 
-	// route to log in
 	app.post('/login', passport.authenticate('local'), function(req, res) {
-		// console.log("::::::::::::::::::::::::::::::::::::::::::::::::::::::", req);
 		res.send(req.user);
 	});
 
 	var auth = function(req, res, next){
-		console.log("AUTHENTICATION");
 		if (!req.isAuthenticated()){
-
-			console.log("401 from authentication");
 			res.send(401);
 		} 
 		else next();
