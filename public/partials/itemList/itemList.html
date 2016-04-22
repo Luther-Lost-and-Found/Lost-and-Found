@@ -39,10 +39,8 @@
 			                  md-colspan-xs="1"
 			                  ng-class="tile.background"
 			                  >
-			<object data="avatar.jpg" type="image/jpg">
-			    <img ng-src="{{item.currentImage}}" class="tilesT" ng-click="clicked($event,item)" ></img>
-			</object>
-	        
+
+			<img ng-src="{{item.currentImage}}" class="tilesT" ng-click="clicked($event,item)" ></img>	        
 	        <md-grid-tile-footer class="tile-footer-darker">
 	        	<md-checkbox ng-model="item.toDelete" ng-hide="switchData.seeAll" ng-change="checked(item.claimed)" aria-label="Checkbox">{{item.title}}</md-checkbox>
 	        	<h3 ng-show="switchData.seeAll">{{item.title}}</h3>
