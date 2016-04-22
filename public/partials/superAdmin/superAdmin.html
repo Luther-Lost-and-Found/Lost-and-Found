@@ -1,0 +1,15 @@
+<div ng-app="superAdminApp" class="container" ng-controller="superAdminController" ng-cloak>
+	<h3 id="subheader"> Super Administrator</h3>
+	<md-button aria-label="Add USER" ng-click="AddUSER($event)">+ Add User</md-button>
+	<h1> {{newPassword}} </h1>
+	<h1>{{newUserPassword}}</h1>
+	<md-list ng-cloak="" class="listdemoListControls">
+		<md-list-item ng-model="pwchange" ng-repeat="user in AdminUsers">
+			<p>{{ user.first_name }}&nbsp;{{user.last_name}}</p>
+			<md-switch ng-model="user.superPrivilege" ng-change="grantSuper(user)"/>
+			<md-icon class="sadminform" md-svg-icon="img/icons/changePasswordBlack.svg" ng-click="ChangePW($event,user)"></md-icon>
+			<md-icon class="sadminform" md-svg-icon="img/icons/deleteUserBlack.svg" ng-click="removeUser($event,user)"></md-icon>
+			<md-divider />
+		</md-list-item>
+	</md-list>
+</div>

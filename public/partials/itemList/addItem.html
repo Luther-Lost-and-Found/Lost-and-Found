@@ -1,4 +1,4 @@
-<form>
+<form class="settings-form">
   <md-toolbar ng-style="{background: chosenColor}">
     <div class="md-toolbar-tools">
       <h2>Add Item &nbsp;<h1 style="color:red;">{{errorMessage}}</h1> </h2>
@@ -11,7 +11,7 @@
 
   <table>
     <tr>
-      <td class="addItemColorImage" width="350" style="min-width: 200px;">
+      <td class="addItemColorImage" width="350" style="min-width: 200px; vertical-align: top;">
 <!-- 
         <label>{{picFile.name}}</label>
         <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="400">
@@ -43,11 +43,10 @@
           <md-tab id="imageUploadTab">
             <md-tab-label>Upload Image</md-tab-label>
             <md-tab-body>
-            <div class="imgholder"
+              
+              <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="100%">
               <label>{{picFile.name}}</label>
-              <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="400">
-              </div>
-              <md-button id="picture" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button>
+              <md-button id="picture" class="md-primary" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button>
             </md-tab-body>
           </md-tab>
         </md-tabs>        
@@ -65,7 +64,7 @@
         </div>
 
         <div>
-          <md-content class="md-padding" layout="column">
+          <md-content id="descForm" class="md-padding" layout="column">
             <md-chips 
                 ng-model="selectedTags" md-autocomplete-snap
                 md-transform-chip="transformChip($chip)"
@@ -76,7 +75,7 @@
                   md-search-text="searchText"
                   md-items="item in querySearch(searchText)"
                   md-item-text="item"
-                  placeholder="Start Typing...">
+                  placeholder="Description">
                 <span md-highlight-text="searchText">{{item}}</span>
 
               </md-autocomplete>
@@ -89,8 +88,8 @@
           </md-content>
         </div>
         <md-dialog-actions layout="row">
-          <md-button aria-label="AddItem" ng-click="uploadImage(picFile)">Add</md-button>
-          <md-button aria-label="Remove" ng-click="cancel()">Cancel</md-button>
+          <md-button aria-label="AddItem" ng-click="uploadImage(picFile)" id="add">Add</md-button>
+          <md-button aria-label="Remove" ng-click="cancel()" id="cancel">Cancel</md-button>
         </md-dialog-actions>
       </td>
     </tr>

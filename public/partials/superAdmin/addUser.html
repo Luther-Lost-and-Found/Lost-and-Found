@@ -1,0 +1,45 @@
+
+		<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="50">
+			<div class="modal-header">
+	            <h3 class="modal-title">To a User Fill Out the Form Below</h3>
+	        </div>
+	        <div class="modal-body" style="z-index:20;">
+	        <div layout-gt-sm="row">
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        		<label>First Name</label>
+	        		<input ng-model="item.first_name">
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        		<label>Last Name</label>
+	        		<input ng-model="item.last_name">
+	        	</md-input-container flex-gt-sm>
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        		<label>Email</label>
+	        		<input ng-model="item.email">
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        		<label>LocationID</label>
+	        		<input ng-model="item.locationID">
+	        	</md-input-container>
+	        	<md-input-container class="md-block" flex-gt-sm>
+	        		<label>NorseKey</label>
+	        		<input ng-model="item.norsekeyID">
+	        	</md-input-container>
+	        </div>
+	        <div>
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<md-button aria-label="Create" ng-click="addUser(item)" md-autofocus>Create
+						      	</md-button>
+						    </td>
+						    <td>
+								<md-button aria-label="Cancel" ng-click="cancel()" md-autofocus>Cancel
+						      	</md-button>
+						    </td>
+					    </tr>
+				    </tbody>
+			    </table>
+			</div>
+		</md-dialog>

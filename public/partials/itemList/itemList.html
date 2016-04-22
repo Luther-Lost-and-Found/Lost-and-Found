@@ -28,7 +28,7 @@
 		    </tr>
 	    </tbody>
     </table>
-	<md-grid-list
+	<md-grid-list id="list"
 	        md-cols-sm="{{10-userSettings.gridSize}}" md-cols-md="{{10-userSettings.gridSize}}" md-cols-gt-md="{{10-userSettings.gridSize}}"
 	        md-row-height-gt-md="1:1.2" md-row-height="4:3"
 	        md-gutter="8px" md-gutter-gt-sm="4px" >
@@ -55,17 +55,13 @@
 					<div style="display: table-cell;">
 						<h1 class="md-toolbar-tools" ng-cloak>Hello, {{userSettings.first_name}}!</h1>
 					</div>
-					<div >
-						<md-button class="logout" aria-label="More" ng-click="logout()" >
-							<md-icon md-svg-icon="img/icons/exitWhite.svg"></md-icon>
-						</md-button>
-					</div>
+					<md-button class="md-primary" aria-label="More" ng-click="logout()" style="position: fixed; bottom:0; right:0;">Logout</md-button>
                 </div>
               </div>
               
             </md-toolbar>
-            <md-content ng-controller="SideNavCtrl" layout-padding>
-				<form>
+            <md-content id="settings" ng-controller="SideNavCtrl" layout-padding>
+				<form id="settings-form">
 					<md-switch aria-label="SwitchAll" ng-model="switchData.seeAll" ng-change="onSwitchChange(switchData.seeAll)">See All Items: {{ message }}</md-switch>
 					<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
 						<h2 class="md-toolbar-tools">
@@ -85,8 +81,12 @@
 
 					</md-slider-container>
 				</form>
-				<md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary" style="position:fixed; bottom:0;">
+				<md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary" style="position: fixed; bottom:0;">
                 Save Settings</md-button>
+                
+                <span flex></span>
+                <md-button id="global" ng-hide="globalSettings" ng-click="goChangeSettings()" class="md-secondary" style="position:fixed;">
+                GLOBAL SETTINGS</md-button>
             </md-content>
         </md-sidenav>
     </div>

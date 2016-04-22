@@ -4,6 +4,10 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   var doneRefreshInit = false;
 
+  $scope.goChangeSettings = function(){
+    $location.url("/superAdminPage");
+  }
+
   var refresh = function(){
     $http.get("/itemlist").success(function(response){
       $scope.$applyAsync(function(){
@@ -595,7 +599,11 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   ]},
   {name: 'White', colors: [
           {hex: '000000' },
-  ]}];
+  ]},
+  {name: 'Norse', colors: [
+          {hex: '093A7D' },
+  ]}
+  ];
 
 
   

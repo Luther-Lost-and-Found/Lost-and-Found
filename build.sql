@@ -25,14 +25,15 @@ room_name VARCHAR(30) NOT NULL)
 engine=InnoDB;
 
 CREATE TABLE AdminLF (norsekeyID varchar(30) NOT NULL PRIMARY KEY, 
-allItems BOOL NOT NULL,
+allItems BOOL NOT NULL DEFAULT false,
 sorting VARCHAR(15),
-gridSize INT NOT NULL,
+gridSize INT NOT NULL DEFAULT 5,
 password VARCHAR(128) NOT NULL,
 locationID INT NOT NULL,
 first_name VARCHAR(20) NOT NULL, 
 last_name VARCHAR(30) NOT NULL,
 email VARCHAR(50) NOT NULL,
+superPrivilege BOOL NOT NULL DEFAULT false,
 FOREIGN KEY (locationID) REFERENCES LocationLF(locationID))
 engine=InnoDB;
 

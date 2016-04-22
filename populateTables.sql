@@ -25,8 +25,8 @@ VALUES (3,"111-1111","awesome3@location.edu","Valders","10");
 
 # AdminLF =============================================
 
-INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password,locationID,first_name,last_name,email)
-VALUES ("111111", false, "date", 5, "$2a$10$z4tbDtxmQaK2004UcE/Fqu9DsqVkQBs1ol7nnP.VdogYJ0B9aKBqG", 2, "Ales", "Sparrow", "super@senior.edu");
+INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password,locationID,first_name,last_name,email,superPrivilege)
+VALUES ("111111", false, "date", 5, "$2a$10$z4tbDtxmQaK2004UcE/Fqu9DsqVkQBs1ol7nnP.VdogYJ0B9aKBqG", 2, "Ales", "Sparrow", "super@senior.edu",true);
 
 INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password,locationID,first_name,last_name,email)
 VALUES ("111112", false, "date", 5, "$2a$10$20cgX0UkoBJr3cac1eJi4ey9SU/LXaa5qjawZFYNa9PFI0w8C4bp2", 1, "Miriam", "Harries", "hello@adele.edu");
@@ -37,8 +37,8 @@ VALUES ("111113", false, "date", 5, "$2a$10$V2pfZRnZmI1DK5.IX4mIAOI7k572seZLOrm6
 INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password,locationID,first_name,last_name,email)
 VALUES ("111114", false, "date", 5, "$2a$10$zK7VmQehbFZ7AQa9I/5KEuhjUSFQluu3YElPuJmhCF5m4mm52i0Km", 1, "Kirby", "Olson", "fresh@prince.edu");
 
-INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password,locationID,first_name,last_name,email)
-VALUES ("111115", false, "date", 5, "$2a$10$bc7qhIYLq7pZNAW/XWwwGeuecEW3KfYTY7UjZTF1hsNQnM8QPQpnW", 2, "Sergei", "Hanka", "jarjar@binks.edu");
+INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password,locationID,first_name,last_name,email,superPrivilege)
+VALUES ("111115", false, "date", 5, "$2a$10$bc7qhIYLq7pZNAW/XWwwGeuecEW3KfYTY7UjZTF1hsNQnM8QPQpnW", 2, "Sergei", "Hanka", "jarjar@binks.edu", true);
 
 # ItemLF =============================================
 

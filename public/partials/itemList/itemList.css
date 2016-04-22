@@ -1,3 +1,5 @@
+/*
+<<<<<<< HEAD
 .navbarColor {
   background-color: #003C72;
 }
@@ -23,11 +25,77 @@
   padding-left:0px;
   padding-right:0px;
  }
+=======
+>>>>>>> f3d15b3ce1e2bafada5139ae2f22dbca41cc2e86*/
+/*input {
+  padding-left:40px;
+  max-width: 75%;
+  color: #4F97E9;
+ }*/
+ input:disabled {
+  margin-left:40px;
+  max-width:75%;
+
+  } 
+md-checkbox.md-checked.blue .md-icon {
+ background-color: rgba(79, 151, 233, 1);
+}
+  .view1{
+  margin-left:40px;
+  max-width:75%;
+
+  } 
+ .view {
+    margin-left:40px;
+  }
+
+ .sizing {
+  padding-top : 0px;
+ }
+.md-input-has-value {
+  padding-bottom: 5px;
+  color: blue;
+ }
+.input {
+  padding-left:5px;
+  padding-right:5px;
+}
+input {
+  width: 4px;
+}
+.navbarColor {
+  background-color: #003C72;
+}
+.left {
+  float:left;
+  display: inline;
+
+}
+.rightFloat {
+  float:right;
+}
 
 /*body {
   background-color: #eee;
   color:#444;
 }*/
+
+.settings-form{
+  margin-top: 0;
+}
+
+#settings{
+  overflow-y: visible;
+  overflow-x: hidden;
+}
+
+#logout{
+  color:#666;
+}
+
+#global, #add, #cancel{
+  color:#666;
+}
 
 .fa {
   color:#666;
@@ -122,4 +190,24 @@ footer h5{
   height: 300px;
   margin-left: auto;
   margin-right: auto;
+}
+.buttonholder {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+ 
+
+.butt1 {
+  background-color: #4F97E9;
+   color: white;
+}
+.butt2 {
+  background-color: rgb(152, 0, 0);
+   color: white;
+}
+#butt3 {
+  background-color:#666;
+  color: white;
+
 }

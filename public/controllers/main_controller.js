@@ -7,9 +7,10 @@ angular.module('searchItemApp',[]);
 angular.module('guestApp',[]);
 angular.module('404App',[]);
 angular.module('SideNavApp',[]);
+angular.module('superAdminApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp','superAdminApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
@@ -30,6 +31,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     if (response.status === 404){
                         console.log("4040404040404");
                         $location.url('/404');
+                    }
+                    if (response.status === 454){
+                        console.log("45454545454");
+                        $location.url('/itemlist');
                     } 
                     return $q.reject(response); 
                 } 
@@ -52,7 +57,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 },
               })
 
-        	.state('login',{
+            .state('login',{
                 url: '/',
                 views: {
                     'login': {
@@ -60,7 +65,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                         action : 'LoginApp.loginController'
                     }
                 }
-        	})
+            })
             .state('itemlist', {
                 parent:'rootIL',
                 url:'/itemlist',
@@ -90,6 +95,20 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                         templateUrl : '../partials/search/searchItem.html',
                         action : 'searchItemApp.searchItemController'
                     }
+                }
+            })
+            .state('superAdminPage', {
+                url:'/superAdminPage',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/guest/guestNav.html',
+                        action : 'guestApp.guestController'
+                    },
+                    'superAdminPage': {
+                        templateUrl : '../partials/superAdmin/superAdmin.html',
+                        action : 'superAdminApp.superAdminController'
+                    }
+                    
                 }
             })
             .state('guestPage', {
@@ -211,4 +230,3 @@ myApp.service('sharedPropertiesTags',function(){
 
 //     console.log("MAIN CONTROLLER");
 // });
-
