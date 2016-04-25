@@ -12,8 +12,10 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   $scope.goToAppSettings = function(){
     if ($rootScope.userSettings.superPrivilege) {
+      console.log("To Super Admin Page");
       $location.url("/superAdminPage");
     } else {
+      console.log("To Chanage Password Page");
       $location.url("/changePassword");
     }
   }
