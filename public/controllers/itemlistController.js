@@ -192,9 +192,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
       $rootScope.$emit(currentSorting.method);
     }
   }
-
-
-
+  
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
@@ -320,12 +318,15 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   $scope.updateItem = function($element){
     var current_id = ($element.itemID);
     $http.put("/itemlist/" + current_id, $scope.item).success(function(response){
+      console.log($scope.item)
+
+
       refresh();
     });
   };
 
   $scope.status = '  ';
-  
+
   $scope.clicked = function(ev,$element) {
 
     var current_id = ($element.itemID);
@@ -394,7 +395,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 }).$inject = ['$scope', 'sharedServiceUpdateModal'];
 
 function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, Upload, sharedServiceUploadModal,sharedPropertiesTags) {
-  
   $rootScope.item = $scope.parentSelected;
   $scope.item = $scope.parentSelected;
   $scope.selected = {

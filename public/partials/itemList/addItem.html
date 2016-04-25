@@ -25,13 +25,13 @@
         </div>
         <md-tabs md-align-tabs="top" md-border-bottom style="height:100%; overflow: auto;"> -->
 
-        <md-tabs md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
+        <md-tabs id="tabs" md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
 
           <md-tab id="colorPickerTab">
             <md-tab-label>Choose Color</md-tab-label>
             <md-tab-body>
               <div ng-cloak="">
-                <md-content layout-padding="">
+                <md-content layout-padding="" style="background-color: #eee">
                   <md-grid-list md-cols="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter-gt-md="1px" md-gutter-md="1px" md-gutter="1px">
                     <md-grid-tile ng-repeat="tile in colorTiles" ng-style="{'background': tile.color}" ng-model="item.itemColor" ng-click="colorClicked(tile)">
                     </md-grid-tile>
