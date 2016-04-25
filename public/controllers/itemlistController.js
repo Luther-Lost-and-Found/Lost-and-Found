@@ -195,9 +195,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
       $rootScope.$emit(currentSorting.method);
     }
   }
-
-
-
+  
   $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
