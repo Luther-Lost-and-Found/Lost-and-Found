@@ -1,9 +1,9 @@
 <div ng-app="superAdminApp" class="container" ng-controller="superAdminController as ctrl" ng-cloak>
 	<md-content class="adminOptions">
-		<md-tabs md-selected="0"  style="background-color: white;width: 100%;" md-dynamic-height>
+		<md-tabs md-selected="0"  style="width: 100%; background-color: lightgrey" md-dynamic-height>
 			<md-tab id="adminTab" >
 		        <md-tab-label>Administrative Options</md-tab-label>
-		        <md-tab-body>
+		        <md-tab-body >
 		        	<h1 ng-if="newPW">New Password Is: {{newPassword}} </h1>
 					<h1 ng-if="newUserPW">New Password Is: {{newUserPassword}}</h1>
 					<md-list ng-cloak="">

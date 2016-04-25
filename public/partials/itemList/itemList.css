@@ -1,3 +1,51 @@
+ input:disabled {
+  margin-left:40px;
+  max-width:75%;
+
+  } 
+md-checkbox.md-checked.blue .md-icon {
+ background-color: rgba(79, 151, 233, 1);
+}
+  .view1{
+  margin-left:40px;
+  max-width:75%;
+
+  } 
+ .view {
+    margin-left:40px;
+  }
+
+ .sizing {
+  padding-top : 0px;
+ }
+.md-input-has-value {
+  padding-bottom: 5px;
+  color: blue;
+ }
+.input {
+  padding-left:5px;
+  padding-right:5px;
+}
+/*input {
+  width: 4px;
+}*/
+.navbarColor {
+  background-color: #003C72;
+}
+.left {
+  float:left;
+  display: inline;
+
+}
+
+.icons{
+  vertical-align: sub;
+}
+
+.rightFloat {
+  float:right;
+}
+
 .settings-form{
   margin-top: 0;
 }
@@ -28,6 +76,7 @@
   background-color: #4F97E9;
   color:white;
 }
+
 
 #cancel{
   background-color: #666;
@@ -106,7 +155,6 @@ footer h5{
   text-align: right;
   text-decoration: bold;
   color:blue;
-
 }
 .itemListOptions {
   padding-top: 150px;
@@ -127,4 +175,30 @@ footer h5{
   height: 300px;
   margin-left: auto;
   margin-right: auto;
+}
+.buttonholder {
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+ 
+.buttonholder1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.butt1 {
+  background-color: #4F97E9;
+   color: white;
+}
+.butt2 {
+  background-color: rgb(152, 0, 0);
+   color: white;
+}
+#butt3 {
+  background-color:#666;
+  color: white;
+
+}
+#butt4 {
+  color: #4F97E9;
 }
