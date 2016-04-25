@@ -5,23 +5,23 @@
           <div class="md-toolbar-tools navbarColor">Edit Item</div>
           </md-toolbar>
           <div class="md-dialog-content">
-
+			<div style="height:234px;">
 	        <div class="left">
             	<img ng-style="{background: item.itemColor}" style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}">
           </div>
-           <div>
+           
 	        <md-input-container class="md-block" flex-gt-sm>
 	        	<label class=view>Title</label>
 	        	<input class=view1 style="color:#093A7D" ng-model="item.title">
 	        	</md-input-container>-
 	        <md-input-container class="md-block" flex-gt-sm>
-	        	<md-checkbox class="blue" ng-model="item.claimed" ng-init="item.claimed" aria-label="Checkbox"><label> Claimed By</label></md-checkbox>
+	        	<label class=view> Claimed By</label>
 	        	<input class=view1 style="color:#093A7D" ng-model="item.claimed_by" >
+
 	        </md-input-container flex-gt-sm>
-	        <br>
-	        <br>
+
 	        </div>
-	        <br>
+	        
 	        <div layout="row" ng-cloak>
             <md-content class="md-padding" layout="column">
               <h2 class="md-title">Tags</h2>

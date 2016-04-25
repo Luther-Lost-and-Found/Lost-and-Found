@@ -60,9 +60,9 @@ md-checkbox.md-checked.blue .md-icon {
   padding-left:5px;
   padding-right:5px;
 }
-input {
+/*input {
   width: 4px;
-}
+}*/
 .navbarColor {
   background-color: #003C72;
 }
@@ -216,7 +216,10 @@ footer h5{
 }
 
  
-
+.buttonholder1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
 .butt1 {
   background-color: #4F97E9;
    color: white;
@@ -229,4 +232,7 @@ footer h5{
   background-color:#666;
   color: white;
 
+}
+#butt4 {
+  color: #4F97E9;
 }
