@@ -11,11 +11,12 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   var doneRefreshInit = false;
 
   $scope.goToAppSettings = function(){
+    console.log("USER PRIV:::",$rootScope.userSettings.superPrivilege);
     if ($rootScope.userSettings.superPrivilege) {
       console.log("To Super Admin Page");
       $location.url("/superAdminPage");
     } else {
-      console.log("To Chanage Password Page");
+      console.log("To Change Password Page");
       $location.url("/changePassword");
     }
   }
