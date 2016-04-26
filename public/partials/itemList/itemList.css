@@ -1,3 +1,15 @@
+
+.md-button.md-fab {
+  line-height: 0px;
+}
+md-menu-content {
+  padding-top: 0px;
+}
+.Locations {
+  padding-bottom: 0px;
+
+}
+
  input:disabled {
   margin-left:40px;
   max-width:75%;
