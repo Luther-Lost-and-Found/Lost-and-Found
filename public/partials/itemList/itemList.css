@@ -1,37 +1,13 @@
-/*
-<<<<<<< HEAD
-.navbarColor {
-  background-color: #003C72;
+.md-button.md-fab {
+  line-height: 0px;
 }
-.left {
-  float:left;
+md-menu-content {
+  padding-top: 0px;
 }
-.right {
-  float: right;
-  padding: 8px;
-}
-.md-block {
-  padding: 2px;
-}
-.addItemForm {
-  padding-right: 20px;
+.Locations {
+  padding-bottom: 0px;
 
 }
-.imgholder img{ 
-  max-height: 70%;
-  min-width: 100%;
- }
- .md-padding {
-  padding-left:0px;
-  padding-right:0px;
- }
-=======
->>>>>>> f3d15b3ce1e2bafada5139ae2f22dbca41cc2e86*/
-/*input {
-  padding-left:40px;
-  max-width: 75%;
-  color: #4F97E9;
- }*/
  input:disabled {
   margin-left:40px;
   max-width:75%;

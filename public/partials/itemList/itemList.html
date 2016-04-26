@@ -5,10 +5,14 @@
 				<td>
 			      	<md-menu md-offset="0 -7">
 			          <md-button aria-label="Open demo menu" class="md-fab md-fab-bottom-left" ng-hide="buttonDisable || switchData.seeAll" ng-click="$mdOpenMenu($event)">
-			            <md-icon md-menu-origin md-svg-icon="img/icons/send.svg"></md-icon>
+			            <md-icon class="icons" md-menu-origin md-svg-icon="img/icons/send.svg"></md-icon>
 			          </md-button>
 			          <md-menu-content width="4">
+			          		<md-toolbar md-scroll-shrink="">
+          						<div class="md-toolbar-tools navbarColor">Migrate to..</div>
+         					 </md-toolbar>
 			          	<md-input-container class="Locations" md-no-float flex>
+
 				          	<input class="locationsInput" ng-model="search" placeholder=" search...">
 			          	</md-input-container>
 			            <md-menu-item ng-repeat="location in locationsAll | filter:search">
@@ -19,7 +23,7 @@
 			    </td>
 				<td>
 					<md-button class="md-fab md-warn md-fab-bottom-right" ng-hide="buttonDisable || switchData.seeAll" aria-label="Delete All" ng-click="deleteAll()">
-			            <md-icon md-svg-src="img/icons/bin.svg"></md-icon>
+			            <md-icon class="icons" md-svg-src="img/icons/bin.svg"></md-icon>
 			        </md-button>
 			    </td>
 		    </tr>
@@ -37,7 +41,7 @@
 			                  ng-class="tile.background"
 			                  >
 
-	        <img ng-src="{{item.currentImage}}" class="tilesT" ng-click="clicked($event,item)" ></img>
+			<img onerror='this.style.opacity = 0' ng-src="{{item.currentImage}}" class="tilesT" ng-click="clicked($event,item)" ></img>	        
 	        <md-grid-tile-footer class="tile-footer-darker">
 	        	<md-checkbox ng-model="item.toDelete" ng-hide="switchData.seeAll" ng-change="checked(item.claimed)" aria-label="Checkbox">{{item.title}}</md-checkbox>
 	        	<h3 ng-show="switchData.seeAll">{{item.title}}</h3>
@@ -82,8 +86,8 @@
                 Save Settings</md-button>
                 
                 <span flex></span>
-                <md-button id="global" ng-hide="globalSettings" ng-click="goChangeSettings()" class="md-secondary" style="position:fixed;">
-                GLOBAL SETTINGS</md-button>
+                <md-button ng-hide="globalSettings" ng-click="goToAppSettings()" class="md-secondary" style="position:fixed; right:0;">
+                SETTINGS</md-button>
             </md-content>
         </md-sidenav>
     </div>
