@@ -2,18 +2,18 @@
 		<md-dialog aria-label="Mango (Fruit)" ng-cloak flex="55">
 		<md-dialog-content>
         <md-toolbar md-scroll-shrink="">
-          <div class="md-toolbar-tools navbarColor">Edit Item</div>
+          <div class="md-toolbar-tools navbarColor" ng-style="{background: item.itemColor}">Edit Item</div>
           </md-toolbar>
           <div class="md-dialog-content">
 			<div style="height:234px;">
 	        <div class="left">
-            	<img ng-style="{background: item.itemColor}" style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}">
+            	<img  onerror='this.style.display = "none"; this.parentElement.classList.remove("left")' style="width:304px;height:228px;" class="images" ng-src="{{item.currentImage}}">
           </div>
            
 	        <md-input-container class="md-block" flex-gt-sm>
 	        	<label class=view>Title</label>
 	        	<input class=view1 style="color:#093A7D" ng-model="item.title">
-	        	</md-input-container>-
+	        	</md-input-container>
 	        <md-input-container class="md-block" flex-gt-sm>
 	        	<label class=view> Claimed By</label>
 	        	<input class=view1 style="color:#093A7D" ng-model="item.claimed_by" >
