@@ -10,14 +10,17 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   var doneRefreshInit = false;
 
-  $scope.goChangeSettings = function(){
-    $location.url("/superAdminPage");
+  $scope.goToAppSettings = function(){
+    if ($rootScope.userSettings.superPrivilege) {
+      $location.url("/superAdminPage");
+    } else {
+      $location.url("/changePassword");
+    }
   }
 
   var refresh = function(){
     $http.get("/itemlist").success(function(response){
       $scope.$applyAsync(function(){
-        console.log(response);
         $rootScope.itemlist = response;
         $rootScope.itemlist = response;
         $rootScope.allItems = response;
@@ -55,7 +58,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
           $rootScope.userSettings = response;
           $rootScope.locationID = response.locationID;
           $rootScope.ownLocation = response.locationID;
-          console.log($rootScope.userSettings);
           
           if(response.allItems == 1){
             $rootScope.switchData = {
@@ -100,7 +102,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   };
 
   $scope.gridChange = function(arg){
-    console.log("HI FROM GRID+++ ",args);
   }
 
   $scope.buttonDisable = true;
@@ -134,10 +135,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
       } 
     }
     if(foundToSend > 0){
-      // refreshAfetSend();
-
-      // console.log("HELLO: ", foundToSend);
-      // refresh();
       refreshAfetSend($rootScope.ownLocation);
     }
   };
@@ -329,11 +326,10 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   };
 
   $scope.status = '  ';
-  
+
   $scope.clicked = function(ev,$element) {
 
     var current_id = ($element.itemID);
-    console.log(current_id); 
     $http.get("/itemlist/" + current_id).success(function(response){
 
 
@@ -370,9 +366,6 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
     $rootScope.item = matches;
 
-    console.log("FINAL",$rootScope.item)
-    console.log('I am here' + $rootScope.item.building_name);
-
     $scope.parentSelected = $element;
 
     $mdDialog.show({
@@ -394,12 +387,11 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   };
 
   $scope.$on('handleBroadcast', function() {
-    console.log("LOCATION",$rootScope.userLocation);
-
     refreshAfetSend($rootScope.ownLocation);
   });
 
   $scope.isCollapsed = true;
+
 }).$inject = ['$scope', 'sharedServiceUpdateModal'];
 
 function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, Upload, sharedServiceUploadModal,sharedPropertiesTags) {
@@ -421,14 +413,11 @@ function ModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedService, 
       }
       var tagsInProcess = []
       var curTagsList = itemEditTags[0].name;
-      console.log("Preprocessing TAGS",curTagsList);
       for (var i = 0; i < curTagsList.length; i++) {
         tagsInProcess.name = curTagsList[i]
       }
       $rootScope.tagsFromItem = curTagsList;
 
-      console.log("SELECTED TAGS",$rootScope.tagsFromItem);
-      console.log('I am here' + response[0].location);
       if(response[0].claimed == 0){
         response[0].claimed = false;
       }
@@ -625,7 +614,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
             name: COLORS[primCol].name.toLowerCase()
             
           });
-          console.log(COLORS[primCol].name,COLORS[primCol].colors.length)
       }
     };
     return tiles;
@@ -637,7 +625,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
   $scope.colorClicked = function(color) {
     $scope.chosenColor = color.color;
     itemColor = color.color;
-    console.log(color);
   };
 
   $scope.updateItem = function(ev,$element){
@@ -692,7 +679,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     for (var i = 0;i< results.length; i++) {
       finalResults.push(results[i].lowername);
     }
-    console.log("RESULTS++++++: ",finalResults);
     return finalResults;
   }
   /* Create filter function for a query string */
@@ -727,8 +713,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
     $scope.item.itemColor = itemColor;
-
-    console.log($scope.item.itemColor);
 
     if($scope.item.itemColor == '' & $scope.imageStatus == null){
       $scope.errorMessage = "Select color or image";

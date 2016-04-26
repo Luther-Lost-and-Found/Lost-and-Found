@@ -26,16 +26,14 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
       sorting: matches[0].name,
       gridSize: $rootScope.userSettings.gridSize
     }
-    console.log("HEY YOU",currentSettings);
+
     $http.post("/saveSettings",currentSettings).success(function(response){
       $rootScope.settingsSaved = true;
-      console.log("HELLO SETTINGS ARE SAVED");
     });
   };
 
   $scope.onSlide = function(cbState) {
     $rootScope.settingsSaved = false;
-    console.log($rootScope)
     $rootScope.userSettings.gridSize = cbState;
     
   };
@@ -94,35 +92,3 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
     }
   };
 });
-
-// app.run(function($rootScope,$http,$location) {
-
-//     var auth = false;
-
-//     var setRootScope = function(){
-//       $http.get("/loggedin").success(function(response){
-
-//         console.log("RESPONSE LOGGEDIN", response);
-
-//         if(response != 0){
-
-//           $http.get("/getSettings").success(function(response){
-            
-//               console.log(response);
-//               console.log("AUTETICATED:",auth);
-//               $rootScope.userSettings = response;
-//           });
-//           auth = true;
-//         }
-//       })
-//       .error(function(response){
-//         console.log("NOT AUTH");
-//       });
-
-//       console.log("REFRESH");       
-//     };
-
-//     setRootScope();
-
-//     console.log("MAIN CONTROLLER");
-// });

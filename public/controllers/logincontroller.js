@@ -1,8 +1,6 @@
-
 angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '$http', '$location',
  '$rootScope','$window', function($timeout, $scope, $http, $location, $rootScope, $window) {
-	// Register the login() function
-	
+
   	$scope.loginSubmit = function($scope){
     	$http.post('/login', {
 	      	username: $scope.username,
@@ -13,6 +11,7 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	    })
 	    .error(function(){
 	    	$rootScope.message = 'Authentication failed.';
+        $scope.password = "";
 	    	$location.url("/");
 	    });
   	};
@@ -21,3 +20,21 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
   		$location.url("/guestPage");
   	}
 }]);
+
+angular.module('LoginApp').directive('focus',
+function($timeout) {
+ return {
+ scope : {
+   trigger : '@focus'
+ },
+ link : function(scope, element) {
+  scope.$watch('trigger', function(value) {
+    if (value === "true") {
+      $timeout(function() {
+       element[0].focus();
+      });
+   }
+ });
+ }
+};
+});

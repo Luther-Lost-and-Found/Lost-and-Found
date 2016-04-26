@@ -4,10 +4,6 @@ app.controller('addItemCtrl', ['$timeout', '$scope', '$http', '$window',
 	'$animate','$uibModal','$rootScope','sharedServiceUploadModal',
 	function($timeout, $scope, $http, $window, $animate, $uibModal,$rootScope, sharedServiceUploadModal) {
 
-	console.log("Hello World from the addItem Controller");
-
-	
-
 	$scope.addItem = function () {
 
 		sharedServiceUploadModal.setProperty($scope.item);
@@ -48,15 +44,10 @@ app.controller('uploadController',
 	    var transferredItem = sharedServiceUploadModal.getProperty();
 
 	    $http.post("/additem",transferredItem).success(function(response){
-			console.log("added successfully");
 
 			var fileExtension = '.' + image.name.split('.').pop();
 
-			console.log(response.toString());
-
 		    Upload.rename(image, response.toString()+fileExtension);
-
-		    console.log(image);
 
 		    image.upload = Upload.upload({
 		      	url: 'additem/uploadImage',

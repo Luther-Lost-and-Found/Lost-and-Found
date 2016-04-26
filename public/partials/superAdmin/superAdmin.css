@@ -1,18 +1,43 @@
-h3#subheader {
-	padding-left: 2%;
-}
-
-md-icon.sadminform {
-	padding-right: 5px;
-	padding-left: 5px;
-}
-
 md-icon.sadminform:hover {
 	background-color: lightgray;
 	border-radius: 10px;
 }
 
+md-toolbar.subNav {
+	background-color: transparent;
+	color: black;	
+}
+
 md-icon.sadminform:focus {
 	outline: none;
     border: 0;
+}
+
+md-icon.sadminform {
+	padding: 5px;
+}
+
+div.tableToolBarItem {
+	padding-left: 10px;
+}
+
+md-button {
+	background-color: blue;
+	color: black;
+}
+
+md-tabs-wrapper {
+    background-color: lightgray !important;
+}
+
+md-tab-content {
+    background-color: #eee;
+}
+
+md-content.adminOptions {
+	background-color: #eee;
+}
+
+md-tooltip {
+	color: black;
 }

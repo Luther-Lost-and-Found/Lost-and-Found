@@ -25,13 +25,13 @@
         </div>
         <md-tabs md-align-tabs="top" md-border-bottom style="height:100%; overflow: auto;"> -->
 
-        <md-tabs md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
+        <md-tabs id="tabs" md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
 
           <md-tab id="colorPickerTab">
             <md-tab-label>Choose Color</md-tab-label>
             <md-tab-body>
               <div ng-cloak="">
-                <md-content layout-padding="">
+                <md-content layout-padding="" style="background-color: #eee">
                   <md-grid-list md-cols="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter-gt-md="1px" md-gutter-md="1px" md-gutter="1px">
                     <md-grid-tile ng-repeat="tile in colorTiles" ng-style="{'background': tile.color}" ng-model="item.itemColor" ng-click="colorClicked(tile)">
                     </md-grid-tile>
@@ -46,6 +46,7 @@
               
               <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="100%">
               <label>{{picFile.name}}</label>
+
               <md-button id="picture" class="md-primary" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button>
             </md-tab-body>
           </md-tab>
@@ -64,7 +65,25 @@
         </div>
 
         <div>
-          <md-content id="descForm" class="md-padding" layout="column">
+        <md-content class="md-padding" layout="row">
+              <md-chips ng-model="selectedTags">
+                <md-autocomplete
+                        md-selected-item="selectedItem"
+                        md-search-text="searchText"
+                        md-items="item in querySearch(searchText)"
+                        md-item-text="item"
+                        placeholder="+ tags">
+                    <span md-highlight-text="searchText">{{item}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                  <strong>{{$chip}}</strong>
+                </md-chip-template>
+              </md-chips>
+            </md-content>
+      </div>
+
+       <!--  <div>
+          <md-content class="md-padding" layout="column">
             <md-chips 
                 ng-model="selectedTags" md-autocomplete-snap
                 md-transform-chip="transformChip($chip)"
@@ -86,7 +105,7 @@
               </md-chip-template>
             </md-chips>
           </md-content>
-        </div>
+        </div> -->
         <md-dialog-actions layout="row">
           <md-button aria-label="AddItem" ng-click="uploadImage(picFile)" id="add">Add</md-button>
           <md-button aria-label="Remove" ng-click="cancel()" id="cancel">Cancel</md-button>

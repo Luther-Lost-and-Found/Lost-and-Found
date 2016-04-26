@@ -5,7 +5,6 @@
 #===== build.sql enter the mysql database as root =====
 #============ and run the following script ============
 #======================================================
-
 DROP DATABASE lost;
 
 DROP USER senior;
@@ -24,7 +23,7 @@ building_name VARCHAR(20) NOT NULL,
 room_name VARCHAR(30) NOT NULL)
 engine=InnoDB;
 
-CREATE TABLE AdminLF (norsekeyID varchar(30) NOT NULL PRIMARY KEY, 
+CREATE TABLE AdminLF (norsekeyID varchar(30) NOT NULL PRIMARY KEY,
 allItems BOOL NOT NULL DEFAULT false,
 sorting VARCHAR(15),
 gridSize INT NOT NULL DEFAULT 5,

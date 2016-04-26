@@ -8,32 +8,24 @@ angular.module('guestApp',[]);
 angular.module('404App',[]);
 angular.module('SideNavApp',[]);
 angular.module('superAdminApp',[]);
+angular.module('changePasswordApp',[]);
 
 var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
-    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp','superAdminApp']);
+    'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp','superAdminApp', 'changePasswordApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
     function($stateProvider,$urlRouterProvider,$httpProvider) {
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
-            
-            console.log("inside interceptor");
             return {
-                // response: function(response) {
-                //     console.log("NO ERROR NO ERROR");
-                //     return response; 
-                // },
                 responseError: function(response) { 
                     if (response.status === 401){
-                        console.log("4010401401401");
                         $location.url('/');
                     }
                     if (response.status === 404){
-                        console.log("4040404040404");
                         $location.url('/404');
                     }
                     if (response.status === 454){
-                        console.log("45454545454");
                         $location.url('/itemlist');
                     } 
                     return $q.reject(response); 
@@ -56,6 +48,21 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'main@rootIL' : { templateUrl: '../partials/tpl/main/tpl.main.html',},
                 },
               })
+
+            .state('changePassword', {
+                url:'/changePassword',
+                views: {
+                    'navBar': {
+                        templateUrl : '../partials/changePassword/adminNav.html',
+                        action : 'changePasswordApp.changePasswordController'
+                    },
+                    'superAdminPage': {
+                        templateUrl : '../partials/changePassword/changePassword.html',
+                        action : 'changePasswordApp.changePasswordController'
+                    }
+                    
+                }
+            })
 
             .state('login',{
                 url: '/',
@@ -101,14 +108,13 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url:'/superAdminPage',
                 views: {
                     'navBar': {
-                        templateUrl : '../partials/guest/guestNav.html',
-                        action : 'guestApp.guestController'
+                        templateUrl : '../partials/changePassword/adminNav.html',
+                        action : 'changePasswordApp.changePasswordController'
                     },
                     'superAdminPage': {
                         templateUrl : '../partials/superAdmin/superAdmin.html',
                         action : 'superAdminApp.superAdminController'
                     }
-                    
                 }
             })
             .state('guestPage', {
@@ -121,8 +127,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     'guestPage': {
                         templateUrl : '../partials/guest/guest.html',
                         action : 'guestApp.guestController'
-                    }
-                    
+                    }                    
                 }
             })
 
@@ -130,8 +135,8 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url:'/404',
                 views:{
                     'navBar': {
-                        templateUrl : '../partials/navBar/navBar.html',
-                        action : 'navBarApp.NavBarCtrl'
+                        templateUrl : '../partials/404/404Nav.html',
+                        action : '404App.404Controller'
                     },
                     '404':{
                         templateUrl : '../partials/404/404.html',
@@ -161,11 +166,9 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 } 
             };
         }];
-
         $httpProvider.interceptors.push(interceptor);
     }
 ]);
-
 
 myApp.service('sharedService',function($rootScope) {
     return{
@@ -213,20 +216,3 @@ myApp.service('sharedPropertiesTags',function(){
         }
     };
 });
-
-// myApp.run(function($rootScope,$http) {
-
-//     var setRootScope = function(){
-//         $http.get("/getSettings").success(function(response){
-//           $scope.$applyAsync(function(){
-//             console.log(response);
-//             $rootScope.userSettings = response;
-//           });
-//         });
-//         console.log("REFRESH");       
-//     };
-
-//     setRootScope();
-
-//     console.log("MAIN CONTROLLER");
-// });

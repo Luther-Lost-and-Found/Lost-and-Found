@@ -2426,4 +2426,3 @@ ngFileUpload.service('UploadExif', ['UploadResize', '$q', function (UploadResize
 
   return upload;
 }]);
-

@@ -8,6 +8,5 @@ db.query('USE ' + dbconfig.database);
 
 module.exports = function(app, passport, isLoggedIn) {
     app.get("*", isLoggedIn, function(req,res){
-        console.log("404 happens");
     });
 };
