@@ -45,3 +45,7 @@ footer {
   background-color: #efefef;
   text-align: center;
 }
+
+#loginhtml{
+	overflow: hidden;
+}
