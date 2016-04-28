@@ -172,7 +172,7 @@ input:focus ~ .highlight {
 }
 
 #header_bar{
-	background-color: #02599C;
+	background-color: #093A7D;
 	min-height: 320px;
 }
 
@@ -195,7 +195,7 @@ input:focus ~ .highlight {
   outline: none;
 }
 .btn1 {
- 	background-color: #02599C;
+ 	background-color: #093A7D;
 }
 .btn2 {
 	background-color: #4F97E9;
