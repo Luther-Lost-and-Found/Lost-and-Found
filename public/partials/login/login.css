@@ -1,3 +1,12 @@
+body {
+	overflow: hidden;
+	height: 100%;
+}
+.webpage {
+	overflow: hidden;
+	height: 100%;
+}
+
 #login-form {
 	width: 380px;
 	padding-left: 10px;
@@ -84,7 +93,7 @@ input:valid ~ label {
 	width: 0;
 	bottom: 1px; 
 	position: absolute;
-	background:  #003C72; 
+	background:  #02599C; 
 	transition: all 0.2s ease;
 
 }
@@ -127,11 +136,12 @@ input:focus ~ .highlight {
 }
 .move-up {
 	position: relative;
-	top: -132px;
+	top: -150px;
 	z-index: 99;
 
 }
 #title1 {
+	margin-top:0px;
 	text-align: center;
 	color: #fff;
 	text-shadow: 0 1px 0 #ccc;
@@ -147,21 +157,22 @@ input:focus ~ .highlight {
 }
 #titles {
 	text-align: center;
-	margin-bottom: 32px;
+	padding-bottom: 10px;
 }
 .md-title {
 	padding-top: 5px;
 }
 
 #norse{
-  max-width:20%;
+  max-width:15%;
   display: block;
   margin-right: auto;
   margin-left: auto;
+  padding-top: 5px;
 }
 
 #header_bar{
-	background-color: #093A7D;
+	background-color: #02599C;
 	min-height: 320px;
 }
 
@@ -184,7 +195,7 @@ input:focus ~ .highlight {
   outline: none;
 }
 .btn1 {
- 	background-color: #093A7D;
+ 	background-color: #02599C;
 }
 .btn2 {
 	background-color: #4F97E9;
