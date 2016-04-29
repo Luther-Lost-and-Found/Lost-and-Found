@@ -1,4 +1,7 @@
 
+.md-sidenav-backdrop {
+  height: 100vh;
+}
 .md-button.md-fab {
   line-height: 0px;
 }
