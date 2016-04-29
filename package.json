@@ -11,19 +11,11 @@
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
     "bcrypt-nodejs": "0.0.3",
-    "ejs": "^2.3.2",
     "cookie-parser": "~1.0.0",
     "express-session": "~1.0.0",
-    "multiparty": "*",
-    "sphinxapi": "*"
+    "multiparty": "*"
   },
-  "devDependencies": {
-    "chai": "^3.3.0",
-    "mocha": "^2.3.3",
-    "superagent": "^1.4.0"
-  },
-  "scripts": {
-    "test": "mocha --recursive -R nyan",
+    "scripts": {
     "start": "node server.js"
   },
   "repository": {
