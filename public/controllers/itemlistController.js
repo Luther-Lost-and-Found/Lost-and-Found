@@ -711,16 +711,20 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     };
 
   $scope.addItem = function(){
-
     $scope.errorMsg = null;
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
     $scope.item.itemColor = itemColor;
 
     if($scope.item.itemColor == '' & $scope.imageStatus == null){
-      $scope.errorMessage = "Select color or image";
+      $scope.errorMessage = "Select color or image.";
     }
-    if($scope.item.itemColor !=''){
+
+    if($scope.item.title == '' || $scope.item.title == null){
+      $scope.errorMessage = "Please enter a valid title.";
+    }
+
+    if($scope.item.itemColor !='' & $scope.item.title != '' & $scope.item.title != null){
       $http.post("/additem",$scope.item).success(function(response){
         sharedService.refreshMain();
         $mdDialog.cancel();

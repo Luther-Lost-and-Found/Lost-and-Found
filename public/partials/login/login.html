@@ -6,40 +6,86 @@
     <link rel="stylesheet" href="/partials/login/login.css">
   </head>
 
-  <body layout="column" >
-    <div class="webpage" ng-controller="loginController" scroll=false>
+  <body layout="column">
+    <div class="webpage" ng-controller="loginController">
     <md-toolbar flex="66" id="header_bar">
-    <div id=titles>
-      <h5 id=title1 >Luther College</h5>
-      <h6 id=title2 >Lost and Found</h6>
-    </div>
+      <div id=titles>
+        <h1 id=title1 >Luther College</h1>
+        <h3 id=title2 >Lost and Found</h3>
+      </div>
     </md-toolbar>
-    <div layout-align="center start" layout="row">
-      <md-card class="background move-up" flex="60">
-      <md-card-header>
-        <md-card-avatar>
-          <img src="/partials/login/gnome.jpg" class="md-user-avatar" id="norse">
-        </md-card-avatar>
-        </md-card-header>
+
+    <!-- LOGIN CARD -->
+
+      <center>
+        <div layout-align="center start" layout="row">
+        <md-card class="background move-up" flex="60">
+          <md-card-header>
+            <md-card-avatar>
+            <img src="/partials/login/gnome.jpg" class="md-user-avatar" id="norse">
+            </md-card-avatar>
+          </md-card-header>
           <md-card-actions class="forms">
             <form id="login-form">
-              <div class="group">
-                <input focus="true" type="text" required ng-model="login.username"><span class="highlight"></span><span class="bar"></span>
-                <label>Username</label>
-              </div>
-              <div class="group">
-                 <input type="password" required ng-model="login.password"><span class="highlight"></span><span class="bar"></span>
-                <label>Password</label>
-              </div>
+            <div class="group">
+              <input focus="true" type="text" required ng-model="login.username"><span class="highlight"></span><span class="bar"></span>
+              <label>Username</label>
+            </div>
+            <div class="group">
+              <input type="password" required ng-model="login.password"><span class="highlight"></span><span class="bar"></span>
+              <label>Password</label>
+            </div>
               <div class="buttonHolder">
-                  <md-button class="btn1" type="submit" id="login-button" ng-click="loginSubmit(login)">Login</md-button>
-                  <md-button class="btn2" type="submit" id="login-button" ng-click="guestLoginSubmit()">Login as Guest</md-button>
+                <md-button class="btn1" type="submit" id="login-button" ng-click="loginSubmit(login)">Sign in as admin</md-button>
+                <!-- <md-button class="btn2" type="submit" id="login-button" ng-click="guestLoginSubmit()">Login as Guest</md-button> -->
+                <md-button class="btn2" ng-click="toggleRight()" ng-hide="isOpenRight()">Lost an item?</md-button>
               </div>
-              </form>
-            </md-card-actions>
-          </md-card>
+            </form>
+          </md-card-actions>
+        </md-card>
+        </div>
+      </center>
+    
+    <!-- SEARCH NAV -->
+
+    <md-sidenav class="md-sidenav-right" md-component-id="right" style="z-index: 1000;">
+      <md-toolbar class="searchNav">
+      <div>
+        <div layout-gt-xs="row">
+          <div style="display: table-cell;">
+            <h1 class="md-toolbar-tools" ng-cloak>Lost Item  :(</h1>
+          </div>
+          <md-button class="md-icon-button" aria-label="More" ng-click="close()" style="position: fixed; top:0; right:0;">
+            <md-icon md-svg-icon="img/icons/close.svg"></md-icon>
+          </md-button>
+        </div>
+      </div>
+      </md-toolbar>
+      <div ng-app="guestApp" ng-controller="guestController">
+        <div class="forms">
+          <md-input-container>
+            <label>Search</label>
+            <textarea ng-model="searchGuest.description" md-select-on-focus></textarea>
+          </md-input-container>
+        </div>
+        <div class="forms">        
+          <div class="buttonHolder">
+            <md-button aria-label="Submit" class="btn1" ng-click="submitGuestSearch($event,searchGuest)" md-autofocus>Submit</md-button>
+          </div>
+        </div>
+        <md-content>
+          <md-list>
+            <md-list-item class="md-3-line" ng-repeat="location in locationlist">
+              <div class="md-list-item-text" layout="column">
+                <h3>{{location.email}}</h3>
+                <h4>{{location.phonenumber}}</h4>
+                <p>{{location.building_name}} {{location.room_name}}</p>
+                <md-divider />
+              </div>
+            </md-list-item>
+          </md-list>
         </md-content>
       </div>
-    </div>
+    </md-sidenav>
   </body>
 </html>

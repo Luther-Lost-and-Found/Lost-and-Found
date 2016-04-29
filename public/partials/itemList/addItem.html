@@ -1,7 +1,7 @@
 <form class="settings-form">
   <md-toolbar ng-style="{background: chosenColor}">
     <div class="md-toolbar-tools">
-      <h2>Add Item &nbsp;<h1 style="color:red;">{{errorMessage}}</h1> </h2>
+      <h2>Add Item &nbsp; </h2>
       <span flex></span>
       <md-button class="md-icon-button" ng-click="">
         <md-icon md-svg-src="" aria-label="Close dialog"></md-icon>
@@ -54,6 +54,7 @@
       </td>
       <td class="addItemForm">
         <div layout-gt-xs="row">
+          <center><h4 style="color:red;">{{errorMessage}}</h4></center>
           <md-input-container class="md-block" flex-gt-xs>
             <label>Title</label>
             <input ng-model="item.title">
