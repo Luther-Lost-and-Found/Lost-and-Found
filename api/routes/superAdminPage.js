@@ -14,8 +14,8 @@ module.exports = function(app, passport, isLoggedIn, isSuper) {
 
         var curUser = req.isAuthenticated() ? req.user : '0';
 
-		db.query('SELECT norsekeyID, locationID, first_name, last_name, email, superPrivilege FROM AdminLF WHERE norsekeyID<>'+curUser.norsekeyID+';', function(err, rows, fields) {
-
+		db.query('SELECT norsekeyID, locationID, first_name, last_name, email, superPrivilege FROM AdminLF WHERE norsekeyID<>"'+curUser.norsekeyID+'";', function(err, rows, fields) {
+            console.log(rows);
             res.json(rows);
         });
 
