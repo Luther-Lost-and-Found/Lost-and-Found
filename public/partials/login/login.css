@@ -1,10 +1,19 @@
 body {
-	overflow: hidden;
-	height: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+	/*background:  #093A7D; */
+	/*height: 100%;*/
 }
 .webpage {
-	overflow: hidden;
 	height: 100%;
+}
+
+md-toolbar.searchNav {
+	background:  #093A7D; 
+}
+
+div.searchCard {
+	width: 100%;
 }
 
 #login-form {

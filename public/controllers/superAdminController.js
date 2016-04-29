@@ -8,7 +8,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 	$rootScope.newUserPW = false;
 
 	var refresh = function(){
-		$http.get("/superAdminPage1").success(function(response){
+		$http.get("/superAdminPage").success(function(response){
 			$scope.AdminUsers = response;
 			for (user in $scope.AdminUsers) {
 				if ($scope.AdminUsers[user].superPrivilege == 1) {
@@ -102,9 +102,12 @@ function addUserController($scope, $rootScope, $http, $mdDialog) {
 
 	$scope.addUser = function (newUser) {
 		$http.post("/addUser",newUser).success(function(response){
+
 			$rootScope.newUserPW = true;
 			$rootScope.newPW = false;
+
 			$rootScope.newUserPassword = response;
+			$rootScope.newUserPW = true;
 			$rootScope.$broadcast('broadcastFromAddUser');
 			$scope.cancel();
 		});
