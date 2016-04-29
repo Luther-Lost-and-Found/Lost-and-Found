@@ -85,7 +85,7 @@ module.exports = function(app, passport, isLoggedIn) {
 
     app.get("/itemlist/locationsAll", isLoggedIn, function(req,res){
 
-        db.query('SELECT building_name from LocationLF ORDER BY building_name ASC', function(err, rows, fields) {
+        db.query('SELECT building_name, locationID from LocationLF ORDER BY building_name ASC', function(err, rows, fields) {
 
             res.json(rows);
         });

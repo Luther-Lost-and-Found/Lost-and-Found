@@ -4,8 +4,8 @@
 			<md-tab id="adminTab" >
 		        <md-tab-label>Administrative Options</md-tab-label>
 		        <md-tab-body >
-		        	<h1 ng-if="newPW">New Password Is: {{newPassword}} </h1>
-					<h1 ng-if="newUserPW">New Password Is: {{newUserPassword}}</h1>
+		        	<h1 ng-if="newPW && !newUserPW">New Password Is: {{newPassword}}</h1>
+					<h1 ng-if="newUserPW && !newPW">New Password Is: {{newUserPassword}}</h1>
 					<md-list ng-cloak="">
 						<md-list-item>
 							<md-button aria-label="Add USER" ng-click="AddUSER($event)">

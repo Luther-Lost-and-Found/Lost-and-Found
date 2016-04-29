@@ -66,6 +66,11 @@ CREATE TABLE ItemTags (
 	)
 engine=MyISAM;
 
-source populateTables.sql;
+USE lost;
+
+source locations.sql;
+
+INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password, locationID, first_name, last_name, email, superPrivilege)
+VALUES ("admin", false, "date", 5, "$2a$10$XxZLxg3raFHX/8F1KhnyWeLGSy3.dwzv6IPGUpXlEUm6FjnZ1q5Y6", 2, "Admin", "Super", "super@admin.edu",true);
 
 source functions.sql;

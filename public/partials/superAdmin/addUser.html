@@ -22,9 +22,15 @@
     		<input ng-model="item.last_name">
     	</md-input-container flex-gt-sm>
         <md-input-container class="md-block" flex-gt-sm>
-    		<label>LocationID</label>
-    		<input ng-model="item.locationID">
-    	</md-input-container>
+    		<label>Location</label>
+    		<!-- <input ng-model="item.locationID"> -->
+    	
+	    	<md-select ng-model="item.locationID">
+	          <md-option ng-repeat="location in locationsAll" value="{{location.locationID}}">
+	            {{location.building_name}}
+	          </md-option>
+	        </md-select>
+        </md-input-container>
       </div>
       </div>
       <div>
