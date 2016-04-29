@@ -46,6 +46,6 @@ footer {
   text-align: center;
 }
 
-md-tooltip {
-	/*background-color: rgb(255,255,255,0.6);*/
+#loginhtml{
+	overflow: hidden;
 }
