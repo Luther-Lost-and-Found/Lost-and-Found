@@ -68,6 +68,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 	function resetPassword(user) {
 		$http.post("/resetPassword",user).success(function(response){
 			$scope.newPW = true;
+			$rootScope.newUserPW = false;
 			$scope.newPassword = response;
 		});
 	};
@@ -102,6 +103,7 @@ function addUserController($scope, $rootScope, $http, $mdDialog) {
 	$scope.addUser = function (newUser) {
 		$http.post("/addUser",newUser).success(function(response){
 			$rootScope.newUserPW = true;
+			$rootScope.newPW = false;
 			$rootScope.newUserPassword = response;
 			$rootScope.$broadcast('broadcastFromAddUser');
 			$scope.cancel();
@@ -118,4 +120,34 @@ function addUserController($scope, $rootScope, $http, $mdDialog) {
     	$mdDialog.hide(answer);
 	};
 
+	var findUnique = function(){
+    	var locations = [];
+	    $http.get("/itemlist/locationsAll").success(function(response){
+	      	$scope.$applyAsync(function(){
+	        	$scope.locationsAll = response;
+	        	console.log(response);
+	      	});
+	    });
+	    return locations;
+  	};
+
+  	$scope.locationsAll = findUnique();
+
+	$scope.pickLocation = function(locationID){
+	    var foundToSend = 0;
+	    for (i=0;i<$rootScope.itemlist.length;i++){
+	      	if ($rootScope.itemlist[i].toDelete == true){
+		        foundToSend++;
+		        var current_id = ($rootScope.itemlist[i].itemID);
+		        $rootScope.ownLocation = ($rootScope.itemlist[i].locationID);
+		        // $http.delete("/itemlist/?" + current_id).success(function(response){
+		        // });
+		        $http.put("/itemlist/?" + current_id, {'location': locationID}).success(function(response){
+		        });
+	      	} 
+	    }
+	    if(foundToSend > 0){
+	      	refreshAfetSend($rootScope.ownLocation);
+	    }
+  	};
 }
