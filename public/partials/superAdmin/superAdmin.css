@@ -1,3 +1,7 @@
+md-input-container.md-block {
+	width: 100%;
+}
+
 md-icon.sadminform:hover {
 	background-color: lightgray;
 	border-radius: 10px;
