@@ -1,3 +1,11 @@
 node_modules/
 bower_components/
-ng-file-upload/
+public/ng-file-upload/
+public/angular/
+public/angular-animate/
+public/angular-aria/
+public/angular-material/
+public/angular-messages/
+public/angular-ui-router/
+public/jquery/
+

@@ -1,7 +1,6 @@
 var express = require('express'),
     path = require('path'),
     mysql = require('mysql'),
-    SphinxClient = require ("sphinxapi"),
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
 
