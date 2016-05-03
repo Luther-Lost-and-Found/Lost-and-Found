@@ -65,6 +65,7 @@ app.controller('NavBarCtrl', ['$rootScope',
 
   $scope.login = function(){
     $http.get("/login").success(function(req,res){
+      console.log("LOGIN RESPONSE",res);
       $location.url("/");
     });
   }
