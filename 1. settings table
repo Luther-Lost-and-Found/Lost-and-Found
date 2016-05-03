@@ -1,0 +1,12 @@
+1. settings table (in user?)
+	a. view which items
+	b. sort by
+
+2. multiple(3) locations
+	a. 2 users each
+		i. user has login/pw
+	b. has own set of items (itemlist)
+
+3. tags table
+	a. tag name
+	b. tag category
