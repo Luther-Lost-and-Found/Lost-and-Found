@@ -9,7 +9,7 @@ app.controller('superAdminController', ['$timeout', '$scope', '$http', '$window'
 
 	var refresh = function(){
 		$http.get("/superAdminPage").success(function(response){
-			console.log("HIIII", response);
+			console.log(response);
 			$scope.AdminUsers = response;
 			for (user in $scope.AdminUsers) {
 				if ($scope.AdminUsers[user].superPrivilege == 1) {
