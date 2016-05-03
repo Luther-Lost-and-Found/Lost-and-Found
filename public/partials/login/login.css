@@ -203,9 +203,9 @@ input:focus ~ .highlight {
   border: black;
   outline: none;
 }
-.btn1 {
+#btn1 {
  	background-color: #093A7D;
 }
-.btn2 {
+#btn2 {
 	background-color: #4F97E9;
 }
