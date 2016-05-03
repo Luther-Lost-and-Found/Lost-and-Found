@@ -47,7 +47,7 @@
               <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="100%">
               <label>{{picFile.name}}</label>
 
-              <md-button id="picture" class="md-primary" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button>
+              <center><md-button id="picture" class="md-primary" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button></center>
             </md-tab-body>
           </md-tab>
         </md-tabs>        
@@ -56,31 +56,29 @@
         <div layout-gt-xs="row">
           <center><h4 style="color:red;">{{errorMessage}}</h4></center>
           <md-input-container class="md-block" flex-gt-xs>
-            <label>Title</label>
-            <input ng-model="item.title">
+            <label>title</label>
+            <input ng-model="item.title" title="descriptive tags..." >
           </md-input-container>
 <!--           <md-input-container class="md-block" flex-gt-xs>
             <label>Color</label>
             <input ng-model="item.itemColor">
           </md-input-container> -->
-        </div>
 
-        <div>
-        <md-content class="md-padding" layout="row">
+        <!-- <md-content layout="row"> -->
               <md-chips ng-model="selectedTags">
                 <md-autocomplete
                         md-selected-item="selectedItem"
                         md-search-text="searchText"
                         md-items="item in querySearch(searchText)"
                         md-item-text="item"
-                        placeholder="+ tags">
+                        placeholder="  descriptive tags...">
                     <span md-highlight-text="searchText">{{item}}</span>
                 </md-autocomplete>
                 <md-chip-template>
                   <strong>{{$chip}}</strong>
                 </md-chip-template>
               </md-chips>
-            </md-content>
+            <!-- </md-content> -->
       </div>
 
        <!--  <div>
