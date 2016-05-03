@@ -71,7 +71,10 @@
             </md-toolbar>
             <md-content id="settings" ng-controller="SideNavCtrl" layout-padding>
 				<form id="settings-form">
-					<md-switch class="blue" aria-label="SwitchAll" ng-model="switchData.seeAll" ng-change="onSwitchChange(switchData.seeAll)">See All Items: {{ message }}</md-switch>
+					<md-switch class="blue" aria-label="SwitchAll" ng-model="switchData.seeAll" ng-change="onSwitchChange(switchData.seeAll)">
+						<span ng-model="switchData.seeAll" ng-if="switchData.seeAll" style="margin-top: 5px;">Show All Items <span style="padding: 0;margin: 0; color: red; font-size: 0.6em; text-align: right; width: 100%;">*no editing allowed</span></span>
+						<span ng-model="switchData.seeAll" ng-if="!switchData.seeAll">Show Your Items</span>
+					</md-switch>
 					<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
 						<h2 class="md-toolbar-tools">
 							<span>Sort By</span>
