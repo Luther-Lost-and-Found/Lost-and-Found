@@ -1,4 +1,6 @@
-
+#view {
+  overflow-x: hidden;
+}
 .md-sidenav-backdrop {
   height: 100vh;
 }
@@ -201,11 +203,11 @@ footer h5{
   text-align: center;
   margin-bottom: 10px;
 }
-.butt1 {
+#butt1 {
   background-color: #4F97E9;
    color: white;
 }
-.butt2 {
+#butt2 {
   background-color: rgb(152, 0, 0);
    color: white;
 }

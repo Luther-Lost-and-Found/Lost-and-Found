@@ -1,5 +1,5 @@
 
-    <md-dialog aria-label="Mango (Fruit)" ng-cloak flex="55">
+    <md-dialog id=view aria-label="Mango (Fruit)" ng-cloak flex="55">
       <md-dialog-content>
         <md-toolbar md-scroll-shrink="">
           <div class="md-toolbar-tools navbarColor" ng-style="{background: item.itemColor}">Item Description</div>
@@ -44,9 +44,9 @@
           </div>
         </div>
         <div class=buttonholder>
-          <md-button class="butt1" aria-label="Edit" ng-hide="switchData.seeAll" ng-click="editItem($event,item)" md-autofocus>Edit
+          <md-button class=raised id="butt1" aria-label="Edit" ng-hide="switchData.seeAll" ng-click="editItem($event,item)" md-autofocus>Edit
           </md-button>
-          <md-button class="butt2" aria-label="Remove" ng-hide="switchData.seeAll" ng-click="removeItem(item)" md-autofocus>Remove
+          <md-button class=rasied id="butt2" aria-label="Remove" ng-hide="switchData.seeAll" ng-click="removeItem(item)" md-autofocus>Remove
           </md-button>
           <md-button id="butt3" aria-label="Cancel" ng-click="cancel()" md-autofocus>Cancel
           </md-button>
