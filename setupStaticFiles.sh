@@ -10,6 +10,12 @@ sudo ln /etc/nginx/sites-availiable/lost-and-found.conf /etc/nginx/sites-enabled
 # front-end dependencies
 bower install
 
+# make sure /var/www exists
+sudo mkdir -p /var/www/
+# clean files from old installs
+sudo rm -rf /var/www/lib
+sudo rm -rf /var/www/static
+
 # make a directory to serve static content from
 sudo mkdir -p /var/www/static
 # move the static content to the proper directory
