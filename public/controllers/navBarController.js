@@ -8,6 +8,7 @@ app.controller('NavBarCtrl', ['$rootScope',
 
     getTagsFromDatabase();
 
+    console.log("NAVBAR:",$rootScope.userSettings);
 
     $scope.toggleRight = buildToggler('right');
     $scope.onSearch = function(searchValue) {

@@ -1,4 +1,38 @@
-<body style="overflow: auto;">
-<div ng-app="LostApp" class="container" ng-controller="ItemCtrl" ng-cloak >
-	
-</body>
+<meta name="viewport" content="width=device-width">
+
+<div ng-app="navBarApp" ng-controller= "NavBarCtrl as ctrl"></div>
+	<md-toolbar class="" layout="row" style="position: fixed; margin-top: 0;">
+		<md-button class="md-icon-button" ng-show="!showSearch">
+			<md-icon class=" mobileHome" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
+		</md-button>
+		<h2 class="md-toolbar-tools" ng-show="!showSearch">
+			<span>Hello, {{userSettings.first_name}}!</span>
+		</h2>
+		<md-input-container class="navBarSearchContainer" ng-show="showSearch" md-no-float flex>
+			<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search...">
+		</md-input-container>
+		<md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+			<md-icon md-svg-icon="img/icons/searchWhite24.svg"></md-icon>
+		</md-button>
+		<md-button class="md-icon-button" ng-show="!showSearch">
+			<md-icon class=" mobileHome" md-svg-icon="img/icons/menu.svg"></md-icon>
+		</md-button>
+	</md-toolbar>
+</div>
+
+<div ng-app="itemApp" ng-controller= "ItemCtrl"></div>
+	<md-button class="md-fab md-fab-bottom-right md-warn" style="position: fixed;" ng-click="ctrl.addItem($event)">
+      <md-icon md-svg-src="img/icons/add.svg"></md-icon>
+    </md-button>
+	<md-list style="padding-top: 70px;">
+		<md-subheader class="mobileSubHead" style="background-color: transparent;">All Items:</md-subheader>
+		<md-list-item class="md-2-line" ng-repeat="item in itemlist | filter:search" style="margin-top: 10px;">
+			<div ng-style="{'background': item.itemColor}" style="height: 90px; width: 90px;">
+				<img onerror='this.style.opacity = 0' ng-src="{{item.currentImage}}" height="90" width="90" />
+			</div>
+			<div class="md-list-item-text">
+          	<h1 style="padding-left: 10px;">{{item.title}}</h1>
+          	</div>
+      	</md-list-item>
+	</md-list>    
+</div>

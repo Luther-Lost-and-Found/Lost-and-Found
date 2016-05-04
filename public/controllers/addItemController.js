@@ -5,7 +5,7 @@ app.controller('addItemCtrl', ['$timeout', '$scope', '$http', '$window',
 	function($timeout, $scope, $http, $window, $animate, $uibModal,$rootScope, sharedServiceUploadModal) {
 
 	$scope.addItem = function () {
-
+		console.log("HERE FROM MOBILE");
 		sharedServiceUploadModal.setProperty($scope.item);
 
 	    var modalInstance = $uibModal.open({
