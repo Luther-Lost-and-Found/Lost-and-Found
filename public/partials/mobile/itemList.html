@@ -3,19 +3,20 @@
 
 <div ng-app="navBarApp" ng-controller= "NavBarCtrl" ng-if="!showAddItem"></div>
 	<md-toolbar class="" layout="row" style="position: fixed; margin-top: 0;">
-		<md-button class="md-icon-button" ng-show="!showSearch">
+		<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem">
 			<md-icon class=" mobileHome" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
 		</md-button>
 		<h2 class="md-toolbar-tools" ng-show="!showSearch">
 			<span ng-if="!showAddItem">Hello, {{userSettings.first_name}}!</span>
+			<span ng-if="showAddItem">Add an item.</span>
 		</h2>
 		<md-input-container class="navBarSearchContainer" ng-show="showSearch" md-no-float flex>
 			<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search...">
 		</md-input-container>
-		<md-button class="md-icon-button" ng-click="showSearch = !showSearch">
+		<md-button class="md-icon-button" ng-click="showSearch = !showSearch" ng-show="!showAddItem">
 			<md-icon md-svg-icon="img/icons/searchWhite24.svg"></md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-show="!showSearch">
+		<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem">
 			<md-icon class=" mobileHome" md-svg-icon="img/icons/menu.svg"></md-icon>
 		</md-button>
 	</md-toolbar>
@@ -36,7 +37,8 @@
 					<img onerror='this.style.opacity = 0' ng-src="{{item.currentImage}}" height="90" width="90" />
 				</div>
 				<div class="md-list-item-text">
-	          	<h1 style="padding-left: 10px;">{{item.title}}</h1>
+	          		<h1 style="padding-left: 10px; margin-bottom: 0;">{{item.title}}</h1>
+	          		<p style="padding-left: 10px; margin-top: 0; padding-top: 0;">{{item.email}}</h1>
 	          	</div>
 	      	</md-list-item>
 		</md-list>    
@@ -47,11 +49,33 @@
 <!-- <div ng-if="showAddItem">HELLO</div> -->
 
 <form ng-app="navBarApp" ng-controller= "addItemMobileCtrl" class="settings-form" ng-if="showAddItem">
-  <table>
-    <tr>
-      <td class="addItemColorImage" width="350" style="min-width: 200px; vertical-align: top;">
-        <md-tabs id="tabs" md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
+		<span flex></span>
+		<center><md-dialog-actions ng-if="showAddItem" layout="row" style="padding-top: 70px;">
+			<md-button aria-label="AddItem" ng-click="uploadImage(picFile); testCancel()" id="add">Add</md-button>
+			<md-button aria-label="Remove" ng-click="testCancel()" id="cancel">Cancel</md-button>
+		</md-dialog-actions></center>
+        <div layout-gt-xs="row">
+          <center><h4 style="color:red;">{{errorMessage}}</h4></center>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>title</label>
+            <input ng-model="item.title" title="descriptive tags..." >
+          </md-input-container>
 
+              <md-chips ng-model="selectedTags">
+                <md-autocomplete
+                        md-selected-item="selectedItem"
+                        md-search-text="searchText"
+                        md-items="item in querySearch(searchText)"
+                        md-item-text="item"
+                        placeholder="  descriptive tags...">
+                    <span md-highlight-text="searchText">{{item}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                  <strong>{{$chip}}</strong>
+                </md-chip-template>
+              </md-chips>
+      </div>
+        <md-tabs id="tabs" md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
           <md-tab id="colorPickerTab">
             <md-tab-label>Choose Color</md-tab-label>
             <md-tab-body>
@@ -76,34 +100,4 @@
             </md-tab-body>
           </md-tab>
         </md-tabs>        
-      </td>
-      <td class="addItemForm">
-        <div layout-gt-xs="row">
-          <center><h4 style="color:red;">{{errorMessage}}</h4></center>
-          <md-input-container class="md-block" flex-gt-xs>
-            <label>title</label>
-            <input ng-model="item.title" title="descriptive tags..." >
-          </md-input-container>
-
-              <md-chips ng-model="selectedTags">
-                <md-autocomplete
-                        md-selected-item="selectedItem"
-                        md-search-text="searchText"
-                        md-items="item in querySearch(searchText)"
-                        md-item-text="item"
-                        placeholder="  descriptive tags...">
-                    <span md-highlight-text="searchText">{{item}}</span>
-                </md-autocomplete>
-                <md-chip-template>
-                  <strong>{{$chip}}</strong>
-                </md-chip-template>
-              </md-chips>
-      </div>
-        <md-dialog-actions layout="row">
-          <md-button aria-label="AddItem" ng-click="uploadImage(picFile); testCancel()" id="add">Add</md-button>
-          <md-button aria-label="Remove" ng-click="testCancel()" id="cancel">Cancel</md-button>
-        </md-dialog-actions>
-      </td>
-    </tr>
-  </table>
 </form>
