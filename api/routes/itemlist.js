@@ -21,7 +21,6 @@ module.exports = function(app, passport, isLoggedIn) {
                     }
 
                     rows[i].tags = (rows[i].convTags).split("@@@");
-
                 }
 
                 var ua = req.headers['user-agent'].toLowerCase();

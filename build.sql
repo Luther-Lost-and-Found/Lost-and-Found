@@ -74,3 +74,5 @@ INSERT INTO AdminLF (norsekeyID, allItems, sorting, gridSize, password, location
 VALUES ("admin", false, "date", 5, "$2a$10$XxZLxg3raFHX/8F1KhnyWeLGSy3.dwzv6IPGUpXlEUm6FjnZ1q5Y6", 2, "Admin", "Super", "super@admin.edu",true);
 
 source functions.sql;
+
+source populateTables.sql;
