@@ -16,7 +16,7 @@
 		<md-button class="md-icon-button" ng-click="showSearch = !showSearch" ng-show="!showAddItem">
 			<md-icon md-svg-icon="img/icons/searchWhite24.svg"></md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem">
+		<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem" >
 			<md-icon class=" mobileHome" md-svg-icon="img/icons/menu.svg"></md-icon>
 		</md-button>
 	</md-toolbar>
@@ -50,12 +50,12 @@
 
 <form ng-app="navBarApp" ng-controller= "addItemMobileCtrl" class="settings-form" ng-if="showAddItem">
 		<span flex></span>
-		<center><md-dialog-actions ng-if="showAddItem" layout="row" style="padding-top: 70px;">
-			<md-button aria-label="AddItem" ng-click="uploadImage(picFile); testCancel()" id="add">Add</md-button>
-			<md-button aria-label="Remove" ng-click="testCancel()" id="cancel">Cancel</md-button>
-		</md-dialog-actions></center>
         <div layout-gt-xs="row">
-          <center><h4 style="color:red;">{{errorMessage}}</h4></center>
+        	<md-dialog-actions ng-if="showAddItem" layout="row" style="padding-top: 70px;">
+				<md-button aria-label="AddItem" ng-click="uploadImage(picFile); testCancel()" id="add">Add</md-button>
+				<md-button aria-label="Remove" ng-click="testCancel()" id="cancel">Cancel</md-button>
+			</md-dialog-actions>
+			<h4 style="color:red;">{{errorMessage}}</h4>
           <md-input-container class="md-block" flex-gt-xs>
             <label>title</label>
             <input ng-model="item.title" title="descriptive tags..." >
