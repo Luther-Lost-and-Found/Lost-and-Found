@@ -8,12 +8,15 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	    })
 	    .success(function(user){
         console.log("MOBILE RESPONSE",user.mobile);
+        $rootScope.mobile = user.mobile;
+        var url = "";
         if(user.mobile){
-          $location.url("/mobile/itemlist");
+          url = "/mobile/itemlist";
         }
         else{
-          $location.url("/itemlist");  
+          url = "/itemlist";  
         }
+        $location.url(url);
 	    	
 	    })
 	    .error(function(){

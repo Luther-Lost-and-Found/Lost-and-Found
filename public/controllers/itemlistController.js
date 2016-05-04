@@ -30,6 +30,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
         $scope.item = "";
         $scope.buttonDisable = true;
         $scope.locationsAll = findUnique();
+        $rootScope.mobile = response.mobile;
         doneRefreshInit = true;
       });
     });
