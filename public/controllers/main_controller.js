@@ -145,6 +145,16 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 }
             })
 
+            .state('mobile',{
+                url:'/mobile',
+                views:{
+                    'mobile':{
+                        templateUrl : '../partials/mobile/mobile.html',
+                        action : 'mobileApp.MobileCtrl'
+                    }
+                }
+            })
+
             $urlRouterProvider.when('','/');
 
             $urlRouterProvider.otherwise('/404');

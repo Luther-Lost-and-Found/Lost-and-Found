@@ -62,9 +62,16 @@ class Color(object):
         clt.fit(image_mat)
 
         percentage,color = self.centroid_histogram(clt)
-        actual_name, closest_name = self.get_colour_name(np.array(color[2]).tolist())
+        print(color)
+        print(percentage)
+        percentage1, color1 = self.get_colour_name(np.array(color[0]).tolist())
+        percentage2, color2 = self.get_colour_name(np.array(color[1]).tolist())
+        percentage3, color3 = self.get_colour_name(np.array(color[2]).tolist())
+        print(percentage[0], color1)
+        print(percentage[1], color2)
+        print(percentage[2], color3)
 
-        return closest_name
+        return color1, color2, color3
 
 s = zerorpc.Server(Color())
 s.bind("tcp://0.0.0.0:4242")

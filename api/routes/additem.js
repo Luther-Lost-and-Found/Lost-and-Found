@@ -3,7 +3,7 @@ var express = require('express'),
     mysql = require('mysql'),
     multiparty = require('multiparty'),
     fs = require('fs'),
-    // zerorpc = require("zerorpc"),
+    zerorpc = require("zerorpc"),
 
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
@@ -58,18 +58,17 @@ module.exports = function(app, passport, isLoggedIn) {
             var primaryKey = file.originalFilename;
             primaryKey = primaryKey.replace(extension,'');
 
-            // Convoluted piece that is responsible for executing things in the correct order
+            // Convoluted piece responsible for executing things in the correct order
 
             var picStream = fs.createWriteStream("public/itemImages/" + file.originalFilename);
             picStream.on('close', function() {
                 client.invoke("final_result", file.originalFilename, function(error, res, more) {
-                    db.query("UPDATE ItemLF SET imagePrimColor = ? WHERE itemID = " + primaryKey, res, function(err,result){
-                    
+                    db.query("UPDATE ItemLF SET imagePrimColor = '"+res[0]+"', imageSecColor = '"+res[1]+"', imageThirdColor = '"+res[2]+"' WHERE itemID = " + primaryKey, function(err,result){
+                    console.log(res);
                     });
                 });
             });
             fs.createReadStream(file.path).pipe(picStream); 
-
         });
     });
 };
