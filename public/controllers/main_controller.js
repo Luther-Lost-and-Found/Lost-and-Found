@@ -27,6 +27,10 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     }
                     if (response.status === 454){
                         $location.url('/itemlist');
+                    }                    
+                    if (response.status === 440){
+                        console.log("MOBILE")
+                        $location.url('/mobile');
                     } 
                     return $q.reject(response); 
                 } 
@@ -141,6 +145,16 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     '404':{
                         templateUrl : '../partials/404/404.html',
                         action : '404App.404Controller'
+                    }
+                }
+            })
+
+            .state('mobile',{
+                url:'/mobile',
+                views:{
+                    'mobile':{
+                        templateUrl : '../partials/mobile/mobile.html',
+                        action : 'mobileApp.MobileCtrl'
                     }
                 }
             })

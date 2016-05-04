@@ -7,7 +7,14 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	      	password: $scope.password,
 	    })
 	    .success(function(user){
-	    	$location.url("/itemlist");
+        console.log("MOBILE RESPONSE",user.mobile);
+        if(user.mobile){
+          $location.url("/mobile");
+        }
+        else{
+          $location.url("/itemlist");  
+        }
+	    	
 	    })
 	    .error(function(){
 	    	$rootScope.message = 'Authentication failed.';
