@@ -8,7 +8,7 @@
 			</md-button>
 			<h2 class="md-toolbar-tools" ng-show="!showSearch">
 				<span ng-if="!showAddItem">Hello, {{userSettings.first_name}}!</span>
-				<span ng-if="showAddItem">Add an items.</span>
+				<span ng-if="showAddItem">Add an item.</span>
 			</h2>
 			<md-input-container class="navBarSearchContainer" ng-show="showSearch" md-no-float flex>
 				<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search...">
@@ -31,8 +31,8 @@
 		<span flex></span>
         <div layout-gt-xs="row">
         	<md-dialog-actions ng-if="showAddItem" layout="row" style="padding-top: 70px;">
-				<md-button aria-label="AddItem" ng-click="uploadImage(picFile); testCancel()" id="add">Add</md-button>
-				<md-button aria-label="Remove" ng-click="testCancel()" id="cancel">Cancel</md-button>
+				<md-button aria-label="AddItem" ng-click="uploadImage(picFile);  chosenColor='#093A7D';testCancel()" id="add">Add</md-button>
+				<md-button aria-label="Remove" ng-click="testCancel(); chosenColor='#093A7D'" id="cancel">Cancel</md-button>
 			</md-dialog-actions>
 			<h4 style="color:red;">{{errorMessage}}</h4>
           <md-input-container class="md-block" flex-gt-xs>

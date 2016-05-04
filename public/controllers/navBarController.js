@@ -184,6 +184,7 @@ app.controller('addItemMobileCtrl', ['$scope','$rootScope',
       $rootScope.showAddItem = !$rootScope.showAddItem;
       console.log($rootScope.showAddItem);
     });
+    $rootScope.chosenColor = "#093A7D"
   }
 
   $scope.errorMessage = "";

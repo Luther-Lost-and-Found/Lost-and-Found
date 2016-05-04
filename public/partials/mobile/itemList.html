@@ -1,8 +1,9 @@
 <meta name="viewport" content="width=device-width">
 
+<!-- ++++ THIS IS THE NAVBAR ++++++ -->
 
 <div ng-app="navBarApp" ng-controller= "NavBarCtrl" ng-if="!showAddItem"></div>
-	<md-toolbar class="" layout="row" style="position: fixed; margin-top: 0;">
+	<md-toolbar class="" layout="row" style="position: fixed; margin-top: 0; top: 0;">
 		<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem">
 			<md-icon class=" mobileHome" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
 		</md-button>
@@ -10,23 +11,27 @@
 			<span ng-if="!showAddItem">Hello, {{userSettings.first_name}}!</span>
 			<span ng-if="showAddItem">Add an item.</span>
 		</h2>
-		<md-input-container class="navBarSearchContainer" ng-show="showSearch" md-no-float flex>
-			<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search...">
+		<md-input-container class="navBarSearchContainer" ng-show="showSearch" flex>
+			<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search..." md-autofocus autofocus>
 		</md-input-container>
 		<md-button class="md-icon-button" ng-click="showSearch = !showSearch" ng-show="!showAddItem">
 			<md-icon md-svg-icon="img/icons/searchWhite24.svg"></md-icon>
 		</md-button>
-		<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem" >
+		<md-button class="md-icon-button" ng-click="toggleRight(); lockSideNav=true" ng-hide="isOpenRight()" ng-show="!showSearch" ng-if="!showAddItem" >
 			<md-icon class=" mobileHome" md-svg-icon="img/icons/menu.svg"></md-icon>
 		</md-button>
 	</md-toolbar>
 </div>
+
+<!-- ++++++ THIS IS THE ADDITEM FAB +++++++++ -->
 
 <div ng-app="navBarApp" ng-controller= "NavBarCtrl" ng-if="!showAddItem">
 	<md-button aria-label="addItem" class="md-fab md-fab-bottom-right md-warn" style="position: fixed;" ng-model="showAddItem" ng-click="switchShowAdditem()">
 	  <md-icon md-svg-src="img/icons/add.svg"></md-icon>
 	</md-button>
 </div>
+
+<!-- ++++++ THIS IS THE ITEMLIST +++++++++ -->
 
 <div class="itemList" ng-if="!showAddItem">
 	<div ng-app="itemApp" ng-controller= "ItemCtrl">
@@ -46,7 +51,7 @@
 	</div>
 </div>
 
-<!-- <div ng-if="showAddItem">HELLO</div> -->
+<!-- ++++ THIS IS THE ADD ITEM PAGE +++ -->
 
 <form ng-app="navBarApp" ng-controller= "addItemMobileCtrl" class="settings-form" ng-if="showAddItem">
 		<span flex></span>
@@ -101,3 +106,59 @@
           </md-tab>
         </md-tabs>        
 </form>
+
+<!-- ++++++ THIS IS THE SIDENAV +++++++++ -->
+
+<div ng-app="LostApp" ng-controller="SideNavCtrl">
+	<div layout="vertical">
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="position:fixed;" md-is-locked-open="lockSideNav" md-component-id="right" flex>
+            <md-toolbar class="md-theme-light">
+              <div>
+                <div layout-gt-xs="row" style="width: 100%;display: table;">
+					<div style="display: table-cell;">
+						<h1 class="md-toolbar-tools" ng-cloak>Hello, {{userSettings.first_name}}!</h1>
+					</div>
+					<md-icon-button ng-hide="globalSettings" 
+                			ng-click="goToAppSettings()" 
+                			class="md-secondary">
+                		<md-icon class="settingsIcon" md-svg-icon="img/icons/settingsWhite48.svg"></md-icon>
+						<md-tooltip md-direction="left" style="color: white; padding-top: 5px;">
+							Settings
+						</md-tooltip>
+                	</md-icon-button>
+                </div>
+              </div>
+              
+            </md-toolbar>
+            <md-content id="settings" ng-controller="SideNavCtrl" layout-padding>
+				<form id="settings-form">
+					<md-switch class="blue" aria-label="SwitchAll" ng-model="switchData.seeAll" ng-change="onSwitchChange(switchData.seeAll)">
+						<span ng-model="switchData.seeAll" ng-if="switchData.seeAll" style="margin-top: 5px;">Show All Items <span style="padding: 0;margin: 0; color: red; font-size: 0.6em; text-align: right; width: 100%;">*no editing allowed</span></span>
+						<span ng-model="switchData.seeAll" ng-if="!switchData.seeAll">Show Your Items</span>
+					</md-switch>
+					<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+						<h2 class="md-toolbar-tools">
+							<span>Sort By</span>
+						</h2>
+					</md-toolbar>
+					<md-radio-group ng-model="sections.active">
+						<md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.name)">{{it.name}}</md-radio-button>
+					</md-radio-group>
+					<md-slider-container>
+						<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+							<h2 class="md-toolbar-tools">
+								<span>Size</span>
+							</h2>
+						</md-toolbar>
+						<md-slider flex min="1" max="10" aria-label="red" ng-model="userSettings.gridSize" ng-change="onSlide(userSettings.gridSize)"></md-slider>
+
+					</md-slider-container>
+				</form>
+				<center><md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary">
+                Save Settings</md-button></center>
+                <md-button class="md-primary" id= "butt3" aria-label="More" ng-click="logout()" style="margin: 5px;width:90%; position: fixed; bottom:0;">Logout</md-button>
+                <span flex></span>
+            </md-content>
+        </md-sidenav>
+    </div>
+</div>
