@@ -21,17 +21,15 @@
         <span flex></span>
               <md-button class="md-icon-button" id="add-button" aria-label="Add Item" ng-click="addItem($event)">
                   <md-icon class="buttonstyle" md-svg-icon="img/icons/add.svg"></md-icon>
-                  <md-tooltip md-direction="bottom" md-delay="800">
-                        Add An Item
-                </md-tooltip>
+                  <md-tooltip md-delay="800">Add Item</md-tooltip>
               </md-button>
         <div class="md-menu-demo" ng-cloak="">
           <md-menu>
             <md-button class="md-icon-button testclass" aria-label="menu icon" ng-click="doTest();toggleRight()" ng-hide="isOpenRight()">
                 <md-icon class="buttonstyle" md-menu-origin md-svg-icon="img/icons/sortWhite.svg"></md-icon>
-                <md-tooltip md-direction="bottom" md-delay="800">
+                <!-- <md-tooltip md-direction="bottom" md-delay="800">
                     Options
-                </md-tooltip>
+                </md-tooltip> -->
             </md-button>
 
             <md-menu-content class="testContent" width="2">

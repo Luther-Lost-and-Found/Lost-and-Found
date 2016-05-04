@@ -106,6 +106,10 @@ hr {
   border-color: transparent;
 }
 
+ {
+  border: 0;
+  border-color: transparent;
+}
 
 #userList {
   display:none;
