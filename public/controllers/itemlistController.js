@@ -10,6 +10,10 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   var doneRefreshInit = false;
 
+  $scope.test = function() {
+    console.log("WORKING");
+  }
+
   $scope.goToAppSettings = function(){
     console.log("USER PRIV:::",$rootScope.userSettings.superPrivilege);
     if ($rootScope.userSettings.superPrivilege) {
@@ -199,6 +203,9 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
   }
   
   $scope.addItem = function(ev){
+
+    console.log("IN ADD ITEM FROM MOBILE");
+
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
 
