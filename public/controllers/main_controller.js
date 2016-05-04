@@ -14,7 +14,6 @@ var myApp = angular.module('LostApp', ['ui.router','ngMaterial',
     'LoginApp','ItemApp','navBarApp', 'searchItemApp', 'guestApp','404App','SideNavApp','superAdminApp', 'changePasswordApp']);
 
 myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
-    $compileProvider.debugInfoEnabled(false);
     function($stateProvider,$urlRouterProvider,$httpProvider) {
 
         var interceptor = ['$location', '$q', '$injector', function($location, $q, $injector) {
