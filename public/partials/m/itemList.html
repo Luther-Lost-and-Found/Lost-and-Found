@@ -1,0 +1,105 @@
+<body style="overflow: auto;">
+<div ng-app="LostApp" class="container" ng-controller="ItemCtrl" ng-cloak >
+	<table>
+		<tbody>
+			<tr>
+				<td>
+			      	<md-menu md-offset="0 -7">
+			          <md-button aria-label="Open demo menu" class="md-fab md-fab-bottom-left" ng-hide="buttonDisable || switchData.seeAll" ng-click="$mdOpenMenu($event)">
+			            <md-icon class="icons" md-menu-origin md-svg-icon="img/icons/send.svg"></md-icon>
+			          </md-button>
+			          <md-menu-content width="4">
+			          		<md-toolbar md-scroll-shrink="">
+          						<div class="md-toolbar-tools navbarColor">Migrate to..</div>
+         					 </md-toolbar>
+			          	<md-input-container class="Locations" md-no-float flex>
+
+				          	<input class="locationsInput" ng-model="search" placeholder=" search...">
+			          	</md-input-container>
+			            <md-menu-item ng-repeat="location in locationsAll | filter:search">
+			              <md-button ng-click="sendToLocation(location.building_name)"> <span md-menu-align-target>{{location.building_name}}</span> </md-button>
+			            </md-menu-item>
+			          </md-menu-content>
+			        </md-menu>
+			    </td>
+				<td>
+					<md-button class="md-fab md-warn md-fab-bottom-right" ng-hide="buttonDisable || switchData.seeAll" aria-label="Delete All" ng-click="deleteAll()">
+			            <md-icon class="icons" md-svg-src="img/icons/bin.svg"></md-icon>
+			        </md-button>
+			    </td>
+		    </tr>
+	    </tbody>
+    </table>
+	<md-grid-list id="list"
+	        md-cols-sm="{{10-userSettings.gridSize}}" md-cols-md="{{10-userSettings.gridSize}}" md-cols-gt-md="{{10-userSettings.gridSize}}"
+	        md-row-height-gt-md="1:1.2" md-row-height="4:3"
+	        md-gutter="8px" md-gutter-gt-sm="4px" >
+	    <md-grid-tile ng-style="{'background': item.itemColor}" ng-repeat="item in itemlist | filter:search"
+			                  md-rowspan="{{item.span.row}}"
+			                  md-colspan="{{item.span.col}}"
+			                  md-colspan-sm="1"
+			                  md-colspan-xs="1"
+			                  ng-class="tile.background"
+			                  >
+
+			<img onerror='this.style.opacity = 0' ng-src="{{item.currentImage}}" class="tilesT" ng-click="clicked($event,item)" ></img>	        
+	        <md-grid-tile-footer class="tile-footer-darker">
+	        	<md-checkbox ng-model="item.toDelete" ng-hide="switchData.seeAll" ng-change="checked(item.claimed)" aria-label="Checkbox">{{item.title}}</md-checkbox>
+	        	<h3 ng-show="switchData.seeAll">{{item.title}}</h3>
+	        </md-grid-tile-footer>
+	    </md-grid-tile>
+	</md-grid-list>
+	<div layout="vertical">
+        <md-sidenav class="md-sidenav-right md-whiteframe-z2" style="position:fixed;" md-is-locked-open="lockSideNav" md-component-id="right" flex>
+            <md-toolbar class="md-theme-light">
+              <div>
+                <div layout-gt-xs="row" style="width: 100%;display: table;">
+					<div style="display: table-cell;">
+						<h1 class="md-toolbar-tools" ng-cloak>Hello, {{userSettings.first_name}}!</h1>
+					</div>
+					<md-icon-button ng-hide="globalSettings" 
+                			ng-click="goToAppSettings()" 
+                			class="md-secondary">
+                		<md-icon class="settingsIcon" md-svg-icon="img/icons/settingsWhite48.svg"></md-icon>
+						<md-tooltip md-direction="left" style="color: white; padding-top: 5px;">
+							Settings
+						</md-tooltip>
+                	</md-icon-button>
+                </div>
+              </div>
+              
+            </md-toolbar>
+            <md-content id="settings" ng-controller="SideNavCtrl" layout-padding>
+				<form id="settings-form">
+					<md-switch class="blue" aria-label="SwitchAll" ng-model="switchData.seeAll" ng-change="onSwitchChange(switchData.seeAll)">
+						<span ng-model="switchData.seeAll" ng-if="switchData.seeAll" style="margin-top: 5px;">Show All Items <span style="padding: 0;margin: 0; color: red; font-size: 0.6em; text-align: right; width: 100%;">*no editing allowed</span></span>
+						<span ng-model="switchData.seeAll" ng-if="!switchData.seeAll">Show Your Items</span>
+					</md-switch>
+					<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+						<h2 class="md-toolbar-tools">
+							<span>Sort By</span>
+						</h2>
+					</md-toolbar>
+					<md-radio-group ng-model="sections.active">
+						<md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.name)">{{it.name}}</md-radio-button>
+					</md-radio-group>
+					<md-slider-container>
+						<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+							<h2 class="md-toolbar-tools">
+								<span>Size</span>
+							</h2>
+						</md-toolbar>
+						<md-slider flex min="1" max="10" aria-label="red" ng-model="userSettings.gridSize" ng-change="onSlide(userSettings.gridSize)"></md-slider>
+
+					</md-slider-container>
+				</form>
+				<center><md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary">
+                Save Settings</md-button></center>
+                <md-button class="md-primary" id= "butt3" aria-label="More" ng-click="logout()" style="margin: 5px;width:90%; position: fixed; bottom:0;">Logout</md-button>
+                <span flex></span>
+            </md-content>
+        </md-sidenav>
+    </div>
+    </div>
+</div>
+</body>
