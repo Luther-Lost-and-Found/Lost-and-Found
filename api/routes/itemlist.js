@@ -13,14 +13,19 @@ module.exports = function(app, passport, isLoggedIn) {
 
 
                 for (i = 0; i < rows.length; i++) { 
+                    console.log("ITEM:::",rows[i].itemID)
                     if(rows[i].imagePrimColor == null){
                         rows[i].currentImage = '../itemImages/'+ rows[i].itemColor + '.jpg';
                     }
                     else{
                         rows[i].currentImage = '../itemImages/' + rows[i].itemID + '.jpg';
                     }
-
-                    rows[i].tags = (rows[i].convTags).split("@@@");
+                    
+                    if (rows[i].convTags == '' | rows[i].convTags == null | rows[i].convTags == "") {
+                        console.log("tags=none");
+                    } else {
+                        rows[i].tags = (rows[i].convTags).split("@@@");
+                    }
                 }
 
                 var ua = req.headers['user-agent'].toLowerCase();

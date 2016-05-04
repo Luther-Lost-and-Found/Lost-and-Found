@@ -14,7 +14,7 @@
 		<md-input-container class="navBarSearchContainer" ng-show="showSearch" flex>
 			<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search..." md-autofocus autofocus>
 		</md-input-container>
-		<md-button class="md-icon-button" ng-click="showSearch = !showSearch" ng-show="!showAddItem">
+		<md-button class="md-icon-button" ng-click="showSearch = !showSearch">
 			<md-icon md-svg-icon="img/icons/searchWhite24.svg"></md-icon>
 		</md-button>
 		<md-button class="md-icon-button" ng-click="toggleRight(); lockSideNav=true" ng-hide="isOpenRight()" ng-show="!showSearch" ng-if="!showAddItem" >

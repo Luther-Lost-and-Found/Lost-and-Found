@@ -7,7 +7,7 @@ app.controller('NavBarCtrl', ['$rootScope',
     sharedService,$animate,sharedServiceUploadModal,sharedPropertiesTags,$filter) {
 
     getTagsFromDatabase();
-
+    $rootScope.chosenColor = "#093A7D"
     console.log("NAVBAR:",$rootScope.userSettings);
 
     $scope.toggleRight = buildToggler('right');
