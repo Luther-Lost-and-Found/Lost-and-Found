@@ -9,7 +9,7 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
 	    .success(function(user){
         console.log("MOBILE RESPONSE",user.mobile);
         if(user.mobile){
-          $location.url("/mobile");
+          $location.url("/mobile/itemlist");
         }
         else{
           $location.url("/itemlist");  
