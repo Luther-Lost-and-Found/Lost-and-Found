@@ -221,3 +221,7 @@ footer h5{
 #butt4 {
   color: #4F97E9;
 }
+
+#info1, #info2, #info3, #info4{
+  width: 50%;
+}

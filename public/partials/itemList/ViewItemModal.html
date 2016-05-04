@@ -6,22 +6,22 @@
           </md-toolbar>
           <div class="md-dialog-content">
           <div class="left">
-            <img style="width:304px;height:228px;" onerror='this.style.display = "none"; this.parentElement.classList.remove("left")'  class="images" ng-src="{{item.currentImage}}">
+            <img style="width:304px;height:228px;" onerror='this.style.display = "none"; this.parentElement.classList.remove("left");'  class="images" ng-src="{{item.currentImage}}">
           </div>
           <div >
-              <md-input-container class="md-block view" flex-gt-sm>
+              <md-input-container class="md-block view" id="info1" flex-gt-sm>
                 <label class="view">Title</label>
                 <input class=view1 disabled style="color:#093A7D" ng-model="item.title"> <br>
               </md-input-container>
-              <md-input-container class="md-block view" flex-gt-sm>
+              <md-input-container class="md-block view" id="info2" flex-gt-sm>
                 <label class=view> Location</label>
                 <input class=view1 disabled style="color:#093A7D" ng-model="item.building_name">
               </md-input-container>
-              <md-input-container class="md-block view" flex-gt-sm>
+              <md-input-container class="md-block view" id="info3" flex-gt-sm>
                 <label class=view>Accepted By</label>
                 <input class=view1 disabled style="color:#093A7D" ng-model="item.accepted_by">
               </md-input-container>
-              <md-input-container class="md-block view" flex-gt-sm>
+              <md-input-container class="md-block view" id="info4" flex-gt-sm>
                 <label class=view1>Claimed By</label>
                 <input class=view1 disabled style="color:#093A7D" ng-model="item.claimed_by" placeholder="Unclaimed">
               </md-input-container>
