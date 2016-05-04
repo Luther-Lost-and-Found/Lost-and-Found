@@ -2,13 +2,13 @@
 
 <div ng-app="navBarApp">
 	<div ng-controller= "NavBarCtrl" ng-if="!showAddItem"></div>
-		<md-toolbar class="" layout="row" style="position: fixed; margin-top: 0;">
+		<md-toolbar ng-style="{background: chosenColor}" class="" layout="row" style="position: fixed; margin-top: 0;">
 			<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem">
 				<md-icon class=" mobileHome" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
 			</md-button>
 			<h2 class="md-toolbar-tools" ng-show="!showSearch">
 				<span ng-if="!showAddItem">Hello, {{userSettings.first_name}}!</span>
-				<span ng-if="showAddItem">Add an item.</span>
+				<span ng-if="showAddItem">Add an items.</span>
 			</h2>
 			<md-input-container class="navBarSearchContainer" ng-show="showSearch" md-no-float flex>
 				<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search...">

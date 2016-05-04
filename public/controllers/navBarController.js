@@ -276,12 +276,15 @@ app.controller('addItemMobileCtrl', ['$scope','$rootScope',
     return tiles;
    })();
 
-   $scope.chosenColor = "#093A7D"
+   $rootScope.chosenColor = "#093A7D"
    var itemColor = "";
 
   $scope.colorClicked = function(color) {
-    $scope.chosenColor = color.color;
-    itemColor = color.color;
+    console.log("COLOR CLICKED", color);
+    $scope.$applyAsync(function(){
+      $rootScope.chosenColor = color.color;
+      itemColor = color.color;
+    });
   };
 
   $scope.updateItem = function(ev,$element){
