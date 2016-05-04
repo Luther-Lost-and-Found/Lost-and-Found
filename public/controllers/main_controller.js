@@ -153,7 +153,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 url:'/mobile/itemlist',
                 views:{
                     'mobile':{
-                        templateUrl : '../partials/mobile/itemlist.html',
+                        templateUrl : '../partials/mobile/mobile.html',
                         action : 'mobileApp.MobileCtrl'
                     }
                 }

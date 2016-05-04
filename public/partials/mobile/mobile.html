@@ -1,1 +1,100 @@
-<h1>HELLO WORLD MOBILE</h1>
+<meta name="viewport" content="width=device-width">
+
+<div ng-app="navBarApp">
+	<div ng-controller= "NavBarCtrl" ng-if="!showAddItem"></div>
+		<md-toolbar class="" layout="row" style="position: fixed; margin-top: 0;">
+			<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem">
+				<md-icon class=" mobileHome" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
+			</md-button>
+			<h2 class="md-toolbar-tools" ng-show="!showSearch">
+				<span ng-if="!showAddItem">Hello, {{userSettings.first_name}}!</span>
+				<span ng-if="showAddItem">Add an item.</span>
+			</h2>
+			<md-input-container class="navBarSearchContainer" ng-show="showSearch" md-no-float flex>
+				<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" placeholder="search...">
+			</md-input-container>
+			<md-button class="md-icon-button" ng-click="showSearch = !showSearch" ng-show="!showAddItem">
+				<md-icon md-svg-icon="img/icons/searchWhite24.svg"></md-icon>
+			</md-button>
+			<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem" >
+				<md-icon class=" mobileHome" md-svg-icon="img/icons/menu.svg"></md-icon>
+			</md-button>
+		</md-toolbar>
+	</div>	
+	<div ng-controller= "NavBarCtrl" ng-if="!showAddItem">
+		<md-button aria-label="addItem" class="md-fab md-fab-bottom-right md-warn" style="position: fixed;" ng-model="showAddItem" ng-click="switchShowAdditem()">
+		  <md-icon md-svg-src="img/icons/add.svg"></md-icon>
+		</md-button>
+	</div>
+
+	<form ng-controller= "addItemMobileCtrl" class="settings-form" ng-if="showAddItem">
+		<span flex></span>
+        <div layout-gt-xs="row">
+        	<md-dialog-actions ng-if="showAddItem" layout="row" style="padding-top: 70px;">
+				<md-button aria-label="AddItem" ng-click="uploadImage(picFile); testCancel()" id="add">Add</md-button>
+				<md-button aria-label="Remove" ng-click="testCancel()" id="cancel">Cancel</md-button>
+			</md-dialog-actions>
+			<h4 style="color:red;">{{errorMessage}}</h4>
+          <md-input-container class="md-block" flex-gt-xs>
+            <label>title</label>
+            <input ng-model="item.title" title="descriptive tags..." >
+          </md-input-container>
+
+              <md-chips ng-model="selectedTags">
+                <md-autocomplete
+                        md-selected-item="selectedItem"
+                        md-search-text="searchText"
+                        md-items="item in querySearch(searchText)"
+                        md-item-text="item"
+                        placeholder="  descriptive tags...">
+                    <span md-highlight-text="searchText">{{item}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                  <strong>{{$chip}}</strong>
+                </md-chip-template>
+              </md-chips>
+      </div>
+        <md-tabs id="tabs" md-align-tabs="top" md-border-bottom style="min-height: 410px; overflow: auto;">
+          <md-tab id="colorPickerTab">
+            <md-tab-label>Choose Color</md-tab-label>
+            <md-tab-body>
+              <div ng-cloak="">
+                <md-content layout-padding="" style="background-color: #eee">
+                  <md-grid-list md-cols="6" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter-gt-md="1px" md-gutter-md="1px" md-gutter="1px">
+                    <md-grid-tile ng-repeat="tile in colorTiles" ng-style="{'background': tile.color}" ng-model="item.itemColor" ng-click="colorClicked(tile)">
+                    </md-grid-tile>
+                  </md-grid-list>
+                </md-content>
+              </div>
+            </md-tab-body>
+          </md-tab>
+          <md-tab id="imageUploadTab">
+            <md-tab-label>Upload Image</md-tab-label>
+            <md-tab-body>
+              
+              <img ngf-src="picFile" class="md-card-image" alt="Washed Out" width="100%">
+              <label>{{picFile.name}}</label>
+
+              <center><md-button id="picture" class="md-primary" label="Upload Images" name="file" ngf-select="" ng-model="picFile" accept="image/*">Select Image</md-button></center>
+            </md-tab-body>
+          </md-tab>
+        </md-tabs>        
+	</form>
+</div>
+
+<div ng-app="itemApp" class="itemList">
+	<div ng-controller= "ItemCtrl"  ng-if="!showAddItem">
+		<md-list style="padding-top: 70px;">
+			<md-subheader class="mobileSubHead" style="background-color: transparent;">All Items:</md-subheader>
+			<md-list-item class="md-2-line" ng-repeat="item in itemlist | filter:search" style="margin-top: 10px;">
+				<div ng-style="{'background': item.itemColor}" style="height: 90px; width: 90px;">
+					<img onerror='this.style.opacity = 0' ng-src="{{item.currentImage}}" height="90" width="90" />
+				</div>
+				<div class="md-list-item-text">
+	          		<h1 style="padding-left: 10px; margin-bottom: 0;">{{item.title}}</h1>
+	          		<p style="padding-left: 10px; margin-top: 0; padding-top: 0;">{{item.email}}</p>
+	          	</div>
+	      	</md-list-item>
+		</md-list>    
+	</div>
+</div>
