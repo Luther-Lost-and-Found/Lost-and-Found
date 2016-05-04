@@ -9,17 +9,25 @@
 			            <md-icon class="icons" md-menu-origin md-svg-icon="img/icons/send.svg"></md-icon>
 			          </md-button>
 			          <md-menu-content width="4">
-			          		<md-toolbar md-scroll-shrink="">
+			          	<div>
+			          		<!-- <md-toolbar md-scroll-shrink="">
           						<div class="md-toolbar-tools navbarColor">Migrate to..</div>
-         					 </md-toolbar>
-			          	<md-input-container class="Locations" md-no-float flex>
+         					 </md-toolbar> -->
+
+         				<md-input-container class="md-block">
+					        <input ng-model="search" placeholder=" search...">
+					    </md-input-container>
+					    </div>
+					    <div>
+			          	<!-- <md-input-container class="Locations" md-no-float flex>
 
 				          	<input class="locationsInput" ng-model="search" placeholder=" search...">
-			          	</md-input-container>
+			          	</md-input-container> -->
 			            <md-menu-item ng-repeat="location in locationsAll | filter:search">
 			              <md-button ng-click="sendToLocation(location.building_name)"> <span md-menu-align-target>{{location.building_name}}</span> </md-button>
 			            </md-menu-item>
 			          </md-menu-content>
+			          </div>
 			        </md-menu>
 			    </td>
 				<td>
