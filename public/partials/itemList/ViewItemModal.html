@@ -9,7 +9,6 @@
             <img style="width:304px;height:228px;" onerror='this.style.display = "none"; this.parentElement.classList.remove("left")'  class="images" ng-src="{{item.currentImage}}">
           </div>
           <div >
-
               <md-input-container class="md-block view" flex-gt-sm>
                 <label class="view">Title</label>
                 <input class=view1 disabled style="color:#093A7D" ng-model="item.title"> <br>
@@ -25,6 +24,10 @@
               <md-input-container class="md-block view" flex-gt-sm>
                 <label class=view1>Claimed By</label>
                 <input class=view1 disabled style="color:#093A7D" ng-model="item.claimed_by" placeholder="Unclaimed">
+              </md-input-container>
+              <md-input-container class="md-block view" flex-gt-sm>
+                <label class=view1>Added On</label>
+                <input class=view1 disabled style="color:#093A7D" ng-model="item.time_stamp" placeholder="Unclaimed">
               </md-input-container>
              </div>
 

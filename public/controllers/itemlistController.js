@@ -27,8 +27,13 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
 
   var refresh = function(){
     $http.get("/itemlist").success(function(response){
+
+      console.log(response)
       $scope.$applyAsync(function(){
         $rootScope.itemlist = response;
+        for (var i = 0; i < $rootScope.itemlist.length; i++) {
+          $rootScope.itemlist[i].time_stamp = new Date(Date.parse($rootScope.itemlist[i].time_stamp)).toUTCString();
+        }
         $rootScope.itemlist = response;
         $rootScope.allItems = response;
         $scope.item = "";
