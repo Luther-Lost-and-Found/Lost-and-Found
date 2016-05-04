@@ -3,7 +3,7 @@ var express = require('express'),
     mysql = require('mysql'),
     multiparty = require('multiparty'),
     fs = require('fs'),
-    // zerorpc = require("zerorpc"),
+    zerorpc = require("zerorpc"),
 
     dbconfig = require('../../config/database'),
     db = mysql.createConnection(dbconfig.connection);
