@@ -5,17 +5,13 @@
 			<tr>
 				<td>
 			      	<md-menu md-offset="0 -7">
-			          <md-button aria-label="Open demo menu" class="md-fab md-fab-bottom-left" ng-hide="buttonDisable || switchData.seeAll" ng-click="$mdOpenMenu($event)">
+			          <md-button aria-label="Open demo menu" class="md-fab md-fab-bottom-left" ng-hide="buttonDisable || switchData.seeAll" ng-click="$mdOpenMenu($event); setCursor()">
 			            <md-icon class="icons" md-menu-origin md-svg-icon="img/icons/send.svg"></md-icon>
 			          </md-button>
 			          <md-menu-content width="4">
 			          	<div>
-			          		<!-- <md-toolbar md-scroll-shrink="">
-          						<div class="md-toolbar-tools navbarColor">Migrate to..</div>
-         					 </md-toolbar> -->
-
-         				<md-input-container class="md-block">
-					        <input ng-model="search" placeholder=" search...">
+			          	<md-input-container class="md-block">
+					        <input id="sendInput" ng-model="search" autofocus>
 					    </md-input-container>
 					    </div>
 					    <div>
@@ -26,8 +22,9 @@
 			            <md-menu-item ng-repeat="location in locationsAll | filter:search">
 			              <md-button ng-click="sendToLocation(location.building_name)"> <span md-menu-align-target>{{location.building_name}}</span> </md-button>
 			            </md-menu-item>
-			          </md-menu-content>
+
 			          </div>
+			          </md-menu-content>
 			        </md-menu>
 			    </td>
 				<td>
