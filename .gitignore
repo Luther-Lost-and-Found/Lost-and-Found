@@ -1,5 +1,5 @@
 node_modules/
 bower_components/
 public/lib/*
+public/itemImages/*
 npm-debug.log
-
