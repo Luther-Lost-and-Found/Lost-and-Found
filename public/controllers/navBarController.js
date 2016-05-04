@@ -93,7 +93,7 @@ app.controller('NavBarCtrl', ['$rootScope',
     });
   }
 
-    $scope.addItem = function(ev){
+  $scope.addItem = function(ev){
     sharedServiceUploadModal.setProperty($scope.item);
     $rootScope.item = {};
 

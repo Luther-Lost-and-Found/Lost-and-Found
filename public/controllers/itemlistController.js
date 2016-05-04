@@ -32,6 +32,7 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
         $scope.locationsAll = findUnique();
         $rootScope.mobile = response.mobile;
         doneRefreshInit = true;
+        console.log("ITEMLIST",$rootScope.itemlist);
       });
     });
   };
