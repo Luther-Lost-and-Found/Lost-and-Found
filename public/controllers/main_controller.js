@@ -91,12 +91,15 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                                         url = "/itemlist";
                                         // $rootScope.isMobile = false;
                                     }
+                                    console.log("DUMMY",response);
                                     $location.url(url);
 
-                                    console.log(response)
+                                    console.log("DUMMY",response)
+                                    var dummy = "dummy";
 
                                 });
-                                console.log("hi");
+                                var dummy = "dummy";
+                                // console.log("hi");
                                 // var curURL = window.location.href;
                                 // if(isMobile && curURL.indexOf("mobile") == -1){
                                 //     $location.url(url);

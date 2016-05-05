@@ -1,40 +1,39 @@
 <md-dialog aria-label="AddUser" ng-cloak flex="30" style="max-width: 250px;">
 	<md-toolbar>
-      	<div class="md-toolbar-tools">
-        	<center><h3 class="modal-title">Adding A New User</h3></center>
-    	</div>
-    </md-toolbar>
-    <div class="modal-body" style="z-index:20;">
+    <div class="md-toolbar-tools">
+      <center><h3 class="modal-title">Adding A New User</h3></center>
+    </div>
+  </md-toolbar>
+  <div class="modal-body" style="z-index:20;">
 	<md-content layout-padding>
     <form name="userForm" >
       <div layout="column" layout-align="space-between center">
         <md-input-container class="md-block" flex-gt-sm>
-    		<label>First Name</label>
-    		<input ng-model="item.first_name" md-autofocus>
-    	</md-input-container>
+      		<label>First Name</label>
+      		<input ng-model="item.first_name" md-autofocus>
+        </md-input-container>
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Last Name</label>
+        <input ng-model="item.last_name">
+      </md-input-container flex-gt-sm>
     	<md-input-container class="md-block" flex-gt-sm>
     		<label>NorseKey</label>
     		<input ng-model="item.norsekeyID">
     	</md-input-container>
-		<md-input-container class="md-block" flex-gt-sm>
-			<label>Last Name</label>
-			<input ng-model="item.last_name">
-		</md-input-container flex-gt-sm>
-		<md-input-container class="md-block" flex-gt-sm>
-			<label>Location</label>
-			<md-select ng-model="item.locationID">
-				<md-option ng-repeat="location in locationsAll" value="{{location.locationID}}">
-				{{location.building_name}}
-				</md-option>
-			</md-select>
-		</md-input-container>
+		  <md-input-container class="md-block" flex-gt-sm>
+  			<label>Location</label>
+  			<md-select ng-model="item.locationID">
+  				<md-option ng-repeat="location in locationsAll" value="{{location.locationID}}">
+  				{{location.building_name}}
+  				</md-option>
+  			</md-select>
+		  </md-input-container>
       </div>
-
       	<div layout="row">
       		<center><md-button aria-label="Create" ng-click="addUser(item)">Create</md-button></center>
       		<center><md-button aria-label="Cancel" ng-click="cancel()">Cancel</md-button></center>
-		</div>
-    </form>
-	</md-content>
+		    </div>
+      </form>
+    </md-content>
 	</div>
 </md-dialog>

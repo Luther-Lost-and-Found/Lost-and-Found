@@ -624,8 +624,6 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
           {hex: '093A7D' },
   ]}
   ];
-
-
   
   $scope.colorTiles = (function() {
     var tiles = [];
@@ -644,10 +642,12 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
 
    $scope.chosenColor = "#093A7D"
    var itemColor = "";
+   var colorName = "";
 
   $scope.colorClicked = function(color) {
     $scope.chosenColor = color.color;
     itemColor = color.color;
+    itemColor = color.name;
   };
 
   $scope.updateItem = function(ev,$element){
@@ -736,6 +736,7 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     var fullTagsRaw = $scope.selectedTags;
     $scope.item.newTags = fullTagsRaw;
     $scope.item.itemColor = itemColor;
+    $scope.item.imagePrimColor = colorName;
 
     if($scope.item.itemColor == '' & $scope.imageStatus == null){
       $scope.errorMessage = "Select color or image.";
