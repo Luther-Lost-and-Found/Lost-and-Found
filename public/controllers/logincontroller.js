@@ -1,6 +1,36 @@
 angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '$http', '$location',
  '$rootScope','$window', '$mdSidenav', function($timeout, $scope, $http, $location, $rootScope, $window, $mdSidenav) {
 
+    function isMobile(){
+      console.log("calling is mobile", window.location.href )
+      var url = "";
+      $http.get("/loginMobile").success(function(response){
+        console.log("RESPONSE:::",response);
+        if(response.mobile){
+          url = "/mobile/login";
+          $rootScope.isMobile = true;
+        }
+        $location.url(url);
+
+        console.log(response)
+
+      });
+      var curURL = window.location.href;
+      if(isMobile && curURL.indexOf("mobile") == -1){
+        $location.url(url);
+      }
+      
+      // if(user.mobile && ){
+      //     url = "/mobile/itemlist";
+      // }
+      // else{
+      //     url = "/itemlist";  
+      // }
+      // $location.url(url);
+    }
+
+    isMobile();
+
   	$scope.loginSubmit = function($scope){
     	$http.post('/login', {
 	      	username: $scope.username,
