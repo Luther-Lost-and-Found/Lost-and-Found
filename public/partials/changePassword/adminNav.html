@@ -11,12 +11,13 @@
         <span flex></span>
         <div>
           <center>
-            <h1 ng-ig="!mobile">GLOBAL SETTINGS</h1>
-            <h1 ng-ig="mobile">GLOBAL SETTINGS</h1>
+            <h1 ng-if="!mobile">GLOBAL SETTINGS</h1>
+            <h1 ng-if="mobile">SETTINGS</h1>
           </center> 
         </div>
         <span flex></span>
-        {{user.norsekeyID}}
+        <span ng-if="!mobile">{{user.first_name}} {{user.last_name}} : {{user.norsekeyID}}</span>
+        <span ng-if="mobile">{{user.norsekeyID}}</span>
       </div>
     </md-toolbar>
   </md-content>

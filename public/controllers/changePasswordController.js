@@ -8,6 +8,14 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 		$scope.user = response;
 	});
 
+	if ($(window).width() < 400 ) {
+		$scope.mobile = true;
+	} else {
+		$scope.mobile = false;
+	}
+
+	console.log($scope.mobile);
+
     $scope.ChangePW = function(oldPass, newPass1, newPass2) {
     	if(newPass1 == newPass2){
     		$scope.user.oldPass = oldPass;
