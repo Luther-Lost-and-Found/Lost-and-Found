@@ -1,3 +1,5 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
 <div ng-app="changePasswordApp">
   <md-content ng-controller= "changePasswordController as ctrl" ng-cloak>
     <md-toolbar class="navbarclass" md-scroll-shrink ng-if="true" layout="row" layout-align="space-between center">
@@ -5,14 +7,16 @@
         <md-button aria-label="goHome" ng-click="goHome()">
           <md-icon md-svg-icon="img/icons/homeWhite.svg" md-menu-align-target></md-icon>
         </md-button>
+
         <span flex></span>
         <div>
           <center>
-            <h1 >GLOBAL SETTINGS</h1>
+            <h1 ng-ig="!mobile">GLOBAL SETTINGS</h1>
+            <h1 ng-ig="mobile">GLOBAL SETTINGS</h1>
           </center> 
         </div>
         <span flex></span>
-        {{user.first_name}} {{user.last_name}} : {{user.norsekeyID}}
+        {{user.norsekeyID}}
       </div>
     </md-toolbar>
   </md-content>
