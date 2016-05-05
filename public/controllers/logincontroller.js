@@ -90,7 +90,6 @@ angular.module('LoginApp').controller('loginController',['$timeout', '$scope', '
     $scope.close = function () {
       $mdSidenav('right').close()
         .then(function () {
-          $log.debug("close RIGHT is done");
         });
     };
 
