@@ -14,8 +14,8 @@
           						<div class="md-toolbar-tools navbarColor">Migrate to..</div>
          					 </md-toolbar> -->
 
-         				<md-input-container class="md-block">
-					        <input ng-model="search" placeholder=" search...">
+         				<md-input-container class="md-block" layout="row" style="width: 100%;">
+					        <input ng-model="search" placeholder=" " style="width: 100%;" autofocus>
 					    </md-input-container>
 					    </div>
 					    <div>
@@ -24,7 +24,9 @@
 				          	<input class="locationsInput" ng-model="search" placeholder=" search...">
 			          	</md-input-container> -->
 			            <md-menu-item ng-repeat="location in locationsAll | filter:search">
-			              <md-button ng-click="sendToLocation(location.building_name)"> <span md-menu-align-target>{{location.building_name}}</span> </md-button>
+			              <md-button ng-click="sendToLocation(location.building_name)">
+			              	<span md-menu-align-target>{{location.building_name}}</span> 
+			              	</md-button>
 			            </md-menu-item>
 			          </md-menu-content>
 			          </div>

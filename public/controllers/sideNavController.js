@@ -12,6 +12,24 @@ app.controller('SideNavCtrl', function ($http,$scope, $rootScope, $timeout, $mdS
       });
   };
 
+  $scope.logout = function(){
+    $http.get("/signout").success(function(req,res){
+      $location.url("/");
+    });
+  }
+
+    $scope.goToAppSettings = function(){
+    console.log("USER PRIV:::",$rootScope.userSettings.superPrivilege);
+    if ($rootScope.userSettings.superPrivilege) {
+      console.log("To Super Admin Page");
+      $location.url("/superAdminPage");
+    } else {
+      console.log("To Change Password Page");
+      $location.url("/changePassword");
+    }
+  }
+
+
   $scope.saveSettings = function () {
     var matches = $.grep($scope.sections.pages, function(element) {
       return element.state == true;

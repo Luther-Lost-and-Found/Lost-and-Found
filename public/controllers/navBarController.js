@@ -27,6 +27,17 @@ app.controller('NavBarCtrl', ['$rootScope',
       }
     }
 
+    $scope.goToAppSettings = function(){
+      console.log("USER PRIV:::",$rootScope.userSettings.superPrivilege);
+      if ($rootScope.userSettings.superPrivilege) {
+        console.log("To Super Admin Page");
+        $location.url("/superAdminPage");
+      } else {
+        console.log("To Change Password Page");
+        $location.url("/changePassword");
+      }
+    }
+
     function debounce(func, wait, context) {
       var timer;
       return function debounced() {

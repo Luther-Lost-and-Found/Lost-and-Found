@@ -23,3 +23,7 @@ input.navBarSearchTextInput {
 md-subheader.mobileSubHead {
 	background-color: transparent;
 }
+
+md-backdrop, md-sidenav {
+	position: fixed;
+}

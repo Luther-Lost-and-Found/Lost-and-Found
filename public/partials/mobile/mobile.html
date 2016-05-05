@@ -1,28 +1,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-<div ng-app="navBarApp">
-	<div ng-controller= "NavBarCtrl" ng-if="!showAddItem"></div>
+<div ng-app="navBarApp" ng-controller= "NavBarCtrl">
 		<md-toolbar ng-style="{background: chosenColor}" class="" layout="row" style="position: fixed; margin-top: 0;">
 			<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem">
 				<md-icon class=" mobileHome" md-svg-icon="img/icons/homeWhite.svg"></md-icon>
 			</md-button>
 			<h2 class="md-toolbar-tools" ng-show="!showSearch">
-				<span ng-if="!showAddItem">Hello, {{userSettings.first_name}}!</span>
-				<span ng-if="showAddItem">Add an item.</span>
+				<span ng-if="!showAddItem">Hello, {{userSettings.first_name}}! </span>
+				<span ng-if="showAddItem">Add an item. </span>
 			</h2>
-
 			<md-input-container class="navBarSearchContainer" ng-show="showSearch"  md-no-float flex>
 				<input class="navBarSearchTextInput" ng-model="search" ng-change="onSearch(search)" ng-hide="showAddItem" placeholder="search..." style="z-index: 10;">
 			</md-input-container>
 			<md-button class="md-icon-button" ng-click="showSearch = !showSearch" ng-hide="showAddItem">
 				<md-icon md-svg-icon="img/icons/searchWhite24.svg" ng-if="!showAddItem"></md-icon>
 			</md-button>
-
-			<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem" >
-				<md-icon class=" mobileHome" md-svg-icon="img/icons/menu.svg"></md-icon>
+			<md-button class="md-icon-button" ng-show="!showSearch" ng-if="!showAddItem" ng-click="toggleRight()">
+				<md-icon class="mobileHome" md-svg-icon="img/icons/menu.svg"></md-icon>
 			</md-button>
 		</md-toolbar>
-	</div>	
+</div>
 	<div ng-controller= "NavBarCtrl" ng-if="!showAddItem">
 		<md-button aria-label="addItem" class="md-fab md-fab-bottom-right md-warn" style="position: fixed;" ng-model="showAddItem" ng-click="switchShowAdditem()">
 		  <md-icon md-svg-src="img/icons/add.svg"></md-icon>
@@ -101,7 +98,41 @@
 	</div>
 </div>
 
-<div style="background-color: yellow;" height="100%" width="50%" style="z-index: 100; width:100%; height: 100%;">
+<div layout="vertical" ng-cloak >
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2" style="position:fixed;" md-is-locked-open="lockSideNav" md-component-id="right" flex>
+            <md-toolbar class="md-theme-light">
+              <div>
+                <div layout-gt-xs="row" style="width: 100%;display: table;">
+					<div style="display: table-cell;">
+						<h1 class="md-toolbar-tools" ng-cloak>Options</h1>
+					</div>
+					<md-icon-button ng-hide="globalSettings" 
+                			ng-click="goToAppSettings()" 
+                			class="md-secondary">
+                		<md-icon class="settingsIcon" md-svg-icon="img/icons/settingsWhite48.svg"></md-icon>
+                	</md-icon-button>
+                </div>
+              </div>
+              
+            </md-toolbar>
+            <md-content id="settings" ng-controller="SideNavCtrl" layout-padding>
+				<form id="settings-form">
+					<div>
+						<h5 style="color: red; ">No Editing Allowed In Mobile.</h5>
+					</div>
+					<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+						<h2 class="md-toolbar-tools">
+							<span>Sort By</span>
+						</h2>
+					</md-toolbar>
+					<md-radio-group ng-model="sections.active">
+						<md-radio-button ng-repeat="it in sections.pages" value="{{it.name}}" ng-click="sort(it.name)">{{it.name}}</md-radio-button>
+					</md-radio-group>
+				</form>
+				<center><md-button ng-hide="settingsSaved" ng-click="saveSettings()" class="md-primary">
+                Save Settings</md-button></center>
+                <md-button class="md-primary" id= "butt3" aria-label="More" ng-click="logout()" style="margin: 5px;width:90%; position: fixed; bottom:0;">Logout</md-button>
+                <span flex></span>
+            </md-content>
+    </md-sidenav>
 </div>
-
-
