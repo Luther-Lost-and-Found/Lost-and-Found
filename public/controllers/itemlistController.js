@@ -135,6 +135,12 @@ app.controller('ItemCtrl', function($timeout, $scope,$location, $http, $animate,
     }
   }
 
+  $scope.setCursor = function(){
+    console.log("setcursor")
+    $("#sendInput").focus();
+    // $("#sendInput").select();
+  }
+
   $scope.sendToLocation = function(locationID){
     var foundToSend = 0;
     for (i=0;i<$rootScope.itemlist.length;i++){
@@ -648,6 +654,7 @@ function itemModalInstanceCtrl($scope, $rootScope, $http, $mdDialog, sharedServi
     var current_id = $rootScope.item.itemID;
     var fullTagsRaw = $rootScope.selectedTags;
     $rootScope.item.newTags = fullTagsRaw;
+    console.log("UPDATING ITEM",$rootScope.item);
 
     $http.put("/itemlist/" + current_id, $rootScope.item).success(function(response){
       $rootScope.$broadcast('handleBroadcast');

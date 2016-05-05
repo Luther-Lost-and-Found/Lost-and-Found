@@ -159,6 +159,16 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 }
             })
 
+            .state('mobileLogin',{
+                url:'/mobile/login',
+                views:{
+                    'mobile':{
+                        templateUrl : '../partials/mobile/mobileLogin.html',
+                        action : 'LoginApp.loginController'
+                    }
+                }
+            })
+
             $urlRouterProvider.when('','/');
 
             $urlRouterProvider.otherwise('/404');

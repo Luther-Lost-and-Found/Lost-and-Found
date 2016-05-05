@@ -154,7 +154,8 @@ module.exports = function(app, passport, isLoggedIn) {
         delete req.body["tags"];
         delete req.body["newTags"];
         delete req.body["convTags"];
-        db.query("UPDATE ItemLF SET ? WHERE itemID = '" + to_update + "'", req.body, function(err,result){
+        console.log("BLOOOOOOOOOOOOOOOOOOODY REQ.BOOOOOOOODY",req.body)
+        db.query("UPDATE ItemLF SET title = '"+req.body.title+"' WHERE itemID = '" + to_update + "'", function(err,result){
             db.query("UPDATE ItemTags SET ? WHERE itemID = '" + to_update + "'",  fullTag,function(err){
 
             });
