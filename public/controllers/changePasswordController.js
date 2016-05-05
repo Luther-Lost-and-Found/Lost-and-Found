@@ -27,10 +27,15 @@ app.controller('changePasswordController', ['$timeout', '$scope', '$http', '$win
 	$scope.goHome = function() {
 		var url = "/itemlist";
 	    $http.get("/loginMobile").success(function(response){
+	    	console.log("GO HOME");
 	        if(response.mobile){
-	          url = "/mobile/itemlist";
+	        	console.log("HOME BUTTON TEST", response)
+	          	url = '/mobile/itemlist';
+	          	$location.url(url);
+	        }
+	        else{
+	        	$location.url(url);
 	        }
 	    });
-		$location.url(url)
 	}
 }]);
