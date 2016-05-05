@@ -100,7 +100,7 @@
 
 <div layout="vertical" ng-cloak >
 	<md-sidenav class="md-sidenav-right md-whiteframe-z2" style="position:fixed;" md-is-locked-open="lockSideNav" md-component-id="right" flex>
-            <md-toolbar class="md-theme-light">
+            <md-toolbar class="md-theme-light" style="background-color: #093A7D;">
               <div ng-controller="NavBarCtrl">
                 <div layout-gt-xs="row" style="width: 100%;display: table;">
 					<div style="display: table-cell;">
@@ -115,12 +115,12 @@
               </div>
               
             </md-toolbar>
-            <md-content id="settings" ng-controller="SideNavCtrl" layout-padding>
+            <md-content id="settings" ng-controller="SideNavCtrl">
 				<form id="settings-form">
 					<div>
-						<h5 style="color: red; ">No Editing Allowed In Mobile.</h5>
+						<h5 style="color: red; padding-left: 10px;">No Editing Allowed In Mobile.</h5>
 					</div>
-					<md-toolbar class="md-theme-light" style="height:10px;width:100%;">
+					<md-toolbar class="md-theme-light" style="background-color: #093A7D;">
 						<h2 class="md-toolbar-tools">
 							<span>Sort By</span>
 						</h2>
