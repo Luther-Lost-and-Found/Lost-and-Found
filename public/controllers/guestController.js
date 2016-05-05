@@ -23,15 +23,43 @@ app.controller('guestController', function($location,$timeout, $scope, $http, $a
 				$rootScope.locationlist = response;
 			});
 		});
-	    $mdDialog.show({
-	    	controller: guestModalInstanceCtrl,
-	    	templateUrl: 'guestSearchResult.html',
-	    	parent: angular.element(document.body),
-	    	targetEvent: ev,
-	    	clickOutsideToClose:true,
-	    	scope: $rootScope.$new()
-	    })
 	};
+
+	//SIDENAV SEARCH
+
+    $scope.toggleRight = buildToggler('right');
+
+    $scope.close = function () {
+      $mdSidenav('right').close()
+        .then(function () {
+          $log.debug("close RIGHT is done");
+        });
+    };
+
+    function buildToggler(navID) {
+      return function() {
+        $mdSidenav(navID)
+          .toggle()
+          .then(function () {
+            
+          });
+      }
+    }
+
+    function debounce(func, wait, context) {
+      var timer;
+      return function debounced() {
+        var context = $scope,
+            args = Array.prototype.slice.call(arguments);
+        $timeout.cancel(timer);
+        timer = $timeout(function() {
+          timer = undefined;
+          func.apply(context, args);
+        }, wait || 10);
+      }
+    }
+
+
 });
 
 app.directive('ngEnter', function() {
