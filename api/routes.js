@@ -38,7 +38,7 @@ module.exports = function(app, passport) {
 
     app.get('*',isLoggedIn, function(req, res){
         console.log("is loggedin anything")
-      res.redirect('/');
+        res.redirect('/');
     });    
 };
 
@@ -59,6 +59,7 @@ function isMobile(req,res,next){
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()){
         console.log("HIII AUTHENTICATED");
+        console.log(req.originalUrl)
         return next();
     }
 

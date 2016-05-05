@@ -31,7 +31,7 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                     if (response.status === 440){
                         console.log("MOBILE")
                         $location.url('/mobile');
-                    } 
+                    }
                     return $q.reject(response); 
                 } 
             };
@@ -73,7 +73,36 @@ myApp.config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
                 views: {
                     'login': {
                         templateUrl : 'partials/login/login.html',
-                        action : 'LoginApp.loginController'
+                        action : 'LoginApp.loginController',
+                        resolve:{
+                            myVar: function($q,$http,$location){
+                                var url = "";
+                                $http.get("/loginMobile").success(function(response){
+                                    console.log("RESPONSE:::",response);
+                                    if(response.mobile && !response.auth){
+                                        url = "/mobile/login";
+                                        // $rootScope.isMobile = true;
+                                    }
+                                    if(response.mobile && response.auth){
+                                        url = "/mobile/itemlist";
+                                        // $rootScope.isMobile = true;
+                                    }
+                                    if(!response.mobile && response.auth){
+                                        url = "/itemlist";
+                                        // $rootScope.isMobile = false;
+                                    }
+                                    $location.url(url);
+
+                                    console.log(response)
+
+                                });
+                                console.log("hi");
+                                // var curURL = window.location.href;
+                                // if(isMobile && curURL.indexOf("mobile") == -1){
+                                //     $location.url(url);
+                                // }
+                            }
+                        }
                     }
                 }
             })
